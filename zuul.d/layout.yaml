@@ -1,4 +1,6 @@
 - project:
+    templates:
+      - openstack-python3-ussuri-jobs
     check:
       jobs:
         - openstack-tox-linters
