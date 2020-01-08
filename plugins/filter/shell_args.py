@@ -18,15 +18,8 @@
 class FilterModule(object):
     def filters(self):
         return {
-            'shell_arg_enabled': self.shell_arg_enabled,
-            'shell_arg_list': self.shell_arg_list,
-            'shell_logging_path': self.shell_logging_path
+            'shell_arg_list': self.shell_arg_list
         }
-
-    def shell_arg_enabled(self, arg, enabled=True):
-        if not enabled:
-            return ''
-        return arg
 
     def shell_arg_list(self, arg, parameter=None):
         if not isinstance(arg, (list, tuple)):
@@ -38,11 +31,3 @@ class FilterModule(object):
             else:
                 return_value.append(a)
         return ' '.join(return_value)
-
-    def shell_logging_path(self, location, combine=True, enabled=False):
-        output = ''
-        if not enabled:
-            return output
-        if combine:
-            output = "{} {}".format(output, '2>&1')
-        return "{} >{}".format(output, location)

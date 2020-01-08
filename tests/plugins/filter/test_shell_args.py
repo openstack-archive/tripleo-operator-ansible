@@ -24,14 +24,6 @@ class TestShellArgsFilters(tests_base.TestCase):
         super(TestShellArgsFilters, self).setUp()
         self.filter = shell_args.FilterModule()
 
-    def test_shell_arg_enabled_default(self):
-        self.assertEqual('foo',
-                         self.filter.shell_arg_enabled('foo'))
-
-    def test_shell_arg_enabled_disabled(self):
-        self.assertEqual('',
-                         self.filter.shell_arg_enabled('foo', enabled=False))
-
     def test_shell_arg_list_default(self):
         arg = ['a', 'b']
         expected = 'a b'
@@ -47,24 +39,3 @@ class TestShellArgsFilters(tests_base.TestCase):
         expected = '--p a --p b'
         self.assertEqual(expected,
                          self.filter.shell_arg_list(arg, parameter='--p'))
-
-    def test_shell_logging_path_default(self):
-        location = '/tmp/foo.log'
-        expected = ''
-        self.assertEqual(expected,
-                         self.filter.shell_logging_path(location))
-
-    def test_shell_logging_path_enabled(self):
-        location = '/tmp/foo.log'
-        expected = ' 2>&1 >/tmp/foo.log'
-        self.assertEqual(expected,
-                         self.filter.shell_logging_path(location,
-                                                        enabled=True))
-
-    def test_shell_logging_path_enabled_not_combined(self):
-        location = '/tmp/foo.log'
-        expected = ' >/tmp/foo.log'
-        self.assertEqual(expected,
-                         self.filter.shell_logging_path(location,
-                                                        combine=False,
-                                                        enabled=True))
