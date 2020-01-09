@@ -1,0 +1,12 @@
+---
+# defaults file for tripleo-undercloud-minion-upgrade
+tripleo_undercloud_minion_upgrade_debug: false
+tripleo_undercloud_minion_upgrade_dry_run: false
+tripleo_undercloud_minion_upgrade_force_stack_update: false
+tripleo_undercloud_minion_upgrade_home_dir: "{{ ansible_env.HOME }}"
+tripleo_undercloud_minion_upgrade_log_combine: true
+tripleo_undercloud_minion_upgrade_log_output: true
+tripleo_undercloud_minion_upgrade_no_validations: false
+tripleo_undercloud_minion_upgrade_timeout: 7200
+tripleo_undercloud_minion_upgrade_yes: false
+tripleo_undercloud_minion_upgrade_log: "{{ tripleo_undercloud_minion_home_dir }}/undercloud_minion_upgrade.log"
