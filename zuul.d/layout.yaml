@@ -12,8 +12,15 @@
               - openstack-tox-linters
             files: &containers_multinode_files
               - ^roles/tripleo_undercloud_install/.*$
+        - tripleo-ci-centos-7-containers-undercloud-minion:
+            dependencies: *deps_unit_lint
+            files: &containers_minion_files
+              - ^roles/tripleo_undercloud_install/.*$
+              - ^roles/tripleo_undercloud_minion_install/.*$
     gate:
       jobs:
         - openstack-tox-linters
         - tripleo-ci-centos-7-containers-multinode:
             files: *containers_multinode_files
+        - tripleo-ci-centos-7-containers-undercloud-minion:
+            files: *containers_minion_files
