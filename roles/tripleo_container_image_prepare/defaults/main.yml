@@ -1,0 +1,11 @@
+---
+# defaults file for tripleo_container_image_prepare
+tripleo_container_image_prepare_become: true
+tripleo_container_image_prepare_cleanup:
+tripleo_container_image_prepare_debug: false
+tripleo_container_image_prepare_dry_run: false
+tripleo_container_image_prepare_environemnt_files: []
+tripleo_container_image_prepare_environment_directory: []
+tripleo_container_image_prepare_output_env_file:
+tripleo_container_image_prepare_roles_file:
+tripleo_container_image_prepare_timeout: 1800
