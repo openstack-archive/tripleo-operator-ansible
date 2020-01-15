@@ -1,0 +1,28 @@
+---
+- name: Setup undercloud minion install facts
+  set_fact:
+    _install_cmd: >-
+      openstack undercloud minion install
+      {{ tripleo_undercloud_minion_install_force_stack_update | ternary("--force-stack-update", '') }}
+      {{ tripleo_undercloud_minion_install_no_validations | ternary("--no-validations", '') }}
+      {{ tripleo_undercloud_minion_install_dry_run | ternary("--dry-run", '') }}
+      {{ tripleo_undercloud_minion_install_yes | ternary("--yes", '') }}
+      {{ tripleo_undercloud_minion_install_log_output | ternary((">" ~ tripleo_undercloud_minion_install_log), '') }}
+      {{ tripleo_undercloud_minion_install_log_combine | ternary("2>&1", '') }}
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_undercloud_minion_install_log }}"
+
+- name: Show the underclound minion install command
+  debug:
+    var: _install_cmd
+  when: tripleo_undercloud_minion_install_debug|bool
+
+- name: undercloud minion install
+  shell: "{{ _install_cmd }}"  # noqa 305
+  args:
+    chdir: "{{ tripleo_undercloud_minion_install_home_dir }}"
+  async: "{{ tripleo_undercloud_minion_install_timeout }}"
+  poll: 10
+  changed_when: true
