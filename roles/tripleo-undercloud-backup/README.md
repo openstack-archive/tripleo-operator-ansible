@@ -21,6 +21,11 @@ Role Variables
 * `tripleo_undercloud_backup_timeout`: (Number) Timeout for the backup command. Default: 7200
 * `tripleo_undercloud_backup_log`: (String) Backup log file path. Default: "{{ tripleo_undercloud_backup_home_dir }}/undercloud_backup.log"
 
+Output Variables
+----------------
+
+* `tripleo_undercloud_backup_result`: Ansible shell execution results
+
 Dependencies
 ------------
 

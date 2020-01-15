@@ -24,6 +24,11 @@ Role Variables
 * `tripleo_undercloud_upgrade_yes`: (Boolean) Flag to add --yes to the upgrade. Default: false
 * `tripleo_undercloud_upgrade_log`: (String) Upgrade log file path. Default: "{{ tripleo_undercloud_upgrade_home_dir }}/undercloud_upgrade.log"
 
+Output Variables
+----------------
+
+* `tripleo_undercloud_upgrade_result`: Ansible shell execution results
+
 Dependencies
 ------------
 
