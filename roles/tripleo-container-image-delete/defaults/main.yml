@@ -1,0 +1,8 @@
+---
+# defaults file for tripleo-container-image-delete
+tripleo_container_image_delete_become: true
+tripleo_container_image_delete_debug: false
+tripleo_container_image_delete_password:
+tripleo_container_image_delete_registry_url:
+tripleo_container_image_delete_username:
+tripleo_container_image_delete_yes: true

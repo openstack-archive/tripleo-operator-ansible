@@ -1,0 +1,22 @@
+---
+# tasks file for tripleo-container-image-delete
+- name: Setup container image delete facts
+  set_fact:
+    _delete_cmd: >-
+      openstack tripleo container image delete
+      {{ tripleo_container_image_delete_username | ternary('--username ' ~ tripleo_container_image_delete_username, '') }}
+      {{ tripleo_container_image_delete_password | ternary('--password ' ~ tripleo_container_image_delete_password, '') }}
+      {{ tripleo_container_image_delete_registry_url | ternary('--registry-url ' ~ tripleo_container_image_delete_registry_url, '') }}
+      {{ tripleo_container_image_delete_yes | ternary('--yes', '') }}
+      {{ tripleo_container_image_delete_image }}
+
+- name: Show the container image delete command
+  debug:
+    var: _delete_cmd
+  when: tripleo_container_image_delete_debug|bool
+
+- name: Container image delete
+  shell: "{{ _delete_cmd }}"  # noqa 305
+  become: "{{ tripleo_container_image_delete_become }}"
+  register: tripleo_container_image_delete_result
+  changed_when: true
