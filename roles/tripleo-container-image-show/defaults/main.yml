@@ -1,0 +1,6 @@
+---
+# defaults file for tripleo-container-image-show
+tripleo_container_image_show_debug: false
+tripleo_container_image_show_format: json
+tripleo_container_image_show_password:
+tripleo_container_image_show_username:
