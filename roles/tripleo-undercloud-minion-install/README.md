@@ -23,6 +23,11 @@ Role Variables
 * `tripleo_undercloud_minion_install_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
 * `tripleo_undercloud_minion_install_log`: (String) Install log file path. Default: "{{ tripleo_undercloud_minion_install_home_dir }}/undercloud_minion_install.log"
 
+Output Variables
+----------------
+
+* `tripleo_undercloud_minion_install_result`: Ansible shell execution results
+
 Dependencies
 ------------
 

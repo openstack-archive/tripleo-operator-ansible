@@ -24,4 +24,5 @@
     warn: false
   async: "{{ tripleo_undercloud_backup_timeout }}"
   poll: 10
+  register: tripleo_undercloud_backup_result
   changed_when: true

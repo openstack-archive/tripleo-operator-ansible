@@ -24,6 +24,11 @@ Role Variables
 * `tripleo_undercloud_install_yes`: (Boolean) Flag to add --yes to the install. Default: false
 * `tripleo_undercloud_install_log`: (String) Install log file path. Default: "{{ tripleo_undercloud_install_home_dir }}/undercloud_install.log"
 
+Output Variables
+----------------
+
+* `tripleo_undercloud_install_result`: Ansible shell execution results
+
 Dependencies
 ------------
 

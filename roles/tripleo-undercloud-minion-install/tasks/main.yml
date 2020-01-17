@@ -25,4 +25,5 @@
     chdir: "{{ tripleo_undercloud_minion_install_home_dir }}"
   async: "{{ tripleo_undercloud_minion_install_timeout }}"
   poll: 10
+  register: tripleo_undercloud_minion_install_result
   changed_when: true

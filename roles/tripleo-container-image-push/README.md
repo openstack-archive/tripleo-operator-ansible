@@ -28,7 +28,7 @@ Role Variables
 Output Variables
 ----------------
 
-* `tripleo_container_image_push_result`: Ansible execution results
+* `tripleo_container_image_push_result`: Ansible shell execution results
 
 Dependencies
 ------------
