@@ -1,0 +1,55 @@
+---
+# tasks file for tripleo_overcloud_node_provide
+- name: Check that at least one input variable is not empty
+  fail:
+    msg: "At least one non-empty variable must be passed."
+  when: >
+    (not tripleo_overcloud_node_provide_all_manageable|bool and
+    tripleo_overcloud_node_provide_node_uuids|length < 1)
+
+- name: Check that both input variables are not passed together
+  fail:
+    msg: "Do not pass both '--all-manageable' and a node UUID list."
+  when:
+    - tripleo_overcloud_node_provide_all_manageable|bool
+    - tripleo_overcloud_node_provide_node_uuids|length > 0
+
+- name: Setup overcloud node provide facts
+  set_fact:
+    _provide_cmd: >-
+      {{ tripleo_overcloud_node_provide_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_provide_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud node provide
+      {{ tripleo_overcloud_node_provide_all_manageable | ternary('--all-manageable', '') }}
+      {{ tripleo_overcloud_node_provide_node_uuids | tripleo.operator.shell_arg_list() }}
+      {{ tripleo_overcloud_node_provide_log_output | ternary((">" ~ tripleo_overcloud_node_provide_log), '') }}
+      {{ tripleo_overcloud_node_provide_log_combine | ternary("2>&1", '') }}
+    _provide_env:
+      OS_CLOUD: "{{ tripleo_overcloud_node_provide_os_cloud }}"
+
+- name: Show debug information
+  when: tripleo_overcloud_node_provide_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _provide_cmd
+
+    - name: Show the environment
+      debug:
+        var: _provide_env
+
+- name: Run overcloud node provide
+  shell: "{{ _provide_cmd }}"  # noqa 305
+  environment: "{{ _provide_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_node_provide_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_node_provide_result
+  async: "{{ tripleo_overcloud_node_provide_timeout }}"
+  poll: "{{ tripleo_overcloud_node_provide_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_node_provide_output: "{{ tripleo_overcloud_node_provide_result.stdout }}"

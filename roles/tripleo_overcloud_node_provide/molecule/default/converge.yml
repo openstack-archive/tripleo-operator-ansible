@@ -1,0 +1,50 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_node_provide_log_output: false
+    tripleo_overcloud_node_provide_poll: 1
+    tripleo_overcloud_node_provide_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_node_provide"
+      include_role:
+        name: "tripleo_overcloud_node_provide"
+      vars:
+        tripleo_overcloud_node_provide_all_manageable: true
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_node_provide_output == "overcloud node provide --all-manageable"
+
+    - name: Assert "tripleo_overcloud_node_provide_node_uuids"
+      include_role:
+        name: "tripleo_overcloud_node_provide"
+      vars:
+        tripleo_overcloud_node_provide_node_uuids:
+          - a
+          - b
+
+    - name: Validate tripleo_overcloud_node_provide_node_uuids
+      assert:
+        that:
+          - tripleo_overcloud_node_provide_output == "overcloud node provide a b"
+
+    - name: Check validation
+      block:
+        - name: Include tripleo_overcloud_node_provide with no options
+          include_role:
+            name: "tripleo_overcloud_node_provide"
+        - name: Fail if it worked
+          fail:
+            msg: No provided vars succeeded (validation failed)
+      rescue:
+        - name: Validate tripleo_overcloud_node_provide validation worked
+          assert:
+            that:
+              - true
