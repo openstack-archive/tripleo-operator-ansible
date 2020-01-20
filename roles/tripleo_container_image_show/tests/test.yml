@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - tripleo_container_image_show
+  vars:
+    tripleo_container_image_show_image: docker.io/library/centos:7

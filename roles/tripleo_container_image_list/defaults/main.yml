@@ -1,0 +1,7 @@
+---
+# defaults file for tripleo_container_image_list
+tripleo_container_image_list_debug: false
+tripleo_container_image_list_format: json
+tripleo_container_image_list_password:
+tripleo_container_image_list_registry:
+tripleo_container_image_list_username:

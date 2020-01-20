@@ -1,0 +1,28 @@
+---
+# tasks file for tripleo_container_image_push
+- name: Setup container image push facts
+  set_fact:
+    _push_cmd: >-
+      openstack tripleo container image push
+      {{ tripleo_container_image_push_local | ternary('--local', '') }}
+      {{ tripleo_container_image_push_registry_url | ternary('--registry-url ' ~ tripleo_container_image_push_registry_url, '') }}
+      {{ tripleo_container_image_push_append_tag | ternary('--append-tag ' ~ tripleo_container_image_push_append_tag, '') }}
+      {{ tripleo_container_image_push_username | ternary('--username ' ~ tripleo_container_image_push_username, '') }}
+      {{ tripleo_container_image_push_password | ternary('--password ' ~ tripleo_container_image_push_password, '') }}
+      {{ tripleo_container_image_push_dry_run | ternary('--dry-run', '') }}
+      {{ tripleo_container_image_push_multi_arch | ternary('--multi-arch', '') }}
+      {{ tripleo_container_image_push_cleanup | ternary('--cleanup', '') }}
+      {{ tripleo_container_image_push_image }}
+
+- name: Show the container image push command
+  debug:
+    var: _push_cmd
+  when: tripleo_container_image_push_debug|bool
+
+- name: Container image push
+  shell: "{{ _push_cmd }}"  # noqa 305
+  async: "{{ tripleo_container_image_push_timeout }}"
+  poll: 1
+  become: "{{ tripleo_container_image_push_become }}"
+  register: tripleo_container_image_push_result
+  changed_when: true

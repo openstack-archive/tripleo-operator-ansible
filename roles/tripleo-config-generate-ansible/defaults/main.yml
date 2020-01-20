@@ -1,7 +1,0 @@
----
-# defaults file for tripleo-config-generate-ansible
-tripleo_config_generate_ansible_debug: false
-tripleo_config_generate_ansible_deployment_user: "{{ ansible_user }}"
-tripleo_config_generate_ansible_os_cloud: "{{ tripleo_os_cloud | default('') }}"
-tripleo_config_generate_ansible_output_dir: "{{ ansible_env.HOME }}"
-tripleo_config_generate_ansible_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/overcloudrc') }}"

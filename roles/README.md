@@ -45,7 +45,7 @@ Example undercloud installation
 
         - name: Configure tripleo repositories
           import_role:
-            name: tripleo-repos
+            name: tripleo_repos
 
         - name: Install python2 tripleoclient
           package:
@@ -82,7 +82,7 @@ Example undercloud installation
 
         - name: Install undercloud
           import_role:
-            name: tripleo-undercloud-install
+            name: tripleo_undercloud_install
           vars:
             tripleo_undercloud_install_debug: true
 

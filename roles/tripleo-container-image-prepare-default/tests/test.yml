@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - tripleo-container-image-prepare-default
-  vars:
-    tripleo_container_image_prepare_default_output_env_file: "{{ ansible_env.HOME }}/container-image-prepare.yaml }}"

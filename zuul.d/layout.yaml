@@ -11,7 +11,7 @@
               - openstack-tox-py37
               - openstack-tox-linters
             files: &containers_multinode_files
-              - ^roles/tripleo-undercloud-install/.*$
+              - ^roles/tripleo_undercloud_install/.*$
     gate:
       jobs:
         - openstack-tox-linters

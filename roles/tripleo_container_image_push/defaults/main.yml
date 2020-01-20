@@ -1,0 +1,13 @@
+---
+# defaults file for tripleo_container_image_push
+tripleo_container_image_push_append_tag:
+tripleo_container_image_push_become: true
+tripleo_container_image_push_cleanup: false
+tripleo_container_image_push_debug: false
+tripleo_container_image_push_dry_run: false
+tripleo_container_image_push_local: false
+tripleo_container_image_push_multi_arch: false
+tripleo_container_image_push_password:
+tripleo_container_image_push_registry_url:
+tripleo_container_image_push_timeout: 360
+tripleo_container_image_push_username:
