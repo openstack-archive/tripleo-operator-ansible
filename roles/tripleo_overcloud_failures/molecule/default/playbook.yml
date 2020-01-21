@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+
+    - name: "Include tripleo_overcloud_failures"
+      include_role:
+        name: "tripleo_overcloud_failures"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_failures_debug: true
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_failures_output == "overcloud failures --plan overcloud"
+
+    - name: Check parameter "tripleo_overcloud_failures_plan"
+      include_role:
+        name: "tripleo_overcloud_failures"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_failures_debug: true
+        tripleo_overcloud_failures_plan: test
+
+    - name: Assert "tripleo_overcloud_failures_plan"
+      assert:
+        that:
+          - tripleo_overcloud_failures_output == "overcloud failures --plan test"

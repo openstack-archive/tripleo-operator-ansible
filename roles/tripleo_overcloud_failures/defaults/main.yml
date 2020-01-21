@@ -1,0 +1,7 @@
+---
+# defaults file for tripleo_overcloud_failures
+openstack_bin: openstack
+tripleo_overcloud_failures_debug: false
+tripleo_overcloud_failures_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_failures_plan: overcloud
+tripleo_overcloud_failures_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

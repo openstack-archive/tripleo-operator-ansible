@@ -1,0 +1,4 @@
+---
+- hosts: localhost
+  roles:
+    - tripleo_overcloud_failures

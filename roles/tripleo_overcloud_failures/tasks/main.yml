@@ -1,0 +1,22 @@
+---
+# tasks file for tripleo_overcloud_failures
+- name: Setup overcloud failures facts
+  set_fact:
+    _failures_cmd: >-
+      {{ tripleo_overcloud_failures_os_cloud | ternary('', "source " ~ tripleo_overcloud_failures_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud failures
+      {{ tripleo_overcloud_failures_plan | ternary('--plan ' ~ tripleo_overcloud_failures_plan, '') }}
+
+- name: Show the overcloud failures command
+  debug:
+    var: _failures_cmd
+  when: tripleo_overcloud_failures_debug|bool
+
+- name: Overcloud failures
+  shell: "{{ _failures_cmd }}"  # noqa 305
+  register: tripleo_overcloud_failures_result
+  changed_when: false
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_failures_output: "{{ tripleo_overcloud_failures_result.stdout }}"

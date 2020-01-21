@@ -3,11 +3,13 @@
     check:
       jobs:
       - tripleo-operator-molecule-tripleo_overcloud_export
+      - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
 
     gate:
       jobs:
       - tripleo-operator-molecule-tripleo_overcloud_export
+      - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
 
 - job:
@@ -24,6 +26,14 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_export
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_failures/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_failures
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_failures
 
 - job:
     files:
