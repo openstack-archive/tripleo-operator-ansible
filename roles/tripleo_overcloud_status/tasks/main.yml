@@ -1,0 +1,22 @@
+---
+# tasks file for tripleo_overcloud_status
+- name: Setup overcloud status facts
+  set_fact:
+    _status_cmd: >-
+      {{ tripleo_overcloud_status_os_cloud | ternary('', "source " ~ tripleo_overcloud_status_rc_file ~ "; ") }}
+      openstack overcloud status
+      {{ tripleo_overcloud_status_plan | ternary('--plan ' ~ tripleo_overcloud_status_plan, '') }}
+
+- name: Show the overcloud status command
+  debug:
+    var: _status_cmd
+  when: tripleo_overcloud_status_debug|bool
+
+- name: Overcloud status
+  shell: "{{ _status_cmd }}"  # noqa 305
+  register: tripleo_overcloud_status_result
+  changed_when: false
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_status_output: "{{ tripleo_overcloud_status_result.stdout }}"
