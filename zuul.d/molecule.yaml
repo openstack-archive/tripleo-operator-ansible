@@ -10,6 +10,7 @@
       - tripleo-operator-molecule-tripleo_container_image_prepare_default
       - tripleo-operator-molecule-tripleo_container_image_push
       - tripleo-operator-molecule-tripleo_container_image_show
+      - tripleo-operator-molecule-tripleo_overcloud_image_upload
       - tripleo-operator-molecule-tripleo_deploy
       - tripleo-operator-molecule-tripleo_overcloud_deploy
       - tripleo-operator-molecule-tripleo_overcloud_export
@@ -33,6 +34,7 @@
       - tripleo-operator-molecule-tripleo_container_image_prepare_default
       - tripleo-operator-molecule-tripleo_container_image_push
       - tripleo-operator-molecule-tripleo_container_image_show
+      - tripleo-operator-molecule-tripleo_overcloud_image_upload
       - tripleo-operator-molecule-tripleo_deploy
       - tripleo-operator-molecule-tripleo_overcloud_deploy
       - tripleo-operator-molecule-tripleo_overcloud_export
@@ -102,6 +104,14 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_container_image_show
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_image_upload/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_image_upload
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_image_upload
 
 - job:
     files:

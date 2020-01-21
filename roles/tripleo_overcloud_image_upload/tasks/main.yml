@@ -1,0 +1,48 @@
+---
+# tasks file for tripleo_overcloud_image_upload
+- name: Setup overcloud image upload facts
+  set_fact:
+    _image_upload_cmd: >-
+      {{ tripleo_overcloud_image_upload_os_cloud | ternary('', "source " ~ tripleo_overcloud_image_upload_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud image upload
+      {{ tripleo_overcloud_image_upload_image_path | ternary('--image-path $UPLOAD_IMAGE_PATH', '') }}
+      {{ tripleo_overcloud_image_upload_os_image_name | ternary('--os-image-name $UPLOAD_OS_IMAGE_NAME', '') }}
+      {{ tripleo_overcloud_image_upload_ironic_python_agent_name | ternary('--ironic-python-agent-name $UPLOAD_IPA_NAME', '') }}
+      {{ tripleo_overcloud_image_upload_http_boot | ternary('--http-boot $UPLOAD_HTTP_BOOT', '') }}
+      {{ tripleo_overcloud_image_upload_update_existing | ternary('--update-existing', '') }}
+      {{ tripleo_overcloud_image_upload_whole_disk | ternary('--whole-disk', '') }}
+      {{ tripleo_overcloud_image_upload_architecture | ternary('--architecture $UPLOAD_ARCHITECTURE', '') }}
+      {{ tripleo_overcloud_image_upload_platform | ternary('--platform $UPLOAD_PLATFORM', '') }}
+      {{ tripleo_overcloud_image_upload_image_type | ternary('--image-type $UPLOAD_IMAGE_TYPE', '') }}
+      {{ tripleo_overcloud_image_upload_log_output | ternary((">$UPLOAD_LOG"), '') }}
+      {{ tripleo_overcloud_image_upload_log_combine | ternary("2>&1", '') }}
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_image_upload_log }}"
+  when: tripleo_overcloud_image_upload_log_output|bool
+
+- name: Show the overcloud image_upload command
+  debug:
+    var: _image_upload_cmd
+  when: tripleo_overcloud_image_upload_debug|bool
+
+- name: Overcloud image upload
+  shell: "{{ _image_upload_cmd }}"  # noqa 305
+  environment:
+    OS_CLOUD: "{{ tripleo_overcloud_image_upload_os_cloud }}"
+    UPLOAD_IMAGE_PATH: "{{ tripleo_overcloud_image_upload_image_path }}"
+    UPLOAD_OS_IMAGE_NAME: "{{ tripleo_overcloud_image_upload_os_image_name }}"
+    UPLOAD_IPA_NAME: "{{ tripleo_overcloud_image_upload_ironic_python_agent_name }}"
+    UPLOAD_HTTP_BOOT: "{{ tripleo_overcloud_image_upload_http_boot }}"
+    UPLOAD_ARCHITECTURE: "{{ tripleo_overcloud_image_upload_architecture }}"
+    UPLOAD_PLATFORM: "{{ tripleo_overcloud_image_upload_platform }}"
+    UPLOAD_IMAGE_TYPE: "{{ tripleo_overcloud_image_upload_image_type }}"
+    UPLOAD_LOG: "{{ tripleo_overcloud_image_upload_log }}"
+  args:
+    chdir: "{{ tripleo_overcloud_image_upload_home_dir }}"
+    warn: false
+  async: "{{ tripleo_overcloud_image_upload_timeout }}"
+  register: tripleo_overcloud_image_upload_result
+  poll: "{{ tripleo_overcloud_image_upload_poll }}"
+  changed_when: false
