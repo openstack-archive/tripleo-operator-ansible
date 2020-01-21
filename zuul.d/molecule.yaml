@@ -2,10 +2,12 @@
     name: tripleo-operator-molecule-jobs
     check:
       jobs:
+      - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
 
     gate:
       jobs:
+      - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
 
 - job:
@@ -14,6 +16,14 @@
     parent: openstack-tox-molecule
     success-url: "reports.html"
     failure-url: "reports.html"
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_export/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_export
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_export
 
 - job:
     files:

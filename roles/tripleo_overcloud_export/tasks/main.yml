@@ -1,0 +1,26 @@
+---
+# tasks file for tripleo_overcloud_export
+- name: Setup overcloud export facts
+  set_fact:
+    _export_cmd: >-
+      {{ tripleo_overcloud_export_os_cloud | ternary('', "source " ~ tripleo_overcloud_export_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud export
+      {{ tripleo_overcloud_export_stack | ternary('--stack ' ~ tripleo_overcloud_export_stack, '') }}
+      {{ tripleo_overcloud_export_output_file | ternary('--output-file ' ~ tripleo_overcloud_export_output_file, '') }}
+      {{ tripleo_overcloud_export_force_overwrite | ternary('--force-overwrite', '') }}
+      {{ tripleo_overcloud_export_config_download_dir | ternary('--config-download-dir ' ~ tripleo_overcloud_export_config_download_dir, '') }}
+      {{ tripleo_overcloud_export_no_password_excludes | ternary('--no-password-excludes', '') }}
+
+- name: Show the overcloud export command
+  debug:
+    var: _export_cmd
+  when: tripleo_overcloud_export_debug|bool
+
+- name: Overcloud export
+  shell: "{{ _export_cmd }}"  # noqa 305
+  register: tripleo_overcloud_export_result
+  changed_when: false
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_export_output: "{{ tripleo_overcloud_export_result.stdout }}"
