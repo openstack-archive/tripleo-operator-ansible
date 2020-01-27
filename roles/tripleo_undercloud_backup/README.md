@@ -11,7 +11,6 @@ None.
 Role Variables
 --------------
 
-
 * `tripleo_undercloud_backup_add_path`: (List) List of additional filesystem paths to backup. Default: []
 * `tripleo_undercloud_backup_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_undercloud_backup_exclude_path`: (List) List of filesystems path to skip backing up. Default: []
@@ -36,14 +35,16 @@ Example Playbook
 
 Example backup execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Backup undercloud
-          import_role:
-            name: tripleo_undercloud_backup
-          vars:
-            tripleo_undercloud_backup_debug: true
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Backup undercloud
+      import_role:
+        name: tripleo_undercloud_backup
+      vars:
+        tripleo_undercloud_backup_debug: true
+```
 
 License
 -------

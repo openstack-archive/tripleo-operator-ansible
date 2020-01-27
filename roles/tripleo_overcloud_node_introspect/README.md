@@ -10,6 +10,7 @@ None.
 
 Role Variables
 --------------
+
 * `tripleo_overcloud_node_introspect_node_uuids`: Baremetal Node UUIDs for the node(s) to be introspected.
 * `tripleo_overcloud_node_introspect_all_manageable`: Introspect all nodes currently in 'manageable' state.
 * `tripleo_overcloud_node_introspect_provide`: Provide (make available) the nodes once introspected.
@@ -40,13 +41,14 @@ Example Playbook
 
 Example overcloud node introspect playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Introspect node
-          import_role:
-            name: tripleo_overcloud_node_introspect
-
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Introspect node
+      import_role:
+        name: tripleo_overcloud_node_introspect
+```
 
 License
 -------

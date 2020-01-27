@@ -1,4 +1,6 @@
 ---
+# fail fast to avoid the need to scroll (some hooks can be verbose)
+fail_fast: true
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.4.0
@@ -12,6 +14,10 @@ repos:
       - id: debug-statements
       - id: check-yaml
         files: .*\.(yaml|yml)$
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: master
+    hooks:
+      - id: markdownlint
   - repo: https://gitlab.com/pycqa/flake8
     rev: '3.7.9'
     hooks:

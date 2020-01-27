@@ -36,15 +36,17 @@ Example Playbook
 
 Example container prepare execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Run container prepare
-          import_role:
-            name: tripleo_container_image_prepare
-          vars:
-            tripleo_container_image_prepare_files:
-              - /home/stack/container-image-prepare.yaml
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Run container prepare
+      import_role:
+        name: tripleo_container_image_prepare
+      vars:
+        tripleo_container_image_prepare_files:
+          - /home/stack/container-image-prepare.yaml
+```
 
 License
 -------

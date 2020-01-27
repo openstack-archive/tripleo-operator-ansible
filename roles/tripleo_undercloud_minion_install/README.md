@@ -11,7 +11,6 @@ None.
 Role Variables
 --------------
 
-
 * `tripleo_undercloud_minion_install_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_undercloud_minion_install_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_undercloud_minion_install_dry_run`: (Boolean) Flag to add --dry-run to the install. Default: false
@@ -38,14 +37,16 @@ Example Playbook
 
 Example install execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Install undercloud minion
-          import_role:
-            name: tripleo_undercloud_minion_install
-          vars:
-            tripleo_undercloud_minion_install_debug: true
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Install undercloud minion
+      import_role:
+        name: tripleo_undercloud_minion_install
+      vars:
+        tripleo_undercloud_minion_install_debug: true
+```
 
 License
 -------

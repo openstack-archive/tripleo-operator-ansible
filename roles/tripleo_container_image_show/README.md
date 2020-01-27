@@ -33,17 +33,19 @@ Example Playbook
 
 Example container show execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: List containers
-          import_role:
-            name: tripleo_container_image_show
-          vars:
-            tripleo_container_image_show_image: docker.io/library/centos:7
-        - name: Print containers
-          debug:
-            var: tripleo_container_image_show_output
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: List containers
+      import_role:
+        name: tripleo_container_image_show
+      vars:
+        tripleo_container_image_show_image: docker.io/library/centos:7
+    - name: Print containers
+      debug:
+        var: tripleo_container_image_show_output
+```
 
 License
 -------

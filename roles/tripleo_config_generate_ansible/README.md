@@ -11,7 +11,6 @@ None.
 Role Variables
 --------------
 
-
 * `tripleo_config_generate_ansible_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_config_generate_ansible_deployment_user`: (String) Deployment user to use. Default: "{{ ansible_user }}"
 * `tripleo_config_generate_ansible_os_cloud`: (String) OS_CLOUD value to use when running the command. If tripleo_os_cloud is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_config_generate_ansible_rc_file`.
@@ -33,12 +32,14 @@ Example Playbook
 
 Example install execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Generate default ansible config
-          import_role:
-            name: tripleo_config_generate_ansible
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Generate default ansible config
+      import_role:
+        name: tripleo_config_generate_ansible
+```
 
 License
 -------

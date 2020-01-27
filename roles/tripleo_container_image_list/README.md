@@ -20,7 +20,7 @@ Role Variables
 Output Variables
 ----------------
 
-* `tripleo_container_image_list_output`: (List|String) If tripleo_container_image_list_format is json, the results will automatically be parsed and a list is returned. If another format is used then this will be the response in String format.
+* `tripleo_container_image_list_output`: (List|String) If tripleo_container_image_list_format is JSON, the results will automatically be parsed and a list is returned. If another format is used then this will be the response in String format.
 * `tripleo_container_image_list_result`: Ansible shell execution results
 
 Dependencies
@@ -33,16 +33,18 @@ Example Playbook
 
 Example container list execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: List containers
-          import_role:
-            name: tripleo_container_image_list
-        - name: Print containers
-          debug:
-            msg: "{{ item['Image Name'] }}"
-          loop: "{{ tripleo_container_image_list_output }}"
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: List containers
+      import_role:
+        name: tripleo_container_image_list
+    - name: Print containers
+      debug:
+        msg: "{{ item['Image Name'] }}"
+      loop: "{{ tripleo_container_image_list_output }}"
+```
 
 License
 -------

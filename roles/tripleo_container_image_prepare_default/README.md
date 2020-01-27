@@ -31,14 +31,16 @@ Example Playbook
 
 Example container prepare default execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Generate default ContainerImagePrepare
-          import_role:
-            name: tripleo_container_image_prepare_default
-          vars:
-            tripleo_container_image_prepare_output_env_file: /home/stack/container-image-prepare.yaml
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Generate default ContainerImagePrepare
+      import_role:
+        name: tripleo_container_image_prepare_default
+      vars:
+        tripleo_container_image_prepare_output_env_file: /home/stack/container-image-prepare.yaml
+```
 
 License
 -------

@@ -11,7 +11,6 @@ None.
 Role Variables
 --------------
 
-
 * `tripleo_container_image_push_append_tag`: (String) Tag to append to the existing tag when pushing the container.
 * `tripleo_container_image_push_become`: (Boolean) Run the command as root. This needs to be true when uploading to the local undercloud registry. Default: true
 * `tripleo_container_image_push_cleanup`: (Boolean) Remove local copy of the image after uploading. Default: false
@@ -40,17 +39,19 @@ Example Playbook
 
 Example container push execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Push a container
-          import_role:
-            name: tripleo_container_image_push
-          vars:
-            tripleo_container_image_push_image: docker.io/library/centos:7
-        - name: Print output
-          debug:
-            var: tripleo_container_image_push_output
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Push a container
+      import_role:
+        name: tripleo_container_image_push
+      vars:
+        tripleo_container_image_push_image: docker.io/library/centos:7
+    - name: Print output
+      debug:
+        var: tripleo_container_image_push_output
+```
 
 License
 -------

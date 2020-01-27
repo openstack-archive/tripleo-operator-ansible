@@ -34,14 +34,16 @@ Example Playbook
 
 Example container delete execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Delete containers
-          import_role:
-            name: tripleo_container_image_delete
-          var:
-            tripleo_container_image_delete_image: undercloud.ctlplane.localdomain:8787/library/centos:7
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Delete containers
+      import_role:
+        name: tripleo_container_image_delete
+      var:
+        tripleo_container_image_delete_image: undercloud.ctlplane.localdomain:8787/library/centos:7
+```
 
 License
 -------

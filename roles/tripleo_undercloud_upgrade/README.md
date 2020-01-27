@@ -11,7 +11,6 @@ None.
 Role Variables
 --------------
 
-
 * `tripleo_undercloud_upgrade_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_undercloud_upgrade_dry_run`: (Boolean) Flag to add --dry-run to the upgrade command. Default: false
 * `tripleo_undercloud_upgrade_force_stack_update`: (Boolean) Flag to add --force-stack-update to the upgrade command. Default: false
@@ -39,14 +38,16 @@ Example Playbook
 
 Example upgrade execution playbook
 
-    - hosts: undercloud
-      gather_facts: true
-      tasks:
-        - name: Upgrade undercloud
-          import_role:
-            name: tripleo_undercloud_upgrade
-          vars:
-            tripleo_undercloud_upgrade_debug: true
+```yaml
+- hosts: undercloud
+  gather_facts: true
+  tasks:
+    - name: Upgrade undercloud
+      import_role:
+        name: tripleo_undercloud_upgrade
+      vars:
+        tripleo_undercloud_upgrade_debug: true
+```
 
 License
 -------
