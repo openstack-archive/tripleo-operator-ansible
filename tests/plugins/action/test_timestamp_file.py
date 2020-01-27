@@ -54,17 +54,18 @@ class TestTimestampFile(tests_base.TestCase):
 
         result = action.run()
 
-        execute_calls = [mock.call(module_args={'path': 'foo.log'},
-                                   module_name='stat',
-                                   task_vars={}),
-                         mock.call(module_args={'path': 'foo.log.foo'},
-                                   module_name='stat',
-                                   task_vars={}),
-                         mock.call(module_args={'src': 'foo.log',
-                                                'dest': 'foo.log.foo',
-                                                'remote_src': True},
-                                   module_name='copy',
-                                   task_vars={})
+        execute_calls = [
+            mock.call(module_args={'path': 'foo.log'},
+                      module_name='stat',
+                      task_vars={}),
+            mock.call(module_args={'path': 'foo.log.foo'},
+                      module_name='stat',
+                      task_vars={}),
+            mock.call(module_args={'src': 'foo.log',
+                                   'dest': 'foo.log.foo',
+                                   'remote_src': True},
+                      module_name='copy',
+                      task_vars={})
         ]
         self.assertEqual(3, mock_execute.call_count)
         mock_execute.assert_has_calls(execute_calls)
@@ -95,11 +96,12 @@ class TestTimestampFile(tests_base.TestCase):
 
         action._execute_module = mock_execute
 
-        self.assertRaises(AnsibleActionSkip,  action.run)
+        self.assertRaises(AnsibleActionSkip, action.run)
 
-        execute_calls = [mock.call(module_args={'path': 'foo.log'},
-                                   module_name='stat',
-                                   task_vars={})
+        execute_calls = [
+            mock.call(module_args={'path': 'foo.log'},
+                      module_name='stat',
+                      task_vars={})
         ]
         self.assertEqual(1, mock_execute.call_count)
         mock_execute.assert_has_calls(execute_calls)
@@ -128,14 +130,15 @@ class TestTimestampFile(tests_base.TestCase):
 
         action._execute_module = mock_execute
 
-        self.assertRaises(AnsibleActionFail,  action.run)
+        self.assertRaises(AnsibleActionFail, action.run)
 
-        execute_calls = [mock.call(module_args={'path': 'foo.log'},
-                                   module_name='stat',
-                                   task_vars={}),
-                         mock.call(module_args={'path': 'foo.log.foo'},
-                                   module_name='stat',
-                                   task_vars={})
+        execute_calls = [
+            mock.call(module_args={'path': 'foo.log'},
+                      module_name='stat',
+                      task_vars={}),
+            mock.call(module_args={'path': 'foo.log.foo'},
+                      module_name='stat',
+                      task_vars={})
         ]
         self.assertEqual(2, mock_execute.call_count)
         mock_execute.assert_has_calls(execute_calls)
@@ -169,17 +172,18 @@ class TestTimestampFile(tests_base.TestCase):
 
         result = action.run()
 
-        execute_calls = [mock.call(module_args={'path': 'foo.log'},
-                                   module_name='stat',
-                                   task_vars={}),
-                         mock.call(module_args={'path': 'foo.log.foo'},
-                                   module_name='stat',
-                                   task_vars={}),
-                         mock.call(module_args={'src': 'foo.log',
-                                                'dest': 'foo.log.foo',
-                                                'remote_src': True},
-                                   module_name='copy',
-                                   task_vars={})
+        execute_calls = [
+            mock.call(module_args={'path': 'foo.log'},
+                      module_name='stat',
+                      task_vars={}),
+            mock.call(module_args={'path': 'foo.log.foo'},
+                      module_name='stat',
+                      task_vars={}),
+            mock.call(module_args={'src': 'foo.log',
+                                   'dest': 'foo.log.foo',
+                                   'remote_src': True},
+                      module_name='copy',
+                      task_vars={})
         ]
         self.assertEqual(3, mock_execute.call_count)
         mock_execute.assert_has_calls(execute_calls)

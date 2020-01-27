@@ -24,7 +24,6 @@ from ansible.module_utils.parsing.convert_bool import boolean
 from ansible.plugins.action import ActionBase
 from datetime import datetime
 
-import json
 import yaml
 
 ANSIBLE_METADATA = {
@@ -102,7 +101,7 @@ class ActionModule(ActionBase):
 
         if missing:
             raise AnsibleActionFail('Missing required parameters: {}'.format(
-                            ', '.join(missing)))
+                ', '.join(missing)))
         return args
 
     def _get_date_string(self, date_format):

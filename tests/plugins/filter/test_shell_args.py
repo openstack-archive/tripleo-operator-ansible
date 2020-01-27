@@ -13,8 +13,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import mock
-
 from tests import base as tests_base
 from plugins.filter import shell_args
 
