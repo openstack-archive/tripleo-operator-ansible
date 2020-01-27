@@ -1,0 +1,153 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+
+    - name: "Include tripleo_overcloud_node_configure"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_os_cloud: undercloud
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_node_uuids"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_node_uuids: ['test1', 'test2']
+
+    - name: Assert "tripleo_overcloud_node_configure_node_uuids"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure test1 test2"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_all_manageable"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_all_manageable: true
+
+    - name: Assert "tripleo_overcloud_node_configure_all_manageable"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --all-manageable"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_deploy_kernel"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_deploy_kernel: value
+
+    - name: Assert "tripleo_overcloud_node_configure_deploy_kernel"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --deploy-kernel value"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_deploy_ramdisk"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_deploy_ramdisk: value
+
+    - name: Assert "tripleo_overcloud_node_configure_deploy_ramdisk"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --deploy-ramdisk value"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_instance_boot_option"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_instance_boot_option: value
+
+    - name: Assert "tripleo_overcloud_node_configure_instance_boot_option"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --instance-boot-option value"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_root_device"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_root_device: value
+
+    - name: Assert "tripleo_overcloud_node_configure_root_device"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --root-device value"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_root_device_minimum_size"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_root_device_minimum_size: value
+
+    - name: Assert "tripleo_overcloud_node_configure_root_device_minimum_size"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --root-device-minimum-size value"
+
+    - name: Check parameter "tripleo_overcloud_node_configure_overwrite_root_device_hints"
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_overwrite_root_device_hints: true
+
+    - name: Assert "tripleo_overcloud_node_configure_overwrite_root_device_hints"
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output == "overcloud node configure --overwrite-root-device-hints"
+
+
+    - name: Check all parameters for role tripleo_overcloud_node_configure
+      include_role:
+        name: "tripleo_overcloud_node_configure"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_configure_debug: true
+        tripleo_overcloud_node_configure_node_uuids: ['value1', 'value2']
+        tripleo_overcloud_node_configure_all_manageable: true
+        tripleo_overcloud_node_configure_deploy_kernel: value
+        tripleo_overcloud_node_configure_deploy_ramdisk: value
+        tripleo_overcloud_node_configure_instance_boot_option: value
+        tripleo_overcloud_node_configure_root_device: value
+        tripleo_overcloud_node_configure_root_device_minimum_size: value
+        tripleo_overcloud_node_configure_overwrite_root_device_hints: true
+
+    - name: Assert all parameters for role tripleo_overcloud_node_configure
+      assert:
+        that:
+          - tripleo_overcloud_node_configure_output ==
+            "overcloud node configure value1 value2 --all-manageable --deploy-kernel value --deploy-ramdisk value --instance-boot-option value
+            --root-device value --root-device-minimum-size value --overwrite-root-device-hints"
