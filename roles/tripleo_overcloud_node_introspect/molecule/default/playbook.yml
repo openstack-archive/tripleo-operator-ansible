@@ -1,0 +1,107 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+
+    - name: "Include tripleo_overcloud_node_introspect"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_node_uuids"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_node_uuids: ['test1', 'test2']
+
+    - name: Assert "tripleo_overcloud_node_introspect_node_uuids"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect test1 test2"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_all_manageable"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_all_manageable: true
+
+    - name: Assert "tripleo_overcloud_node_introspect_all_manageable"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --all-manageable"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_provide"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_provide: true
+
+    - name: Assert "tripleo_overcloud_node_introspect_provide"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --provide"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_run_validations"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_run_validations: true
+
+    - name: Assert "tripleo_overcloud_node_introspect_run_validations"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --run-validations"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_concurrency"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_concurrency: value
+
+    - name: Assert "tripleo_overcloud_node_introspect_concurrency"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --concurrency value"
+
+
+    - name: Check all parameters for role tripleo_overcloud_node_introspect
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_node_uuids: ['value1', 'value2']
+        tripleo_overcloud_node_introspect_all_manageable: true
+        tripleo_overcloud_node_introspect_provide: true
+        tripleo_overcloud_node_introspect_run_validations: true
+        tripleo_overcloud_node_introspect_concurrency: value
+
+    - name: Assert all parameters for role tripleo_overcloud_node_introspect
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output ==
+            "overcloud node introspect value1 value2 --all-manageable --provide --run-validations --concurrency value"

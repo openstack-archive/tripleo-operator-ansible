@@ -1,0 +1,11 @@
+---
+# defaults file for tripleo_overcloud_node_introspect
+openstack_bin: openstack
+tripleo_overcloud_node_introspect_debug: false
+tripleo_overcloud_node_introspect_node_uuids: []
+tripleo_overcloud_node_introspect_all_manageable: false
+tripleo_overcloud_node_introspect_provide: false
+tripleo_overcloud_node_introspect_run_validations: false
+tripleo_overcloud_node_introspect_concurrency:
+tripleo_overcloud_node_configure_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_node_configure_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

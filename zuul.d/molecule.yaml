@@ -1,0 +1,24 @@
+- project-template:
+    name: tripleo-operator-molecule-jobs
+    check:
+      jobs:
+      - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+
+    gate:
+      jobs:
+      - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+
+- job:
+    name: tripleo-operator-molecule-base
+    abstract: true
+    parent: openstack-tox-molecule
+    success-url: "reports.html"
+    failure-url: "reports.html"
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_node_introspect/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_node_introspect
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_node_introspect
