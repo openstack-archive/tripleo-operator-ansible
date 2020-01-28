@@ -1,6 +1,7 @@
 - project:
     templates:
       - openstack-python3-ussuri-jobs
+      - tripleo-operator-molecule-jobs
     check:
       jobs:
         - openstack-tox-linters
