@@ -2,12 +2,20 @@
     name: tripleo-operator-molecule-jobs
     check:
       jobs:
+      - tripleo-operator-molecule-tripleo_container_image_delete
+      - tripleo-operator-molecule-tripleo_container_image_list
+      - tripleo-operator-molecule-tripleo_container_image_push
+      - tripleo-operator-molecule-tripleo_container_image_show
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
 
     gate:
       jobs:
+      - tripleo-operator-molecule-tripleo_container_image_delete
+      - tripleo-operator-molecule-tripleo_container_image_list
+      - tripleo-operator-molecule-tripleo_container_image_push
+      - tripleo-operator-molecule-tripleo_container_image_show
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
@@ -18,6 +26,38 @@
     parent: openstack-tox-molecule
     success-url: "reports.html"
     failure-url: "reports.html"
+
+- job:
+    files:
+      - ^roles/tripleo_container_image_delete/.*
+    name: tripleo-operator-molecule-tripleo_container_image_delete
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_container_image_delete
+
+- job:
+    files:
+      - ^roles/tripleo_container_image_list/.*
+    name: tripleo-operator-molecule-tripleo_container_image_list
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_container_image_list
+
+- job:
+    files:
+      - ^roles/tripleo_container_image_push/.*
+    name: tripleo-operator-molecule-tripleo_container_image_push
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_container_image_push
+
+- job:
+    files:
+      - ^roles/tripleo_container_image_show/.*
+    name: tripleo-operator-molecule-tripleo_container_image_show
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_container_image_show
 
 - job:
     files:

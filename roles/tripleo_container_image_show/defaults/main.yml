@@ -1,5 +1,6 @@
 ---
 # defaults file for tripleo_container_image_show
+openstack_bin: openstack
 tripleo_container_image_show_debug: false
 tripleo_container_image_show_format: json
 tripleo_container_image_show_password:

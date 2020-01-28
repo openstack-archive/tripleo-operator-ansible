@@ -3,11 +3,11 @@
 - name: Setup container image list facts
   set_fact:
     _list_cmd: >-
-      openstack tripleo container image list
-      {{ tripleo_container_image_list_username | ternary('--username ' ~ tripleo_container_image_list_username, '') }}
-      {{ tripleo_container_image_list_password | ternary('--password ' ~ tripleo_container_image_list_password, '') }}
-      {{ tripleo_container_image_list_registry | ternary('--registry ' ~ tripleo_container_image_list_registry, '') }}
-      {{ tripleo_container_image_list_format | ternary('-f ' ~ tripleo_container_image_list_format, '') }}
+      {{ openstack_bin }} tripleo container image list
+      {{ tripleo_container_image_list_username | ternary('--username $TRIPLEO_IMAGE_LIST_USERNAME', '') }}
+      {{ tripleo_container_image_list_password | ternary('--password $TRIPLEO_IMAGE_LIST_PASSWORD', '') }}
+      {{ tripleo_container_image_list_registry_url | ternary('--registry-url $TRIPLEO_IMAGE_LIST_REGISTRY_URL', '') }}
+      {{ tripleo_container_image_list_format | ternary('-f $TRIPLEO_IMAGE_LIST_FORMAT', '') }}
 
 - name: Show the container image list command
   debug:
@@ -16,6 +16,11 @@
 
 - name: Container image list
   shell: "{{ _list_cmd }}"  # noqa 305
+  environment:
+    TRIPLEO_IMAGE_LIST_USERNAME: "{{ tripleo_container_image_list_username | default('') }}"
+    TRIPLEO_IMAGE_LIST_PASSWORD: "{{ tripleo_container_image_list_password | default('') }}"
+    TRIPLEO_IMAGE_LIST_REGISTRY_URL: "{{ tripleo_container_image_list_registry_url | default('') }}"
+    TRIPLEO_IMAGE_LIST_FORMAT: "{{ tripleo_container_image_list_format | default('') }}"
   register: tripleo_container_image_list_result
   changed_when: false
 

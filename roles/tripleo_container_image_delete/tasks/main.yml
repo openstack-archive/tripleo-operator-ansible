@@ -3,10 +3,10 @@
 - name: Setup container image delete facts
   set_fact:
     _delete_cmd: >-
-      openstack tripleo container image delete
-      {{ tripleo_container_image_delete_username | ternary('--username ' ~ tripleo_container_image_delete_username, '') }}
-      {{ tripleo_container_image_delete_password | ternary('--password ' ~ tripleo_container_image_delete_password, '') }}
-      {{ tripleo_container_image_delete_registry_url | ternary('--registry-url ' ~ tripleo_container_image_delete_registry_url, '') }}
+      {{ openstack_bin }} tripleo container image delete
+      {{ tripleo_container_image_delete_username | ternary('--username $TRIPLEO_IMAGE_DELETE_USERNAME', '') }}
+      {{ tripleo_container_image_delete_password | ternary('--password $TRIPLEO_IMAGE_DELETE_PASSWORD', '') }}
+      {{ tripleo_container_image_delete_registry_url | ternary('--registry-url $TRIPLEO_IMAGE_DELETE_REGISTRY_URL', '') }}
       {{ tripleo_container_image_delete_yes | ternary('--yes', '') }}
       {{ tripleo_container_image_delete_image }}
 
@@ -17,6 +17,10 @@
 
 - name: Container image delete
   shell: "{{ _delete_cmd }}"  # noqa 305
+  environment:
+    TRIPLEO_IMAGE_DELETE_USERNAME: "{{ tripleo_container_image_delete_username | default('') }}"
+    TRIPLEO_IMAGE_DELETE_PASSWORD: "{{ tripleo_container_image_delete_password | default('') }}"
+    TRIPLEO_IMAGE_DELETE_REGISTRY_URL: "{{ tripleo_container_image_delete_registry_url | default('') }}"
   become: "{{ tripleo_container_image_delete_become }}"
   register: tripleo_container_image_delete_result
   changed_when: true
