@@ -11,9 +11,14 @@
       - tripleo-operator-molecule-tripleo_overcloud_deploy
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
-      - tripleo-operator-molecule-tripleo_overcloud_node_introspect
-      - tripleo-operator-molecule-tripleo_overcloud_node_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
+      - tripleo-operator-molecule-tripleo_overcloud_node_configure
+      - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+      - tripleo-operator-molecule-tripleo_undercloud_backup
+      - tripleo-operator-molecule-tripleo_undercloud_install
+      - tripleo-operator-molecule-tripleo_undercloud_minion_install
+      - tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
+      - tripleo-operator-molecule-tripleo_undercloud_upgrade
 
     gate:
       jobs:
@@ -26,10 +31,15 @@
       - tripleo-operator-molecule-tripleo_overcloud_deploy
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
-      - tripleo-operator-molecule-tripleo_overcloud_node_introspect
-      - tripleo-operator-molecule-tripleo_overcloud_node_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
       - tripleo-operator-molecule-tripleo_container_image_prepare
+      - tripleo-operator-molecule-tripleo_overcloud_node_configure
+      - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+      - tripleo-operator-molecule-tripleo_undercloud_backup
+      - tripleo-operator-molecule-tripleo_undercloud_install
+      - tripleo-operator-molecule-tripleo_undercloud_minion_install
+      - tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
+      - tripleo-operator-molecule-tripleo_undercloud_upgrade
 
 - job:
     files:
@@ -134,3 +144,43 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_container_image_prepare
+
+- job:
+    files:
+      - ^roles/tripleo_undercloud_backup/.*
+    name: tripleo-operator-molecule-tripleo_undercloud_backup
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_undercloud_backup
+
+- job:
+    files:
+      - ^roles/tripleo_undercloud_install/.*
+    name: tripleo-operator-molecule-tripleo_undercloud_install
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_undercloud_install
+
+- job:
+    files:
+      - ^roles/tripleo_undercloud_minion_install/.*
+    name: tripleo-operator-molecule-tripleo_undercloud_minion_install
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_undercloud_minion_install
+
+- job:
+    files:
+      - ^roles/tripleo_undercloud_minion_upgrade/.*
+    name: tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_undercloud_minion_upgrade
+
+- job:
+    files:
+      - ^roles/tripleo_undercloud_upgrade/.*
+    name: tripleo-operator-molecule-tripleo_undercloud_upgrade
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_undercloud_upgrade

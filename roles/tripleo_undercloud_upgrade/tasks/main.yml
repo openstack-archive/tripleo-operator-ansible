@@ -2,7 +2,7 @@
 - name: Setup undercloud upgrade facts
   set_fact:
     _upgrade_cmd: >-
-      openstack undercloud upgrade
+      {{ openstack_bin }} undercloud upgrade
       {{ tripleo_undercloud_upgrade_force_stack_update | ternary("--force-stack-update", '') }}
       {{ tripleo_undercloud_upgrade_no_validations | ternary("--no-validations", '') }}
       {{ tripleo_undercloud_upgrade_inflight_validations | ternary("--inflight-validations", '') }}
@@ -14,6 +14,7 @@
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_undercloud_upgrade_log }}"
+  when: tripleo_undercloud_upgrade_log_output|bool
 
 - name: Show the underclound upgrade command
   debug:
@@ -26,6 +27,6 @@
     chdir: "{{ tripleo_undercloud_upgrade_home_dir }}"
     warn: false
   async: "{{ tripleo_undercloud_upgrade_timeout }}"
-  poll: 10
+  poll: "{{ tripleo_undercloud_upgrade_poll }}"
   register: tripleo_undercloud_upgrade_result
   changed_when: true

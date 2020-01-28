@@ -1,5 +1,6 @@
 ---
 # defaults file for tripleo_undercloud_install
+openstack_bin: openstack
 tripleo_undercloud_install_debug: false
 tripleo_undercloud_install_dry_run: false
 tripleo_undercloud_install_force_stack_update: false
@@ -8,6 +9,7 @@ tripleo_undercloud_install_inflight_validations: false
 tripleo_undercloud_install_log_combine: true
 tripleo_undercloud_install_log_output: true
 tripleo_undercloud_install_no_validations: false
+tripleo_undercloud_install_poll: 10
 tripleo_undercloud_install_timeout: 7200
 tripleo_undercloud_install_yes: false
 tripleo_undercloud_install_log: "{{ tripleo_undercloud_install_home_dir }}/undercloud_install.log"

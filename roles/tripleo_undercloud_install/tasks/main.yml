@@ -2,7 +2,7 @@
 - name: Setup undercloud install facts
   set_fact:
     _install_cmd: >-
-      openstack undercloud install
+      {{ openstack_bin }} undercloud install
       {{ tripleo_undercloud_install_force_stack_update | ternary("--force-stack-update", '') }}
       {{ tripleo_undercloud_install_no_validations | ternary("--no-validations", '') }}
       {{ tripleo_undercloud_install_inflight_validations | ternary("--inflight-validations", '') }}
@@ -14,6 +14,7 @@
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_undercloud_install_log }}"
+  when: tripleo_undercloud_install_log_output|bool
 
 - name: Show the underclound install command
   debug:
@@ -26,6 +27,6 @@
     chdir: "{{ tripleo_undercloud_install_home_dir }}"
     warn: false
   async: "{{ tripleo_undercloud_install_timeout }}"
-  poll: 10
+  poll: "{{ tripleo_undercloud_install_poll }}"
   register: tripleo_undercloud_install_result
   changed_when: true

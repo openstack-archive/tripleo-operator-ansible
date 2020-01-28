@@ -2,7 +2,7 @@
 - name: Setup undercloud minion upgrade facts
   set_fact:
     _upgrade_cmd: >-
-      openstack undercloud minion upgrade
+      {{ openstack_bin }} undercloud minion upgrade
       {{ tripleo_undercloud_minion_upgrade_force_stack_update | ternary("--force-stack-update", '') }}
       {{ tripleo_undercloud_minion_upgrade_no_validations | ternary("--no-validations", '') }}
       {{ tripleo_undercloud_minion_upgrade_dry_run | ternary("--dry-run", '') }}
@@ -13,6 +13,7 @@
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_undercloud_minion_upgrade_log }}"
+  when: tripleo_undercloud_minion_upgrade_log_output|bool
 
 - name: Show the underclound minion upgrade command
   debug:
@@ -24,6 +25,6 @@
   args:
     chdir: "{{ tripleo_undercloud_minion_upgrade_home_dir }}"
   async: "{{ tripleo_undercloud_minion_upgrade_timeout }}"
-  poll: 10
+  poll: "{{ tripleo_undercloud_minion_upgrade_poll }}"
   register: tripleo_undercloud_minion_upgrade_result
   changed_when: true

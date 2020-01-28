@@ -19,7 +19,8 @@ Role Variables
 * `tripleo_undercloud_minion_upgrade_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true
 * `tripleo_undercloud_minion_upgrade_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
 * `tripleo_undercloud_minion_upgrade_no_validations`: (Boolean) Flag to add --no-validations to the upgrade. Default: false
-* `tripleo_undercloud_minion_upgrade_timeout`: (Number) Timeout for the upgrade command. Default: 7200
+* `tripleo_undercloud_minion_upgrade_poll`: (Integer) Number of seconds to wait between checks to see if the upgrade command has completed. This should be set to a value greater or equal to 1. Default: 10
+* `tripleo_undercloud_minion_upgrade_timeout`: (Integer) Timeout for the upgrade command. Default: 7200
 * `tripleo_undercloud_minion_upgrade_yes`: (Boolean) Flag to add --yes to the upgrade. Default: false
 * `tripleo_undercloud_minion_upgrade_log`: (String) Upgrade log file path. Default: "{{ tripleo_undercloud_minion_upgrade_home_dir }}/undercloud_minion_upgrade.log"
 

@@ -1,0 +1,77 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_undercloud_upgrade_debug: true
+    tripleo_undercloud_upgrade_log_output: false
+    tripleo_undercloud_upgrade_log_combine: false
+    tripleo_undercloud_upgrade_poll: 1
+  tasks:
+
+    - name: "Include tripleo_undercloud_upgrade"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade"
+
+    - name: Check parameter "tripleo_undercloud_upgrade_force_stack_update"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+      vars:
+        tripleo_undercloud_upgrade_force_stack_update: true
+
+    - name: Assert "tripleo_undercloud_upgrade_force_stack_update"
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --force-stack-update"
+
+    - name: Check parameter "tripleo_undercloud_upgrade_no_validations"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+      vars:
+        tripleo_undercloud_upgrade_no_validations: true
+
+    - name: Assert "tripleo_undercloud_upgrade_no_validations"
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --no-validations"
+
+    - name: Check parameter "tripleo_undercloud_upgrade_inflight_validations"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+      vars:
+        tripleo_undercloud_upgrade_inflight_validations: true
+
+    - name: Assert "tripleo_undercloud_upgrade_inflight_validations"
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --inflight-validations"
+
+    - name: Check parameter "tripleo_undercloud_upgrade_dry_run"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+      vars:
+        tripleo_undercloud_upgrade_dry_run: true
+
+    - name: Assert "tripleo_undercloud_upgrade_dry_run"
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --dry-run"
+
+    - name: Check parameter "tripleo_undercloud_upgrade_yes"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+      vars:
+        tripleo_undercloud_upgrade_yes: true
+
+    - name: Assert "tripleo_undercloud_upgrade_yes"
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --yes"
