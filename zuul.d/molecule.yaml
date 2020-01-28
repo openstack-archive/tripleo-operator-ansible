@@ -4,11 +4,13 @@
       jobs:
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
+      - tripleo-operator-molecule-tripleo_overcloud_node_clean
 
     gate:
       jobs:
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
+      - tripleo-operator-molecule-tripleo_overcloud_node_clean
 
 - job:
     name: tripleo-operator-molecule-base
@@ -32,3 +34,11 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_node_configure
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_node_clean/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_node_clean
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_node_clean
