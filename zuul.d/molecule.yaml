@@ -5,6 +5,7 @@
       - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
+      - tripleo-operator-molecule-tripleo_container_image_prepare
       - tripleo-operator-molecule-tripleo_container_image_push
       - tripleo-operator-molecule-tripleo_container_image_show
       - tripleo-operator-molecule-tripleo_overcloud_export
@@ -18,6 +19,7 @@
       - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
+      - tripleo-operator-molecule-tripleo_container_image_prepare
       - tripleo-operator-molecule-tripleo_container_image_push
       - tripleo-operator-molecule-tripleo_container_image_show
       - tripleo-operator-molecule-tripleo_overcloud_export
@@ -25,6 +27,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
+      - tripleo-operator-molecule-tripleo_container_image_prepare
 
 - job:
     files:
@@ -113,3 +116,11 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_node_clean
+
+- job:
+    files:
+      - ^roles/tripleo_container_image_prepare/.*
+    name: tripleo-operator-molecule-tripleo_container_image_prepare
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_container_image_prepare

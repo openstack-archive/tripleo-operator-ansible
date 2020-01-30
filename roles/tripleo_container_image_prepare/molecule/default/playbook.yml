@@ -1,0 +1,80 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    tripleo_container_image_prepare_become: false
+  tasks:
+
+    - name: "Include tripleo_container_image_prepare with environment_files"
+      include_role:
+        name: "tripleo_container_image_prepare"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_prepare_environment_files:
+          - file1
+          - file2
+        tripleo_container_image_prepare_debug: true
+
+    - name: Check role with environment_files
+      assert:
+        that:
+          - tripleo_container_image_prepare_result.stdout ==
+            "tripleo container image prepare --environment-file file1 --environment-file file2"
+
+    - name: "Include tripleo_container_image_prepare with environment_directory"
+      include_role:
+        name: "tripleo_container_image_prepare"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_prepare_environment_directory:
+          - dir1
+          - dir2
+        tripleo_container_image_prepare_debug: true
+
+    - name: Check role with environment_directory
+      assert:
+        that:
+          - tripleo_container_image_prepare_result.stdout ==
+            "tripleo container image prepare --environment-directory dir1 --environment-directory dir2"
+
+    - name: "Include tripleo_container_image_prepare with roles_file"
+      include_role:
+        name: "tripleo_container_image_prepare"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_prepare_roles_file: role-file
+        tripleo_container_image_prepare_debug: true
+
+    - name: Check role with roles_file
+      assert:
+        that:
+          - tripleo_container_image_prepare_result.stdout ==
+            "tripleo container image prepare --roles-file role-file"
+
+    - name: "Include tripleo_container_image_prepare with all vars set"
+      include_role:
+        name: "tripleo_container_image_prepare"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_prepare_cleanup: true
+        tripleo_container_image_prepare_debug: true
+        tripleo_container_image_prepare_dry_run: true
+        tripleo_container_image_prepare_environment_files:
+          - file1
+          - file2
+        tripleo_container_image_prepare_environment_directory:
+          - dir1
+        tripleo_container_image_prepare_output_env_file: envfile
+        tripleo_container_image_prepare_roles_file: some_role_file
+
+    - debug: var=tripleo_container_image_prepare_result.stdout
+
+
+    - name: Check role with all vars set
+      assert:
+        that:
+          - tripleo_container_image_prepare_result.stdout ==
+            "tripleo container image prepare --environment-file file1 --environment-file file2 "
+            "--environment-directory dir1 --roles-file some_role_file --output-env-file envfile --dry-run --cleanup True"
