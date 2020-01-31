@@ -1,5 +1,6 @@
 ---
 # defaults file for tripleo_container_image_delete
+openstack_bin: openstack
 tripleo_container_image_delete_become: true
 tripleo_container_image_delete_debug: false
 tripleo_container_image_delete_password:

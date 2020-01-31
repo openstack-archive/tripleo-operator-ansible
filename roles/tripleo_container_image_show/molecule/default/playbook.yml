@@ -1,0 +1,59 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+
+    - name: "Include tripleo_container_image_show"
+      include_role:
+        name: "tripleo_container_image_show"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_show_debug: true
+        tripleo_container_image_show_image: containername
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_container_image_show_result.stdout == "tripleo container image show -f json containername"
+
+    - name: Check parameter "tripleo_container_image_show_username"
+      include_role:
+        name: "tripleo_container_image_show"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_show_debug: true
+        tripleo_container_image_show_username: test
+        tripleo_container_image_show_image: containername
+
+    - name: Assert "tripleo_container_image_show_username"
+      assert:
+        that:
+          - tripleo_container_image_show_result.stdout == "tripleo container image show --username test -f json containername"
+
+    - name: Check parameter "tripleo_container_image_show_password"
+      include_role:
+        name: "tripleo_container_image_show"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_show_debug: true
+        tripleo_container_image_show_password: test
+        tripleo_container_image_show_image: containername
+
+    - name: Assert "tripleo_container_image_show_password"
+      assert:
+        that:
+          - tripleo_container_image_show_result.stdout == "tripleo container image show --password test -f json containername"
+
+    - name: Check parameter "tripleo_container_image_show_format"
+      include_role:
+        name: "tripleo_container_image_show"
+      vars:
+        openstack_bin: echo
+        tripleo_container_image_show_debug: true
+        tripleo_container_image_show_format: values
+        tripleo_container_image_show_image: containername
+
+    - name: Assert "tripleo_container_image_show_format"
+      assert:
+        that:
+          - tripleo_container_image_show_result.stdout == "tripleo container image show -f values containername"
