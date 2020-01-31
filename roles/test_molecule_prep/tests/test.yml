@@ -1,0 +1,4 @@
+---
+- hosts: localhost
+  roles:
+    - test_molecule_prep

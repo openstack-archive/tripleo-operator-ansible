@@ -2,6 +2,7 @@
     name: tripleo-operator-molecule-jobs
     check:
       jobs:
+      - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
       - tripleo-operator-molecule-tripleo_container_image_push
@@ -12,6 +13,7 @@
 
     gate:
       jobs:
+      - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
       - tripleo-operator-molecule-tripleo_container_image_push
@@ -19,6 +21,15 @@
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+
+- job:
+    files:
+      - ^roles/test_molecule_prep/.*
+      - ^plugins/.*
+    name: tripleo-operator-molecule-test_molecule_prep
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: test_molecule_prep
 
 - job:
     name: tripleo-operator-molecule-base
