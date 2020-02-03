@@ -1,0 +1,12 @@
+---
+- name: Build collection
+  shell: >-
+    pwd && ansible-galaxy collection build --force --output-path {{ test_molecule_prep_collections_build_root }}
+  args:
+    chdir: "{{ test_molecule_prep_execution_root }}"
+  changed_when: true
+
+- name: Install collection
+  shell: >-
+    ansible-galaxy collection install --force {{ test_molecule_prep_collections_build_root }}/tripleo-operator*
+  changed_when: true

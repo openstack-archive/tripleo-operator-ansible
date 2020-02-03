@@ -1,0 +1,4 @@
+---
+# defaults file for test_molecule_prep
+test_molecule_prep_collections_build_root: "{{ ansible_env.HOME }}/collection-buildroot"
+test_molecule_prep_execution_root: "../../../.."
