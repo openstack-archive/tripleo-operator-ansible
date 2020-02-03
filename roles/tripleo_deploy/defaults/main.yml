@@ -1,0 +1,39 @@
+---
+# defaults file for tripleo_deploy
+openstack_bin: openstack
+tripleo_deploy_become: true
+tripleo_deploy_cleanup: false
+tripleo_deploy_control_virtual_ip:
+tripleo_deploy_debug: false
+tripleo_deploy_deployment_python_interpreter:
+tripleo_deploy_deployment_user: "{{ ansible_env.USER }}"
+tripleo_deploy_environment_files: []
+tripleo_deploy_force_stack_create: false
+tripleo_deploy_force_stack_update: false
+tripleo_deploy_heat_api_port:
+tripleo_deploy_heat_user:
+tripleo_deploy_hieradata_override:
+tripleo_deploy_home_dir: "{{ ansible_env.HOME }}"
+tripleo_deploy_inflight_validations: false
+tripleo_deploy_keep_running: false
+tripleo_deploy_local_domain:
+tripleo_deploy_local_ip:
+tripleo_deploy_log: "{{ tripleo_deploy_home_dir }}/overcloud_deploy.log"
+tripleo_deploy_log_combine: true
+tripleo_deploy_log_output: true
+tripleo_deploy_networks_file:
+tripleo_deploy_output_dir:
+tripleo_deploy_output_only: false
+tripleo_deploy_override_ansible_cfg:
+tripleo_deploy_plan_environment_file:
+tripleo_deploy_poll: 10
+tripleo_deploy_public_virtual_ip:
+tripleo_deploy_stack: standalone
+tripleo_deploy_standalone: true
+tripleo_deploy_standalone_role: Standalone
+tripleo_deploy_templates: /usr/share/openstack-tripleo-heat-templates
+tripleo_deploy_roles_file: "{{ tripleo_deploy_templates }}/roles/Standalone.yaml"
+tripleo_deploy_timeout: 5700
+tripleo_deploy_timeout_arg: 90
+tripleo_deploy_upgrade: false
+tripleo_deploy_yes: true

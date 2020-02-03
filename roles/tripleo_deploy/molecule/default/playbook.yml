@@ -1,0 +1,387 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_deploy_become: false
+    tripleo_deploy_debug: true
+    tripleo_deploy_log_output: false
+    tripleo_deploy_log_combine: false
+    tripleo_deploy_poll: 1
+    tripleo_deploy_local_ip: 192.168.24.2/24
+    tripleo_deploy_deployment_user:
+    tripleo_deploy_roles_file:
+    tripleo_deploy_yes: false
+  tasks:
+
+    - name: "Include tripleo_deploy"
+      include_role:
+        name: "tripleo_deploy"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_deploy_output ==
+            "tripleo deploy --templates /usr/share/openstack-tripleo-heat-templates "
+            "--standalone --stack standalone --standalone-role Standalone --timeout 90 "
+            "--local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_stack"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack: test
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+
+    - name: Assert "tripleo_deploy_stack"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --stack test --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_upgrade"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_upgrade: true
+
+    - name: Assert "tripleo_deploy_upgrade"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --upgrade --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_yes"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_yes: true
+
+    - name: Assert "tripleo_deploy_yes"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --yes --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_output_dir"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_output_dir: /foo
+
+    - name: Assert "tripleo_deploy_output_dir"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --output-dir /foo --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_output_only"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_output_only: true
+
+    - name: Assert "tripleo_deploy_output_only"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --output-only --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_environment_files"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_environment_files:
+          - /foo/bar.yml
+          - /foo/baz.yml
+
+    - name: Assert "tripleo_deploy_environment_files"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy -e /foo/bar.yml -e /foo/baz.yml --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_roles_file"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_roles_file: roles.yaml
+
+    - name: Assert "tripleo_deploy_roles_file"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy -r roles.yaml --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_networks_file"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_networks_file: net.yaml
+
+    - name: Assert "tripleo_deploy_networks_file"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy -n net.yaml --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_plan_environment_file"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_plan_environment_file: plan.yaml
+
+    - name: Assert "tripleo_deploy_plan_environment_file"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy -p plan.yaml --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_heat_api_port"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_heat_api_port: 1111
+
+    - name: Assert "tripleo_deploy_heat_api_port"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --heat-api-port 1111 --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_heat_user"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_heat_user: foo
+
+    - name: Assert "tripleo_deploy_heat_user"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --heat-user foo --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_deployment_user"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_deployment_user: user
+
+    - name: Assert "tripleo_deploy_deployment_user"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --deployment-user user --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_deployment_python_interpreter"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_deployment_python_interpreter: python2
+
+    - name: Assert "tripleo_deploy_deployment_python_interpreter"
+      assert:
+        that:
+          - tripleo_deploy_output ==
+            "tripleo deploy --deployment-python-interpreter python2 --local-ip 192.168.24.2/24"
+
+    - name: Check parameter "tripleo_deploy_control_virtual_ip"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_control_virtual_ip: 1.1.1.12
+
+    - name: Assert "tripleo_deploy_control_virtual_ip"
+      assert:
+        that:
+          - tripleo_deploy_output ==
+            "tripleo deploy --local-ip 192.168.24.2/24 --control-virtual-ip 1.1.1.12"
+
+    - name: Check parameter "tripleo_deploy_public_virtual_ip"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_public_virtual_ip: 1.1.1.13
+
+    - name: Assert "tripleo_deploy_public_virtual_ip"
+      assert:
+        that:
+          - tripleo_deploy_output ==
+            "tripleo deploy --local-ip 192.168.24.2/24 --public-virtual-ip 1.1.1.13"
+
+    - name: Check parameter "tripleo_deploy_local_domain"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_local_domain: rh.local
+
+    - name: Assert "tripleo_deploy_local_domain"
+      assert:
+        that:
+          - tripleo_deploy_output ==
+            "tripleo deploy --local-ip 192.168.24.2/24 --local-domain rh.local"
+
+    - name: Check parameter "tripleo_deploy_cleanup"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_cleanup: true
+
+    - name: Assert "tripleo_deploy_cleanup"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --local-ip 192.168.24.2/24 --cleanup"
+
+    - name: Check parameter "tripleo_deploy_hieradata_override"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_hieradata_override: /foo.yml
+
+    - name: Assert "tripleo_deploy_hieradata_override"
+      assert:
+        that:
+          - tripleo_deploy_output ==
+            "tripleo deploy --local-ip 192.168.24.2/24 --hieradata-override /foo.yml"
+
+    - name: Check parameter "tripleo_deploy_keep_running"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_keep_running: true
+
+    - name: Assert "tripleo_deploy_keep_running"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --local-ip 192.168.24.2/24 --keep-running"
+
+    - name: Check parameter "tripleo_deploy_inflight_validations"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_inflight_validations: true
+
+    - name: Assert "tripleo_deploy_inflight_validations"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --local-ip 192.168.24.2/24 --inflight-validations"
+
+    - name: Check parameter "tripleo_deploy_force_stack_create"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_force_stack_create: true
+
+    - name: Assert "tripleo_deploy_force_stack_create"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --local-ip 192.168.24.2/24 --force-stack-create"
+
+    - name: Check parameter "tripleo_deploy_force_stack_update"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_force_stack_update: true
+
+    - name: Assert "tripleo_deploy_force_stack_update"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --local-ip 192.168.24.2/24 --force-stack-update"
