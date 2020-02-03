@@ -32,7 +32,6 @@
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
-      - tripleo-operator-molecule-tripleo_container_image_prepare
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
       - tripleo-operator-molecule-tripleo_undercloud_backup
