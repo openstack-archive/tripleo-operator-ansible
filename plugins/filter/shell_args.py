@@ -22,6 +22,9 @@ class FilterModule(object):
         }
 
     def shell_arg_list(self, arg, parameter=None):
+        # Nothing was passed into this, just return an empty string
+        if not arg:
+            return ''
         if not isinstance(arg, (list, tuple)):
             arg = [arg]
         return_value = []
