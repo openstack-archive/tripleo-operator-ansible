@@ -44,40 +44,47 @@
       {{ tripleo_overcloud_deploy_baremetal_deployment | ternary('--baremetal-deployment $DEPLOY_BAREMETAL_DEPLOYMENT', '') }}
       {{ tripleo_overcloud_deploy_log_output | ternary((">" ~ tripleo_overcloud_deploy_log), '') }}
       {{ tripleo_overcloud_deploy_log_combine | ternary("2>&1", '') }}
+    _deploy_env:
+      DEPLOY_TEMPLATES: "{{ tripleo_overcloud_deploy_templates }}"
+      DEPLOY_STACK: "{{ tripleo_overcloud_deploy_stack }}"
+      DEPLOY_TIMEOUT_ARG: "{{ tripleo_overcloud_deploy_timeout_arg }}"
+      DEPLOY_LIBVIRT_TYPE: "{{ tripleo_overcloud_deploy_libvirt_type }}"
+      DEPLOY_NTP_SERVER: "{{ tripleo_overcloud_deploy_ntp_server }}"
+      DEPLOY_NO_PROXY: "{{ tripleo_overcloud_deploy_no_proxy }}"
+      DEPLOY_OVERCLOUD_SSH_USER: "{{ tripleo_overcloud_deploy_overcloud_ssh_user }}"
+      DEPLOY_OVERCLOUD_SSH_KEY: "{{ tripleo_overcloud_deploy_overcloud_ssh_key }}"
+      DEPLOY_OVERCLOUD_SSH_NETWORK: "{{ tripleo_overcloud_deploy_overcloud_ssh_network }}"
+      DEPLOY_OVERCLOUD_SSH_ENABLE_TIMEOUT: "{{ tripleo_overcloud_deploy_overcloud_ssh_enable_timeout }}"
+      DEPLOY_OVERCLOUD_SSH_PORT_TIMEOUT: "{{ tripleo_overcloud_deploy_overcloud_ssh_port_timeout }}"
+      DEPLOY_ROLES_FILE: "{{ tripleo_overcloud_deploy_roles_file }}"
+      DEPLOY_NETWORKS_FILE: "{{ tripleo_overcloud_deploy_networks_file }}"
+      DEPLOY_PLAN_ENV_FILE: "{{ tripleo_overcloud_deploy_plan_environment_file }}"
+      DEPLOY_ANSWERS_FILE: "{{ tripleo_overcloud_deploy_answers_file }}"
+      DEPLOY_OUTPUT_DIR: "{{ tripleo_overcloud_deploy_output_dir }}"
+      DEPLOY_OVERRIDE_ANSIBLE_CFG: "{{ tripleo_overcloud_deploy_override_ansible_cfg }}"
+      DEPLOY_CONFIG_DOWNLOAD_TIMEOUT: "{{ tripleo_overcloud_deploy_config_download_timeout }}"
+      DEPLOY_PYTHON_INTERPRETER: "{{ tripleo_overcloud_deploy_deployment_python_interpreter }}"
+      DEPLOY_BAREMETAL_DEPLOYMENT: "{{ tripleo_overcloud_deploy_baremetal_deployment }}"
 
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_overcloud_deploy_log }}"
   when: tripleo_overcloud_deploy_log_output|bool
 
-- name: Show the overcloud deploy command
-  debug:
-    var: _deploy_cmd
+- name: Show debug information
   when: tripleo_overcloud_deploy_debug|bool
+  block:
+    - name: Show the overcloud deploy command
+      debug:
+        var: _deploy_cmd
+
+    - name: Show the overcloud deploy environment
+      debug:
+        var: _deploy_env
 
 - name: Overcloud deploy
   shell: "{{ _deploy_cmd }}"  # noqa 305
-  environment:
-    DEPLOY_TEMPLATES: "{{ tripleo_overcloud_deploy_templates }}"
-    DEPLOY_STACK: "{{ tripleo_overcloud_deploy_stack }}"
-    DEPLOY_TIMEOUT_ARG: "{{ tripleo_overcloud_deploy_timeout_arg }}"
-    DEPLOY_LIBVIRT_TYPE: "{{ tripleo_overcloud_deploy_libvirt_type }}"
-    DEPLOY_NTP_SERVER: "{{ tripleo_overcloud_deploy_ntp_server }}"
-    DEPLOY_NO_PROXY: "{{ tripleo_overcloud_deploy_no_proxy }}"
-    DEPLOY_OVERCLOUD_SSH_USER: "{{ tripleo_overcloud_deploy_overcloud_ssh_user }}"
-    DEPLOY_OVERCLOUD_SSH_KEY: "{{ tripleo_overcloud_deploy_overcloud_ssh_key }}"
-    DEPLOY_OVERCLOUD_SSH_NETWORK: "{{ tripleo_overcloud_deploy_overcloud_ssh_network }}"
-    DEPLOY_OVERCLOUD_SSH_ENABLE_TIMEOUT: "{{ tripleo_overcloud_deploy_overcloud_ssh_enable_timeout }}"
-    DEPLOY_OVERCLOUD_SSH_PORT_TIMEOUT: "{{ tripleo_overcloud_deploy_overcloud_ssh_port_timeout }}"
-    DEPLOY_ROLES_FILE: "{{ tripleo_overcloud_deploy_roles_file }}"
-    DEPLOY_NETWORKS_FILE: "{{ tripleo_overcloud_deploy_networks_file }}"
-    DEPLOY_PLAN_ENV_FILE: "{{ tripleo_overcloud_deploy_plan_environment_file }}"
-    DEPLOY_ANSWERS_FILE: "{{ tripleo_overcloud_deploy_answers_file }}"
-    DEPLOY_OUTPUT_DIR: "{{ tripleo_overcloud_deploy_output_dir }}"
-    DEPLOY_OVERRIDE_ANSIBLE_CFG: "{{ tripleo_overcloud_deploy_override_ansible_cfg }}"
-    DEPLOY_CONFIG_DOWNLOAD_TIMEOUT: "{{ tripleo_overcloud_deploy_config_download_timeout }}"
-    DEPLOY_PYTHON_INTERPRETER: "{{ tripleo_overcloud_deploy_deployment_python_interpreter }}"
-    DEPLOY_BAREMETAL_DEPLOYMENT: "{{ tripleo_overcloud_deploy_baremetal_deployment }}"
+  environment: "{{ _deploy_env }}"
   args:
     chdir: "{{ tripleo_overcloud_deploy_home_dir }}"
     warn: false
