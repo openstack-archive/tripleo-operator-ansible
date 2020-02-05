@@ -1,5 +1,6 @@
 ---
 # defaults file for tripleo_config_generate_ansible
+openstack_bin: openstack
 tripleo_config_generate_ansible_debug: false
 tripleo_config_generate_ansible_deployment_user: "{{ ansible_user }}"
 tripleo_config_generate_ansible_os_cloud: "{{ tripleo_os_cloud | default('') }}"
