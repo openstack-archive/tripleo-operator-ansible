@@ -3,6 +3,7 @@
     check:
       jobs:
       - tripleo-operator-molecule-test_molecule_prep
+      - tripleo-operator-molecule-tripleo_config_generate_ansible
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
       - tripleo-operator-molecule-tripleo_container_image_prepare
@@ -23,6 +24,7 @@
     gate:
       jobs:
       - tripleo-operator-molecule-test_molecule_prep
+      - tripleo-operator-molecule-tripleo_config_generate_ansible
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
       - tripleo-operator-molecule-tripleo_container_image_prepare
@@ -42,6 +44,13 @@
       - tripleo-operator-molecule-tripleo_undercloud_upgrade
 
 - job:
+    name: tripleo-operator-molecule-base
+    abstract: true
+    parent: openstack-tox-molecule
+    success-url: "reports.html"
+    failure-url: "reports.html"
+
+- job:
     files:
       - ^roles/test_molecule_prep/.*
       - ^plugins/.*
@@ -51,11 +60,13 @@
       tox_extra_args: test_molecule_prep
 
 - job:
-    name: tripleo-operator-molecule-base
-    abstract: true
-    parent: openstack-tox-molecule
-    success-url: "reports.html"
-    failure-url: "reports.html"
+    files:
+      - ^roles/tripleo_config_generate_ansible/.*
+      - ^plugins/.*
+    name: tripleo-operator-molecule-tripleo_config_generate_ansible
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_config_generate_ansible
 
 - job:
     files:

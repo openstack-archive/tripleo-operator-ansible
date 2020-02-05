@@ -1,0 +1,45 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_config_generate_ansible_debug: true
+    tripleo_config_generate_ansible_deployment_user:
+    tripleo_config_generate_ansible_output_dir:
+  tasks:
+
+    - name: "Include tripleo_config_generate_ansible"
+      include_role:
+        name: "tripleo_config_generate_ansible"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_config_generate_ansible_result.stdout == "tripleo config generate ansible"
+
+    - name: Check parameter "tripleo_config_generate_ansible_deployment_user"
+      include_role:
+        name: "tripleo_config_generate_ansible"
+      vars:
+        tripleo_config_generate_ansible_deployment_user: foo
+
+    - name: Assert "tripleo_config_generate_ansible_deployment_user"
+      assert:
+        that:
+          - tripleo_config_generate_ansible_result.stdout ==
+            "tripleo config generate ansible --deployment-user foo"
+
+    - name: Check parameter "tripleo_config_generate_ansible_output_dir"
+      include_role:
+        name: "tripleo_config_generate_ansible"
+      vars:
+        tripleo_config_generate_ansible_output_dir: /foo
+
+    - name: Assert "tripleo_config_generate_ansible_output_dir"
+      assert:
+        that:
+          - tripleo_config_generate_ansible_result.stdout ==
+            "tripleo config generate ansible --output-dir /foo"

@@ -3,20 +3,28 @@
   set_fact:
     _generate_cmd: >-
       {{ tripleo_config_generate_ansible_os_cloud | ternary('', "source " ~ tripleo_config_generate_ansible_rc_file ~ "; ") }}
-      openstack tripleo config generate ansible
-      {{ tripleo_config_generate_ansible_deployment_user | ternary("--deployment_user " ~ tripleo_config_generate_ansible_deployment_user, '') }}
-      {{ tripleo_config_generate_ansible_output_dir | ternary("--output-dir " ~ tripleo_config_generate_ansible_output_dir, '') }}
+      {{ openstack_bin }} tripleo config generate ansible
+      {{ tripleo_config_generate_ansible_deployment_user | ternary("--deployment-user $GENERATE_DEPLOYMENT_USER", '') }}
+      {{ tripleo_config_generate_ansible_output_dir | ternary("--output-dir $GENERATE_OUTPUT_DIR", '') }}
+    _generate_env:
+      GENERATE_DEPLOYMENT_USER: "{{ tripleo_config_generate_ansible_deployment_user }}"
+      GENERATE_OUTPUT_DIR: "{{ tripleo_config_generate_ansible_output_dir }}"
+      OS_CLOUD: "{{ tripleo_config_generate_ansible_os_cloud }}"
 
-- name: Show the config generate ansible command
-  debug:
-    var: _generate_cmd
+- name: Show debug information
   when: tripleo_config_generate_ansible_debug|bool
+  block:
+    - name: Show the config generate ansible command
+      debug:
+        var: _generate_cmd
+    - name: Show the config generate ansible environment
+      debug:
+        var: _generate_env
 
 - name: tripleo config generate ansible
   shell: "{{ _generate_cmd }}"  # noqa 305
   args:
     warn: false
-  environment:
-    OS_CLOUD: "{{ tripleo_config_generate_ansible_os_cloud }}"
+  environment: "{{ _generate_env }}"
   register: tripleo_config_generate_ansible_result
   changed_when: true
