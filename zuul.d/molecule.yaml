@@ -15,6 +15,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_deploy
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
+      - tripleo-operator-molecule-tripleo_overcloud_image_build
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
@@ -42,6 +43,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_deploy
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
+      - tripleo-operator-molecule-tripleo_overcloud_image_build
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
@@ -150,6 +152,14 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_failures
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_image_build/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_image_build
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_image_build
 
 - job:
     files:

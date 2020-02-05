@@ -1,0 +1,51 @@
+---
+# tasks file for tripleo_overcloud_image_build
+- name: Setup overcloud image build facts
+  set_fact:
+    _build_cmd: >-
+      {{ openstack_bin }} overcloud image build
+      {{ tripleo_overcloud_image_build_config_files | tripleo.operator.shell_arg_list('--config-file') }}
+      {{ tripleo_overcloud_image_build_image_names | tripleo.operator.shell_arg_list('--image-name') }}
+      {{ tripleo_overcloud_image_build_no_skip | ternary('--no-skip', '') }}
+      {{ tripleo_overcloud_image_build_output_directory | ternary('--output-directory ' ~ tripleo_overcloud_image_build_output_directory, '') }}
+      {{ tripleo_overcloud_image_build_log_output | ternary((">" ~ tripleo_overcloud_image_build_log), '') }}
+      {{ tripleo_overcloud_image_build_log_combine | ternary("2>&1", '') }}
+    _build_env: |
+      {% set env_vars = {} %}
+      {% if tripleo_overcloud_image_build_dib_yum_repo_conf %}
+      {% set _ = env_vars.update({'DIB_YUM_REPO_CONF': tripleo_overcloud_image_build_dib_yum_repo_conf}) %}
+      {% endif %}
+      {% if tripleo_overcloud_image_build_dib_local_image %}
+      {% set _ = env_vars.update({'DIB_LOCAL_IMAGE': tripleo_overcloud_image_build_dib_local_image}) %}
+      {% endif %}
+      {% if tripleo_overcloud_image_build_stable_branch %}
+      {% set _ = env_vars.update({'STABLE_BRANCH': tripleo_overcloud_image_build_stable_branch}) %}
+      {% endif %}
+      {% set _ = env_vars.update(tripleo_overcloud_image_build_extra_env_vars) %}
+      {{ env_vars }}
+
+- name: Show debugging information
+  when: tripleo_overcloud_image_build_debug|bool
+  block:
+    - name: Show the overcloud image build command
+      debug:
+        var: _build_cmd
+
+    - name: Show the overcloud image build environment
+      debug:
+        var: _build_env
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_image_build_log }}"
+  when: tripleo_overcloud_image_build_log_output|bool
+
+- name: Overcloud image build
+  shell: "{{ _build_cmd }}"  # noqa 305
+  environment: "{{ _build_env }}"
+  args:
+    chdir: "{{ tripleo_overcloud_image_build_home_dir }}"
+  async: "{{ tripleo_overcloud_image_build_timeout }}"
+  poll: "{{ tripleo_overcloud_image_build_poll }}"
+  register: tripleo_overcloud_image_build_result
+  changed_when: true
