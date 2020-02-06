@@ -18,7 +18,7 @@ tripleo_deploy_inflight_validations: false
 tripleo_deploy_keep_running: false
 tripleo_deploy_local_domain:
 tripleo_deploy_local_ip:
-tripleo_deploy_log: "{{ tripleo_deploy_home_dir }}/overcloud_deploy.log"
+tripleo_deploy_log: "{{ tripleo_deploy_home_dir }}/standalone_deploy.log"
 tripleo_deploy_log_combine: true
 tripleo_deploy_log_output: true
 tripleo_deploy_networks_file:
