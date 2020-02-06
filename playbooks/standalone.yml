@@ -1,0 +1,110 @@
+---
+###############################################################################
+# Standalone installation playbook
+#
+# Description:
+#   This is a basic playbook to run a simple standalone node deploymend on an
+#   existing provisioned system.
+#
+###############################################################################
+- hosts: standalone
+  collections:
+    - tripleo.operator
+  vars:
+    standalone_debug: true
+    standalone_dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    standalone_hostname: 'standalone.localdomain'
+    standalone_ip: 192.168.24.2
+    standalone_cidr: 24
+    standalone_gateway:
+    standalone_local_mtu: 1400
+    standalone_local_interface: eth1
+    standalone_enable_selinux: false
+    standalone_virt_type: qemu
+
+  tasks:
+    - name: Set hostname
+      hostname:
+        name: "{{ standalone_hostname }}"
+      become: true
+
+    - name: Configure tripleo repositories
+      include_role:
+        name: tripleo_repos
+      vars:
+        tripleo_repos_debug: "{{ install_debug }}"
+
+    - name: Ensure system is up to date
+      yum:
+        name: '*'
+        state: latest  # noqa 403
+      register: packages_updated
+      become: true
+
+    - name: Reboot if necessary
+      reboot:
+      become: true
+      when: packages_updated is changed
+
+    - name: Install tripleoclient
+      block:
+        - name: install python2 tripleoclient
+          yum:
+            name: python-tripleoclient
+            state: installed
+          become: true
+          when: ansible_distribution_major_version|int <= 7
+
+        - name: install python3 tripleoclient
+          package:
+            name: python3-tripleoclient
+            state: present
+          become: true
+          when: ansible_distribution_major_version|int >= 8
+
+    - name: Generate parameters.yaml
+      copy:
+        content: |
+          parameter_defaults:
+            CloudName: {{ standalone_hostname }}
+            {% if standalone_gateway | default(False) -%}
+            ControlPlaneStaticRoutes:
+              - ip_netmask: 0.0.0.0/0
+                next_hop: {{ standalone_gateway }}
+                default: true
+            {% endif -%}
+            Debug: {{ standalone_debug|bool }}
+            DeploymentUser: {{ ansible_env.USER }}
+            DnsServers: {{ standalone_dns }}
+            KernelIpNonLocalBind: 1
+            NeutronPublicInterface: {{ standalone_local_interface }}
+            NeutronBridgeMappings: datacenter:br-ctlplane
+            NeutronPyshicalBridge: br-ctlplane
+            StandaloneEnableRoutedNetworks: false
+            StandaloneHomeDir: {{ ansible_env.HOME }}
+            InterfacesLocalMtu: {{ standalone_local_mtu }}
+            NovaComputeLibvirtType: {{ standalone_virt_type }}
+        dest: "{{ ansible_env.HOME }}/parameters.yaml"
+
+    - name: Generate ContainerImagePrepare
+      include_role:
+        name: tripleo_container_image_prepare_default
+      vars:
+        tripleo_container_image_prepare_default_output_env_file: "{{ ansible_env.HOME }}/container-image-prepare.yaml"
+
+    - name: Run standalone deployment
+      include_role:
+        name: tripleo_deploy
+      vars:
+        tripleo_deploy_debug: "{{ standalone_debug }}"
+        tripleo_deploy_templates: /usr/share/openstack-tripleo-heat-templates
+        tripleo_deploy_local_ip: "{{ standalone_ip }}/{{ standalone_cidr }}"
+        tripleo_deploy_roles_file: /usr/share/openstack-tripleo-heat-templates/roles/Standalone.yaml
+        tripleo_deploy_environment_files:
+          - /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml
+          - "{{ ansible_env.HOME }}/container-image-prepare.yaml"
+          - "{{ ansible_env.HOME }}/parameters.yaml"
+        tripleo_deploy_standalone: true
+        tripleo_deploy_output_dir: "{{ ansible_env.HOME }}"
