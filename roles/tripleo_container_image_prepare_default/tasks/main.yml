@@ -3,7 +3,7 @@
 - name: Setup container image prepare default facts
   set_fact:
     _prepare_cmd: >-
-      openstack tripleo container image prepare default
+      {{ openstack_bin }} tripleo container image prepare default
       {{ tripleo_container_image_prepare_default_output_env_file | ternary('--output-env-file '
       ~ tripleo_container_image_prepare_default_output_env_file, '') }}
       {{ tripleo_container_image_prepare_default_local_push_destination | ternary('--local-push-destination', '') }}
@@ -20,4 +20,4 @@
 
 - name: Set output variable
   set_fact:
-    tripleo_container_image_prepare_default_result: "{{ tripleo_container_image_prepare_default_result.stdout }}"
+    tripleo_container_image_prepare_default_output: "{{ tripleo_container_image_prepare_default_result.stdout }}"
