@@ -12,19 +12,19 @@
     - name: Grab repo package list
       uri:
         url: "{{ _tripleo_repos_repo_url }}"
-        return_content:
+        return_content: true
       retries: 10
       delay: 3
       register: _tripleo_repos_repo_data
     - name: Find rpm name
       set_fact:
-        _tripleo_repos_rpm: "{{ _tripleo_repos_repo_data.content | regex_search('python[0-9]-tripleo_repos-[a-z0-9-.]+\\.rpm') }}"
+        _tripleo_repos_rpm: "{{ _tripleo_repos_repo_data.content | regex_search('python[0-9]-tripleo-repos-[a-z0-9-.]+\\.rpm') }}"
     - name: Fail if rpm is missing
       fail:
         msg: Unable to find tripleo_repos rpm
       when: _tripleo_repos_rpm|length == 0
 
-- name: Install tripleo_repos
+- name: Install tripleo-repos
   yum:
     name: "{{ _tripleo_repos_repo_url }}{{ _tripleo_repos_rpm }}"
     state: present

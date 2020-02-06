@@ -11,14 +11,14 @@
 - name: Gather the rpm package facts
   package_facts:
 
-- name: Install tripleo_repos
+- name: Install tripleo-repos
   include_tasks: install.yml
-  when: (ansible_facts.distribution_major_version|int <= 7 and not 'python2-tripleo_repos' in ansible_facts.packages) or
-        (ansible_facts.distribution_major_version|int <= 8 and not 'python3-tripleo_repos' in ansible_facts.packages)
+  when: (ansible_facts.distribution_major_version|int <= 7 and not 'python2-tripleo-repos' in ansible_facts.packages) or
+        (ansible_facts.distribution_major_version|int <= 8 and not 'python3-tripleo-repos' in ansible_facts.packages)
 
-- name: Run tripleo_repos
+- name: Run tripleo-repos
   command: >-
-    tripleo_repos
+    tripleo-repos
     -b {{ tripleo_repos_branch }}
     {{ tripleo_repos_extra_args | join(' ') }}
     {{ tripleo_repos_version }}
