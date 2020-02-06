@@ -4,8 +4,8 @@
   set_fact:
     _show_cmd: >-
       {{ openstack_bin }} tripleo container image show
-      {{ tripleo_container_image_show_username | ternary('--username $TRIPLEO_IMAGE_SHOW_USERNAME', '') }}
-      {{ tripleo_container_image_show_password | ternary('--password $TRIPLEO_IMAGE_SHOW_PASSWORD', '') }}
+      {{ tripleo_container_image_show_username | ternary('--username "$TRIPLEO_IMAGE_SHOW_USERNAME"', '') }}
+      {{ tripleo_container_image_show_password | ternary('--password "$TRIPLEO_IMAGE_SHOW_PASSWORD"', '') }}
       {{ tripleo_container_image_show_format | ternary('-f $TRIPLEO_IMAGE_SHOW_FORMAT', '') }}
       {{ tripleo_container_image_show_image }}
 
@@ -17,8 +17,8 @@
 - name: Container image show
   shell: "{{ _show_cmd }}"  # noqa 305
   environment:
-    TRIPLEO_IMAGE_SHOW_USERNAME: "{{ tripleo_container_image_show_username | default('') }}"
-    TRIPLEO_IMAGE_SHOW_PASSWORD: "{{ tripleo_container_image_show_password | default('') }}"
+    TRIPLEO_IMAGE_SHOW_USERNAME: "{{ tripleo_container_image_show_username | default('') | quote }}"
+    TRIPLEO_IMAGE_SHOW_PASSWORD: "{{ tripleo_container_image_show_password | default('') | quote }}"
     TRIPLEO_IMAGE_SHOW_FORMAT: "{{ tripleo_container_image_show_format | default('') }}"
   register: tripleo_container_image_show_result
   changed_when: false
