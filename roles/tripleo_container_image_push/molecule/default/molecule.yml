@@ -6,9 +6,6 @@ driver:
     ansible_connection_options:
       ansible_connection: local
 log: true
-lint:
-  name: yamllint
-  enabled: false
 platforms:
   - name: instance
 provisioner:
