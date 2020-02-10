@@ -1,0 +1,121 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_node_import_debug: true
+    tripleo_overcloud_node_import_log_combine: false
+    tripleo_overcloud_node_import_log_output: false
+    tripleo_overcloud_node_import_poll: 1
+  tasks:
+
+    - name: "Include tripleo_overcloud_node_import"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_concurrency"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_concurrency: 10
+
+    - name: Assert "tripleo_overcloud_node_import_concurrency"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --concurrency 10 environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_environment_file"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_environment_file: /tmp/foo.json
+
+    - name: Assert "tripleo_overcloud_node_import_environment_file"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import /tmp/foo.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_http_boot"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_http_boot: /foo
+
+    - name: Assert "tripleo_overcloud_node_import_http_boot"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --http-boot /foo environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_instance_boot_option"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_instance_boot_option: local
+
+    - name: Assert "tripleo_overcloud_node_import_instance_boot_option"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --instance-boot-option local environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_introspect"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_introspect: true
+
+    - name: Assert "tripleo_overcloud_node_import_introspect"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --introspect environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_no_deploy_image"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_no_deploy_image: true
+
+    - name: Assert "tripleo_overcloud_node_import_no_deploy_image"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --no-deploy-image environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_provide"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_provide: true
+
+    - name: Assert "tripleo_overcloud_node_import_provide"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --provide environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_run_validations"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_run_validations: true
+
+    - name: Assert "tripleo_overcloud_node_import_run_validations"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --run-validations environment.json"
+
+    - name: Check parameter "tripleo_overcloud_node_import_validate_only"
+      include_role:
+        name: "tripleo_overcloud_node_import"
+      vars:
+        tripleo_overcloud_node_import_validate_only: true
+
+    - name: Assert "tripleo_overcloud_node_import_validate_only"
+      assert:
+        that:
+          - tripleo_overcloud_node_import_output == "overcloud node import --validate-only environment.json"

@@ -17,6 +17,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+      - tripleo-operator-molecule-tripleo_overcloud_node_import
       - tripleo-operator-molecule-tripleo_undercloud_backup
       - tripleo-operator-molecule-tripleo_undercloud_install
       - tripleo-operator-molecule-tripleo_undercloud_minion_install
@@ -40,6 +41,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
       - tripleo-operator-molecule-tripleo_overcloud_node_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
+      - tripleo-operator-molecule-tripleo_overcloud_node_import
       - tripleo-operator-molecule-tripleo_undercloud_backup
       - tripleo-operator-molecule-tripleo_undercloud_install
       - tripleo-operator-molecule-tripleo_undercloud_minion_install
@@ -142,6 +144,14 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_node_introspect
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_node_import/.*
+    name: tripleo-operator-molecule-tripleo_overcloud_node_import
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_node_import
 
 - job:
     files:
