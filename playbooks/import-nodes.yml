@@ -1,0 +1,51 @@
+---
+###############################################################################
+# Overcloud node import and introspection playbook
+#
+# Description:
+#   This is a basic playbook to import overcloud nodes and kick off node
+#   introspection.
+#
+###############################################################################
+- hosts: undercloud
+  collections:
+    - tripleo.operator
+  vars:
+    node_debug: true
+    node_introspect: true
+    node_environment_source_json_file: environment.json
+  tasks:
+    - name: Gather the rpm package facts
+      package_facts:
+
+    - name: Check if tripleoclient is installed
+      fail:
+        msg: >-
+          TripleO Client is not installed. Please make sure that the client
+          has been installed and the repositories are properly configured.
+      when: (ansible_facts.distribution_major_version|int <= 7 and not 'python2-tripleoclient' in ansible_facts.packages) or
+            (ansible_facts.distribution_major_version|int >= 8 and not 'python3-tripleoclient' in ansible_facts.packages)
+
+    - name: Copy environment file to the undercloud
+      copy:
+        src: "{{ node_environment_source_json_file }}"
+        dest: "{{ ansible_env.HOME }}/environment.json"
+        owner: "{{ ansible_env.USER }}"
+        mode: "0600"
+
+    - name: Run node import
+      include_role:
+        name: tripleo_overcloud_node_import
+      vars:
+        tripleo_overcloud_node_import_debug: "{{ node_debug }}"
+        tripleo_overcloud_node_import_environment_file: "{{ ansible_env.HOME }}/environment.json"
+
+    # NOTE(mwhahaha): We can do these actions during import, not sure which is better.
+    - name: Run node introspection
+      include_role:
+        name: tripleo_overcloud_node_introspect
+      vars:
+        tripleo_overcloud_node_introspect_debug: "{{ node_debug }}"
+        tripleo_overcloud_node_introspect_all_manageable: true
+        tripleo_overcloud_node_introspect_provide: true
+      when: node_introspect|bool
