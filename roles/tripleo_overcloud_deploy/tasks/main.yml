@@ -65,6 +65,7 @@
       DEPLOY_CONFIG_DOWNLOAD_TIMEOUT: "{{ tripleo_overcloud_deploy_config_download_timeout }}"
       DEPLOY_PYTHON_INTERPRETER: "{{ tripleo_overcloud_deploy_deployment_python_interpreter }}"
       DEPLOY_BAREMETAL_DEPLOYMENT: "{{ tripleo_overcloud_deploy_baremetal_deployment }}"
+      OS_CLOUD: "{{ tripleo_overcloud_deploy_os_cloud }}"
 
 - name: Preserve existing log file if exists
   timestamp_file:

@@ -15,15 +15,23 @@
       {{ tripleo_overcloud_node_configure_root_device_minimum_size | ternary('--root-device-minimum-size '
       ~ tripleo_overcloud_node_configure_root_device_minimum_size, '') }}
       {{ tripleo_overcloud_node_configure_overwrite_root_device_hints | ternary('--overwrite-root-device-hints', '') }}
+    _configure_env:
+      OS_CLOUD: "{{ tripleo_overcloud_node_configure_os_cloud }}"
 
-
-- name: Show the node configure command
-  debug:
-    var: _configure_cmd
+- name: Show debug information
   when: tripleo_overcloud_node_configure_debug|bool
+  block:
+    - name: Show the node configure command
+      debug:
+        var: _configure_cmd
+
+    - name: Show the node configure envrionment
+      debug:
+        var: _configure_env
 
 - name: Configure node
   shell: "{{ _configure_cmd }}"  # noqa 305
+  environment: "{{ _configure_env }}"
   register: tripleo_overcloud_node_configure_result
   changed_when: true
 

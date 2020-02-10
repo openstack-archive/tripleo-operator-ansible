@@ -17,8 +17,8 @@ Role Variables
 * `tripleo_overcloud_node_introspect_run_validations`: Run the pre-deployment validations.
   These external validations are from the TripleO Validations project.
 * `tripleo_overcloud_node_introspect_concurrency`: Maximum number of nodes to introspect at once.
-* `tripleo_overcloud_node_configure_os_cloud`: (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_node_configure_rc_file`.
-* `tripleo_overcloud_node_configure_rc_file`: (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
+* `tripleo_overcloud_node_introspect_os_cloud`: (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_node_introspect_rc_file`.
+* `tripleo_overcloud_node_introspect_rc_file`: (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

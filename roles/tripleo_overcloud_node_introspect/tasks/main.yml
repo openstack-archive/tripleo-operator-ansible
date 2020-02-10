@@ -3,22 +3,30 @@
 - name: Setup overcloud node introspect command
   set_fact:
     _introspect_cmd: >-
-      {{ tripleo_overcloud_node_configure_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_configure_rc_file ~ "; ") }}
+      {{ tripleo_overcloud_node_introspect_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_introspect_rc_file ~ "; ") }}
       {{ openstack_bin }} overcloud node introspect
       {{ tripleo_overcloud_node_introspect_node_uuids | join(' ') }}
       {{ tripleo_overcloud_node_introspect_all_manageable | ternary('--all-manageable', '') }}
       {{ tripleo_overcloud_node_introspect_provide | ternary('--provide', '') }}
       {{ tripleo_overcloud_node_introspect_run_validations | ternary('--run-validations', '') }}
       {{ tripleo_overcloud_node_introspect_concurrency | ternary('--concurrency ' ~ tripleo_overcloud_node_introspect_concurrency, '') }}
+    _introspect_env:
+      OS_CLOUD: "{{ tripleo_overcloud_node_introspect_os_cloud }}"
 
-
-- name: Show the node introspect command
-  debug:
-    var: _introspect_cmd
+- name: Show debug information
   when: tripleo_overcloud_node_introspect_debug|bool
+  block:
+    - name: Show the node introspect command
+      debug:
+        var: _introspect_cmd
+
+    - name: Show the node introspect environment
+      debug:
+        var: _introspect_env
 
 - name: Introspect node
   shell: "{{ _introspect_cmd }}"  # noqa 305
+  environment: "{{ _introspect_env }}"
   register: tripleo_overcloud_node_introspect_result
   changed_when: true
 

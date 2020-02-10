@@ -10,14 +10,23 @@
       {{ tripleo_overcloud_export_force_overwrite | ternary('--force-overwrite', '') }}
       {{ tripleo_overcloud_export_config_download_dir | ternary('--config-download-dir ' ~ tripleo_overcloud_export_config_download_dir, '') }}
       {{ tripleo_overcloud_export_no_password_excludes | ternary('--no-password-excludes', '') }}
+    _export_env:
+      OS_CLOUD: "{{ tripleo_overcloud_export_os_cloud }}"
 
-- name: Show the overcloud export command
-  debug:
-    var: _export_cmd
+- name: Show debug information
   when: tripleo_overcloud_export_debug|bool
+  block:
+    - name: Show the overcloud export command
+      debug:
+        var: _export_cmd
+
+    - name: Show the overcloud export environment
+      debug:
+        var: _export_env
 
 - name: Overcloud export
   shell: "{{ _export_cmd }}"  # noqa 305
+  environment: "{{ _export_env }}"
   register: tripleo_overcloud_export_result
   changed_when: false
 

@@ -6,14 +6,23 @@
       {{ tripleo_overcloud_failures_os_cloud | ternary('', "source " ~ tripleo_overcloud_failures_rc_file ~ "; ") }}
       {{ openstack_bin }} overcloud failures
       {{ tripleo_overcloud_failures_plan | ternary('--plan ' ~ tripleo_overcloud_failures_plan, '') }}
+    _failures_env:
+      OS_CLOUD: "{{ tripleo_overcloud_failures_os_cloud }}"
 
-- name: Show the overcloud failures command
-  debug:
-    var: _failures_cmd
+- name: Show debug information
   when: tripleo_overcloud_failures_debug|bool
+  block:
+    - name: Show the overcloud failures command
+      debug:
+        var: _failures_cmd
+
+    - name: Show the overcloud failures environment
+      debug:
+        var: _failures_env
 
 - name: Overcloud failures
   shell: "{{ _failures_cmd }}"  # noqa 305
+  environment: "{{ _failures_env }}"
   register: tripleo_overcloud_failures_result
   changed_when: false
 

@@ -8,14 +8,23 @@
       {{ tripleo_overcloud_node_clean_node_uuids | join(' ') }}
       {{ tripleo_overcloud_node_clean_all_manageable | ternary('--all-manageable', '') }}
       {{ tripleo_overcloud_node_clean_provide | ternary('--provide', '') }}
+    _clean_env:
+      OS_CLOUD: "{{ tripleo_overcloud_node_clean_os_cloud }}"
 
-- name: Show the node clean command
-  debug:
-    var: _clean_cmd
+- name: Show debug information
   when: tripleo_overcloud_node_clean_debug|bool
+  block:
+    - name: Show the node clean command
+      debug:
+        var: _clean_cmd
+
+    - name: Show the node clean environment
+      debug:
+        var: _clean_env
 
 - name: Clean node
   shell: "{{ _clean_cmd }}"  # noqa 305
+  environment: "{{ _clean_env }}"
   register: tripleo_overcloud_node_clean_result
   changed_when: true
 
