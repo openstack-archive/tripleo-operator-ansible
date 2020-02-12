@@ -1,0 +1,42 @@
+---
+# tasks file for tripleo_overcloud_node_discover
+- name: Setup overcloud node discover command
+  set_fact:
+    _discover_cmd: >-
+      {{ tripleo_overcloud_node_discover_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_discover_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud node discover
+      {{ tripleo_overcloud_node_discover_ip | tripleo.operator.shell_arg_list('--ip') }}
+      {{ tripleo_overcloud_node_discover_range | ternary('--range ' ~ tripleo_overcloud_node_discover_range, '') }}
+      {{ tripleo_overcloud_node_discover_credentials | tripleo.operator.shell_arg_list('--credentials') }}
+      {{ tripleo_overcloud_node_discover_port | tripleo.operator.shell_arg_list('--port') }}
+      {{ tripleo_overcloud_node_discover_introspect | ternary('--introspect', '') }}
+      {{ tripleo_overcloud_node_discover_run_validations | ternary('--run-validations', '') }}
+      {{ tripleo_overcloud_node_discover_provide | ternary('--provide', '') }}
+      {{ tripleo_overcloud_node_discover_no_deploy_image | ternary('--no-deploy-image', '') }}
+      {{ tripleo_overcloud_node_discover_instance_boot_option | ternary('--instance-boot-option '
+      ~ tripleo_overcloud_node_discover_instance_boot_option, '') }}
+      {{ tripleo_overcloud_node_discover_concurrency | ternary('--concurrency ' ~ tripleo_overcloud_node_discover_concurrency, '') }}
+
+    _discover_env:
+      OS_CLOUD: "{{ tripleo_overcloud_node_discover_os_cloud }}"
+
+- name: Show debug information
+  when: tripleo_overcloud_node_discover_debug|bool
+  block:
+    - name: Show the node discover command
+      debug:
+        var: _discover_cmd
+
+    - name: Show the node discover environment
+      debug:
+        var: _discover_env
+
+- name: Discover node
+  shell: "{{ _discover_cmd }}"  # noqa 305
+  environment: "{{ _discover_env }}"
+  register: tripleo_overcloud_node_discover_result
+  changed_when: true
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_node_discover_output: "{{ tripleo_overcloud_node_discover_result.stdout }}"
