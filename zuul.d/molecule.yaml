@@ -61,6 +61,12 @@
     files:
       - ^roles/test_molecule_prep/.*
       - ^plugins/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-test_molecule_prep
     parent: tripleo-operator-molecule-base
     vars:
@@ -70,6 +76,12 @@
     files:
       - ^roles/tripleo_config_generate_ansible/.*
       - ^plugins/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_config_generate_ansible
     parent: tripleo-operator-molecule-base
     vars:
@@ -78,6 +90,12 @@
 - job:
     files:
       - ^roles/tripleo_container_image_delete/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_container_image_delete
     parent: tripleo-operator-molecule-base
     vars:
@@ -86,6 +104,12 @@
 - job:
     files:
       - ^roles/tripleo_container_image_list/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_container_image_list
     parent: tripleo-operator-molecule-base
     vars:
@@ -94,6 +118,12 @@
 - job:
     files:
       - ^roles/tripleo_container_image_push/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_container_image_push
     parent: tripleo-operator-molecule-base
     vars:
@@ -102,6 +132,12 @@
 - job:
     files:
       - ^roles/tripleo_container_image_show/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_container_image_show
     parent: tripleo-operator-molecule-base
     vars:
@@ -110,6 +146,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_image_upload/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_image_upload
     parent: tripleo-operator-molecule-base
     vars:
@@ -118,6 +160,12 @@
 - job:
     files:
       - ^roles/tripleo_deploy/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_deploy
     parent: tripleo-operator-molecule-base
     vars:
@@ -126,6 +174,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_deploy/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_deploy
     parent: tripleo-operator-molecule-base
     vars:
@@ -134,6 +188,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_export/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_export
     parent: tripleo-operator-molecule-base
     vars:
@@ -142,6 +202,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_failures/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_failures
     parent: tripleo-operator-molecule-base
     vars:
@@ -150,6 +216,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_node_introspect/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_node_introspect
     parent: tripleo-operator-molecule-base
     vars:
@@ -158,6 +230,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_node_import/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_node_import
     parent: tripleo-operator-molecule-base
     vars:
@@ -166,6 +244,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_node_configure/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_node_configure
     parent: tripleo-operator-molecule-base
     vars:
@@ -174,6 +258,12 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_node_clean/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_overcloud_node_clean
     parent: tripleo-operator-molecule-base
     vars:
@@ -182,6 +272,12 @@
 - job:
     files:
       - ^roles/tripleo_container_image_prepare/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_container_image_prepare
     parent: tripleo-operator-molecule-base
     vars:
@@ -190,6 +286,12 @@
 - job:
     files:
       - ^roles/tripleo_container_image_prepare_default/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_container_image_prepare_default
     parent: tripleo-operator-molecule-base
     vars:
@@ -198,6 +300,12 @@
 - job:
     files:
       - ^roles/tripleo_undercloud_backup/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_undercloud_backup
     parent: tripleo-operator-molecule-base
     vars:
@@ -206,6 +314,12 @@
 - job:
     files:
       - ^roles/tripleo_undercloud_install/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_undercloud_install
     parent: tripleo-operator-molecule-base
     vars:
@@ -214,6 +328,12 @@
 - job:
     files:
       - ^roles/tripleo_undercloud_minion_install/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_undercloud_minion_install
     parent: tripleo-operator-molecule-base
     vars:
@@ -222,6 +342,12 @@
 - job:
     files:
       - ^roles/tripleo_undercloud_minion_upgrade/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
     parent: tripleo-operator-molecule-base
     vars:
@@ -230,6 +356,12 @@
 - job:
     files:
       - ^roles/tripleo_undercloud_upgrade/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
     name: tripleo-operator-molecule-tripleo_undercloud_upgrade
     parent: tripleo-operator-molecule-base
     vars:
