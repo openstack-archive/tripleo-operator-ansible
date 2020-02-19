@@ -1,0 +1,81 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    tripleo_overcloud_image_build_log_output: false
+    tripleo_overcloud_image_build_log_combine: false
+  tasks:
+
+    - name: "Include tripleo_overcloud_image_build"
+      include_role:
+        name: "tripleo_overcloud_image_build"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_image_build_debug: true
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_image_build_result.stdout == "overcloud image build"
+
+    - name: Check parameter "tripleo_overcloud_image_build_config_files"
+      include_role:
+        name: "tripleo_overcloud_image_build"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_image_build_debug: true
+        tripleo_overcloud_image_build_config_files:
+          - a.yaml
+          - b.yaml
+
+    - name: Assert "tripleo_overcloud_image_build_config_files"
+      assert:
+        that:
+          - tripleo_overcloud_image_build_result.stdout ==
+            "overcloud image build --config-file a.yaml --config-file b.yaml"
+
+    - name: Check parameter "tripleo_overcloud_image_build_image_names"
+      include_role:
+        name: "tripleo_overcloud_image_build"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_image_build_debug: true
+        tripleo_overcloud_image_build_image_names:
+          - os
+          - ipa
+
+    - name: Assert "tripleo_overcloud_image_build_image_names"
+      assert:
+        that:
+          - tripleo_overcloud_image_build_result.stdout ==
+            "overcloud image build --image-name os --image-name ipa"
+
+    - name: Check parameter "tripleo_overcloud_image_build_no_skip"
+      include_role:
+        name: "tripleo_overcloud_image_build"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_image_build_debug: true
+        tripleo_overcloud_image_build_no_skip: true
+
+    - name: Assert "tripleo_overcloud_image_build_config_files"
+      assert:
+        that:
+          - tripleo_overcloud_image_build_result.stdout ==
+            "overcloud image build --no-skip"
+
+    - name: Check parameter "tripleo_overcloud_image_build_output_directory"
+      include_role:
+        name: "tripleo_overcloud_image_build"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_image_build_debug: true
+        tripleo_overcloud_image_build_output_directory: /foo
+
+    - name: Assert "tripleo_overcloud_image_build_output_directory"
+      assert:
+        that:
+          - tripleo_overcloud_image_build_result.stdout ==
+            "overcloud image build --output-directory /foo"
