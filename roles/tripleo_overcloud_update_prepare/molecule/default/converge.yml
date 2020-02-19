@@ -1,0 +1,487 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_update_prepare_debug: true
+    tripleo_overcloud_update_prepare_log_output: false
+    tripleo_overcloud_update_prepare_log_combine: false
+    tripleo_overcloud_update_prepare_poll: 1
+  tasks:
+
+    - name: "Include tripleo_overcloud_update_prepare"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output ==
+            "overcloud update prepare --templates /usr/share/openstack-tripleo-heat-templates --stack overcloud --timeout 90"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_stack"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack: test
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+
+    - name: Assert "tripleo_overcloud_update_prepare_stack"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --stack test"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_libvirt_type"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_libvirt_type: qemu
+
+    - name: Assert "tripleo_overcloud_update_prepare_libvirt_type"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --libvirt-type qemu"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_ntp_server"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_ntp_server: 0.pool.ntp.org,1.pool.ntp.org
+
+    - name: Assert "tripleo_overcloud_update_prepare_ntp_server"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --ntp-server 0.pool.ntp.org,1.pool.ntp.org"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_no_proxy"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_no_proxy: 192.168.24.1
+
+    - name: Assert "tripleo_overcloud_update_prepare_no_proxy"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --no-proxy 192.168.24.1"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_overcloud_ssh_user"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_overcloud_ssh_user: bob
+
+    - name: Assert "tripleo_overcloud_update_prepare_overcloud_ssh_user"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --overcloud-ssh-user bob"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_overcloud_ssh_key"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_overcloud_ssh_key: /tmp/foo
+
+    - name: Assert "tripleo_overcloud_update_prepare_overcloud_ssh_key"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --overcloud-ssh-key /tmp/foo"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_overcloud_ssh_network"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_overcloud_ssh_network: external
+
+    - name: Assert "tripleo_overcloud_update_prepare_overcloud_ssh_network"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --overcloud-ssh-network external"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_overcloud_ssh_enable_timeout"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_overcloud_ssh_enable_timeout: 12
+
+    - name: Assert "tripleo_overcloud_update_prepare_overcloud_ssh_enable_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --overcloud-ssh-enable-timeout 12"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_overcloud_ssh_port_timeout"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_overcloud_ssh_port_timeout: 200
+
+    - name: Assert "tripleo_overcloud_update_prepare_overcloud_ssh_port_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --overcloud-ssh-port-timeout 200"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_environment_files"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_environment_files:
+          - a.yaml
+          - b.yaml
+
+    - name: Assert "tripleo_overcloud_update_prepare_environment_files"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare -e a.yaml -e b.yaml"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_environment_dirs"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_environment_dirs:
+          - /home/foo/overcloud/
+
+    - name: Assert "tripleo_overcloud_update_prepare_environment_dirs"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --environment-directory /home/foo/overcloud/"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_roles_files"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_roles_file: roles.yaml
+
+    - name: Assert "tripleo_overcloud_update_prepare_roles_files"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare -r roles.yaml"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_networks_file"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_networks_file: networks.yaml
+
+    - name: Assert "tripleo_overcloud_update_prepare_networks_file"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare -n networks.yaml"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_plan_environment_file"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_no_cleanup: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_no_cleanup"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --no-cleanup"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_update_plan_only"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_update_plan_only: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_update_plan_only"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --update-plan-only"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_validation_errors_nonfatal"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_validation_errors_nonfatal: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_validation_errors_nonfatal"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --validation-errors-nonfatal"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_validation_warnings_fatal"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_validation_warnings_fatal: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_validation_warnings_fatal"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --validation-warnings-fatal"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_disable_validations"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_disable_validations: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_disable_validations"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --disable-validations"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_inflight_validations"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_inflight_validations: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_inflight_validations"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --inflight-validations"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_dry_run"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_dry_run: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_dry_run"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --dry-run"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_run_validations"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_run_validations: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_run_validations"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --run-validations"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_skip_postconfig"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_skip_postconfig: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_skip_postconfig"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --skip-postconfig"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_force_postconfig"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_force_postconfig: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_force_postconfig"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --force-postconfig"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_answers_file"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_answers_file: foo.yaml
+
+    - name: Assert "tripleo_overcloud_update_prepare_answers_file"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --answers-file foo.yaml"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_disable_password_generation"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_disable_password_generation: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_disable_password_generation"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --disable-password-generation"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_update_prepareed_server"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_update_prepareed_server: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_update_prepareed_server"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --deployed-server"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_config_download"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_config_download: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_config_download"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --config-download"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_no_config_download"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_no_config_download: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_no_config_download"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --no-config-download"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_output_dir"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_output_dir: /tmp/output
+
+    - name: Assert "tripleo_overcloud_update_prepare_output_dir"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --output-dir /tmp/output"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_override_ansible_cfg"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_override_ansible_cfg: foo.cfg
+
+    - name: Assert "tripleo_overcloud_update_prepare_override_ansible_cfg"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --override-ansible-cfg foo.cfg"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_config_download_timeout"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_config_download_timeout: 12
+
+    - name: Assert "tripleo_overcloud_update_prepare_config_download_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --config-download-timeout 12"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_update_preparement_python_interpreter"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_update_preparement_python_interpreter: python3
+
+    - name: Assert "tripleo_overcloud_update_prepare_update_preparement_python_interpreter"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --deployment-python-interpreter python3"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_baremetal_update_preparement"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_baremetal_update_preparement: bare.yaml
+
+    - name: Assert "tripleo_overcloud_update_prepare_baremetal_update_preparement"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --baremetal-deployment bare.yaml"
