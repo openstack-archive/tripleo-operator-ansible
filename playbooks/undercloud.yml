@@ -97,4 +97,4 @@
       include_role:
         name: tripleo_undercloud_install
       vars:
-        tripleo_undercloud_debug: "{{ install_debug }}"
+        tripleo_undercloud_install_debug: "{{ install_debug }}"
