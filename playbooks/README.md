@@ -8,5 +8,6 @@ tailored to your specific requirements.
 Examples
 --------
 
+* `import-nodes.yml` - Baremetal node import and introspection playbook
 * `standalone.yml` - Standalone playbook for PoC
 * `undercloud.yml` - Undercloud installation playbook
