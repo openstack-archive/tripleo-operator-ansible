@@ -1,0 +1,50 @@
+---
+###############################################################################
+# Container preparation playbook
+#
+# Description:
+#   This is a basic playbook to perform the basic container prepare actions
+#   for an overcloud or undercloud deployment.
+#
+###############################################################################
+- hosts: undercloud
+  collections:
+    - tripleo.operator
+  vars:
+    prepare_debug: true
+    use_default: true
+    default_push_destination: true
+    output_env_file: "{{ ansible_env.HOME }}/container-image-prepare.yaml"
+    prepare_env_files: []
+    prepare_rolefile:
+
+  tasks:
+    - name: Gather the rpm package facts
+      package_facts:
+
+    - name: Check if tripleoclient is installed
+      fail:
+        msg: >-
+          TripleO Client is not installed. Please make sure that the client
+          has been installed and the repositories are properly configured.
+      when: (ansible_facts.distribution_major_version|int <= 7 and not 'python2-tripleoclient' in ansible_facts.packages) or
+            (ansible_facts.distribution_major_version|int >= 8 and not 'python3-tripleoclient' in ansible_facts.packages)
+
+    - name: Run container image prepare defaults
+      include_role:
+        name: tripleo_container_image_prepare_default
+      vars:
+        tripleo_container_image_prepare_default_debug: "{{ prepare_debug }}"
+        tripleo_container_image_prepare_default_local_push_destination: "{{ default_push_destination }}"
+        tripleo_container_image_prepare_default_output_env_file: "{{ output_env_file }}"
+      when: use_default|bool
+
+    - name: Run container image prepare
+      include_role:
+        name: tripleo_overcloud_node_introspect
+      vars:
+        tripleo_container_image_prepare_debug: "{{ prepare_debug }}"
+        tripleo_container_image_prepare_environment_files: "{{ prepare_env_files }}"
+        tripleo_container_image_prepare_roles_file: "{{ prepare_roles_file }}"
+        tripleo_container_image_prepare_output_env_file: "{{ output_env_file }}"
+      when: not use_default|bool
