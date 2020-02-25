@@ -1,0 +1,17 @@
+---
+# defaults file for tripleo_overcloud_update_run
+openstack_bin: openstack
+tripleo_overcloud_update_run_debug: false
+tripleo_overcloud_update_run_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_update_run_limit:
+tripleo_overcloud_update_run_log: "{{ tripleo_overcloud_update_run_home_dir }}/overcloud_update_run.log"
+tripleo_overcloud_update_run_log_combine: true
+tripleo_overcloud_update_run_log_output: true
+tripleo_overcloud_update_run_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_update_run_playbook: []
+tripleo_overcloud_update_run_poll: 10
+tripleo_overcloud_update_run_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
+tripleo_overcloud_update_run_ssh_user:
+tripleo_overcloud_update_run_stack:
+tripleo_overcloud_update_run_static_inventory:
+tripleo_overcloud_update_run_timeout: 5700
