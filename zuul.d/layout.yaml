@@ -2,9 +2,16 @@
     templates:
       - openstack-python3-ussuri-jobs
       - tripleo-operator-molecule-jobs
+      - release-notes-jobs-python3
     check:
       jobs:
         - openstack-tox-linters
+        - openstack-tox-docs: &tripleo-docs
+            files:
+            - ^doc/.*
+            - ^molecule-requirements.txt
+            - ^README.rst
+            - ^requirements.txt
         - tripleo-ci-centos-7-containers-multinode:
             dependencies: &deps_unit_lint
               - openstack-tox-pep8
@@ -21,7 +28,11 @@
     gate:
       jobs:
         - openstack-tox-linters
+        - openstack-tox-docs: *tripleo-docs
         - tripleo-ci-centos-7-containers-multinode:
             files: *containers_multinode_files
         - tripleo-ci-centos-7-containers-undercloud-minion:
             files: *containers_minion_files
+    promote:
+      jobs:
+      - promote-openstack-tox-docs: *tripleo-docs
