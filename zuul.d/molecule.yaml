@@ -25,6 +25,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_discover
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
       - tripleo-operator-molecule-tripleo_overcloud_node_import
+      - tripleo-operator-molecule-tripleo_overcloud_update_converge
       - tripleo-operator-molecule-tripleo_overcloud_update_prepare
       - tripleo-operator-molecule-tripleo_overcloud_update_run
       - tripleo-operator-molecule-tripleo_undercloud_backup
@@ -58,6 +59,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_discover
       - tripleo-operator-molecule-tripleo_overcloud_node_introspect
       - tripleo-operator-molecule-tripleo_overcloud_node_import
+      - tripleo-operator-molecule-tripleo_overcloud_update_converge
       - tripleo-operator-molecule-tripleo_overcloud_update_prepare
       - tripleo-operator-molecule-tripleo_overcloud_update_run
       - tripleo-operator-molecule-tripleo_undercloud_backup
@@ -366,6 +368,20 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_container_image_prepare_default
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_update_converge/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_overcloud_update_converge
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_update_converge
 
 - job:
     files:
