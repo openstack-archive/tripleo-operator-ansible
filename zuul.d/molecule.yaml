@@ -28,6 +28,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_update_converge
       - tripleo-operator-molecule-tripleo_overcloud_update_prepare
       - tripleo-operator-molecule-tripleo_overcloud_update_run
+      - tripleo-operator-molecule-tripleo_overcloud_upgrade_converge
       - tripleo-operator-molecule-tripleo_overcloud_upgrade_prepare
       - tripleo-operator-molecule-tripleo_undercloud_backup
       - tripleo-operator-molecule-tripleo_undercloud_install
@@ -63,6 +64,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_update_converge
       - tripleo-operator-molecule-tripleo_overcloud_update_prepare
       - tripleo-operator-molecule-tripleo_overcloud_update_run
+      - tripleo-operator-molecule-tripleo_overcloud_upgrade_converge
       - tripleo-operator-molecule-tripleo_overcloud_upgrade_prepare
       - tripleo-operator-molecule-tripleo_undercloud_backup
       - tripleo-operator-molecule-tripleo_undercloud_install
@@ -412,6 +414,20 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_update_run
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_upgrade_converge/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_overcloud_upgrade_converge
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_upgrade_converge
 
 - job:
     files:
