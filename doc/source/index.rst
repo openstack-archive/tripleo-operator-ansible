@@ -7,8 +7,9 @@ Contents:
    :maxdepth: 2
 
    installation
-   contributing
    usage
+   bestpractices
+   contributing
    roles
 
 Indices and tables
