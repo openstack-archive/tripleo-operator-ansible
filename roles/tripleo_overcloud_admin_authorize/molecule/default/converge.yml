@@ -1,0 +1,92 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_admin_authorize_debug: true
+    tripleo_overcloud_admin_authorize_output_dir:
+  tasks:
+
+    - name: "Include tripleo_overcloud_admin_authorize"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output == "overcloud admin authorize"
+
+    - name: Check parameter "tripleo_overcloud_admin_authorize_stack"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+      vars:
+        tripleo_overcloud_admin_authorize_stack: foo
+
+    - name: Assert "tripleo_overcloud_admin_authorize_stack"
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output ==
+            "overcloud admin authorize --stack foo"
+
+    - name: Check parameter "tripleo_overcloud_admin_authorize_ssh_user"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+      vars:
+        tripleo_overcloud_admin_authorize_ssh_user: foo
+
+    - name: Assert "tripleo_overcloud_admin_authorize_ssh_user"
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output ==
+            "overcloud admin authorize --overcloud-ssh-user foo"
+
+    - name: Check parameter "tripleo_overcloud_admin_authorize_ssh_key"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+      vars:
+        tripleo_overcloud_admin_authorize_ssh_key: /home/stack/foo.pub
+
+    - name: Assert "tripleo_overcloud_admin_authorize_ssh_key"
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output ==
+            "overcloud admin authorize --overcloud-ssh-key /home/stack/foo.pub"
+
+    - name: Check parameter "tripleo_overcloud_admin_authorize_ssh_network"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+      vars:
+        tripleo_overcloud_admin_authorize_ssh_network: internal
+
+    - name: Assert "tripleo_overcloud_admin_authorize_ssh_network"
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output ==
+            "overcloud admin authorize --overcloud-ssh-network internal"
+
+    - name: Check parameter "tripleo_overcloud_admin_authorize_ssh_enable_timeout"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+      vars:
+        tripleo_overcloud_admin_authorize_ssh_enable_timeout: 10
+
+    - name: Assert "tripleo_overcloud_admin_authorize_ssh_enable_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output ==
+            "overcloud admin authorize --overcloud-ssh-enable-timeout 10"
+
+    - name: Check parameter "tripleo_overcloud_admin_authorize_ssh_port_timeout"
+      include_role:
+        name: "tripleo_overcloud_admin_authorize"
+      vars:
+        tripleo_overcloud_admin_authorize_ssh_port_timeout: 10
+
+    - name: Assert "tripleo_overcloud_admin_authorize_ssh_port_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_admin_authorize_output ==
+            "overcloud admin authorize --overcloud-ssh-port-timeout 10"
