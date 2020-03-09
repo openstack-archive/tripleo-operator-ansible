@@ -1,0 +1,206 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_container_image_prepare_log_output: false
+    tripleo_overcloud_container_image_prepare_poll: 1
+    tripleo_overcloud_container_image_prepare_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_container_image_prepare"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output == "overcloud container image prepare"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_template_file"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_template_file: foo.yaml.j2
+
+    - name: Assert tripleo_overcloud_container_image_prepare_template_file
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --template-file foo.yaml.j2"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_push_destination"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_push_destination: "localhost:8787"
+
+    - name: Assert tripleo_overcloud_container_image_prepare_push_destination
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --push-destination localhost:8787"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_tag"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_tag: foo
+
+    - name: Assert tripleo_overcloud_container_image_prepare_tag
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --tag foo"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_tag_from_label"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_tag_from_label: "{version}-123"
+
+    - name: Assert tripleo_overcloud_container_image_prepare_tag_from_label
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --tag-from-label '{version}-123'"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_namespace"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_namespace: foo
+
+    - name: Assert tripleo_overcloud_container_image_prepare_namespace
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --namespace foo"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_prefix"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_prefix: foo
+
+    - name: Assert tripleo_overcloud_container_image_prepare_prefix
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --prefix foo"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_suffix"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_suffix: bar
+
+    - name: Assert tripleo_overcloud_container_image_prepare_suffix
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --suffix bar"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_excludes"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_excludes:
+          - nova-api
+          - nova-compute
+
+    - name: Assert tripleo_overcloud_container_image_prepare_excludes
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --exclude nova-api --exclude nova-compute"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_includes"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_includes:
+          - nova-api
+          - nova-compute
+
+    - name: Assert tripleo_overcloud_container_image_prepare_includes
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --include nova-api --include nova-compute"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_environment_files"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_environment_files:
+          - a.yaml
+          - b.yaml
+
+    - name: Assert tripleo_overcloud_container_image_prepare_environment_files
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --environment-file a.yaml --environment-file b.yaml"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_environment_directory"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_environment_directory: /tmp/a
+
+    - name: Assert tripleo_overcloud_container_image_prepare_environment_directory
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --environment-directory /tmp/a"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_output_env_file"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_output_env_file: env.yaml
+
+    - name: Assert tripleo_overcloud_container_image_prepare_output_env_file
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --output-env-file env.yaml"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_roles_file"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_roles_file: roles.yaml
+
+    - name: Assert tripleo_overcloud_container_image_preparea_roles_file
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --roles-file roles.yaml"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_modify_role"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_modify_role: yum-update
+
+    - name: Assert tripleo_overcloud_container_image_prepare_modify_role
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --modify-role yum-update"
+
+    - name: Validate "tripleo_overcloud_container_image_prepare_modify_vars"
+      include_role:
+        name: "tripleo_overcloud_container_image_prepare"
+      vars:
+        tripleo_overcloud_container_image_prepare_modify_vars: myvars.yaml
+
+    - name: Assert tripleo_overcloud_container_image_prepare_modify_vars
+      assert:
+        that:
+          - tripleo_overcloud_container_image_prepare_output ==
+            "overcloud container image prepare --modify-vars myvars.yaml"
