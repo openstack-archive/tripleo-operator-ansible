@@ -332,6 +332,20 @@
         that:
           - tripleo_overcloud_update_prepare_output == "overcloud update prepare --skip-postconfig"
 
+    - name: Check parameter "tripleo_overcloud_update_prepare_skip_deploy_identifier"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_skip_deploy_identifier: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_skip_deploy_identifier"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --skip-deploy-identifier"
+
     - name: Check parameter "tripleo_overcloud_update_prepare_force_postconfig"
       include_role:
         name: "tripleo_overcloud_update_prepare"
@@ -472,16 +486,16 @@
         that:
           - tripleo_overcloud_update_prepare_output == "overcloud update prepare --deployment-python-interpreter python3"
 
-    - name: Check parameter "tripleo_overcloud_update_prepare_baremetal_update_preparement"
+    - name: Check parameter "tripleo_overcloud_update_prepare_baremetal_deployment"
       include_role:
         name: "tripleo_overcloud_update_prepare"
       vars:
         tripleo_overcloud_update_prepare_stack:
         tripleo_overcloud_update_prepare_templates:
         tripleo_overcloud_update_prepare_timeout_arg:
-        tripleo_overcloud_update_prepare_baremetal_update_preparement: bare.yaml
+        tripleo_overcloud_update_prepare_baremetal_deployment: bare.yaml
 
-    - name: Assert "tripleo_overcloud_update_prepare_baremetal_update_preparement"
+    - name: Assert "tripleo_overcloud_update_prepare_baremetal_deployment"
       assert:
         that:
           - tripleo_overcloud_update_prepare_output == "overcloud update prepare --baremetal-deployment bare.yaml"

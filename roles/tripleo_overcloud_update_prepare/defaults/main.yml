@@ -2,7 +2,7 @@
 # defaults file for tripleo_overcloud_update_prepare
 openstack_bin: openstack
 tripleo_overcloud_update_prepare_answers_file:
-tripleo_overcloud_update_prepare_baremetal_update_preparement:
+tripleo_overcloud_update_prepare_baremetal_deployment:
 tripleo_overcloud_update_prepare_config_download: false
 tripleo_overcloud_update_prepare_config_download_timeout:
 tripleo_overcloud_update_prepare_debug: false
@@ -38,7 +38,7 @@ tripleo_overcloud_update_prepare_poll: 10
 tripleo_overcloud_update_prepare_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
 tripleo_overcloud_update_prepare_roles_file:
 tripleo_overcloud_update_prepare_run_validations: false
-tripleo_overcloud_update_prepare_skip_update_prepare_identifier: false
+tripleo_overcloud_update_prepare_skip_deploy_identifier: false
 tripleo_overcloud_update_prepare_skip_postconfig: false
 tripleo_overcloud_update_prepare_stack: overcloud
 tripleo_overcloud_update_prepare_templates: /usr/share/openstack-tripleo-heat-templates

@@ -31,7 +31,7 @@
       {{ tripleo_overcloud_update_prepare_run_validations | ternary('--run-validations', '') }}
       {{ tripleo_overcloud_update_prepare_skip_postconfig | ternary('--skip-postconfig', '') }}
       {{ tripleo_overcloud_update_prepare_force_postconfig | ternary('--force-postconfig', '') }}
-      {{ tripleo_overcloud_update_prepare_skip_update_prepare_identifier | ternary('--skip-deploy-identifier', '') }}
+      {{ tripleo_overcloud_update_prepare_skip_deploy_identifier | ternary('--skip-deploy-identifier', '') }}
       {{ tripleo_overcloud_update_prepare_answers_file | ternary('--answers-file $UPDATE_ANSWERS_FILE', '') }}
       {{ tripleo_overcloud_update_prepare_disable_password_generation | ternary('--disable-password-generation', '') }}
       {{ tripleo_overcloud_update_prepare_update_prepareed_server | ternary('--deployed-server', '') }}
@@ -41,7 +41,7 @@
       {{ tripleo_overcloud_update_prepare_override_ansible_cfg | ternary('--override-ansible-cfg $UPDATE_OVERRIDE_ANSIBLE_CFG', '') }}
       {{ tripleo_overcloud_update_prepare_config_download_timeout | ternary('--config-download-timeout $UPDATE_CONFIG_DOWNLOAD_TIMEOUT', '') }}
       {{ tripleo_overcloud_update_prepare_update_preparement_python_interpreter | ternary('--deployment-python-interpreter $UPDATE_PYTHON_INTERPRETER', '') }}
-      {{ tripleo_overcloud_update_prepare_baremetal_update_preparement | ternary('--baremetal-deployment $UPDATE_BAREMETAL_DEPLOYMENT', '') }}
+      {{ tripleo_overcloud_update_prepare_baremetal_deployment | ternary('--baremetal-deployment $UPDATE_BAREMETAL_DEPLOYMENT', '') }}
       {{ tripleo_overcloud_update_prepare_log_output | ternary((">" ~ tripleo_overcloud_update_prepare_log), '') }}
       {{ tripleo_overcloud_update_prepare_log_combine | ternary("2>&1", '') }}
     _update_prepare_env:
@@ -64,7 +64,7 @@
       UPDATE_OVERRIDE_ANSIBLE_CFG: "{{ tripleo_overcloud_update_prepare_override_ansible_cfg }}"
       UPDATE_CONFIG_DOWNLOAD_TIMEOUT: "{{ tripleo_overcloud_update_prepare_config_download_timeout }}"
       UPDATE_PYTHON_INTERPRETER: "{{ tripleo_overcloud_update_prepare_update_preparement_python_interpreter }}"
-      UPDATE_BAREMETAL_DEPLOYMENT: "{{ tripleo_overcloud_update_prepare_baremetal_update_preparement }}"
+      UPDATE_BAREMETAL_DEPLOYMENT: "{{ tripleo_overcloud_update_prepare_baremetal_deployment }}"
       OS_CLOUD: "{{ tripleo_overcloud_update_prepare_os_cloud }}"
 
 - name: Preserve existing log file if exists
