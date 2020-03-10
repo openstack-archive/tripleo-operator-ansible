@@ -1,0 +1,44 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_container_image_tag_discover_log_output: false
+    tripleo_overcloud_container_image_tag_discover_poll: 1
+    tripleo_overcloud_container_image_tag_discover_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_container_image_tag_discover"
+      include_role:
+        name: "tripleo_overcloud_container_image_tag_discover"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_container_image_tag_discover_output == "overcloud container image tag discover"
+
+    - name: Assert "tripleo_overcloud_container_image_tag_discover_image"
+      include_role:
+        name: "tripleo_overcloud_container_image_tag_discover"
+      vars:
+        tripleo_overcloud_container_image_tag_discover_image: "docker.io/tripleomaster/foo:latest"
+
+    - name: Check tripleo_overcloud_container_image_tag_discover_image
+      assert:
+        that:
+          - tripleo_overcloud_container_image_tag_discover_output ==
+            "overcloud container image tag discover --image docker.io/tripleomaster/foo:latest"
+
+    - name: Assert "tripleo_overcloud_container_image_tag_discover_tag_from_label"
+      include_role:
+        name: "tripleo_overcloud_container_image_tag_discover"
+      vars:
+        tripleo_overcloud_container_image_tag_discover_tag_from_label: '{version}-123'
+
+    - name: Check tripleo_overcloud_container_image_tag_discover_tag_from_label
+      assert:
+        that:
+          - tripleo_overcloud_container_image_tag_discover_output ==
+            "overcloud container image tag discover --tag-from-label '{version}-123'"
