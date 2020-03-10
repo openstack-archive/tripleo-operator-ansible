@@ -1,0 +1,108 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_container_image_build_log_output: false
+    tripleo_overcloud_container_image_build_poll: 1
+    tripleo_overcloud_container_image_build_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_container_image_build"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output == "overcloud container image build"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_config_files"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_config_files:
+          - foo.yaml
+          - bar.yaml
+
+    - name: Assert "tripleo_overcloud_container_image_build_config_files"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --config-file foo.yaml --config-file bar.yaml"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_kolla_config_file"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_kolla_config_file: foo.conf
+
+    - name: Assert "tripleo_overcloud_container_image_build_kolla_config_file"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --kolla-config-file foo.conf"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_list_images"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_list_images: true
+
+    - name: Assert "tripleo_overcloud_container_image_build_list_images"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --list-images"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_list_dependencies"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_list_dependencies: true
+
+    - name: Assert "tripleo_overcloud_container_image_build_list_dependencies"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --list-dependencies"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_excludes"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_excludes:
+          - nova-api
+          - nova-compute
+
+    - name: Assert "tripleo_overcloud_container_image_build_excludes"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --exclude nova-api --exclude nova-compute"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_use_buildah"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_use_buildah: true
+
+    - name: Assert "tripleo_overcloud_container_image_build_use_buildah"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --use-buildah"
+
+    - name: Check paramter "tripleo_overcloud_container_image_build_work_dir"
+      include_role:
+        name: "tripleo_overcloud_container_image_build"
+      vars:
+        tripleo_overcloud_container_image_build_work_dir: /tmp/foo
+
+    - name: Assert "tripleo_overcloud_container_image_build_work_dir"
+      assert:
+        that:
+          - tripleo_overcloud_container_image_build_output ==
+            "overcloud container image build --work-dir /tmp/foo"

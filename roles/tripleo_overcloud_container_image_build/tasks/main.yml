@@ -1,0 +1,49 @@
+---
+# tasks file for tripleo_overcloud_container_image_build
+- name: Set facts for overcloud container image build
+  set_fact:
+    _build_cmd: >-
+      {{ openstack_bin }} overcloud container image build
+      {{ tripleo_overcloud_container_image_build_config_files | tripleo.operator.shell_arg_list('--config-file') }}
+      {{ tripleo_overcloud_container_image_build_kolla_config_file | tripleo.operator.shell_arg_list('--kolla-config-file') }}
+      {{ tripleo_overcloud_container_image_build_list_images | ternary('--list-images', '') }}
+      {{ tripleo_overcloud_container_image_build_list_dependencies | ternary('--list-dependencies', '') }}
+      {{ tripleo_overcloud_container_image_build_excludes | tripleo.operator.shell_arg_list('--exclude') }}
+      {{ tripleo_overcloud_container_image_build_use_buildah | ternary('--use-buildah', '') }}
+      {{ tripleo_overcloud_container_image_build_work_dir | tripleo.operator.shell_arg_list('--work-dir') }}
+      {{ tripleo_overcloud_container_image_build_log_output | ternary((">" ~ tripleo_overcloud_container_image_build_log), '') }}
+      {{ tripleo_overcloud_container_image_build_log_combine | ternary("2>&1", '') }}
+    _build_env: {}
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_container_image_build_log }}"
+  when: tripleo_overcloud_container_image_build_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_container_image_build_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _build_cmd
+
+    - name: Show the environment
+      debug:
+        var: _build_env
+
+- name: Run container image build
+  shell: "{{ _build_cmd }}"  # noqa 305
+  environment: "{{ _build_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_container_image_build_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_container_image_build_result
+  async: "{{ tripleo_overcloud_container_image_build_timeout }}"
+  poll: "{{ tripleo_overcloud_container_image_build_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_container_image_build_output: "{{ tripleo_overcloud_container_image_build_result.stdout }}"
