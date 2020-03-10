@@ -1,0 +1,70 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_cell_export_log_output: false
+    tripleo_overcloud_cell_export_poll: 1
+    tripleo_overcloud_cell_export_name: cell1
+    tripleo_overcloud_cell_export_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_cell_export"
+      include_role:
+        name: "tripleo_overcloud_cell_export"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_cell_export_output == "overcloud cell export cell1"
+
+    - name: Assert "tripleo_overcloud_cell_export_control_plane_stack"
+      include_role:
+        name: "tripleo_overcloud_cell_export"
+      vars:
+        tripleo_overcloud_cell_export_control_plane_stack: overcloud
+
+    - name: Check tripleo_overcloud_cell_export_control_plane_stack
+      assert:
+        that:
+          - tripleo_overcloud_cell_export_output ==
+            "overcloud cell export --control-plane-stack overcloud cell1"
+
+    - name: Assert "tripleo_overcloud_cell_export_cell_stack"
+      include_role:
+        name: "tripleo_overcloud_cell_export"
+      vars:
+        tripleo_overcloud_cell_export_cell_stack: stack0
+
+    - name: Check tripleo_overcloud_cell_export_cell_stack
+      assert:
+        that:
+          - tripleo_overcloud_cell_export_output ==
+            "overcloud cell export --cell-stack stack0 cell1"
+
+    - name: Assert "tripleo_overcloud_cell_export_output_file"
+      include_role:
+        name: "tripleo_overcloud_cell_export"
+      vars:
+        tripleo_overcloud_cell_export_output_file: foo.json
+
+    - name: Check tripleo_overcloud_cell_export_output_file
+      assert:
+        that:
+          - tripleo_overcloud_cell_export_output ==
+            "overcloud cell export --output-file foo.json cell1"
+
+    - name: Assert "tripleo_overcloud_cell_export_force_overwrite"
+      include_role:
+        name: "tripleo_overcloud_cell_export"
+      vars:
+        tripleo_overcloud_cell_export_force_overwrite: true
+
+    - name: Check tripleo_overcloud_cell_export_force_overwrite
+      assert:
+        that:
+          - tripleo_overcloud_cell_export_output ==
+            "overcloud cell export --force-overwrite cell1"
