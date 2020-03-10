@@ -1,6 +1,9 @@
 tripleo_overcloud_container_image_prepare
 =========================================
 
+IMPORTANT: This role is for use in Queens only. This functionality was replaced
+by the `openstack tripleo container image prepare` command in Rocky.
+
 A role to perform the overcloud container image prepare.
 
 Requirements
