@@ -1,0 +1,46 @@
+---
+# tasks file for tripleo_overcloud_container_image_upload
+- name: Set overcloud container image upload facts
+  set_fact:
+    _upload_cmd: >-
+      {{ openstack_bin }} overcloud container image upload
+      {{ tripleo_overcloud_container_image_upload_config_files | tripleo.operator.shell_arg_list('--config-file') }}
+      {{ tripleo_overcloud_container_image_upload_cleanup | ternary('--cleanup $UPLOAD_CLEANUP', '') }}
+      {{ tripleo_overcloud_container_image_upload_log_output | ternary((">" ~ tripleo_overcloud_container_image_upload_log), '') }}
+      {{ tripleo_overcloud_container_image_upload_log_combine | ternary("2>&1", '') }}
+    _upload_env:
+      UPLOAD_CLEANUP: "{{ tripleo_overcloud_container_image_upload_cleanup | quote }}"
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_container_image_upload_log }}"
+  when: tripleo_overcloud_container_image_upload_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_container_image_upload_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _upload_cmd
+
+    - name: Show the environment
+      debug:
+        var: _upload_env
+
+- name: Run overcloud container image upload
+  shell: "{{ _upload_cmd }}"  # noqa 305
+  environment: "{{ _upload_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_container_image_upload_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_container_image_upload_result
+  async: "{{ tripleo_overcloud_container_image_upload_timeout }}"
+  poll: "{{ tripleo_overcloud_container_image_upload_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_container_image_upload_output: "{{ tripleo_overcloud_container_image_upload_result.stdout }}"

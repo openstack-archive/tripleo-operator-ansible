@@ -1,0 +1,46 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_container_image_upload_log_output: false
+    tripleo_overcloud_container_image_upload_poll: 1
+    tripleo_overcloud_container_image_upload_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_container_image_upload"
+      include_role:
+        name: "tripleo_overcloud_container_image_upload"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_container_image_upload_output == "overcloud container image upload"
+
+    - name: Assert "tripleo_overcloud_container_image_upload_config_files"
+      include_role:
+        name: "tripleo_overcloud_container_image_upload"
+      vars:
+        tripleo_overcloud_container_image_upload_config_files:
+          - a.yaml
+          - b.yaml
+
+    - name: Validate tripleo_overcloud_container_image_upload_config_files
+      assert:
+        that:
+          - tripleo_overcloud_container_image_upload_output ==
+            "overcloud container image upload --config-file a.yaml --config-file b.yaml"
+
+    - name: Assert "tripleo_overcloud_container_image_upload_cleanup"
+      include_role:
+        name: "tripleo_overcloud_container_image_upload"
+      vars:
+        tripleo_overcloud_container_image_upload_cleanup: full
+
+    - name: Validate tripleo_overcloud_container_image_upload_cleanup
+      assert:
+        that:
+          - tripleo_overcloud_container_image_upload_output ==
+            "overcloud container image upload --cleanup full"
