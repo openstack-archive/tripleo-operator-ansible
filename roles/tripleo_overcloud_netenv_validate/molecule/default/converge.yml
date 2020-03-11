@@ -1,0 +1,32 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_netenv_validate_log_output: false
+    tripleo_overcloud_netenv_validate_poll: 1
+    tripleo_overcloud_netenv_validate_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_netenv_validate"
+      include_role:
+        name: "tripleo_overcloud_netenv_validate"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_netenv_validate_output == "overcloud netenv validate"
+
+    - name: Assert "tripleo_overcloud_netenv_validate_file"
+      include_role:
+        name: "tripleo_overcloud_netenv_validate"
+      vars:
+        tripleo_overcloud_netenv_validate_file: /tmp/foo.yaml
+
+    - name: Validate tripleo_overcloud_netenv_validate_file
+      assert:
+        that:
+          - tripleo_overcloud_netenv_validate_output ==
+            "overcloud netenv validate --file /tmp/foo.yaml"
