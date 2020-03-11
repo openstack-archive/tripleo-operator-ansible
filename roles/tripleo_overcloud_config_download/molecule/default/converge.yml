@@ -1,0 +1,69 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_config_download_log_output: false
+    tripleo_overcloud_config_download_poll: 1
+    tripleo_overcloud_config_download_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_config_download"
+      include_role:
+        name: "tripleo_overcloud_config_download"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_config_download_output == "overcloud config download"
+
+    - name: Assert "tripleo_overcloud_config_download_name"
+      include_role:
+        name: "tripleo_overcloud_config_download"
+      vars:
+        tripleo_overcloud_config_download_name: foo
+
+    - name: Verify tripleo_overcloud_config_download_name
+      assert:
+        that:
+          - tripleo_overcloud_config_download_output ==
+            "overcloud config download --name foo"
+
+    - name: Assert "tripleo_overcloud_config_download_config_dir"
+      include_role:
+        name: "tripleo_overcloud_config_download"
+      vars:
+        tripleo_overcloud_config_download_config_dir: /foo
+
+    - name: Verify tripleo_overcloud_config_download_config_dir
+      assert:
+        that:
+          - tripleo_overcloud_config_download_output ==
+            "overcloud config download --config-dir /foo"
+
+    - name: Assert "tripleo_overcloud_config_download_config_type"
+      include_role:
+        name: "tripleo_overcloud_config_download"
+      vars:
+        tripleo_overcloud_config_download_config_type: bar
+
+    - name: Verify tripleo_overcloud_config_download_config_type
+      assert:
+        that:
+          - tripleo_overcloud_config_download_output ==
+            "overcloud config download --config-type bar"
+
+    - name: Assert "tripleo_overcloud_config_download_no_preserve_config"
+      include_role:
+        name: "tripleo_overcloud_config_download"
+      vars:
+        tripleo_overcloud_config_download_no_preserve_config: true
+
+    - name: Verify tripleo_overcloud_config_download_no_preserve_config
+      assert:
+        that:
+          - tripleo_overcloud_config_download_output ==
+            "overcloud config download --no-preserve-config"
