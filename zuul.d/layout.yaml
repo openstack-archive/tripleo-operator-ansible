@@ -12,7 +12,7 @@
             - ^molecule-requirements.txt
             - ^README.rst
             - ^requirements.txt
-        - tripleo-ci-centos-7-containers-multinode:
+        - tripleo-ci-centos-8-containers-multinode:
             dependencies: &deps_unit_lint
               - openstack-tox-pep8
               - openstack-tox-py36
@@ -20,7 +20,7 @@
               - openstack-tox-linters
             files: &containers_multinode_files
               - ^roles/tripleo_undercloud_install/.*$
-        - tripleo-ci-centos-7-containers-undercloud-minion:
+        - tripleo-ci-centos-8-containers-undercloud-minion:
             dependencies: *deps_unit_lint
             files: &containers_minion_files
               - ^roles/tripleo_undercloud_install/.*$
@@ -29,9 +29,9 @@
       jobs:
         - openstack-tox-linters
         - openstack-tox-docs: *tripleo-docs
-        - tripleo-ci-centos-7-containers-multinode:
+        - tripleo-ci-centos-8-containers-multinode:
             files: *containers_multinode_files
-        - tripleo-ci-centos-7-containers-undercloud-minion:
+        - tripleo-ci-centos-8-containers-undercloud-minion:
             files: *containers_minion_files
     promote:
       jobs:
