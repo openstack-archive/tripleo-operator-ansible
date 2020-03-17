@@ -1,0 +1,49 @@
+---
+# tasks file for tripleo_overcloud_node_unprovision
+- name: Set overcloud node unprovision facts
+  set_fact:
+    _unprovision_cmd: >-
+      {{ tripleo_overcloud_node_unprovision_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_unprovision_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud node unprovision
+      {{ tripleo_overcloud_node_unprovision_stack | ternary('--stack $UNPROVISION_STACK', '') }}
+      {{ tripleo_overcloud_node_unprovision_all | ternary('--all', '') }}
+      {{ tripleo_overcloud_node_unprovision_yes | ternary('--yes', '') }}
+      {{ tripleo_overcloud_node_unprovision_deployment_file }}
+      {{ tripleo_overcloud_node_unprovision_log_output | ternary((">" ~ tripleo_overcloud_node_unprovision_log), '') }}
+      {{ tripleo_overcloud_node_unprovision_log_combine | ternary("2>&1", '') }}
+    _unprovision_env:
+      OS_CLOUD: "{{ tripleo_overcloud_node_unprovision_os_cloud }}"
+      UNPROVISION_STACK: "{{ tripleo_overcloud_node_unprovision_stack | quote }}"
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_node_unprovision_log }}"
+  when: tripleo_overcloud_node_unprovision_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_node_unprovision_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _unprovision_cmd
+
+    - name: Show the environment
+      debug:
+        var: _unprovision_env
+
+- name: overcloud node unprovision
+  shell: "{{ _unprovision_cmd }}"  # noqa 305
+  environment: "{{ _unprovision_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_node_unprovision_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_node_unprovision_result
+  async: "{{ tripleo_overcloud_node_unprovision_timeout }}"
+  poll: "{{ tripleo_overcloud_node_unprovision_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_node_unprovision_output: "{{ tripleo_overcloud_node_unprovision_result.stdout }}"

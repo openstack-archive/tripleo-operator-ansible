@@ -28,6 +28,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_import
       - tripleo-operator-molecule-tripleo_overcloud_node_provide
       - tripleo-operator-molecule-tripleo_overcloud_node_provision
+      - tripleo-operator-molecule-tripleo_overcloud_node_unprovision
       - tripleo-operator-molecule-tripleo_overcloud_update_converge
       - tripleo-operator-molecule-tripleo_overcloud_update_prepare
       - tripleo-operator-molecule-tripleo_overcloud_update_run
@@ -67,6 +68,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_node_import
       - tripleo-operator-molecule-tripleo_overcloud_node_provide
       - tripleo-operator-molecule-tripleo_overcloud_node_provision
+      - tripleo-operator-molecule-tripleo_overcloud_node_unprovision
       - tripleo-operator-molecule-tripleo_overcloud_update_converge
       - tripleo-operator-molecule-tripleo_overcloud_update_prepare
       - tripleo-operator-molecule-tripleo_overcloud_update_run
@@ -348,6 +350,20 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_node_provision
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_node_unprovision/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_overcloud_node_unprovision
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_node_unprovision
 
 - job:
     files:
