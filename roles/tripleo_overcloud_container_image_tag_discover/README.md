@@ -1,6 +1,9 @@
 tripleo_overcloud_container_image_tag_discover
 =========
 
+IMPORTANT: This role is for use in Queens only. This functionality was replaced
+by the `openstack tripleo container image prepare` command in Rocky.
+
 A role to perform a tag discovery for a container.
 
 Requirements
