@@ -14,6 +14,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+try:  # py3
+    from shlex import quote
+except ImportError:  # py2
+    from pipes import quote
+
 
 class FilterModule(object):
     def filters(self):
@@ -29,8 +34,9 @@ class FilterModule(object):
             arg = [arg]
         return_value = []
         for a in arg:
+            val = quote(a)
             if parameter:
-                return_value.append("{} {}".format(parameter, a))
+                return_value.append("{} {}".format(parameter, val))
             else:
-                return_value.append(a)
+                return_value.append(val)
         return ' '.join(return_value)
