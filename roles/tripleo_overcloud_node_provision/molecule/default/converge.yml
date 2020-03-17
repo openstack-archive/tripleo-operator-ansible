@@ -1,0 +1,105 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_node_provision_log_output: false
+    tripleo_overcloud_node_provision_poll: 1
+    tripleo_overcloud_node_provision_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_node_provision"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output == "overcloud node provision"
+
+    - name: Assert "tripleo_overcloud_node_provision_output_file"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_output_file: foo.yaml
+
+    - name: Validate tripleo_overcloud_node_provision_output_file
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision -o foo.yaml"
+
+    - name: Assert "tripleo_overcloud_node_provision_stack"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_stack: foo
+
+    - name: Validate tripleo_overcloud_node_provision_stack
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --stack foo"
+
+    - name: Assert "tripleo_overcloud_node_provision_overcloud_ssh_user"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_overcloud_ssh_user: foo
+
+    - name: Validate tripleo_overcloud_node_provision_overcloud_ssh_user
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --overcloud-ssh-user foo"
+
+    - name: Assert "tripleo_overcloud_node_provision_overcloud_ssh_key"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_overcloud_ssh_key: foo.pub
+
+    - name: Validate tripleo_overcloud_node_provision_overcloud_ssh_key
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --overcloud-ssh-key foo.pub"
+
+    - name: Assert "tripleo_overcloud_node_provision_concurrency"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_concurrency: 5
+
+    - name: Validate tripleo_overcloud_node_provision_concurrency
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --concurrency 5"
+
+    - name: Assert "tripleo_overcloud_node_provision_timeout_arg"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_timeout_arg: 12
+
+    - name: Validate tripleo_overcloud_node_provision_timeout_arg
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --timeout 12"
+
+    - name: Assert "tripleo_overcloud_node_provision_deployment_file"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_deployment_file: deploy.yaml
+
+    - name: Validate tripleo_overcloud_node_provision_deployment_file
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision deploy.yaml"
