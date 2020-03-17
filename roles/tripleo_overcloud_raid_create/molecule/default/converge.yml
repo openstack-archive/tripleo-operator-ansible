@@ -1,0 +1,47 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_raid_create_log_output: false
+    tripleo_overcloud_raid_create_poll: 1
+    tripleo_overcloud_raid_create_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_raid_create"
+      include_role:
+        name: "tripleo_overcloud_raid_create"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_raid_create_output == "overcloud raid create"
+
+    - name: Assert "tripleo_overcloud_raid_create_nodes"
+      include_role:
+        name: "tripleo_overcloud_raid_create"
+      vars:
+        tripleo_overcloud_raid_create_nodes:
+          - node1
+          - node2
+
+    - name: Validate tripleo_overcloud_raid_create_nodes
+      assert:
+        that:
+          - tripleo_overcloud_raid_create_output ==
+            "overcloud raid create --node node1 --node node2"
+
+    - name: Assert "tripleo_overcloud_raid_create_configuration"
+      include_role:
+        name: "tripleo_overcloud_raid_create"
+      vars:
+        tripleo_overcloud_raid_create_configuration: foo.yaml
+
+    - name: Validate tripleo_overcloud_raid_create_configuration
+      assert:
+        that:
+          - tripleo_overcloud_raid_create_output ==
+            "overcloud raid create foo.yaml"
