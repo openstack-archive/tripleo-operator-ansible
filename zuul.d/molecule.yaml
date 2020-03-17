@@ -23,6 +23,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_image_build
+      - tripleo-operator-molecule-tripleo_overcloud_netenv_validate
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_reset
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
@@ -68,6 +69,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_failures
       - tripleo-operator-molecule-tripleo_overcloud_image_build
+      - tripleo-operator-molecule-tripleo_overcloud_netenv_validate
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_reset
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
@@ -358,6 +360,20 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_image_build
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_netenv_validate/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_overcloud_netenv_validate
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_netenv_validate
 
 - job:
     files:

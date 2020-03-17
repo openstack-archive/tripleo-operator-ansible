@@ -1,0 +1,45 @@
+---
+# tasks file for tripleo_overcloud_netenv_validate
+- name: Set overcloud netenv validate facts
+  set_fact:
+    _validate_cmd: >-
+      {{ openstack_bin }} overcloud netenv validate
+      {{ tripleo_overcloud_netenv_validate_file | ternary('--file $NETENV_FILE', '') }}
+      {{ tripleo_overcloud_netenv_validate_log_output | ternary((">" ~ tripleo_overcloud_netenv_validate_log), '') }}
+      {{ tripleo_overcloud_netenv_validate_log_combine | ternary("2>&1", '') }}
+    _validate_env:
+      NETENV_FILE: "{{ tripleo_overcloud_netenv_validate_file | quote }}"
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_netenv_validate_log }}"
+  when: tripleo_overcloud_netenv_validate_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_netenv_validate_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _validate_cmd
+
+    - name: Show the environment
+      debug:
+        var: _validate_env
+
+- name: Run overcloud netenv validate
+  shell: "{{ _validate_cmd }}"  # noqa 305
+  environment: "{{ _validate_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_netenv_validate_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_netenv_validate_result
+  async: "{{ tripleo_overcloud_netenv_validate_timeout }}"
+  poll: "{{ tripleo_overcloud_netenv_validate_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_netenv_validate_output: "{{ tripleo_overcloud_netenv_validate_result.stdout }}"
