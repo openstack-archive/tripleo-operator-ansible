@@ -1,4 +1,4 @@
 ---
 - hosts: localhost
   roles:
-    - tripleo_overcloud_update_prepare
+    - tripleo_overcloud_update_run
