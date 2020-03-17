@@ -1,0 +1,117 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_generate_fencing_log_output: false
+    tripleo_overcloud_generate_fencing_poll: 1
+    tripleo_overcloud_generate_fencing_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_generate_fencing"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output == "overcloud generate fencing"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_action"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_action: foo
+
+    - name: Validate tripleo_overcloud_generate_fencing_action
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --action foo"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_delay"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_delay: 10
+
+    - name: Validate tripleo_overcloud_generate_fencing_delay
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --delay 10"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_ipmi_lanplus"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_ipmi_lanplus: true
+
+    - name: Validate tripleo_overcloud_generate_fencing_ipmi_lanplus
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --ipmi-lanplus"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_ipmi_no_lanplus"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_ipmi_no_lanplus: true
+
+    - name: Validate tripleo_overcloud_generate_fencing_ipmi_no_lanplus
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --ipmi-no-lanplus"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_ipmi_cipher"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_ipmi_cipher: foo
+
+    - name: Validate tripleo_overcloud_generate_fencing_ipmi_cipher
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --ipmi-cipher foo"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_ipmi_level"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_ipmi_level: foo
+
+    - name: Validate tripleo_overcloud_generate_fencing_ipmi_level
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --ipmi-level foo"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_output_file"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_output_file: foo.yaml
+
+    - name: Validate tripleo_overcloud_generate_fencing_output_file
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing --output foo.yaml"
+
+    - name: Assert "tripleo_overcloud_generate_fencing_environment_file"
+      include_role:
+        name: "tripleo_overcloud_generate_fencing"
+      vars:
+        tripleo_overcloud_generate_fencing_environment_file: foo.yaml
+
+    - name: Validate tripleo_overcloud_generate_fencing_environment_file
+      assert:
+        that:
+          - tripleo_overcloud_generate_fencing_output ==
+            "overcloud generate fencing foo.yaml"
