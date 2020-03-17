@@ -1,0 +1,90 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_upgrade_run_debug: true
+    tripleo_overcloud_upgrade_run_log_output: false
+    tripleo_overcloud_upgrade_run_log_combine: false
+    tripleo_overcloud_upgrade_run_poll: 1
+  tasks:
+
+    - name: "Include tripleo_overcloud_upgrade_run"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run"
+
+    - name: Check parameter "tripleo_overcloud_upgrade_run_stack"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+      vars:
+        tripleo_overcloud_upgrade_run_stack: test
+
+    - name: Assert "tripleo_overcloud_upgrade_run_stack"
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run --stack test"
+
+    - name: Check parameter "tripleo_overcloud_upgrade_run_tags"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+      vars:
+        tripleo_overcloud_upgrade_run_tags: test
+
+    - name: Assert "tripleo_overcloud_upgrade_run_tags"
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run --tags test"
+
+    - name: Check parameter "tripleo_overcloud_upgrade_run_skip_tags"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+      vars:
+        tripleo_overcloud_upgrade_run_skip_tags: test
+
+    - name: Assert "tripleo_overcloud_upgrade_run_skip_tags"
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run --skip-tags test"
+
+    - name: Check parameter "tripleo_overcloud_upgrade_run_playbook"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+      vars:
+        tripleo_overcloud_upgrade_run_playbook:
+          - test1
+          - test2
+
+    - name: Assert "tripleo_overcloud_upgrade_run_playbook"
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run --playbook test1 --playbook test2"
+
+    - name: Check parameter "tripleo_overcloud_upgrade_run_ssh_user"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+      vars:
+        tripleo_overcloud_upgrade_run_ssh_user: username
+
+    - name: Assert "tripleo_overcloud_upgrade_run_ssh_user"
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run --ssh-user username"
+
+    - name: Check parameter "tripleo_overcloud_upgrade_run_static_inventory"
+      include_role:
+        name: "tripleo_overcloud_upgrade_run"
+      vars:
+        tripleo_overcloud_upgrade_run_static_inventory: /home/foo/inventory.yml
+
+    - name: Assert "tripleo_overcloud_upgrade_run_static_inventory"
+      assert:
+        that:
+          - tripleo_overcloud_upgrade_run_output == "overcloud upgrade run --static-inventory /home/foo/inventory.yml"
