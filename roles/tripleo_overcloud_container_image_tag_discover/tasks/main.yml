@@ -1,0 +1,47 @@
+---
+# tasks file for tripleo_overcloud_container_image_tag_discover
+- name: Set overcloud container image tag discover faces
+  set_fact:
+    _discover_cmd: >-
+      {{ openstack_bin }} overcloud container image tag discover
+      {{ tripleo_overcloud_container_image_tag_discover_image | ternary('--image $DISCOVER_IMAGE', '') }}
+      {{ tripleo_overcloud_container_image_tag_discover_tag_from_label | ternary('--tag-from-label $DISCOVER_TAG_FROM_LABEL', '') }}
+      {{ tripleo_overcloud_container_image_tag_discover_log_output | ternary((">" ~ tripleo_overcloud_container_image_tag_discover_log), '') }}
+      {{ tripleo_overcloud_container_image_tag_discover_log_combine | ternary("2>&1", '') }}
+    _discover_env:
+      DISCOVER_IMAGE: "{{ tripleo_overcloud_container_image_tag_discover_image | quote }}"
+      DISCOVER_TAG_FROM_LABEL: "{{ tripleo_overcloud_container_image_tag_discover_tag_from_label | quote }}"
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_container_image_tag_discover_log }}"
+  when: tripleo_overcloud_container_image_tag_discover_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_container_image_tag_discover_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _discover_cmd
+
+    - name: Show the environment
+      debug:
+        var: _discover_env
+
+- name: Run overcloud image tag discover
+  shell: "{{ _discover_cmd }}"  # noqa 305
+  environment: "{{ _discover_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_container_image_tag_discover_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_container_image_tag_discover_result
+  async: "{{ tripleo_overcloud_container_image_tag_discover_timeout }}"
+  poll: "{{ tripleo_overcloud_container_image_tag_discover_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_container_image_tag_discover_output: "{{ tripleo_overcloud_container_image_tag_discover_result.stdout }}"
