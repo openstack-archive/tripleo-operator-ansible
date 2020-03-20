@@ -1,0 +1,57 @@
+---
+# tasks file for tripleo_overcloud_generate_fencing
+- name: Set overcloud generate fencing facts
+  set_fact:
+    _fencing_cmd: >-
+      {{ tripleo_overcloud_generate_fencing_os_cloud | ternary('', "source " ~ tripleo_overcloud_generate_fencing_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud generate fencing
+      {{ tripleo_overcloud_generate_fencing_action | ternary('--action $FENCING_ACTION', '') }}
+      {{ tripleo_overcloud_generate_fencing_delay | ternary('--delay $FENCING_DELAY', '') }}
+      {{ tripleo_overcloud_generate_fencing_ipmi_lanplus | ternary('--ipmi-lanplus', '') }}
+      {{ tripleo_overcloud_generate_fencing_ipmi_no_lanplus | ternary('--ipmi-no-lanplus', '') }}
+      {{ tripleo_overcloud_generate_fencing_ipmi_cipher | ternary('--ipmi-cipher $FENCING_CIPHER', '') }}
+      {{ tripleo_overcloud_generate_fencing_ipmi_level | ternary('--ipmi-level $FENCING_LEVEL', '') }}
+      {{ tripleo_overcloud_generate_fencing_output_file | ternary('--output $FENCING_OUTPUT', '') }}
+      {{ tripleo_overcloud_generate_fencing_environment_file }}
+      {{ tripleo_overcloud_generate_fencing_log_output | ternary((">" ~ tripleo_overcloud_generate_fencing_log), '') }}
+      {{ tripleo_overcloud_generate_fencing_log_combine | ternary("2>&1", '') }}
+    _fencing_env:
+      OS_CLOUD: "{{ tripleo_overcloud_generate_fencing_os_cloud }}"
+      FENCING_ACTION: "{{ tripleo_overcloud_generate_fencing_action | quote }}"
+      FENCING_DELAY: "{{ tripleo_overcloud_generate_fencing_delay | quote }}"
+      FENCING_CIPHER: "{{ tripleo_overcloud_generate_fencing_ipmi_cipher | quote }}"
+      FENCING_LEVEL: "{{ tripleo_overcloud_generate_fencing_ipmi_level | quote }}"
+      FENCING_OUTPUT: "{{ tripleo_overcloud_generate_fencing_output_file | quote }}"
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_generate_fencing_log }}"
+  when: tripleo_overcloud_generate_fencing_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_generate_fencing_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _fencing_cmd
+
+    - name: Show the environment
+      debug:
+        var: _fencing_env
+
+- name: overcloud generate fencing
+  shell: "{{ _fencing_cmd }}"  # noqa 305
+  environment: "{{ _fencing_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_generate_fencing_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_generate_fencing_result
+  async: "{{ tripleo_overcloud_generate_fencing_timeout }}"
+  poll: "{{ tripleo_overcloud_generate_fencing_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_generate_fencing_output: "{{ tripleo_overcloud_generate_fencing_result.stdout }}"
