@@ -41,3 +41,15 @@ class TestShellArgsFilters(tests_base.TestCase):
     def test_shell_arg_list_none(self):
         expected = ''
         self.assertEqual(expected, self.filter.shell_arg_list(None))
+
+    def test_shell_arg_list_quote(self):
+        arg = ["a b"]
+        expected = "--p 'a b'"
+        self.assertEqual(expected,
+                         self.filter.shell_arg_list(arg, parameter='--p'))
+
+    def test_shell_arg_str_quote(self):
+        arg = "a b"
+        expected = "'a b'"
+        self.assertEqual(expected,
+                         self.filter.shell_arg_list(arg))
