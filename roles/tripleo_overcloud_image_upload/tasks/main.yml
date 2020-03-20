@@ -46,3 +46,7 @@
   register: tripleo_overcloud_image_upload_result
   poll: "{{ tripleo_overcloud_image_upload_poll }}"
   changed_when: false
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_image_upload_output: "{{ tripleo_overcloud_image_upload_result.stdout }}"
