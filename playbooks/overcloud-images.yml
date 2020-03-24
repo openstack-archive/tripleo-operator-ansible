@@ -38,6 +38,7 @@
       set_fact:
         distro_name: "{{ (ansible_facts.distribution == 'RedHat') | ternary('rhel', 'centos') }}"
         distro_version: "{{ ansible_facts.distribution_major_version | int }}"
+        images_version: "{{ (ansible_facts.distribution_major_version|int >= 8) | ternary('-python3', '') }}"
 
     - name: Ensure image folder exists
       file:
@@ -52,7 +53,7 @@
       vars:
         tripleo_overcloud_image_build_debug: "{{ images_debug }}"
         tripleo_overcloud_image_build_config_files:
-          - /usr/share/openstack-tripleo-common/image-yaml/overcloud-images.yaml
+          - /usr/share/openstack-tripleo-common/image-yaml/overcloud-images{{ images_version }}.yaml
           - /usr/share/openstack-tripleo-common/image-yaml/overcloud-images-{{ distro_name }}{{ distro_version }}.yaml
       when: build_images|bool
 
