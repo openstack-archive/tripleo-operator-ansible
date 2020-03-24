@@ -1,0 +1,48 @@
+---
+# tasks file for tripleo_overcloud_delete
+- name: Set overcloud delete facts
+  set_fact:
+    _delete_cmd: >-
+      {{ tripleo_overcloud_delete_os_cloud | ternary('', "source " ~ tripleo_overcloud_delete_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud delete
+      {{ tripleo_overcloud_delete_yes | ternary('--yes', '') }}
+      {{ tripleo_overcloud_delete_name }}
+      {{ tripleo_overcloud_delete_log_output | ternary((">" ~ tripleo_overcloud_delete_log), '') }}
+      {{ tripleo_overcloud_delete_log_combine | ternary("2>&1", '') }}
+    _delete_env:
+      OS_CLOUD: "{{ tripleo_overcloud_delete_os_cloud }}"
+
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_delete_log }}"
+  when: tripleo_overcloud_delete_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_delete_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _delete_cmd
+
+    - name: Show the environment
+      debug:
+        var: _delete_env
+
+- name: openstack overcloud delete
+  shell: "{{ _delete_cmd }}"  # noqa 305
+  environment: "{{ _delete_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_delete_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_delete_result
+  async: "{{ tripleo_overcloud_delete_timeout }}"
+  poll: "{{ tripleo_overcloud_delete_poll }}"
+  changed_when: false
+  when: not ansible_check_mode|bool
+
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_delete_output: "{{ tripleo_overcloud_delete_result.stdout }}"

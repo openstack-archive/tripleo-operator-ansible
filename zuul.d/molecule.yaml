@@ -20,6 +20,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_container_image_tag_discover
       - tripleo-operator-molecule-tripleo_overcloud_container_image_upload
       - tripleo-operator-molecule-tripleo_overcloud_deploy
+      - tripleo-operator-molecule-tripleo_overcloud_delete
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_external_update_run
       - tripleo-operator-molecule-tripleo_overcloud_external_upgrade_run
@@ -71,6 +72,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_container_image_tag_discover
       - tripleo-operator-molecule-tripleo_overcloud_container_image_upload
       - tripleo-operator-molecule-tripleo_overcloud_deploy
+      - tripleo-operator-molecule-tripleo_overcloud_delete
       - tripleo-operator-molecule-tripleo_overcloud_export
       - tripleo-operator-molecule-tripleo_overcloud_external_update_run
       - tripleo-operator-molecule-tripleo_overcloud_external_upgrade_run
@@ -334,6 +336,20 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_deploy
+
+- job:
+    files:
+      - ^roles/tripleo_overcloud_delete/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_overcloud_delete
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_delete
 
 - job:
     files:
