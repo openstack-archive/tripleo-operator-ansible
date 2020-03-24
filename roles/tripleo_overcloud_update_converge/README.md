@@ -1,5 +1,5 @@
 tripleo_overcloud_update_converge
-================================
+=================================
 
 A role to execute an overcloud update converge.
 
