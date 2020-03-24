@@ -1,0 +1,67 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_ffwd_upgrade_run_debug: true
+    tripleo_overcloud_ffwd_upgrade_run_yes: false
+    tripleo_overcloud_ffwd_upgrade_run_log_output: false
+    tripleo_overcloud_ffwd_upgrade_run_log_combine: false
+    tripleo_overcloud_ffwd_upgrade_run_poll: 1
+  tasks:
+
+    - name: "Include tripleo_overcloud_ffwd_upgrade_run"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_run"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_run_output == "overcloud ffwd-upgrade run"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_run_stack"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_run"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_run_stack: test
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_run_stack"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_run_output == "overcloud ffwd-upgrade run --stack test"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_run_yes"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_run"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_run_yes: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_run_yes"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_run_output == "overcloud ffwd-upgrade run --yes"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_run_ssh_user"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_run"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_run_ssh_user: username
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_run_ssh_user"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_run_output == "overcloud ffwd-upgrade run --ssh-user username"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_run_static_inventory"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_run"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_run_static_inventory: /home/foo/inventory.yml
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_run_static_inventory"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_run_output == "overcloud ffwd-upgrade run --static-inventory /home/foo/inventory.yml"
