@@ -1,0 +1,44 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_delete_yes: false
+    tripleo_overcloud_delete_log_output: false
+    tripleo_overcloud_delete_poll: 1
+    tripleo_overcloud_delete_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_delete"
+      include_role:
+        name: "tripleo_overcloud_delete"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_delete_output == "overcloud delete"
+
+    - name: Validate "tripleo_overcloud_delete_name"
+      include_role:
+        name: "tripleo_overcloud_delete"
+      vars:
+        tripleo_overcloud_delete_name: foo
+
+    - name: Assert tripleo_overcloud_delete_name
+      assert:
+        that:
+          - tripleo_overcloud_delete_output == "overcloud delete foo"
+
+    - name: Validate "tripleo_overcloud_delete_yes"
+      include_role:
+        name: "tripleo_overcloud_delete"
+      vars:
+        tripleo_overcloud_delete_yes: true
+
+    - name: Assert tripleo_overcloud_delete_yes
+      assert:
+        that:
+          - tripleo_overcloud_delete_output == "overcloud delete --yes"
