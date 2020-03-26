@@ -1,0 +1,502 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_ffwd_upgrade_prepare_debug: true
+    tripleo_overcloud_ffwd_upgrade_prepare_yes: false
+    tripleo_overcloud_ffwd_upgrade_prepare_log_output: false
+    tripleo_overcloud_ffwd_upgrade_prepare_log_combine: false
+    tripleo_overcloud_ffwd_upgrade_prepare_poll: 1
+  tasks:
+
+    - name: "Include tripleo_overcloud_ffwd_upgrade_prepare"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output ==
+            "overcloud ffwd-upgrade prepare --templates /usr/share/openstack-tripleo-heat-templates --stack overcloud --timeout 90"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_stack"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack: test
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_stack"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --stack test"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_libvirt_type"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_libvirt_type: qemu
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_libvirt_type"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --libvirt-type qemu"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_ntp_server"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_ntp_server: 0.pool.ntp.org,1.pool.ntp.org
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_ntp_server"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --ntp-server 0.pool.ntp.org,1.pool.ntp.org"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_no_proxy"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_no_proxy: 192.168.24.1
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_no_proxy"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --no-proxy 192.168.24.1"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_user"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_user: bob
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_user"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --overcloud-ssh-user bob"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_key"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_key: /tmp/foo
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_key"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --overcloud-ssh-key /tmp/foo"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_network"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_network: external
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_network"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --overcloud-ssh-network external"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_enable_timeout"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_enable_timeout: 12
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_enable_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --overcloud-ssh-enable-timeout 12"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_port_timeout"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_port_timeout: 200
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_overcloud_ssh_port_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --overcloud-ssh-port-timeout 200"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_environment_files"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_environment_files:
+          - a.yaml
+          - b.yaml
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_environment_files"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare -e a.yaml -e b.yaml"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_environment_dirs"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_environment_dirs:
+          - /home/foo/overcloud/
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_environment_dirs"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --environment-directory /home/foo/overcloud/"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_roles_files"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_roles_file: roles.yaml
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_roles_files"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare -r roles.yaml"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_networks_file"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_networks_file: networks.yaml
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_networks_file"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare -n networks.yaml"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_plan_environment_file"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_no_cleanup: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_no_cleanup"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --no-cleanup"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_update_plan_only"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_update_plan_only: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_update_plan_only"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --update-plan-only"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_validation_errors_nonfatal"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_validation_errors_nonfatal: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_validation_errors_nonfatal"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --validation-errors-nonfatal"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_validation_warnings_fatal"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_validation_warnings_fatal: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_validation_warnings_fatal"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --validation-warnings-fatal"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_disable_validations"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_disable_validations: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_disable_validations"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --disable-validations"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_inflight_validations"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_inflight_validations: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_inflight_validations"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --inflight-validations"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_dry_run"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_dry_run: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_dry_run"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --dry-run"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_run_validations"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_run_validations: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_run_validations"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --run-validations"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_skip_deploy_identifier"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_skip_deploy_identifier: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_skip_deploy_identifier"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --skip-deploy-identifier"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_skip_postconfig"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_skip_postconfig: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_skip_postconfig"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --skip-postconfig"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_force_postconfig"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_force_postconfig: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_force_postconfig"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --force-postconfig"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_answers_file"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_answers_file: foo.yaml
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_answers_file"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --answers-file foo.yaml"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_disable_password_generation"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_disable_password_generation: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_disable_password_generation"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --disable-password-generation"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_deployed_server"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_deployed_server: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_deployed_server"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --deployed-server"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_config_download"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_config_download: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_config_download"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --config-download"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_no_config_download"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_no_config_download: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_no_config_download"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --no-config-download"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_output_dir"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_output_dir: /tmp/output
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_output_dir"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --output-dir /tmp/output"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_override_ansible_cfg"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_override_ansible_cfg: foo.cfg
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_override_ansible_cfg"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --override-ansible-cfg foo.cfg"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_config_download_timeout"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_config_download_timeout: 12
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_config_download_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --config-download-timeout 12"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_baremetal_deployment"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_baremetal_deployment: bare.yaml
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_baremetal_deployment"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --baremetal-deployment bare.yaml"
+
+    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_yes"
+      include_role:
+        name: "tripleo_overcloud_ffwd_upgrade_prepare"
+      vars:
+        tripleo_overcloud_ffwd_upgrade_prepare_stack:
+        tripleo_overcloud_ffwd_upgrade_prepare_templates:
+        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
+        tripleo_overcloud_ffwd_upgrade_prepare_yes: true
+
+    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_yes"
+      assert:
+        that:
+          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --yes"
