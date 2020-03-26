@@ -1,0 +1,43 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_credentials_log_output: false
+    tripleo_overcloud_credentials_poll: 1
+    tripleo_overcloud_credentials_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_credentials"
+      include_role:
+        name: "tripleo_overcloud_credentials"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_credentials_output == "overcloud credentials"
+
+    - name: Assert "tripleo_overcloud_credentials_plan"
+      include_role:
+        name: "tripleo_overcloud_credentials"
+      vars:
+        tripleo_overcloud_credentials_plan: foo
+
+    - name: Verify tripleo_overcloud_credentials_plan
+      assert:
+        that:
+          - tripleo_overcloud_credentials_output == "overcloud credentials foo"
+
+    - name: Assert "tripleo_overcloud_credentials_directory"
+      include_role:
+        name: "tripleo_overcloud_credentials"
+      vars:
+        tripleo_overcloud_credentials_directory: /foo
+
+    - name: Verify tripleo_overcloud_credentials_plan
+      assert:
+        that:
+          - tripleo_overcloud_credentials_output == "overcloud credentials --directory /foo"
