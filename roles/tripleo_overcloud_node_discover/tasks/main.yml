@@ -31,9 +31,20 @@
       debug:
         var: _discover_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_node_discover_home_dir }}/tripleo_overcloud_node_discover.sh"
+    shell_command: "{{ _discover_cmd }}"
+    shell_environment: "{{ _discover_env }}"
+  when: tripleo_overcloud_node_discover_generate_scripts|bool
+
 - name: Discover node
   shell: "{{ _discover_cmd }}"  # noqa 305
   environment: "{{ _discover_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_node_discover_home_dir }}"
+    warn: false
   register: tripleo_overcloud_node_discover_result
   changed_when: true
 

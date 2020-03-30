@@ -11,9 +11,10 @@ None.
 Role Variables
 --------------
 
-* `tripleo_overcloud_node_bios_configure_node_uuids`: Baremetal Node UUIDs for the node(s) to configure BIOS.
 * `tripleo_overcloud_node_bios_configure_all_manageable`: Configure BIOS for all nodes currently in 'manageable' state.
 * `tripleo_overcloud_node_bios_configure_configuration`: BIOS configuration (YAML/JSON string or file name).
+* `tripleo_overcloud_node_bios_configure_home_dir`: (String) Location to run the command in. Default: "{{ ansible_env.HOME }}"
+* `tripleo_overcloud_node_bios_configure_node_uuids`: Baremetal Node UUIDs for the node(s) to configure BIOS.
 * `tripleo_overcloud_node_bios_configure_os_cloud`: (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_node_bios_configure_rc_file`.
 * `tripleo_overcloud_node_bios_configure_rc_file`: (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
 

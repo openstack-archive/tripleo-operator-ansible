@@ -18,6 +18,7 @@ Role Variables
 * `tripleo_overcloud_container_image_prepare_environment_directory`: (String) Path to a directory containing the environment files specifying which services are containerized.
 * `tripleo_overcloud_container_image_prepare_environment_files`: (List) List of environment files specifying which services are containerized. Default: []
 * `tripleo_overcloud_container_image_prepare_excludes`: (List) List of patterns to match the imagename against to exclude from the output. Default: []
+* `tripleo_overcloud_container_image_prepare_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_container_image_prepare_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_container_image_prepare_includes`: (List) List of patterns to match the imagename against to include in the output. Default: []
 * `tripleo_overcloud_container_image_prepare_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true

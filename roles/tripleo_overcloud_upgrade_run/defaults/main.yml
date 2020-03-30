@@ -2,6 +2,7 @@
 # defaults file for tripleo_overcloud_upgrade_run
 openstack_bin: openstack
 tripleo_overcloud_upgrade_run_debug: false
+tripleo_overcloud_upgrade_run_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_upgrade_run_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_upgrade_run_limit:
 tripleo_overcloud_upgrade_run_log: "{{ tripleo_overcloud_upgrade_run_home_dir }}/overcloud_upgrade_run.log"

@@ -29,11 +29,11 @@ tripleo_deploy_override_ansible_cfg:
 tripleo_deploy_plan_environment_file:
 tripleo_deploy_poll: 10
 tripleo_deploy_public_virtual_ip:
+tripleo_deploy_roles_file: "{{ tripleo_deploy_templates }}/roles/Standalone.yaml"
 tripleo_deploy_stack: standalone
 tripleo_deploy_standalone: true
 tripleo_deploy_standalone_role: Standalone
 tripleo_deploy_templates: /usr/share/openstack-tripleo-heat-templates
-tripleo_deploy_roles_file: "{{ tripleo_deploy_templates }}/roles/Standalone.yaml"
 tripleo_deploy_timeout: 5700
 tripleo_deploy_timeout_arg: 90
 tripleo_deploy_upgrade: false

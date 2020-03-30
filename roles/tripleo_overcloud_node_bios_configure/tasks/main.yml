@@ -23,9 +23,20 @@
       debug:
         var: _bios_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_node_bios_configure_home_dir }}/tripleo_overcloud_node_bios_configure.sh"
+    shell_command: "{{ _bios_cmd }}"
+    shell_environment: "{{ _bios_env }}"
+  when: tripleo_overcloud_node_bios_configure_generate_scripts|bool
+
 - name: Configure node bios
   shell: "{{ _bios_cmd }}"  # noqa 305
   environment: "{{ _bios_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_node_bios_configure_home_dir }}"
+    warn: false
   register: tripleo_overcloud_node_bios_configure_result
   changed_when: true
 

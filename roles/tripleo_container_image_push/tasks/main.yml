@@ -13,19 +13,25 @@
       {{ tripleo_container_image_push_multi_arch | ternary('--multi-arch', '') }}
       {{ tripleo_container_image_push_cleanup | ternary('--cleanup', '') }}
       {{ tripleo_container_image_push_image }}
+    _push_env:
+      TRIPLEO_IMAGE_PUSH_APPEND_TAG: "{{ tripleo_container_image_push_append_tag | default('') }}"
+      TRIPLEO_IMAGE_PUSH_USERNAME: "{{ tripleo_container_image_push_username | default('') | quote }}"
+      TRIPLEO_IMAGE_PUSH_PASSWORD: "{{ tripleo_container_image_push_password | default('') | quote }}"
+      TRIPLEO_IMAGE_PUSH_REGISTRY_URL: "{{ tripleo_container_image_push_registry_url | default('') }}"
 
-- name: Show the container image push command
-  debug:
-    var: _push_cmd
+- name: Show debug information
   when: tripleo_container_image_push_debug|bool
+  block:
+    - name: Show the container image push command
+      debug:
+        var: _push_cmd
+    - name: Show the container image push environment
+      debug:
+        var: _push_env
 
 - name: Container image push
   shell: "{{ _push_cmd }}"  # noqa 305
-  environment:
-    TRIPLEO_IMAGE_PUSH_APPEND_TAG: "{{ tripleo_container_image_push_append_tag | default('') }}"
-    TRIPLEO_IMAGE_PUSH_USERNAME: "{{ tripleo_container_image_push_username | default('') | quote }}"
-    TRIPLEO_IMAGE_PUSH_PASSWORD: "{{ tripleo_container_image_push_password | default('') | quote }}"
-    TRIPLEO_IMAGE_PUSH_REGISTRY_URL: "{{ tripleo_container_image_push_registry_url | default('') }}"
+  environment: "{{ _push_env }}"
   async: "{{ tripleo_container_image_push_timeout }}"
   poll: 1
   become: "{{ tripleo_container_image_push_become }}"

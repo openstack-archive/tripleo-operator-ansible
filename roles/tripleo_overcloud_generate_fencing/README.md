@@ -15,6 +15,7 @@ Role Variables
 * `tripleo_overcloud_generate_fencing_debug`: (Boolean) Flag to print out the delete command. Default: False
 * `tripleo_overcloud_generate_fencing_delay`: (Integer) Number of seconds to wait before fencing is started.
 * `tripleo_overcloud_generate_fencing_environment_file`: (String) REQUIRED. Path to the environment file.
+* `tripleo_overcloud_generate_fencing_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_generate_fencing_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_generate_fencing_ipmi_cipher`: (String) Cipher squit to use (same as ipmitool -C)
 * `tripleo_overcloud_generate_fencing_ipmi_lanplus`: (Boolean) Use lanplus. Option deprecated because it's the default. Default: false

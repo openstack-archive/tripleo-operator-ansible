@@ -1,5 +1,5 @@
----
 # defaults file for tripleo_overcloud_node_unprovision
+---
 openstack_bin: openstack
 tripleo_overcloud_node_unprovision_all: false
 tripleo_overcloud_node_unprovision_debug: false

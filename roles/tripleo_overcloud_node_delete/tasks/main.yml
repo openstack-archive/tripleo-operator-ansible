@@ -27,9 +27,20 @@
       debug:
         var: _delete_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_node_delete_home_dir }}/tripleo_overcloud_node_delete.sh"
+    shell_command: "{{ _delete_cmd }}"
+    shell_environment: "{{ _delete_env }}"
+  when: tripleo_overcloud_node_delete_generate_scripts|bool
+
 - name: Delete node
   shell: "{{ _delete_cmd }}"  # noqa 305
   environment: "{{ _delete_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_node_delete_home_dir }}"
+    warn: false
   register: tripleo_overcloud_node_delete_result
   changed_when: true
 

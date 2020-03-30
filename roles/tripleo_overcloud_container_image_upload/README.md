@@ -17,6 +17,7 @@ Role Variables
 * `tripleo_overcloud_container_image_upload_cleanup`: (String) Cleanup behaviour for local images
 * `tripleo_overcloud_container_image_upload_config_files`: (List) REQUIRED. YAML config files specifying images. Default: []
 * `tripleo_overcloud_container_image_upload_debug`: (Boolean) Flag to print out the delete command. Default: False
+* `tripleo_overcloud_container_image_upload_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_container_image_upload_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_container_image_upload_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_container_image_upload_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true

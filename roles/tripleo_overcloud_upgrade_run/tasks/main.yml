@@ -40,6 +40,13 @@
       debug:
         var: _run_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_upgrade_run_home_dir }}/tripleo_overcloud_upgrade_run_ansible.sh"
+    shell_command: "{{ _run_cmd }}"
+    shell_environment: "{{ _run_env }}"
+  when: tripleo_overcloud_upgrade_run_generate_scripts|bool
+
 - name: Overcloud upgrade run
   shell: "{{ _run_cmd }}"  # noqa 305
   environment: "{{ _run_env }}"

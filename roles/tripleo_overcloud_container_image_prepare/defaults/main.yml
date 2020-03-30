@@ -1,10 +1,11 @@
----
 # defaults file for tripleo_overcloud_container_image_prepare
+---
 openstack_bin: openstack
 tripleo_overcloud_container_image_prepare_debug: false
 tripleo_overcloud_container_image_prepare_environment_directory:
 tripleo_overcloud_container_image_prepare_environment_files: []
 tripleo_overcloud_container_image_prepare_excludes: []
+tripleo_overcloud_container_image_prepare_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_container_image_prepare_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_container_image_prepare_includes: []
 tripleo_overcloud_container_image_prepare_log: "{{ tripleo_overcloud_container_image_prepare_home_dir }}/overcloud_container_image_prepare.log"

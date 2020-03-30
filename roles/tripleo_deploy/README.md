@@ -15,6 +15,7 @@ Role Variables
 * `tripleo_deploy_cleanup`: (Boolean) Cleanup temporary files after execution. Default: false
 * `tripleo_deploy_control_virtual_ip`: (String) Control plain VIP address.
 * `tripleo_deploy_debug`: (Boolean) Flag to print out the command that is run. Default: false
+* `tripleo_deploy_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_deploy_deployment_python_interpreter`: (String) Path to a python interpreter for the deployment actions.
 * `tripleo_deploy_deployment_user`: (String) User who is executing the tripleo deployment via sudo. Defaults: "{{ ansible_env.USER }}"
 * `tripleo_deploy_environment_files`: (List) A list of environment file paths for the deployment.

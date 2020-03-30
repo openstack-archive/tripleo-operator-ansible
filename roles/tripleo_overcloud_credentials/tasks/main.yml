@@ -29,6 +29,13 @@
       debug:
         var: _creds_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_credentials_home_dir }}/tripleo_overcloud_credentials.sh"
+    shell_command: "{{ _creds_cmd }}"
+    shell_environment: "{{ _creds_env }}"
+  when: tripleo_overcloud_credentials_generate_scripts|bool
+
 - name: CHANGEME
   shell: "{{ _creds_cmd }}"  # noqa 305
   environment: "{{ _creds_env }}"

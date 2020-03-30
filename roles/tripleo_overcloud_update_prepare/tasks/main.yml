@@ -83,6 +83,13 @@
       debug:
         var: _update_prepare_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_update_prepare_home_dir }}/tripleo_overcloud_update_prepare.sh"
+    shell_command: "{{ _update_prepare_cmd }}"
+    shell_environment: "{{ _update_prepare_env }}"
+  when: tripleo_overcloud_update_prepare_generate_scripts|bool
+
 - name: Overcloud update prepare
   shell: "{{ _update_prepare_cmd }}"  # noqa 305
   environment: "{{ _update_prepare_env }}"

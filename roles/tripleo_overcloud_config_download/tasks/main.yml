@@ -34,6 +34,13 @@
       debug:
         var: _download_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_config_download_home_dir }}/tripleo_overcloud_config_download.sh"
+    shell_command: "{{ _download_cmd }}"
+    shell_environment: "{{ _download_env }}"
+  when: tripleo_overcloud_config_download_generate_scripts|bool
+
 - name: Run overcloud config download
   shell: "{{ _download_cmd }}"  # noqa 305
   environment: "{{ _download_env }}"

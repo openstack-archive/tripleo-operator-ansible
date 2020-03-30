@@ -1,23 +1,24 @@
----
 # defaults file for tripleo_overcloud_image_upload
+---
 openstack_bin: openstack
 tripleo_overcloud_image_upload_architecture:
 tripleo_overcloud_image_upload_debug: false
-tripleo_overcloud_image_upload_http_boot:
+tripleo_overcloud_image_upload_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_image_upload_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_image_upload_http_boot:
 tripleo_overcloud_image_upload_image_path:
 tripleo_overcloud_image_upload_image_type:
 tripleo_overcloud_image_upload_ironic_python_agent_name:
+tripleo_overcloud_image_upload_local: false
+tripleo_overcloud_image_upload_local_path:
+tripleo_overcloud_image_upload_log: "{{ tripleo_overcloud_image_upload_home_dir }}/overcloud_image_upload.log"
 tripleo_overcloud_image_upload_log_combine: false
 tripleo_overcloud_image_upload_log_output: true
 tripleo_overcloud_image_upload_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_image_upload_os_image_name:
-tripleo_overcloud_image_upload_poll: 10
 tripleo_overcloud_image_upload_platform:
+tripleo_overcloud_image_upload_poll: 10
 tripleo_overcloud_image_upload_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
 tripleo_overcloud_image_upload_timeout: 600
 tripleo_overcloud_image_upload_update_existing: false
 tripleo_overcloud_image_upload_whole_disk: false
-tripleo_overcloud_image_upload_local: false
-tripleo_overcloud_image_upload_local_path:
-tripleo_overcloud_image_upload_log: "{{ tripleo_overcloud_image_upload_home_dir }}/overcloud_image_upload.log"

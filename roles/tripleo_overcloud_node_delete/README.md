@@ -13,6 +13,8 @@ Role Variables
 
 * `tripleo_overcloud_node_delete_nodes`: Node ID(s) to delete (otherwise specified in the --baremetal-deployment file)
 * `tripleo_overcloud_node_delete_baremetal_deployment`: Configuration file describing the baremetal deployment
+* `tripleo_overcloud_node_delete_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_node_delete_home_dir`: (String) Location to run the command in. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_node_delete_stack`: Name or ID of heat stack to scale (default=Env: OVERCLOUD_STACK_NAME)
 * `tripleo_overcloud_node_delete_templates`: The directory containing the Heat templates to deploy.
     This argument is deprecated. The command now utilizes a deployment plan, which should be updated prior to running this

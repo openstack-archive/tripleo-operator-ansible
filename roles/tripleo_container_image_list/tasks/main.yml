@@ -8,19 +8,25 @@
       {{ tripleo_container_image_list_password | ternary('--password "$TRIPLEO_IMAGE_LIST_PASSWORD"', '') }}
       {{ tripleo_container_image_list_registry_url | ternary('--registry-url $TRIPLEO_IMAGE_LIST_REGISTRY_URL', '') }}
       {{ tripleo_container_image_list_format | ternary('-f $TRIPLEO_IMAGE_LIST_FORMAT', '') }}
+    _list_env:
+      TRIPLEO_IMAGE_LIST_USERNAME: "{{ tripleo_container_image_list_username | default('') | quote }}"
+      TRIPLEO_IMAGE_LIST_PASSWORD: "{{ tripleo_container_image_list_password | default('') | quote }}"
+      TRIPLEO_IMAGE_LIST_REGISTRY_URL: "{{ tripleo_container_image_list_registry_url | default('') }}"
+      TRIPLEO_IMAGE_LIST_FORMAT: "{{ tripleo_container_image_list_format | default('') }}"
 
-- name: Show the container image list command
-  debug:
-    var: _list_cmd
+- name: Show debug information
   when: tripleo_container_image_list_debug|bool
+  block:
+    - name: Show the container image list command
+      debug:
+        var: _list_cmd
+    - name: Show the container image list environment
+      debug:
+        var: _list_env
 
 - name: Container image list
   shell: "{{ _list_cmd }}"  # noqa 305
-  environment:
-    TRIPLEO_IMAGE_LIST_USERNAME: "{{ tripleo_container_image_list_username | default('') | quote }}"
-    TRIPLEO_IMAGE_LIST_PASSWORD: "{{ tripleo_container_image_list_password | default('') | quote }}"
-    TRIPLEO_IMAGE_LIST_REGISTRY_URL: "{{ tripleo_container_image_list_registry_url | default('') }}"
-    TRIPLEO_IMAGE_LIST_FORMAT: "{{ tripleo_container_image_list_format | default('') }}"
+  environment: "{{ _list_env }}"
   register: tripleo_container_image_list_result
   changed_when: false
 

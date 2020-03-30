@@ -31,9 +31,18 @@
       debug:
         var: _authorize_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_admin_authorize_home_dir }}/tripleo_overcloud_admin_authorize.sh"
+    shell_command: "{{ _authorize_cmd }}"
+    shell_environment: "{{ _authorize_env }}"
+  when: tripleo_overcloud_admin_authorize_generate_scripts|bool
+
 - name: overcloud admin authorize
   shell: "{{ _authorize_cmd }}"  # noqa 305
   args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_admin_authorize_home_dir }}"
     warn: false
   environment: "{{ _authorize_env }}"
   async: "{{ tripleo_overcloud_admin_authorize_timeout }}"

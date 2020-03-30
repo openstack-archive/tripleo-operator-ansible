@@ -13,6 +13,7 @@ Role Variables
 
 * `tripleo_undercloud_backup_add_path`: (List) List of additional filesystem paths to backup. Default: []
 * `tripleo_undercloud_backup_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
+* `tripleo_undercloud_backup_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_undercloud_backup_exclude_path`: (List) List of filesystems path to skip backing up. Default: []
 * `tripleo_undercloud_backup_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_undercloud_backup_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true

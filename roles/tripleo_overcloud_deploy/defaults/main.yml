@@ -1,5 +1,5 @@
----
 # defaults file for tripleo_overcloud_deploy
+---
 openstack_bin: openstack
 tripleo_overcloud_deploy_answers_file:
 tripleo_overcloud_deploy_baremetal_deployment:

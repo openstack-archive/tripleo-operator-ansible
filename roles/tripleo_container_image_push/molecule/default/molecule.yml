@@ -13,6 +13,7 @@ provisioner:
 scenario:
   name: default
   test_sequence:
+    - prepare
     - syntax
     - converge
     - verify

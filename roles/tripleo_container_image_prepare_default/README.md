@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 * `tripleo_container_image_prepare_default_debug`: (Boolean) Flag to print out the push command. Default: False
+* `tripleo_container_image_prepare_default_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_container_image_prepare_default_local_push_destination`: (Boolean) Include a push_Destination to trigger upload to a local registry on the undercloud. Default: false
 * `tripleo_container_image_prepare_default_output_env_file`: (String) File to write environment file containing default ContainerImagePrepare value. When not set, `tripleo_container_image_prepare_default_output` will contain yaml defining ContainerImagePrepare. Default is not set.
 

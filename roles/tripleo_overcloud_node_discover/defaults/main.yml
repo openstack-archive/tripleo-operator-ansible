@@ -1,16 +1,18 @@
----
 # defaults file for tripleo_overcloud_node_discover
+---
 openstack_bin: openstack
-tripleo_overcloud_node_discover_debug: false
-tripleo_overcloud_node_discover_ip:
-tripleo_overcloud_node_discover_range:
-tripleo_overcloud_node_discover_credentials:
-tripleo_overcloud_node_discover_port:
-tripleo_overcloud_node_discover_introspect: false
-tripleo_overcloud_node_discover_run_validations: false
-tripleo_overcloud_node_discover_provide: false
-tripleo_overcloud_node_discover_no_deploy_image: false
-tripleo_overcloud_node_discover_instance_boot_option:
 tripleo_overcloud_node_discover_concurrency:
+tripleo_overcloud_node_discover_credentials:
+tripleo_overcloud_node_discover_debug: false
+tripleo_overcloud_node_discover_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_node_discover_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_node_discover_instance_boot_option:
+tripleo_overcloud_node_discover_introspect: false
+tripleo_overcloud_node_discover_ip:
+tripleo_overcloud_node_discover_no_deploy_image: false
 tripleo_overcloud_node_discover_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_node_discover_port:
+tripleo_overcloud_node_discover_provide: false
+tripleo_overcloud_node_discover_range:
 tripleo_overcloud_node_discover_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
+tripleo_overcloud_node_discover_run_validations: false

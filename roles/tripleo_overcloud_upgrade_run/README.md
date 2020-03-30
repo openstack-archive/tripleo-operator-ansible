@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 * `tripleo_overcloud_upgrade_run_debug`: (Boolean) Flag to print out the command that is run. Default: false
+* `tripleo_overcloud_upgrade_run_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_upgrade_run_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_upgrade_run_limit`: (String) String that identifies a single node or a list of nodes to be upgraded.
 * `tripleo_overcloud_upgrade_run_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true

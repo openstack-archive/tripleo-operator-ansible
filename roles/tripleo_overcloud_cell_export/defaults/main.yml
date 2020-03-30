@@ -1,10 +1,11 @@
----
 # defaults file for tripleo_overcloud_cell_export
+---
 openstack_bin: openstack
 tripleo_overcloud_cell_export_cell_stack:
 tripleo_overcloud_cell_export_control_plane_stack:
 tripleo_overcloud_cell_export_debug: false
 tripleo_overcloud_cell_export_force_overwrite: false
+tripleo_overcloud_cell_export_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_cell_export_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_cell_export_log: "{{ tripleo_overcloud_cell_export_home_dir }}/overcloud_cell_export.log"
 tripleo_overcloud_cell_export_log_combine: true

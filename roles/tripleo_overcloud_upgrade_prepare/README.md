@@ -23,6 +23,7 @@ Role Variables
 * `tripleo_overcloud_upgrade_prepare_environment_dirs`: (List) A list of directory paths containing environment files for the deployment. Should not be used with environment files.
 * `tripleo_overcloud_upgrade_prepare_environment_files`: (List) A list of environment file paths for the deployment.  Should not be used with environment dirs.
 * `tripleo_overcloud_upgrade_prepare_force_postconfig`: (Boolean) Force the overclodu post-deployment configuration. Default: false
+* `tripleo_overcloud_upgrade_prepare_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_upgrade_prepare_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_upgrade_prepare_inflight_validations`: (Boolean) Flag to enable inflight validations. Default: false
 * `tripleo_overcloud_upgrade_prepare_libvirt_type`: (String) Libvirt domain time. Setting `NovaComputeLibvirtType` in an environment file is prefered over this option.

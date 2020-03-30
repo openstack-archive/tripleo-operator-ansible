@@ -1,6 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  collections:
+    - tripleo.operator
   tasks:
 
     - name: "Include tripleo_overcloud_node_bios_configure"

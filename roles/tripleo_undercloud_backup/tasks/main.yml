@@ -7,19 +7,34 @@
       {{ tripleo_undercloud_backup_exclude_path | tripleo.operator.shell_arg_list(parameter='--exclude-path') }}
       {{ tripleo_undercloud_backup_log_output | ternary((">" ~ tripleo_undercloud_backup_log), '') }}
       {{ tripleo_undercloud_backup_log_combine | ternary("2>&1", '') }}
+    _backup_env: {}
 
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_undercloud_backup_log }}"
   when: tripleo_undercloud_backup_log_output|bool
 
-- name: Show the underclound backup command
-  debug:
-    var: _backup_cmd
+- name: Show debug information
   when: tripleo_undercloud_backup_debug|bool
+  block:
+    - name: Show the undercloud backup command
+      debug:
+        var: _backup_cmd
+
+    - name: Show the undercloud backup environment
+      debug:
+        var: _backup_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_undercloud_backup_home_dir }}/tripleo_undercloud_backup.sh"
+    shell_command: "{{ _backup_cmd }}"
+    shell_environment: "{{ _backup_env }}"
+  when: tripleo_undercloud_backup_generate_scripts|bool
 
 - name: undercloud backup
   shell: "{{ _backup_cmd }}"  # noqa 305
+  environment: "{{ _backup_env }}"
   args:
     chdir: "{{ tripleo_undercloud_backup_home_dir }}"
     warn: false

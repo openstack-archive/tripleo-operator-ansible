@@ -15,6 +15,7 @@ Role Variables
 --------------
 
 * `tripleo_overcloud_container_image_tag_discover_debug`: (Boolean) Flag to print out the delete command. Default: False
+* `tripleo_overcloud_container_image_tag_discover_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_container_image_tag_discover_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_container_image_tag_discover_image`: (String) REQUIRED. Fully qualified name of the image to discover the tag.
 * `tripleo_overcloud_container_image_tag_discover_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true

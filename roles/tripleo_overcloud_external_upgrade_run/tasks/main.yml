@@ -37,6 +37,13 @@
       debug:
         var: _upgrade_run_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_external_upgrade_run_home_dir }}/tripleo_overcloud_external_upgrade_run.sh"
+    shell_command: "{{ _upgrade_run_cmd }}"
+    shell_environment: "{{ _upgrade_run_env }}"
+  when: tripleo_overcloud_external_upgrade_run_generate_scripts|bool
+
 - name: Overcloud external-upgrade run
   shell: "{{ _upgrade_run_cmd }}"  # noqa 305
   environment: "{{ _upgrade_run_env }}"

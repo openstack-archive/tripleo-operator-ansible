@@ -82,6 +82,13 @@
       debug:
         var: _upgrade_prepare_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_ffwd_upgrade_prepare_home_dir }}/tripleo_overcloud_ffwd_upgrade_prepare.sh"
+    shell_command: "{{ _upgrade_prepare_cmd }}"
+    shell_environment: "{{ _upgrade_prepare_env }}"
+  when: tripleo_overcloud_ffwd_upgrade_prepare_generate_scripts|bool
+
 - name: overcloud ffwd-upgrade prepare
   shell: "{{ _upgrade_prepare_cmd }}"  # noqa 305
   environment: "{{ _upgrade_prepare_env }}"

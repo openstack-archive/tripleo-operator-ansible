@@ -9,19 +9,34 @@
       {{ tripleo_undercloud_minion_install_yes | ternary("--yes", '') }}
       {{ tripleo_undercloud_minion_install_log_output | ternary((">" ~ tripleo_undercloud_minion_install_log), '') }}
       {{ tripleo_undercloud_minion_install_log_combine | ternary("2>&1", '') }}
+    _install_env: {}
 
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_undercloud_minion_install_log }}"
   when: tripleo_undercloud_minion_install_log_output|bool
 
-- name: Show the underclound minion install command
-  debug:
-    var: _install_cmd
+- name: Show debug information
   when: tripleo_undercloud_minion_install_debug|bool
+  block:
+    - name: Show the underclound minion install command
+      debug:
+        var: _install_cmd
+
+    - name: Show the underclound minion install environment
+      debug:
+        var: _install_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_undercloud_minion_install_home_dir }}/tripleo_undercloud_minion_install.sh"
+    shell_command: "{{ _install_cmd }}"
+    shell_environment: "{{ _install_env }}"
+  when: tripleo_undercloud_minion_install_generate_scripts|bool
 
 - name: undercloud minion install
   shell: "{{ _install_cmd }}"  # noqa 305
+  environment: "{{ _install_env }}"
   args:
     chdir: "{{ tripleo_undercloud_minion_install_home_dir }}"
   async: "{{ tripleo_undercloud_minion_install_timeout }}"

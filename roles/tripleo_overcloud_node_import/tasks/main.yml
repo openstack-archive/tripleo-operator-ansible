@@ -30,10 +30,18 @@
       debug:
         var: _import_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_node_import_home_dir }}/tripleo_overcloud_node_import.sh"
+    shell_command: "{{ _import_cmd }}"
+    shell_environment: "{{ _import_env }}"
+  when: tripleo_overcloud_node_import_generate_scripts|bool
+
 - name: Import node(s)
   shell: "{{ _import_cmd }}"  # noqa 305
   environment: "{{ _import_env }}"
   args:
+    executable: /bin/bash
     chdir: "{{ tripleo_overcloud_node_import_home_dir }}"
     warn: false
   async: "{{ tripleo_overcloud_node_import_timeout }}"

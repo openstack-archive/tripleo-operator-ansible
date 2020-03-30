@@ -1,5 +1,5 @@
----
 # defaults file for tripleo_overcloud_status
+---
 tripleo_overcloud_status_debug: false
 tripleo_overcloud_status_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_status_plan: overcloud

@@ -1,9 +1,11 @@
----
 # defaults file for tripleo_overcloud_node_bios_configure
+---
 openstack_bin: openstack
-tripleo_overcloud_node_bios_configure_debug: false
-tripleo_overcloud_node_bios_configure_node_uuids: []
 tripleo_overcloud_node_bios_configure_all_manageable: false
 tripleo_overcloud_node_bios_configure_configuration:
+tripleo_overcloud_node_bios_configure_debug: false
+tripleo_overcloud_node_bios_configure_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_node_bios_configure_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_node_bios_configure_node_uuids: []
 tripleo_overcloud_node_bios_configure_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_node_bios_configure_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

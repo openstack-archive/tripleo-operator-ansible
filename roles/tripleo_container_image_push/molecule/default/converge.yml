@@ -1,6 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  collections:
+    - tripleo.operator
   tasks:
 
     - name: "Include tripleo_container_image_push"

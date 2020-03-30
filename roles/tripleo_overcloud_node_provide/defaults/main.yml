@@ -1,5 +1,5 @@
----
 # defaults file for tripleo_overcloud_node_provide
+---
 openstack_bin: openstack
 tripleo_overcloud_node_provide_all_manageable: false
 tripleo_overcloud_node_provide_debug: false

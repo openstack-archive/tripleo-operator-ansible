@@ -17,6 +17,7 @@ Role Variables
 * `tripleo_container_image_prepare_dry_run`: (Boolean) Perform a dry run upload which will not perform any push, pull or modify operations. The environment file will still be populaged. Default: false
 * `tripleo_container_image_prepare_environment_files`: (List) List of environment files. Default: []
 * `tripleo_container_image_prepare_environment_directory`: (List) Directories containing environment files. Should not be used if `tripleo_container_image_prepare_environment_files` is defined. Default: []
+* `tripleo_container_image_prepare_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_container_image_prepare_output_env_file`: (String) File to write heat environment file which specifies all image parameters. Default is not set.
 * `tripleo_container_image_prepare_output_roles_file`: (String) Roles file path on the remote system. Default is not set.
 * `tripleo_container_image_prepare_timeout`: (Number) Amount of time to wait for the command to conplete. Default: 1800

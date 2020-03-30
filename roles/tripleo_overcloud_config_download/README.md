@@ -14,6 +14,7 @@ Role Variables
 * `tripleo_overcloud_config_download_config_dir`: (String) Directory where the files will be downloaded to
 * `tripleo_overcloud_config_download_config_type`: (String) Type of object config to extract from the deployment
 * `tripleo_overcloud_config_download_debug`: (Boolean) Flag to print out the delete command. Default: False
+* `tripleo_overcloud_config_download_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_config_download_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_config_download_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_config_download_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true

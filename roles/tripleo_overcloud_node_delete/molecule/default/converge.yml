@@ -2,6 +2,8 @@
 - name: Converge
   hosts: all
   gather_facts: true
+  collections:
+    - tripleo.operator
   tasks:
 
     - name: "Include tripleo_overcloud_node_delete"

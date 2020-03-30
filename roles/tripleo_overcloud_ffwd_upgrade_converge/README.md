@@ -11,10 +11,11 @@ None.
 Role Variables
 --------------
 
+* `tripleo_overcloud_ffwd_upgrade_converge_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_upgrade_ffwd_converge_answers_file`: (String) File path to a deployment answers file.
 * `tripleo_overcloud_upgrade_ffwd_converge_baremetal_deployment`: (String) File path to a baremetal deployment configuration.
-* `tripleo_overcloud_upgrade_ffwd_converge_config_download`: (Boolean) Flag to add --config-download option. This is the default as of Rocky and enabling this should have no effect. Default: false
 * `tripleo_overcloud_upgrade_ffwd_converge_config_download_timeout`: (Integer) Timeout in minutes for the config-download steps.
+* `tripleo_overcloud_upgrade_ffwd_converge_config_download`: (Boolean) Flag to add --config-download option. This is the default as of Rocky and enabling this should have no effect. Default: false
 * `tripleo_overcloud_upgrade_ffwd_converge_debug`: (Boolean) Flag to print out the command that is run. Default: false
 * `tripleo_overcloud_upgrade_ffwd_converge_deployed_server`: (Boolean) Flag to use pre-provisioned nodes. Default: false
 * `tripleo_overcloud_upgrade_ffwd_converge_disable_password_generation`: (Boolean) Flag to disable password generation. Default: false
@@ -26,9 +27,9 @@ Role Variables
 * `tripleo_overcloud_upgrade_ffwd_converge_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_upgrade_ffwd_converge_inflight_validations`: (Boolean) Flag to enable inflight validations. Default: false
 * `tripleo_overcloud_upgrade_ffwd_converge_libvirt_type`: (String) Libvirt domain time. Setting `NovaComputeLibvirtType` in an environment file is prefered over this option.
-* `tripleo_overcloud_upgrade_ffwd_converge_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_upgrade_ffwd_converge_home_dir }}/overcloud_upgrade_ffwd_converge.log"
 * `tripleo_overcloud_upgrade_ffwd_converge_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_upgrade_ffwd_converge_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_upgrade_ffwd_converge_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_upgrade_ffwd_converge_home_dir }}/overcloud_upgrade_ffwd_converge.log"
 * `tripleo_overcloud_upgrade_ffwd_converge_networks_file`: (String) File path to a networks file for the deployment.
 * `tripleo_overcloud_upgrade_ffwd_converge_no_cleanup`: (Boolean) String to enable no cleanup. Default: false
 * `tripleo_overcloud_upgrade_ffwd_converge_no_config_download`: (Boolean) String to disable the config download software configuration. Default: false

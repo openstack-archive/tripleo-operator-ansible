@@ -1,13 +1,15 @@
----
 # defaults file for tripleo_overcloud_image_build
+---
 openstack_bin: openstack
 tripleo_overcloud_image_build_config_files: []
 tripleo_overcloud_image_build_debug: false
 tripleo_overcloud_image_build_dib_local_image:
 tripleo_overcloud_image_build_dib_yum_repo_conf: "/etc/yum.repos.d/*"
 tripleo_overcloud_image_build_extra_env_vars: {}
+tripleo_overcloud_image_build_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_image_build_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_image_build_image_names: []
+tripleo_overcloud_image_build_log: "{{ tripleo_overcloud_image_build_home_dir }}/overcloud_image_build.log"
 tripleo_overcloud_image_build_log_combine: true
 tripleo_overcloud_image_build_log_output: true
 tripleo_overcloud_image_build_no_skip: false
@@ -15,4 +17,3 @@ tripleo_overcloud_image_build_output_directory:
 tripleo_overcloud_image_build_poll: 10
 tripleo_overcloud_image_build_stable_branch:
 tripleo_overcloud_image_build_timeout: 1800
-tripleo_overcloud_image_build_log: "{{ tripleo_overcloud_image_build_home_dir }}/overcloud_image_build.log"

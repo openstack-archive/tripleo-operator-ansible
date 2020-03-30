@@ -18,30 +18,44 @@
       {{ tripleo_overcloud_image_upload_local_path | ternary('--local-path $UPLOAD_LOCAL_PATH', '') }}
       {{ tripleo_overcloud_image_upload_log_output | ternary((">$UPLOAD_LOG"), '') }}
       {{ tripleo_overcloud_image_upload_log_combine | ternary("2>&1", '') }}
+    _image_upload_env:
+      OS_CLOUD: "{{ tripleo_overcloud_image_upload_os_cloud }}"
+      UPLOAD_IMAGE_PATH: "{{ tripleo_overcloud_image_upload_image_path }}"
+      UPLOAD_OS_IMAGE_NAME: "{{ tripleo_overcloud_image_upload_os_image_name }}"
+      UPLOAD_IPA_NAME: "{{ tripleo_overcloud_image_upload_ironic_python_agent_name }}"
+      UPLOAD_HTTP_BOOT: "{{ tripleo_overcloud_image_upload_http_boot }}"
+      UPLOAD_ARCHITECTURE: "{{ tripleo_overcloud_image_upload_architecture }}"
+      UPLOAD_PLATFORM: "{{ tripleo_overcloud_image_upload_platform }}"
+      UPLOAD_IMAGE_TYPE: "{{ tripleo_overcloud_image_upload_image_type }}"
+      UPLOAD_LOG: "{{ tripleo_overcloud_image_upload_log }}"
+      UPLOAD_LOCAL_PATH: "{{ tripleo_overcloud_image_upload_local_path }}"
 
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_overcloud_image_upload_log }}"
   when: tripleo_overcloud_image_upload_log_output|bool
 
-- name: Show the overcloud image_upload command
-  debug:
-    var: _image_upload_cmd
+- name: Show debug information
   when: tripleo_overcloud_image_upload_debug|bool
+  block:
+    - name: Show the overcloud image upload command
+      debug:
+        var: _deploy_cmd
+
+    - name: Show the overcloud image upload environment
+      debug:
+        var: _deploy_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_image_upload_home_dir }}/tripleo_overcloud_image_upload.sh"
+    shell_command: "{{ _image_upload_cmd }}"
+    shell_environment: "{{ _image_upload_env }}"
+  when: tripleo_overcloud_image_upload_generate_scripts|bool
 
 - name: Overcloud image upload
   shell: "{{ _image_upload_cmd }}"  # noqa 305
-  environment:
-    OS_CLOUD: "{{ tripleo_overcloud_image_upload_os_cloud }}"
-    UPLOAD_IMAGE_PATH: "{{ tripleo_overcloud_image_upload_image_path }}"
-    UPLOAD_OS_IMAGE_NAME: "{{ tripleo_overcloud_image_upload_os_image_name }}"
-    UPLOAD_IPA_NAME: "{{ tripleo_overcloud_image_upload_ironic_python_agent_name }}"
-    UPLOAD_HTTP_BOOT: "{{ tripleo_overcloud_image_upload_http_boot }}"
-    UPLOAD_ARCHITECTURE: "{{ tripleo_overcloud_image_upload_architecture }}"
-    UPLOAD_PLATFORM: "{{ tripleo_overcloud_image_upload_platform }}"
-    UPLOAD_IMAGE_TYPE: "{{ tripleo_overcloud_image_upload_image_type }}"
-    UPLOAD_LOG: "{{ tripleo_overcloud_image_upload_log }}"
-    UPLOAD_LOCAL_PATH: "{{ tripleo_overcloud_image_upload_local_path }}"
+  environment: "{{ _image_upload_env }}"
   args:
     chdir: "{{ tripleo_overcloud_image_upload_home_dir }}"
     warn: false

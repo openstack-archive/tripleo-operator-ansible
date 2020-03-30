@@ -1,9 +1,10 @@
----
 # defaults file for tripleo_overcloud_container_image_build
+---
 openstack_bin: openstack
 tripleo_overcloud_container_image_build_config_files: []
 tripleo_overcloud_container_image_build_debug: false
 tripleo_overcloud_container_image_build_excludes: []
+tripleo_overcloud_container_image_build_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_container_image_build_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_container_image_build_kolla_config_file:
 tripleo_overcloud_container_image_build_list_dependencies: false

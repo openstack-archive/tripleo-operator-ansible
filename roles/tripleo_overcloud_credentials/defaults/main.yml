@@ -1,8 +1,9 @@
----
 # defaults file for tripleo_overcloud_credentials
+---
 openstack_bin: openstack
 tripleo_overcloud_credentials_debug: false
 tripleo_overcloud_credentials_directory:
+tripleo_overcloud_credentials_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_credentials_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_credentials_log: "{{ tripleo_overcloud_credentials_home_dir }}/overcloud_credentials.log"
 tripleo_overcloud_credentials_log_combine: true

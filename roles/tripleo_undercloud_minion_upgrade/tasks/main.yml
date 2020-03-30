@@ -9,19 +9,34 @@
       {{ tripleo_undercloud_minion_upgrade_yes | ternary("--yes", '') }}
       {{ tripleo_undercloud_minion_upgrade_log_output | ternary((">" ~ tripleo_undercloud_minion_upgrade_log), '') }}
       {{ tripleo_undercloud_minion_upgrade_log_combine | ternary("2>&1", '') }}
+    _upgrade_env: {}
 
 - name: Preserve existing log file if exists
   timestamp_file:
     path: "{{ tripleo_undercloud_minion_upgrade_log }}"
   when: tripleo_undercloud_minion_upgrade_log_output|bool
 
-- name: Show the underclound minion upgrade command
-  debug:
-    var: _upgrade_cmd
+- name: Show debug information
   when: tripleo_undercloud_minion_upgrade_debug|bool
+  block:
+    - name: Show the underclound minion upgrade command
+      debug:
+        var: _upgrade_cmd
+
+    - name: Show the underclound minion upgrade environment
+      debug:
+        var: _upgrade_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_undercloud_minion_upgrade_home_dir }}/tripleo_undercloud_minion_upgrade.sh"
+    shell_command: "{{ _upgrade_cmd }}"
+    shell_environment: "{{ _upgrade_env }}"
+  when: tripleo_undercloud_minion_upgrade_generate_scripts|bool
 
 - name: undercloud minion upgrade
   shell: "{{ _upgrade_cmd }}"  # noqa 305
+  environment: "{{ _upgrade_env }}"
   args:
     chdir: "{{ tripleo_undercloud_minion_upgrade_home_dir }}"
   async: "{{ tripleo_undercloud_minion_upgrade_timeout }}"

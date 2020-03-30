@@ -21,9 +21,17 @@
       debug:
         var: _generate_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_config_generate_home_dir }}/tripleo_config_generate_ansible.sh"
+    shell_command: "{{ _generate_cmd }}"
+    shell_environment: "{{ _generate_env }}"
+  when: tripleo_config_generate_ansible_generate_scripts|bool
+
 - name: tripleo config generate ansible
   shell: "{{ _generate_cmd }}"  # noqa 305
   args:
+    chdir: "{{ tripleo_config_generate_ansible_home_dir }}"
     warn: false
   environment: "{{ _generate_env }}"
   register: tripleo_config_generate_ansible_result

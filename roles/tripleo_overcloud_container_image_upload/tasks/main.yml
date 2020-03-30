@@ -27,6 +27,13 @@
       debug:
         var: _upload_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_container_image_upload_home_dir }}/tripleo_overcloud_container_image_upload.sh"
+    shell_command: "{{ _upload_cmd }}"
+    shell_environment: "{{ _upload_env }}"
+  when: tripleo_overcloud_container_image_upload_generate_scripts|bool
+
 - name: Run overcloud container image upload
   shell: "{{ _upload_cmd }}"  # noqa 305
   environment: "{{ _upload_env }}"

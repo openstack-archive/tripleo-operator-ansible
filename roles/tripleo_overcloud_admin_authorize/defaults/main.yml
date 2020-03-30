@@ -2,8 +2,10 @@
 # defaults file for tripleo_overcloud_admin_authorize
 openstack_bin: openstack
 tripleo_overcloud_admin_authorize_debug: false
+tripleo_overcloud_admin_authorize_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_admin_authorize_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_admin_authorize_os_cloud: "{{ tripleo_os_cloud | default('') }}"
-tripleo_overcloud_admin_authorize_output_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_admin_authorize_output_dir:
 tripleo_overcloud_admin_authorize_poll: 10
 tripleo_overcloud_admin_authorize_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/overcloudrc') }}"
 tripleo_overcloud_admin_authorize_ssh_enable_timeout:

@@ -23,6 +23,9 @@
 - name: Overcloud failures
   shell: "{{ _failures_cmd }}"  # noqa 305
   environment: "{{ _failures_env }}"
+  args:
+    executable: /bin/bash
+    warn: false
   register: tripleo_overcloud_failures_result
   changed_when: false
 
