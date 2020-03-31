@@ -2,10 +2,11 @@
 - name: Build distro string
   set_fact:
     _tripleo_repos_distro: "{{ (ansible_facts.distribution == 'RedHat') | ternary('rhel', 'centos') }}{{ ansible_facts.distribution_major_version }}"
+    _tripleo_repos_component: "{{ (ansible_facts.distribution_major_version|int >= 8) | ternary('component/tripleo/', '') }}"
 
 - name: Build RDO repo url
   set_fact:
-    _tripleo_repos_repo_url: "{{ tripleo_repos_repo_base }}/{{ _tripleo_repos_distro }}-{{ tripleo_repos_branch }}/current/"
+    _tripleo_repos_repo_url: "{{ tripleo_repos_repo_base }}/{{ _tripleo_repos_distro }}-{{ tripleo_repos_branch }}/{{ _tripleo_repos_component }}/current/"
 
 - name: Find available tripleo_repos rpm
   block:
