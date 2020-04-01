@@ -1,0 +1,64 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  tasks:
+
+    - name: "Include tripleo_overcloud_support_report_collect"
+      include_role:
+        name: "tripleo_overcloud_support_report_collect"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_support_report_collect_debug: true
+        tripleo_os_cloud: undercloud
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_support_report_collect_output == "overcloud support report collect --output /var/lib/tripleo/support"
+
+    - name: Check parameter "tripleo_overcloud_support_report_collect_server_name"
+      include_role:
+        name: "tripleo_overcloud_support_report_collect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_support_report_collect_debug: true
+        tripleo_overcloud_support_report_collect_server_name: value
+
+    - name: Assert "tripleo_overcloud_support_report_collect_server_name"
+      assert:
+        that:
+          - tripleo_overcloud_support_report_collect_output == "overcloud support report collect value --output /var/lib/tripleo/support"
+
+    - name: Check parameter "tripleo_overcloud_support_report_collect_output_dir"
+      include_role:
+        name: "tripleo_overcloud_support_report_collect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_support_report_collect_debug: true
+        tripleo_overcloud_support_report_collect_output_dir: value
+
+    - name: Assert "tripleo_overcloud_support_report_collect_output_dir"
+      assert:
+        that:
+          - tripleo_overcloud_support_report_collect_output == "overcloud support report collect --output value"
+
+
+    - name: Check all parameters for role tripleo_overcloud_support_report_collect
+      include_role:
+        name: "tripleo_overcloud_support_report_collect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_support_report_collect_debug: true
+        tripleo_overcloud_support_report_collect_server_name: value
+        tripleo_overcloud_support_report_collect_output_dir: value
+
+    - name: Assert all parameters for role tripleo_overcloud_support_report_collect
+      assert:
+        that:
+          - tripleo_overcloud_support_report_collect_output ==
+            "overcloud support report collect value --output value"
