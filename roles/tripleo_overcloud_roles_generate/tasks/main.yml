@@ -1,0 +1,41 @@
+---
+# tasks file for tripleo_overcloud_roles_generate
+- name: setup overcloud roles generate
+  set_fact:
+    _generate_roles_cmd: >-
+      {{ tripleo_overcloud_roles_generate_os_cloud | ternary('', "source " ~ tripleo_overcloud_roles_generate_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud roles generate
+      {{ tripleo_overcloud_roles_generate_roles_path | ternary('--roles-path ' ~ tripleo_overcloud_roles_generate_roles_path, '') }}
+      {{ tripleo_overcloud_roles_generate_output_file | ternary('--output-file ' ~ tripleo_overcloud_roles_generate_output_file, '') }}
+      {{ tripleo_overcloud_roles_generate_skip_validate | ternary('--skip-validate', '') }}
+      {{ tripleo_overcloud_roles_generate_roles | tripleo.operator.shell_arg_list() }}
+    _generate_roles_env:
+      OS_CLOUD: "{{ tripleo_overcloud_roles_generate_os_cloud }}"
+
+- name: Debug the _generate_roles_cmd
+  when: tripleo_overcloud_roles_generate_debug|bool
+  block:
+    - name: Show the roles generate command
+      debug:
+        var: _generate_roles_cmd
+
+    - name: Show the roles generate environment
+      debug:
+        var: _generate_roles_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_roles_generate_home_dir }}/tripleo_overcloud_roles_generate.sh"
+    shell_command: "{{ _generate_roles_cmd }}"
+    shell_environment: "{{ _generate_roles_env }}"
+  when: tripleo_overcloud_roles_generate_generate_scripts|bool
+
+- name: run roles generate
+  shell: "{{ _generate_roles_cmd }}"  # noqa 305
+  environment: "{{ _generate_roles_env }}"
+  register: tripleo_overcloud_roles_generate_result
+  changed_when: true
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_roles_generate_output: "{{ tripleo_overcloud_roles_generate_result.stdout }}"

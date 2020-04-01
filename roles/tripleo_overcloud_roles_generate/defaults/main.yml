@@ -1,0 +1,12 @@
+---
+# defaults file for tripleo_overcloud_roles_generate
+openstack_bin: openstack
+tripleo_overcloud_roles_generate_debug: false
+tripleo_overcloud_roles_generate_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_roles_generate_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_roles_generate_roles_path: /usr/share/openstack-tripleo-heat-templates/roles
+tripleo_overcloud_roles_generate_output_file: "{{ tripleo_overcloud_roles_generate_home_dir }}/roles_data.yaml"
+tripleo_overcloud_roles_generate_skip_validate: false
+tripleo_overcloud_roles_generate_roles: []
+tripleo_overcloud_roles_generate_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_roles_generate_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

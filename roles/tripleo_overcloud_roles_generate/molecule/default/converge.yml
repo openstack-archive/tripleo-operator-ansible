@@ -1,0 +1,60 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_roles_generate_debug: true
+  tasks:
+
+    - name: Test --output-file
+      vars:
+        tripleo_overcloud_roles_generate_roles: ['Compute']
+        tripleo_overcloud_roles_generate_output_file: "molecule_roles_test1.yml"
+        test_name: "--output-file"
+      block:
+        - name: 'Run test {{ test_name }}'
+          include_role:
+            name: "tripleo_overcloud_roles_generate"
+        - name: 'Check output {{ test_name }}'
+          assert:
+            that:
+              - tripleo_overcloud_roles_generate_output ==
+                "overcloud roles generate --roles-path /usr/share/openstack-tripleo-heat-templates/roles
+                 --output-file molecule_roles_test1.yml Compute"
+
+    - name: Test --roles-path --output-file
+      vars:
+        tripleo_overcloud_roles_generate_roles_path: /foo
+        tripleo_overcloud_roles_generate_roles: ['Controller']
+        tripleo_overcloud_roles_generate_output_file: "molecule_roles_test2.yml"
+        test_name: "--roles-path --output-file"
+      block:
+        - name: 'Run test {{ test_name }}'
+          include_role:
+            name: "tripleo_overcloud_roles_generate"
+        - name: 'Check output {{ test_name }}'
+          assert:
+            that:
+              - tripleo_overcloud_roles_generate_output ==
+                "overcloud roles generate --roles-path /foo --output-file molecule_roles_test2.yml Controller"
+
+    - name: Test all --roles-path --output-file --skip-validate
+      vars:
+        tripleo_overcloud_roles_generate_roles_path: /bar
+        tripleo_overcloud_roles_generate_skip_validate: true
+        tripleo_overcloud_roles_generate_output_file: "molecule_roles_test3.yml"
+        tripleo_overcloud_roles_generate_roles: ['Controller', 'Compute']
+        test_name: "--roles-path --output-file --skip-validate"
+      block:
+        - name: 'Run test {{ test_name }}'
+          include_role:
+            name: "tripleo_overcloud_roles_generate"
+        - name: 'Check output {{ test_name }}'
+          assert:
+            that:
+              - tripleo_overcloud_roles_generate_output ==
+                "overcloud roles generate --roles-path /bar --output-file molecule_roles_test3.yml
+                --skip-validate Controller Compute"
