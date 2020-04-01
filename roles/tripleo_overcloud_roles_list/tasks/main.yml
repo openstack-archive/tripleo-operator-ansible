@@ -1,0 +1,40 @@
+---
+# tasks file for tripleo_overcloud_roles_list
+- name: Setup overcloud roles list command
+  set_fact:
+    _list_cmd: >-
+      {{ tripleo_overcloud_roles_list_os_cloud | ternary('', "source " ~ tripleo_overcloud_roles_list_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud roles list
+      {{ tripleo_overcloud_roles_list_name | ternary('--name ' ~ tripleo_overcloud_roles_list_name, '') }}
+      {{ tripleo_overcloud_roles_list_detail | ternary('--detail', '') }}
+      {{ tripleo_overcloud_roles_list_current | ternary('--current', '') }}
+    _list_env:
+      OS_CLOUD: "{{ tripleo_overcloud_roles_list_os_cloud }}"
+
+- name: Show debug information
+  when: tripleo_overcloud_roles_list_debug|bool
+  block:
+    - name: Show the roles list command
+      debug:
+        var: _list_cmd
+
+    - name: Show the roles list environment
+      debug:
+        var: _list_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_roles_list_home_dir }}/tripleo_overcloud_roles_list.sh"
+    shell_command: "{{ _list_cmd }}"
+    shell_environment: "{{ _list_env }}"
+  when: tripleo_overcloud_roles_list_generate_scripts|bool
+
+- name: List roles
+  shell: "{{ _list_cmd }}"  # noqa 305
+  environment: "{{ _list_env }}"
+  register: tripleo_overcloud_roles_list_result
+  changed_when: true
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_roles_list_output: "{{ tripleo_overcloud_roles_list_result.stdout }}"

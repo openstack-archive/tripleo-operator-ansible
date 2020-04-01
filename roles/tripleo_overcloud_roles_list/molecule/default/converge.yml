@@ -1,0 +1,71 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_roles_list_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_roles_list"
+      include_role:
+        name: "tripleo_overcloud_roles_list"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_roles_list_debug: true
+        tripleo_os_cloud: undercloud
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_roles_list_output == "overcloud roles list"
+
+    - name: Check parameter "tripleo_overcloud_roles_list_name"
+      include_role:
+        name: "tripleo_overcloud_roles_list"
+      vars:
+        tripleo_overcloud_roles_list_name: value
+
+    - name: Assert "tripleo_overcloud_roles_list_name"
+      assert:
+        that:
+          - tripleo_overcloud_roles_list_output == "overcloud roles list --name value"
+
+    - name: Check parameter "tripleo_overcloud_roles_list_detail"
+      include_role:
+        name: "tripleo_overcloud_roles_list"
+      vars:
+        tripleo_overcloud_roles_list_detail: true
+
+    - name: Assert "tripleo_overcloud_roles_list_detail"
+      assert:
+        that:
+          - tripleo_overcloud_roles_list_output == "overcloud roles list --detail"
+
+    - name: Check parameter "tripleo_overcloud_roles_list_current"
+      include_role:
+        name: "tripleo_overcloud_roles_list"
+      vars:
+        tripleo_overcloud_roles_list_current: true
+
+    - name: Assert "tripleo_overcloud_roles_list_current"
+      assert:
+        that:
+          - tripleo_overcloud_roles_list_output == "overcloud roles list --current"
+
+
+    - name: Check all parameters for role tripleo_overcloud_roles_list
+      include_role:
+        name: "tripleo_overcloud_roles_list"
+      vars:
+        tripleo_overcloud_roles_list_name: value
+        tripleo_overcloud_roles_list_detail: true
+        tripleo_overcloud_roles_list_current: true
+
+    - name: Assert all parameters for role tripleo_overcloud_roles_list
+      assert:
+        that:
+          - tripleo_overcloud_roles_list_output ==
+            "overcloud roles list --name value --detail --current"
