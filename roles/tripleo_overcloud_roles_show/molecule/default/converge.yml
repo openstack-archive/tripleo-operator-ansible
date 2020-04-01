@@ -1,0 +1,64 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  tasks:
+
+    - name: "Include tripleo_overcloud_roles_show"
+      include_role:
+        name: "tripleo_overcloud_roles_show"
+      vars:
+        openstack_bin: echo
+        tripleo_overcloud_roles_show_debug: true
+        tripleo_os_cloud: undercloud
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_roles_show_output == "overcloud roles show --name overcloud"
+
+    - name: Check parameter "tripleo_overcloud_roles_show_role"
+      include_role:
+        name: "tripleo_overcloud_roles_show"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_roles_show_debug: true
+        tripleo_overcloud_roles_show_role: value
+
+    - name: Assert "tripleo_overcloud_roles_show_role"
+      assert:
+        that:
+          - tripleo_overcloud_roles_show_output == "overcloud roles show --role value --name overcloud"
+
+    - name: Check parameter "tripleo_overcloud_roles_show_name"
+      include_role:
+        name: "tripleo_overcloud_roles_show"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_roles_show_debug: true
+        tripleo_overcloud_roles_show_name: value
+
+    - name: Assert "tripleo_overcloud_roles_show_name"
+      assert:
+        that:
+          - tripleo_overcloud_roles_show_output == "overcloud roles show --name value"
+
+
+    - name: Check all parameters for role tripleo_overcloud_roles_show
+      include_role:
+        name: "tripleo_overcloud_roles_show"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_roles_show_debug: true
+        tripleo_overcloud_roles_show_role: value
+        tripleo_overcloud_roles_show_name: value
+
+    - name: Assert all parameters for role tripleo_overcloud_roles_show
+      assert:
+        that:
+          - tripleo_overcloud_roles_show_output ==
+            "overcloud roles show --role value --name value"

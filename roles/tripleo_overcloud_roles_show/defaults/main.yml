@@ -1,0 +1,10 @@
+---
+# defaults file for tripleo_overcloud_roles_show
+openstack_bin: openstack
+tripleo_overcloud_roles_show_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_roles_show_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_roles_show_debug: false
+tripleo_overcloud_roles_show_role:
+tripleo_overcloud_roles_show_name: overcloud
+tripleo_overcloud_roles_show_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_roles_show_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
