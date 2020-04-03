@@ -8,8 +8,11 @@
       {{ tripleo_container_image_prepare_environment_directory | tripleo.operator.shell_arg_list('--environment-directory') }}
       {{ tripleo_container_image_prepare_roles_file | ternary('--roles-file ' ~ tripleo_container_image_prepare_roles_file, '') }}
       {{ tripleo_container_image_prepare_output_env_file | ternary('--output-env-file ' ~ tripleo_container_image_prepare_output_env_file, '') }}
+      {{ tripleo_container_image_prepare_log_file | ternary('--log-file ' ~ tripleo_container_image_prepare_log_file, '') }}
       {{ tripleo_container_image_prepare_dry_run | ternary('--dry-run', '') }}
       {{ tripleo_container_image_prepare_cleanup | ternary('--cleanup ' ~ tripleo_container_image_prepare_cleanup, '') }}
+      {{ tripleo_container_image_prepare_log_output | ternary((">" ~ tripleo_container_image_prepare_log), '') }}
+      {{ tripleo_container_image_prepare_log_combine | ternary("2>&1", '') }}
 
 - name: Show the container image prepare command
   debug:
