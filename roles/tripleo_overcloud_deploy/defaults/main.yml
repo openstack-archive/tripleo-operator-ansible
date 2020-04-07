@@ -14,6 +14,7 @@ tripleo_overcloud_deploy_dry_run: false
 tripleo_overcloud_deploy_environment_dirs: []
 tripleo_overcloud_deploy_environment_files: []
 tripleo_overcloud_deploy_force_postconfig: false
+tripleo_overcloud_deploy_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_deploy_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_deploy_inflight_validations: false
 tripleo_overcloud_deploy_libvirt_type:
