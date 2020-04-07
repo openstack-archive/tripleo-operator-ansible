@@ -8,12 +8,12 @@
       ~ tripleo_container_image_prepare_default_output_env_file, '') }}
       {{ tripleo_container_image_prepare_default_local_push_destination | ternary('--local-push-destination', '') }}
 
-- name: Show the container image push command
+- name: Show the container image prepare default command
   debug:
     var: _prepare_cmd
   when: tripleo_container_image_prepare_default_debug|bool
 
-- name: Container image push
+- name: Container image prepare default
   shell: "{{ _prepare_cmd }}"  # noqa 305
   register: tripleo_container_image_prepare_default_result
   changed_when: true

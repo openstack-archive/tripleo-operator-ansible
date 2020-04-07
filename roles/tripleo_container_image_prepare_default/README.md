@@ -1,7 +1,7 @@
 tripleo_container_image_prepare_default
-============================
+=======================================
 
-A role to perform the container image push against a registry.
+A role to generate the default container image prepare information.
 
 Requirements
 ------------
