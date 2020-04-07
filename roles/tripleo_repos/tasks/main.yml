@@ -16,12 +16,28 @@
   when: (ansible_facts.distribution_major_version|int <= 7 and not 'python2-tripleo-repos' in ansible_facts.packages) or
         (ansible_facts.distribution_major_version|int >= 8 and not 'python3-tripleo-repos' in ansible_facts.packages)
 
+- name: Setup tripleo repos ansible facts
+  set_fact:
+    _repos_cmd: >-
+      tripleo-repos
+      {{ tripleo_repos_branch | ternary('-b ' ~ tripleo_repos_branch, '') }}
+      {{ tripleo_repos_distro | ternary('-d ' ~ tripleo_repos_distro, '') }}
+      {{ tripleo_repos_output_path | ternary('-o ' ~ tripleo_repos_output_path, '') }}
+      {{ tripleo_repos_mirror | ternary('--mirror ' ~ tripleo_repos_mirror, '') }}
+      {{ tripleo_repos_rdo_mirror | ternary('--rdo-mirror ' ~ tripleo_repos_rdo_mirror, '') }}
+      {{ tripleo_repos_extra_args | join(' ') }}
+      {{ tripleo_repos_repos | join( ' ') }}
+
+- name: Show debug information
+  when: tripleo_repos_debug|bool
+  block:
+    - name: Show the tripleo repos command
+      debug:
+        var: _repos_cmd
+
 - name: Run tripleo-repos
-  command: >-
-    tripleo-repos
-    -b {{ tripleo_repos_branch }}
-    {{ tripleo_repos_extra_args | join(' ') }}
-    {{ tripleo_repos_version }}
-    {{ tripleo_repos_extra_repos | join(' ') }}
+  shell: "{{ _repos_cmd }}"
+  args:
+    warn: false
   become: true
   changed_when: true
