@@ -34,7 +34,7 @@
       include_role:
         name: tripleo_repos
       vars:
-        tripleo_repos_debug: "{{ install_debug }}"
+        tripleo_repos_debug: "{{ standalone_debug }}"
 
     - name: Ensure system is up to date
       yum:
