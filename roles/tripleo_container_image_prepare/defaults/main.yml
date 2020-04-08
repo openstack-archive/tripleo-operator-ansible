@@ -7,6 +7,11 @@ tripleo_container_image_prepare_debug: false
 tripleo_container_image_prepare_dry_run: false
 tripleo_container_image_prepare_environment_files: []
 tripleo_container_image_prepare_environment_directory: []
+tripleo_container_image_prepare_home_dir: "{{ ansible_env.HOME }}"
+tripleo_container_image_prepare_log: "{{ tripleo_container_image_prepare_home_dir }}/container_image_prepare.log"
+tripleo_container_image_prepare_log_file:
+tripleo_container_image_prepare_log_output: false
+tripleo_container_image_prepare_log_combine: true
 tripleo_container_image_prepare_output_env_file:
 tripleo_container_image_prepare_roles_file:
 tripleo_container_image_prepare_timeout: 1800

@@ -66,8 +66,11 @@
           - file2
         tripleo_container_image_prepare_environment_directory:
           - dir1
+        tripleo_container_image_prepare_log_file: /tmp/mylog
         tripleo_container_image_prepare_output_env_file: envfile
         tripleo_container_image_prepare_roles_file: some_role_file
+        tripleo_container_image_prepare_log_output: false
+        tripleo_container_image_prepare_log_combine: false
 
     - debug: var=tripleo_container_image_prepare_result.stdout
 
@@ -77,4 +80,5 @@
         that:
           - tripleo_container_image_prepare_result.stdout ==
             "tripleo container image prepare --environment-file file1 --environment-file file2 "
-            "--environment-directory dir1 --roles-file some_role_file --output-env-file envfile --dry-run --cleanup True"
+            "--environment-directory dir1 --roles-file some_role_file --output-env-file envfile "
+            "--log-file /tmp/mylog --dry-run --cleanup True"
