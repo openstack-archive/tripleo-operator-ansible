@@ -60,6 +60,7 @@
             dependencies: *deps_content_provider_c8
             files: &standalone_files
               - ^roles/tripleo_deploy/.*$
+              - ^roles/tripleo_container_image_prepare/.*$
     gate:
       jobs:
         - openstack-tox-linters
