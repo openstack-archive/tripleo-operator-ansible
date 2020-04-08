@@ -1,0 +1,104 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_profiles_list_debug: true
+    tripleo_os_cloud: undercloud
+  tasks:
+
+    - name: "Include tripleo_overcloud_profiles_list"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list"
+
+    - name: Check parameter "tripleo_overcloud_profiles_list_all"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_all: true
+
+    - name: Assert "tripleo_overcloud_profiles_list_all"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list --all"
+
+    - name: Check parameter "tripleo_overcloud_profiles_list_control_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_control_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_list_control_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list --control-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_list_compute_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_compute_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_list_compute_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list --compute-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_list_ceph_storage_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_ceph_storage_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_list_ceph_storage_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list --ceph-storage-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_list_block_storage_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_block_storage_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_list_block_storage_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list --block-storage-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_list_swift_storage_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_swift_storage_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_list_swift_storage_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output == "overcloud profiles list --swift-storage-flavor value"
+
+
+    - name: Check all parameters for role tripleo_overcloud_profiles_list
+      include_role:
+        name: "tripleo_overcloud_profiles_list"
+      vars:
+        tripleo_overcloud_profiles_list_all: true
+        tripleo_overcloud_profiles_list_control_flavor: value
+        tripleo_overcloud_profiles_list_compute_flavor: value
+        tripleo_overcloud_profiles_list_ceph_storage_flavor: value
+        tripleo_overcloud_profiles_list_block_storage_flavor: value
+        tripleo_overcloud_profiles_list_swift_storage_flavor: value
+
+    - name: Assert all parameters for role tripleo_overcloud_profiles_list
+      assert:
+        that:
+          - tripleo_overcloud_profiles_list_output ==
+            "overcloud profiles list --all --control-flavor value --compute-flavor value --ceph-storage-flavor value
+            --block-storage-flavor value --swift-storage-flavor value"
