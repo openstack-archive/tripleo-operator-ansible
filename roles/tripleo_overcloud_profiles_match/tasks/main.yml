@@ -1,0 +1,59 @@
+---
+# tasks file for tripleo_overcloud_profiles_match
+- name: Setup overcloud profiles match command
+  set_fact:
+    _match_cmd: >-
+      {{ tripleo_overcloud_profiles_match_os_cloud | ternary('', "source " ~ tripleo_overcloud_profiles_match_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud profiles match
+      {{ tripleo_overcloud_profiles_match_all | ternary('--all', '') }}
+      {{ tripleo_overcloud_profiles_match_control_flavor | ternary('--control-flavor '
+      ~ tripleo_overcloud_profiles_match_control_flavor, '') }}
+      {{ tripleo_overcloud_profiles_match_compute_flavor | ternary('--compute-flavor '
+      ~ tripleo_overcloud_profiles_match_compute_flavor, '') }}
+      {{ tripleo_overcloud_profiles_match_ceph_storage_flavor | ternary('--ceph-storage-flavor '
+      ~ tripleo_overcloud_profiles_match_ceph_storage_flavor, '') }}
+      {{ tripleo_overcloud_profiles_match_block_storage_flavor | ternary('--block-storage-flavor '
+      ~ tripleo_overcloud_profiles_match_block_storage_flavor, '') }}
+      {{ tripleo_overcloud_profiles_match_swift_storage_flavor | ternary('--swift-storage-flavor '
+      ~ tripleo_overcloud_profiles_match_swift_storage_flavor, '') }}
+      {{ tripleo_overcloud_profiles_match_control_scale | ternary('--control-scale '
+      ~ tripleo_overcloud_profiles_match_control_scale, '') }}
+      {{ tripleo_overcloud_profiles_match_compute_scale | ternary('--compute-scale '
+      ~ tripleo_overcloud_profiles_match_compute_scale, '') }}
+      {{ tripleo_overcloud_profiles_match_ceph_storage_scale | ternary('--ceph-storage-scale '
+      ~ tripleo_overcloud_profiles_match_ceph_storage_scale, '') }}
+      {{ tripleo_overcloud_profiles_match_block_storage_scale | ternary('--block-storage-scale '
+      ~ tripleo_overcloud_profiles_match_block_storage_scale, '') }}
+      {{ tripleo_overcloud_profiles_match_swift_storage_scale | ternary('--swift-storage-scale '
+      ~ tripleo_overcloud_profiles_match_swift_storage_scale, '') }}
+
+    _match_env:
+      OS_CLOUD: "{{ tripleo_overcloud_profiles_match_os_cloud }}"
+
+- name: Show debug information
+  when: tripleo_overcloud_profiles_match_debug|bool
+  block:
+    - name: Show the profiles match command
+      debug:
+        var: _match_cmd
+
+    - name: Show the profiles match environment
+      debug:
+        var: _match_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_profiles_match_home_dir }}/tripleo_overcloud_profiles_match.sh"
+    shell_command: "{{ _match_cmd }}"
+    shell_environment: "{{ _match_env }}"
+  when: tripleo_overcloud_profiles_match_generate_scripts|bool
+
+- name: Match profiles
+  shell: "{{ _match_cmd }}"  # noqa 305
+  environment: "{{ _match_env }}"
+  register: tripleo_overcloud_profiles_match_result
+  changed_when: true
+
+- name: Set output fact
+  set_fact:
+    tripleo_overcloud_profiles_match_output: "{{ tripleo_overcloud_profiles_match_result.stdout }}"

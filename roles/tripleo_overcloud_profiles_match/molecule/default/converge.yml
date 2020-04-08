@@ -1,0 +1,166 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_overcloud_profiles_match_debug: true
+    tripleo_os_cloud: undercloud
+  tasks:
+
+    - name: "Include tripleo_overcloud_profiles_match"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_all"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_all: true
+
+    - name: Assert "tripleo_overcloud_profiles_match_all"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --all"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_control_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_control_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_control_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --control-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_compute_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_compute_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_compute_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --compute-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_ceph_storage_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_ceph_storage_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_ceph_storage_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --ceph-storage-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_block_storage_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_block_storage_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_block_storage_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --block-storage-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_swift_storage_flavor"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_swift_storage_flavor: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_swift_storage_flavor"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --swift-storage-flavor value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_control_scale"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_control_scale: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_control_scale"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --control-scale value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_compute_scale"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_compute_scale: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_compute_scale"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --compute-scale value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_ceph_storage_scale"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_ceph_storage_scale: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_ceph_storage_scale"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --ceph-storage-scale value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_block_storage_scale"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_block_storage_scale: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_block_storage_scale"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --block-storage-scale value"
+
+    - name: Check parameter "tripleo_overcloud_profiles_match_swift_storage_scale"
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_swift_storage_scale: value
+
+    - name: Assert "tripleo_overcloud_profiles_match_swift_storage_scale"
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output == "overcloud profiles match --swift-storage-scale value"
+
+
+    - name: Check all parameters for role tripleo_overcloud_profiles_match
+      include_role:
+        name: "tripleo_overcloud_profiles_match"
+      vars:
+        tripleo_overcloud_profiles_match_all: true
+        tripleo_overcloud_profiles_match_control_flavor: value
+        tripleo_overcloud_profiles_match_compute_flavor: value
+        tripleo_overcloud_profiles_match_ceph_storage_flavor: value
+        tripleo_overcloud_profiles_match_block_storage_flavor: value
+        tripleo_overcloud_profiles_match_swift_storage_flavor: value
+        tripleo_overcloud_profiles_match_control_scale: value
+        tripleo_overcloud_profiles_match_compute_scale: value
+        tripleo_overcloud_profiles_match_ceph_storage_scale: value
+        tripleo_overcloud_profiles_match_block_storage_scale: value
+        tripleo_overcloud_profiles_match_swift_storage_scale: value
+
+    - name: Assert all parameters for role tripleo_overcloud_profiles_match
+      assert:
+        that:
+          - tripleo_overcloud_profiles_match_output ==
+            "overcloud profiles match --all --control-flavor value --compute-flavor value
+            --ceph-storage-flavor value --block-storage-flavor value --swift-storage-flavor value
+            --control-scale value --compute-scale value --ceph-storage-scale value --block-storage-scale value
+            --swift-storage-scale value"
