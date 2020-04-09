@@ -74,6 +74,65 @@ class TestTripleoShellScript(tests_base.TestCase):
         mock_exit_json.assert_called_once_with(changed=True)
 
     @mock.patch('os.chmod')
+    def test_run_env_avoid_none(self, mock_chmod):
+        mock_module = mock.Mock()
+        mock_exit_json = mock.Mock()
+        mock_open = mock.mock_open()
+        mock_module.exit_json = mock_exit_json
+        params = {'dest': '/tmo/foo.sh',
+                  'shell_command': 'foo',
+                  'shell_environment': {
+                      'OS_CLOUD': 'undercloud',
+                      'FOO_BAR': None}
+                  }
+        mock_module.params = params
+        results = {}
+
+        with mock.patch('plugins.modules.tripleo_shell_script.open',
+                        mock_open):
+            tripleo_shell_script.TripleoShellScript(mock_module, results)
+
+        mock_calls = [
+            mock.call().write(tripleo_shell_script._SHELL_HEADER),
+            mock.call().write('export OS_CLOUD=undercloud\n'),
+            mock.call().write('foo'),
+            mock.call().write("\n")
+        ]
+        mock_open.assert_has_calls(mock_calls)
+        mock_chmod.assert_called_once_with('/tmo/foo.sh', 0o755)
+        mock_exit_json.assert_called_once_with(changed=True)
+
+    @mock.patch('os.chmod')
+    def test_run_env_quote_int(self, mock_chmod):
+        mock_module = mock.Mock()
+        mock_exit_json = mock.Mock()
+        mock_open = mock.mock_open()
+        mock_module.exit_json = mock_exit_json
+        params = {'dest': '/tmo/foo.sh',
+                  'shell_command': 'foo',
+                  'shell_environment': {
+                      'OS_CLOUD': 'undercloud',
+                      'FOO_BAR': 1}
+                  }
+        mock_module.params = params
+        results = {}
+
+        with mock.patch('plugins.modules.tripleo_shell_script.open',
+                        mock_open):
+            tripleo_shell_script.TripleoShellScript(mock_module, results)
+
+        mock_calls = [
+            mock.call().write(tripleo_shell_script._SHELL_HEADER),
+            mock.call().write('export OS_CLOUD=undercloud\n'),
+            mock.call().write('export FOO_BAR=1\n'),
+            mock.call().write('foo'),
+            mock.call().write("\n")
+        ]
+        mock_open.assert_has_calls(mock_calls)
+        mock_chmod.assert_called_once_with('/tmo/foo.sh', 0o755)
+        mock_exit_json.assert_called_once_with(changed=True)
+
+    @mock.patch('os.chmod')
     def test_run_env_quoted(self, mock_chmod):
         mock_module = mock.Mock()
         mock_exit_json = mock.Mock()

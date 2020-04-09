@@ -114,8 +114,10 @@ class TripleoShellScript(object):
             with open(dest, 'w') as fh:
                 fh.write(_SHELL_HEADER)
                 for k, v in shell_environment.items():
-                    fh.write("export %(key)s=%(val)s\n" % {'key': k,
-                                                           'val': quote(v)})
+                    if v:
+                        val = quote(str(v))
+                        fh.write("export %(key)s=%(val)s\n" % {'key': k,
+                                                               'val': val})
                 fh.write(shell_command)
                 fh.write("\n")
             os.chmod(dest, 0o755)
