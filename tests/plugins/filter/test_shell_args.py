@@ -53,3 +53,9 @@ class TestShellArgsFilters(tests_base.TestCase):
         expected = "'a b'"
         self.assertEqual(expected,
                          self.filter.shell_arg_list(arg))
+
+    def test_shell_arg_list_avoid_none_in_list(self):
+        arg = ['a', None]
+        expected = '-p a'
+        self.assertEqual(expected,
+                         self.filter.shell_arg_list(arg, parameter='-p'))
