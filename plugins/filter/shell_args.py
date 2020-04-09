@@ -34,9 +34,10 @@ class FilterModule(object):
             arg = [arg]
         return_value = []
         for a in arg:
-            val = quote(a)
-            if parameter:
-                return_value.append("{} {}".format(parameter, val))
-            else:
-                return_value.append(val)
+            if a:
+                val = quote(a)
+                if parameter:
+                    return_value.append("{} {}".format(parameter, val))
+                else:
+                    return_value.append(val)
         return ' '.join(return_value)
