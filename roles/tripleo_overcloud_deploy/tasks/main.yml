@@ -87,7 +87,7 @@
   tripleo_shell_script:
     dest: "{{ tripleo_overcloud_deploy_home_dir }}/overcloud_deploy_{{ tripleo_overcloud_deploy_stack }}.sh"
     shell_command: "{{ _deploy_cmd }}"
-    shell_environment: "{{ deploy_env }}"
+    shell_environment: "{{ _deploy_env }}"
   when: tripleo_overcloud_deploy_generate_scripts|bool
 
 - name: Overcloud deploy

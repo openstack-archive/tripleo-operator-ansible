@@ -78,7 +78,7 @@
   tripleo_shell_script:
     dest: "{{ tripleo_deploy_home_dir }}/standalone_deploy.sh"
     shell_command: "{{ _deploy_cmd }}"
-    shell_environment: "{{ deploy_env }}"
+    shell_environment: "{{ _deploy_env }}"
   when: tripleo_deploy_generate_scripts|bool
 
 - name: Standalone deploy
