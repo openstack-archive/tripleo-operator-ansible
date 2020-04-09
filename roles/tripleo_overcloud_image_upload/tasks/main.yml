@@ -14,6 +14,8 @@
       {{ tripleo_overcloud_image_upload_architecture | ternary('--architecture $UPLOAD_ARCHITECTURE', '') }}
       {{ tripleo_overcloud_image_upload_platform | ternary('--platform $UPLOAD_PLATFORM', '') }}
       {{ tripleo_overcloud_image_upload_image_type | ternary('--image-type $UPLOAD_IMAGE_TYPE', '') }}
+      {{ tripleo_overcloud_image_upload_local | ternary('--local', '') }}
+      {{ tripleo_overcloud_image_upload_local_path | ternary('--local-path $UPLOAD_LOCAL_PATH', '') }}
       {{ tripleo_overcloud_image_upload_log_output | ternary((">$UPLOAD_LOG"), '') }}
       {{ tripleo_overcloud_image_upload_log_combine | ternary("2>&1", '') }}
 
@@ -39,6 +41,7 @@
     UPLOAD_PLATFORM: "{{ tripleo_overcloud_image_upload_platform }}"
     UPLOAD_IMAGE_TYPE: "{{ tripleo_overcloud_image_upload_image_type }}"
     UPLOAD_LOG: "{{ tripleo_overcloud_image_upload_log }}"
+    UPLOAD_LOCAL_PATH: "{{ tripleo_overcloud_image_upload_local_path }}"
   args:
     chdir: "{{ tripleo_overcloud_image_upload_home_dir }}"
     warn: false

@@ -18,4 +18,6 @@ tripleo_overcloud_image_upload_rc_file: "{{ tripleo_rc_file | default(ansible_en
 tripleo_overcloud_image_upload_timeout: 600
 tripleo_overcloud_image_upload_update_existing: false
 tripleo_overcloud_image_upload_whole_disk: false
+tripleo_overcloud_image_upload_local: false
+tripleo_overcloud_image_upload_local_path:
 tripleo_overcloud_image_upload_log: "{{ tripleo_overcloud_image_upload_home_dir }}/overcloud_image_upload.log"

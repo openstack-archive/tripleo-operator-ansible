@@ -119,3 +119,25 @@
       assert:
         that:
           - tripleo_overcloud_image_upload_result.stdout == "overcloud image upload --image-type os"
+
+    - name: Check parameter "tripleo_overcloud_image_upload_local"
+      include_role:
+        name: "tripleo_overcloud_image_upload"
+      vars:
+        tripleo_overcloud_image_upload_local: true
+
+    - name: Assert "tripleo_overcloud_image_upload_local"
+      assert:
+        that:
+          - tripleo_overcloud_image_upload_result.stdout == "overcloud image upload --local"
+
+    - name: Check parameter "tripleo_overcloud_image_upload_local_path"
+      include_role:
+        name: "tripleo_overcloud_image_upload"
+      vars:
+        tripleo_overcloud_image_upload_local_path: /var/lib/ironic/images/test
+
+    - name: Assert "tripleo_overcloud_image_upload_local_path"
+      assert:
+        that:
+          - tripleo_overcloud_image_upload_result.stdout == "overcloud image upload --local-path /var/lib/ironic/images/test"
