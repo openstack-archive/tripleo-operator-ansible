@@ -1,7 +1,12 @@
 ---
 # defaults file for tripleo_repos
 tripleo_repos_branch: master
+tripleo_repos_debug: false
+tripleo_repos_distro:
 tripleo_repos_extra_args: []
-tripleo_repos_extra_repos: []
+tripleo_repos_mirror:
+tripleo_repos_output_path:
+tripleo_repos_rdo_mirror:
 tripleo_repos_repo_base: https://trunk.rdoproject.org
-tripleo_repos_version: current-tripleo-dev
+tripleo_repos_repos:
+  - current-tripleo-dev
