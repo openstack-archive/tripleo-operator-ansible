@@ -7,6 +7,7 @@
       {{ tripleo_container_image_prepare_default_output_env_file | ternary('--output-env-file '
       ~ tripleo_container_image_prepare_default_output_env_file, '') }}
       {{ tripleo_container_image_prepare_default_local_push_destination | ternary('--local-push-destination', '') }}
+      {{ tripleo_container_image_prepare_default_enable_registry_login | ternary('--enable-registry-login', '') }}
 
 - name: Show the container image prepare default command
   debug:
