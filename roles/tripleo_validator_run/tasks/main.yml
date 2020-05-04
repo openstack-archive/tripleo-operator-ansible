@@ -1,0 +1,54 @@
+---
+- name: Fail if we do not pass validation or group
+  fail:
+    msg: "Please pass either tripleo_validator_run_validation or tripleo_validator_run_group"
+  when:
+    - tripleo_validator_run_validation | length == 0
+    - tripleo_validator_run_group | length == 0
+
+- name: Fail if we pass validation and group
+  fail:
+    msg: "Please pass either tripleo_validator_run_validation OR tripleo_validator_run_group"
+  when:
+    - tripleo_validator_run_validation | length != 0
+    - tripleo_validator_run_group | length != 0
+
+- name: Setup validator run facts
+  set_fact:
+    _validator_run_cmd: >-
+      {{ openstack_bin }} tripleo validator run
+      {{ tripleo_validator_run_plan | ternary('--plan ' ~ tripleo_validator_run_plan, '') }}
+      {{ tripleo_validator_run_workers | ternary('--workers ' ~ tripleo_validator_run_workers, '') }}
+      {{ tripleo_validator_run_extra_vars_file | ternary('--extra-vars-file ' ~ tripleo_validator_run_extra_vars_file, '') }}
+      {{ tripleo_validator_run_validation | ternary('--validation "${TRIPLEO_VALIDATOR_RUN_VALIDATION}"', '') }}
+      {{ tripleo_validator_run_group | ternary('--group "${TRIPLEO_VALIDATOR_RUN_GROUP}"', '') }}
+    _validator_run_env:
+      TRIPLEO_VALIDATOR_RUN_VALIDATION: >-
+        {%- if tripleo_validator_run_validation is string -%}
+        {{ tripleo_validator_run_validation }}
+        {%- else -%}
+        {{ tripleo_validator_run_validation | join(',') }}
+        {%- endif -%}
+      TRIPLEO_VALIDATOR_RUN_GROUP: >-
+        {%- if tripleo_validator_run_group is string -%}
+        {{ tripleo_validator_run_group }}
+        {%- else -%}
+        {{ tripleo_validator_run_group | join(',') }}
+        {%- endif -%}
+
+- name: Show debug information
+  when:
+    tripleo_validator_run_debug|bool
+  block:
+    - name: Show validator run environment
+      debug:
+        var: _validator_run_env
+    - name: Show validator run command
+      debug:
+        var: _validator_run_cmd
+
+- name: Run validation
+  shell: "{{ _validator_run_cmd }}"  # noqa 305
+  environment: "{{ _validator_run_env }}"
+  register: tripleo_validator_run_result
+  changed_when: true

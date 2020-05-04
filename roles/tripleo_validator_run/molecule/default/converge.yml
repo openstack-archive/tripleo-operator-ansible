@@ -1,0 +1,123 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_validator_run_debug: true
+  tasks:
+
+    - name: Check parameter "tripleo_validator_run_validation" as a list
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_validation:
+          - 'check_disk_space'
+          - 'check_ram'
+
+    - name: Assert "tripleo_validator_run_validation"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            "tripleo validator run --validation check_disk_space,check_ram"
+
+    - name: Check parameter "tripleo_validator_run_validation" as single element
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_validation: 'check_disk_space'
+
+    - name: Assert "tripleo_validator_run_validation"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            "tripleo validator run --validation check_disk_space"
+
+    - name: Check parameter "tripleo_validator_run_group" as a list
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_group:
+          - 'no-op'
+          - 'prep'
+
+    - name: Assert "tripleo_validator_run_group"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            "tripleo validator run --group no-op,prep"
+
+    - name: Check parameter "tripleo_validator_run_group" as single element
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_group: 'no-op'
+
+    - name: Assert "tripleo_validator_run_group"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            "tripleo validator run --group no-op"
+
+    - name: Check parameter "tripleo_validator_run_extra_vars_file"
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_extra_vars_file: '/tmp/foo.json'
+        tripleo_validator_run_group: 'no-op'
+
+    - name: Assert "tripleo_validator_run_extra_vars_file"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            "tripleo validator run --extra-vars-file /tmp/foo.json --group no-op"
+
+    - name: Check parameter "tripleo_validator_run_plan"
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_plan: 'my-thing'
+        tripleo_validator_run_group: 'no-op'
+
+    - name: Assert "tripleo_validator_run_plan"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            'tripleo validator run --plan my-thing --group no-op'
+
+    - name: Check parameter "tripleo_validator_run_workers"
+      include_role:
+        name: "tripleo_validator_run"
+      vars:
+        tripleo_validator_run_workers: 10
+        tripleo_validator_run_group: 'no-op'
+
+    - name: Assert "tripleo_validator_run_workers"
+      assert:
+        that:
+          - tripleo_validator_run_result.stdout ==
+            'tripleo validator run --workers 10 --group no-op'
+
+    - name: "Catch failed inclusion"
+      block:
+        - name: "Include tripleo_validator_run and fail"
+          include_role:
+            name: "tripleo_validator_run"
+
+      rescue:
+        - name: Clear host errors
+          meta: clear_host_errors
+
+        - name: Status message
+          debug:
+            msg: "Successfully caught failure"
+
+        - name: End play
+          meta: end_play
+
+    - name: Fail the test
+      fail:
+        msg: |
+          tripleo_validator_run didn't properly detect missing param.
