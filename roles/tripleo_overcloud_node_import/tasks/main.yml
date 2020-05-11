@@ -48,6 +48,7 @@
   poll: "{{ tripleo_overcloud_node_import_poll }}"
   register: tripleo_overcloud_node_import_result
   changed_when: true
+  when: not tripleo_overcloud_node_import_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

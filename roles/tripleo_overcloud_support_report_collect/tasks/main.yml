@@ -33,6 +33,9 @@
   environment: "{{ _report_env }}"
   register: tripleo_overcloud_support_report_collect_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_support_report_collect_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

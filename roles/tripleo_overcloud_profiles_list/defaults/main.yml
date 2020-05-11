@@ -8,6 +8,7 @@ tripleo_overcloud_profiles_list_compute_flavor:
 tripleo_overcloud_profiles_list_control_flavor:
 tripleo_overcloud_profiles_list_debug: false
 tripleo_overcloud_profiles_list_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_profiles_list_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_profiles_list_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_profiles_list_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_profiles_list_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

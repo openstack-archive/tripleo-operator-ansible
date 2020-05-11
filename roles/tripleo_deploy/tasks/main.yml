@@ -93,7 +93,9 @@
   async: "{{ tripleo_deploy_timeout }}"
   poll: "{{ tripleo_deploy_poll }}"
   changed_when: false
-  when: not ansible_check_mode|bool
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_deploy_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

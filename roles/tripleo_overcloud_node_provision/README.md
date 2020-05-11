@@ -15,6 +15,7 @@ Role Variables
 * `tripleo_overcloud_node_provision_debug`: (Boolean) Flag to print out the delete command. Default: False
 * `tripleo_overcloud_node_provision_deployment_file`: (String) REQUIRED. File path to the deployment file describing the nodes.
 * `tripleo_overcloud_node_provision_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_node_provision_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_node_provision_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_node_provision_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_node_provision_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_node_provision_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true

@@ -7,4 +7,5 @@ tripleo_config_generate_ansible_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_config_generate_ansible_output_dir:
 tripleo_config_generate_ansible_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/overcloudrc') }}"
 tripleo_config_generate_ansible_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_config_generate_ansible_generate_scripts_only: "{{ tripleo_scripts_only | default(False) }}"
 tripleo_config_generate_ansible_home_dir: "{{ ansible_env.HOME }}"

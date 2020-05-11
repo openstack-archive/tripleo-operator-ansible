@@ -14,6 +14,7 @@ tripleo_overcloud_upgrade_converge_environment_dirs: []
 tripleo_overcloud_upgrade_converge_environment_files: []
 tripleo_overcloud_upgrade_converge_force_postconfig: false
 tripleo_overcloud_upgrade_converge_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_upgrade_converge_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_upgrade_converge_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_upgrade_converge_inflight_validations: false
 tripleo_overcloud_upgrade_converge_libvirt_type:

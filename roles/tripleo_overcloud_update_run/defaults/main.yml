@@ -3,6 +3,7 @@
 openstack_bin: openstack
 tripleo_overcloud_update_run_debug: false
 tripleo_overcloud_update_run_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_update_run_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_update_run_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_update_run_limit:
 tripleo_overcloud_update_run_log: "{{ tripleo_overcloud_update_run_home_dir }}/overcloud_update_run.log"

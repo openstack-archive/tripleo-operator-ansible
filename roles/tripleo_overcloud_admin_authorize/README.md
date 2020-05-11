@@ -13,6 +13,7 @@ Role Variables
 
 * `tripleo_overcloud_admin_authorize_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_overcloud_admin_authorize_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_admin_authorize_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_admin_authorize_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_admin_authorize_home_dir`: (String) Location to execute the command in. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_admin_authorize_os_cloud`: (String) OS_CLOUD value to use when running the command. If tripleo_os_cloud is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_admin_authorize_rc_file`.
 * `tripleo_overcloud_admin_authorize_output_dir`: (String) Directory to output ansible.cfg and ansible.log files. If not specified, will output to the `tripleo_overcloud_admin_authorize_home_dir`.

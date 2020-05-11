@@ -36,3 +36,6 @@
   environment: "{{ _generate_env }}"
   register: tripleo_config_generate_ansible_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_config_generate_ansible_generate_scripts_only|bool

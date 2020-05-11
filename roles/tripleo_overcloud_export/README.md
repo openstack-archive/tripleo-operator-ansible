@@ -15,6 +15,7 @@ Role Variables
 * `tripleo_overcloud_export_debug`: (Boolean) Flag to print out the command that is run. Default: False
 * `tripleo_overcloud_export_force_overwrite`: (Boolean) Overwrite the output file if it exists. Default: false
 * `tripleo_overcloud_export_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_export_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_export_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_export_home_dir`: (String) Location to runt he command in. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_export_no_password_excludes`: (Boolean) Do not exclude certain passwords from the export. Default: false
 * `tripleo_overcloud_export_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_export_rc_file`.

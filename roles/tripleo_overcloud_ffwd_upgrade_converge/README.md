@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 * `tripleo_overcloud_ffwd_upgrade_converge_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_ffwd_upgrade_converge_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_ffwd_upgrade_converge_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_upgrade_ffwd_converge_answers_file`: (String) File path to a deployment answers file.
 * `tripleo_overcloud_upgrade_ffwd_converge_baremetal_deployment`: (String) File path to a baremetal deployment configuration.
 * `tripleo_overcloud_upgrade_ffwd_converge_config_download_timeout`: (Integer) Timeout in minutes for the config-download steps.

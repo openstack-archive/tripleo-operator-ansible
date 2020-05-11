@@ -43,6 +43,9 @@
     warn: false
   register: tripleo_overcloud_node_delete_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_node_delete_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

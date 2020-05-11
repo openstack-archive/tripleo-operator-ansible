@@ -13,6 +13,7 @@ Role Variables
 
 * `tripleo_overcloud_roles_list_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_overcloud_roles_list_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_roles_list_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_roles_list_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_roles_list_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_roles_list_name`: The name of the plan, which is used for the object storage container, workflow environment and orchestration stack names.
 * `tripleo_overcloud_roles_list_detail`: Include details about each role.

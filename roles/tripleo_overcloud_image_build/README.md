@@ -17,6 +17,7 @@ Role Variables
 * `tripleo_overcloud_image_build_dib_yum_repo_conf`: (String) String containing the path to the yum files for the image building process. Default: "/etc/yum.repos.d/*"
 * `tripleo_overcloud_image_build_extra_env_vars`: (Dictionary) Dictionary containing extra environment variables to be set for the build. Default: {}
 * `tripleo_overcloud_image_build_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_image_build_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_image_build_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_image_build_home_dir`: (String) Path that the command should be executed in. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_image_build_image_names`: (List) List of image names to build.
 * `tripleo_overcloud_image_build_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true

@@ -35,6 +35,9 @@
   environment: "{{ _generate_roles_env }}"
   register: tripleo_overcloud_roles_generate_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_roles_generate_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

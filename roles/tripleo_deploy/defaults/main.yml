@@ -11,6 +11,7 @@ tripleo_deploy_environment_files: []
 tripleo_deploy_force_stack_create: false
 tripleo_deploy_force_stack_update: false
 tripleo_deploy_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_deploy_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_deploy_heat_api_port:
 tripleo_deploy_heat_user:
 tripleo_deploy_hieradata_override:
