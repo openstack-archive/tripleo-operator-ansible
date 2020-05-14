@@ -43,3 +43,6 @@
   poll: "{{ tripleo_undercloud_minion_upgrade_poll }}"
   register: tripleo_undercloud_minion_upgrade_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_undercloud_minion_upgrade_generate_scripts_only|bool

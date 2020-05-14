@@ -17,6 +17,7 @@ Role Variables
 * `tripleo_overcloud_ffwd_upgrade_prepare_config_download_timeout`: (Integer) Timeout in minutes for the config-download steps.
 * `tripleo_overcloud_ffwd_upgrade_prepare_debug`: (Boolean) Flag to print out the command that is run. Default: false
 * `tripleo_overcloud_ffwd_upgrade_prepare_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_ffwd_upgrade_prepare_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_ffwd_upgrade_prepare_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_ffwd_upgrade_prepare_deployed_server`: (Boolean) Flag to use pre-provisioned nodes. Default: false
 * `tripleo_overcloud_ffwd_upgrade_prepare_disable_password_generation`: (Boolean) Flag to disable password generation. Default: false
 * `tripleo_overcloud_ffwd_upgrade_prepare_disable_validations`: (Boolean) Flag to disable validations. Default: false

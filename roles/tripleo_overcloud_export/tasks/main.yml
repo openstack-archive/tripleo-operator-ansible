@@ -40,6 +40,9 @@
     warn: false
   register: tripleo_overcloud_export_result
   changed_when: false
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_export_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

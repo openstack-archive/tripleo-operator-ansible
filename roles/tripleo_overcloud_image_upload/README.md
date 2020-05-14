@@ -14,6 +14,7 @@ Role Variables
 * `tripleo_overcloud_image_upload_architecture`: (String) Architecture type for the images being uploaded.
 * `tripleo_overcloud_image_upload_debug`: (Boolean) Flag to print out the command that is run. Default: False
 * `tripleo_overcloud_image_upload_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_image_upload_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_image_upload_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_image_upload_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_image_upload_http_boot`: (String) Root directory for the ironic-pytho-agent-image
 * `tripleo_overcloud_image_upload_image_path`: (String) Path to directory overcloud images. By default the command will use the images in `tripleo_overcloud_image_upload_home_dir` if this is not specified.

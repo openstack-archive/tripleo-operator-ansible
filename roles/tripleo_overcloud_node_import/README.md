@@ -15,6 +15,7 @@ Role Variables
 * `tripleo_overcloud_node_import_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_overcloud_node_import_environment_file`: (String) Path to the file that contains the baremetal node information. Can be a JSON, YAML or CSV file. Default: environment.json
 * `tripleo_overcloud_node_import_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_node_import_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_node_import_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_node_import_home_dir`: (String) Path to the directory to execute the command in. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_node_import_http_boot`: (String) Root directory for the ironic-python-agent image.
 * `tripleo_overcloud_node_import_instance_boot_option`: (String) Wheither to set instances for booting from local hard drive (local) or network (netboot).

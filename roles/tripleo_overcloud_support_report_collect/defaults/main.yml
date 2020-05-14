@@ -2,6 +2,7 @@
 # defaults file for tripleo_overcloud_support_report_collect
 openstack_bin: openstack
 tripleo_overcloud_support_report_collect_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_support_report_collect_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_support_report_collect_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_support_report_collect_debug: false
 tripleo_overcloud_support_report_collect_server_name:

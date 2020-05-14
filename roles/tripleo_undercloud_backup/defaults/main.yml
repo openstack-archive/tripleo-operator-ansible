@@ -5,6 +5,7 @@ tripleo_undercloud_backup_add_path: []
 tripleo_undercloud_backup_debug: false
 tripleo_undercloud_backup_exclude_path: []
 tripleo_undercloud_backup_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_undercloud_backup_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_undercloud_backup_home_dir: "{{ ansible_env.HOME }}"
 tripleo_undercloud_backup_log: "{{ tripleo_undercloud_backup_home_dir }}/undercloud_backup.log"
 tripleo_undercloud_backup_log_combine: true

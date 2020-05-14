@@ -5,6 +5,7 @@ tripleo_undercloud_upgrade_debug: false
 tripleo_undercloud_upgrade_dry_run: false
 tripleo_undercloud_upgrade_force_stack_update: false
 tripleo_undercloud_upgrade_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_undercloud_upgrade_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_undercloud_upgrade_home_dir: "{{ ansible_env.HOME }}"
 tripleo_undercloud_upgrade_inflight_validations: false
 tripleo_undercloud_upgrade_log: "{{ tripleo_undercloud_upgrade_home_dir }}/undercloud_upgrade.log"

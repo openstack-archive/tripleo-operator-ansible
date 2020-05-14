@@ -5,6 +5,7 @@ tripleo_overcloud_node_discover_concurrency:
 tripleo_overcloud_node_discover_credentials:
 tripleo_overcloud_node_discover_debug: false
 tripleo_overcloud_node_discover_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_node_discover_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_node_discover_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_node_discover_instance_boot_option:
 tripleo_overcloud_node_discover_introspect: false

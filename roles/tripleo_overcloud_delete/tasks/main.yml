@@ -47,8 +47,9 @@
   async: "{{ tripleo_overcloud_delete_timeout }}"
   poll: "{{ tripleo_overcloud_delete_poll }}"
   changed_when: false
-  when: not ansible_check_mode|bool
-
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_delete_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

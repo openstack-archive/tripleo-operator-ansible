@@ -34,6 +34,9 @@
   environment: "{{ _list_env }}"
   register: tripleo_overcloud_roles_list_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_roles_list_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

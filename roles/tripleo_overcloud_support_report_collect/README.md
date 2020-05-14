@@ -13,6 +13,7 @@ Role Variables
 
 * `tripleo_overcloud_support_report_collect_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_overcloud_support_report_collect_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_support_report_collect_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_support_report_collect_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_support_report_collect_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_support_report_collect_server_name`: Server name, group name, or partial name to match. For example "Controller" will match all controllers for an environment.
 * `tripleo_overcloud_support_report_collect_output_dir`: Output directory for the report.

@@ -24,6 +24,7 @@ Role Variables
 * `tripleo_overcloud_upgrade_converge_environment_files`: (List) A list of environment file paths for the deployment.  Should not be used with environment dirs.
 * `tripleo_overcloud_upgrade_converge_force_postconfig`: (Boolean) Force the overclodu post-deployment configuration. Default: false
 * `tripleo_overcloud_upgrade_converge_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
+* `tripleo_overcloud_upgrade_converge_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_upgrade_converge_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_upgrade_converge_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_upgrade_converge_inflight_validations`: (Boolean) Flag to enable inflight validations. Default: false
 * `tripleo_overcloud_upgrade_converge_libvirt_type`: (String) Libvirt domain time. Setting `NovaComputeLibvirtType` in an environment file is prefered over this option.

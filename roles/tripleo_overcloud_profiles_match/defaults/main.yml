@@ -12,6 +12,7 @@ tripleo_overcloud_profiles_match_control_flavor:
 tripleo_overcloud_profiles_match_control_scale:
 tripleo_overcloud_profiles_match_debug: false
 tripleo_overcloud_profiles_match_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_profiles_match_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_profiles_match_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_profiles_match_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_profiles_match_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

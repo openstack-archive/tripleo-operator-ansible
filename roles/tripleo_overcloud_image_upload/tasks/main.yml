@@ -63,6 +63,9 @@
   register: tripleo_overcloud_image_upload_result
   poll: "{{ tripleo_overcloud_image_upload_poll }}"
   changed_when: false
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_image_upload_generate_scripts_only|bool
 
 - name: Set output fact
   set_fact:

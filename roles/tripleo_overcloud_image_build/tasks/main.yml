@@ -56,3 +56,6 @@
   poll: "{{ tripleo_overcloud_image_build_poll }}"
   register: tripleo_overcloud_image_build_result
   changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_image_build_generate_scripts_only|bool
