@@ -30,5 +30,7 @@
   changed_when: false
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_failures_result.stdout is defined
   set_fact:
     tripleo_overcloud_failures_output: "{{ tripleo_overcloud_failures_result.stdout }}"

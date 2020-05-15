@@ -62,5 +62,7 @@
     - not tripleo_overcloud_generate_fencing_generate_scripts_only|bool
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_generate_fencing_result.stdout is defined
   set_fact:
     tripleo_overcloud_generate_fencing_output: "{{ tripleo_overcloud_generate_fencing_result.stdout }}"

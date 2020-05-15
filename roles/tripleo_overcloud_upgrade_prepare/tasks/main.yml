@@ -103,5 +103,7 @@
     - not tripleo_overcloud_upgrade_prepare_generate_scripts_only|bool
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_upgrade_prepare_result.stdout is defined
   set_fact:
     tripleo_overcloud_upgrade_prepare_output: "{{ tripleo_overcloud_upgrade_prepare_result.stdout }}"

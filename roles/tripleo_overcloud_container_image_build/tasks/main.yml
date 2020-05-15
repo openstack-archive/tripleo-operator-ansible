@@ -54,5 +54,7 @@
     - not tripleo_overcloud_container_image_build_generate_scripts_only|bool
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_container_image_build_result.stdout is defined
   set_fact:
     tripleo_overcloud_container_image_build_output: "{{ tripleo_overcloud_container_image_build_result.stdout }}"

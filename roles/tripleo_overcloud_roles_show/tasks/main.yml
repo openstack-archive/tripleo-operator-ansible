@@ -38,5 +38,7 @@
     - not tripleo_overcloud_roles_show_generate_scripts_only|bool
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_roles_show_result.stdout is defined
   set_fact:
     tripleo_overcloud_roles_show_output: "{{ tripleo_overcloud_roles_show_result.stdout }}"

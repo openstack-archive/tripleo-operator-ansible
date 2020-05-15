@@ -36,5 +36,7 @@
   changed_when: true
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_node_configure_result.stdout is defined
   set_fact:
     tripleo_overcloud_node_configure_output: "{{ tripleo_overcloud_node_configure_result.stdout }}"

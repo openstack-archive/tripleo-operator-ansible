@@ -51,5 +51,7 @@
   when: not ansible_check_mode|bool
 
 - name: Set output fact
+  when:
+    - tripleo_overcloud_node_provide_result.stdout is defined
   set_fact:
     tripleo_overcloud_node_provide_output: "{{ tripleo_overcloud_node_provide_result.stdout }}"

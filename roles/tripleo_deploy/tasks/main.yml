@@ -98,5 +98,7 @@
     - not tripleo_deploy_generate_scripts_only|bool
 
 - name: Set output fact
+  when:
+    - tripleo_deploy_result.stdout is defined
   set_fact:
     tripleo_deploy_output: "{{ tripleo_deploy_result.stdout }}"

@@ -31,5 +31,7 @@
   changed_when: false
 
 - name: Set output fact
+  when:
+    - tripleo_container_image_list_result.stdout is defined
   set_fact:
     tripleo_container_image_list_output: "{{ tripleo_container_image_list_result.stdout }}"
