@@ -1,0 +1,37 @@
+---
+###############################################################################
+# Container Image Build playbook
+#
+# Description:
+#   This is a basic playbook to perform the basic container image build actions
+#   for TripleO containers.
+#
+###############################################################################
+- hosts: undercloud
+  collections:
+    - tripleo.operator
+  vars:
+    build_debug: true
+    registry: quay.io/tripleomaster
+    tag: current-tripleo
+
+  tasks:
+    - name: Gather the rpm package facts
+      package_facts:
+
+    - name: Check if tripleoclient is installed
+      fail:
+        msg: >-
+          TripleO Client is not installed. Please make sure that the client
+          has been installed and the repositories are properly configured.
+      when: (ansible_facts.distribution_major_version|int <= 7 and not 'python2-tripleoclient' in ansible_facts.packages) or
+            (ansible_facts.distribution_major_version|int >= 8 and not 'python3-tripleoclient' in ansible_facts.packages)
+
+    - name: Run container image build
+      include_role:
+        name: tripleo_container_image_build
+      vars:
+        tripleo_container_image_build_debug: "{{ build_debug }}"
+        tripleo_container_image_build_registry: "{{ registry }}"
+        tripleo_container_image_build_tag: "{{ tag }}"
+        tripleo_container_image_build_push: true

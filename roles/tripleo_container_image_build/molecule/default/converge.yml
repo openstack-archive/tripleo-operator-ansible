@@ -1,0 +1,216 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_container_image_build_poll: 1
+    tripleo_container_image_build_log_output: false
+    tripleo_container_image_build_log_combine: false
+  tasks:
+
+    - name: "Include tripleo_container_image_build"
+      include_role:
+        name: "tripleo_container_image_build"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_container_image_build_output == "tripleo container image build"
+
+    - name: Check parameter "tripleo_container_image_build_authfile"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_authfile: /tmp/secure.json
+
+    - name: Assert "tripleo_container_image_build_authfile"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --authfile /tmp/secure.json"
+
+    - name: Check parameter "tripleo_container_image_build_base"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_base: ubi8:latest
+
+    - name: Assert "tripleo_container_image_build_base"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --base ubi8:latest"
+
+    - name: Check parameter "tripleo_container_image_build_config_file"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_config_file: /tmp/tripleo_containers.yaml
+
+    - name: Assert "tripleo_container_image_build_config_file"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --config-file /tmp/tripleo_containers.yaml"
+
+    - name: Check parameter "tripleo_container_image_build_config_path"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_config_path: /tmp/configs
+
+    - name: Assert "tripleo_container_image_build_config_path"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --config-path /tmp/configs"
+
+    - name: Check parameter "tripleo_container_image_build_debug"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_debug: true
+
+    - name: Assert "tripleo_container_image_build_debug"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --debug"
+
+    - name: Check parameter "tripleo_container_image_build_distro"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_distro: fedora
+
+    - name: Assert "tripleo_container_image_build_distro"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --distro fedora"
+
+    - name: Check parameter "tripleo_container_image_build_excludes"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_excludes:
+          - keystone
+          - nova_api
+
+    - name: Assert "tripleo_container_image_build_excludes"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --exclude keystone --exclude nova_api"
+
+    - name: Check parameter "tripleo_container_image_build_extra_config"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_extra_config: my_config.yaml
+
+    - name: Assert "tripleo_container_image_build_extra_config"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --extra-config my_config.yaml"
+
+    - name: Check parameter "tripleo_container_image_build_namespace"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_namespace: masterchef
+
+    - name: Assert "tripleo_container_image_build_namespace"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --namespace masterchef"
+
+    - name: Check parameter "tripleo_container_image_build_prefix"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_prefix: os
+
+    - name: Assert "tripleo_container_image_build_prefix"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --prefix os"
+
+    - name: Check parameter "tripleo_container_image_build_push"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_push: true
+
+    - name: Assert "tripleo_container_image_build_push"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --push"
+
+    - name: Check parameter "tripleo_container_image_build_registry"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_registry: localhost:8787
+
+    - name: Assert "tripleo_container_image_build_registry"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --registry localhost:8787"
+
+    - name: Check parameter "tripleo_container_image_build_skip_build"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_skip_build: true
+
+    - name: Assert "tripleo_container_image_build_skip_build"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --skip-build"
+
+    - name: Check parameter "tripleo_container_image_build_tag"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_tag: current
+
+    - name: Assert "tripleo_container_image_build_tag"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --tag current"
+
+    - name: Check parameter "tripleo_container_image_build_volumes"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_volumes:
+          - '/etc:/etc'
+          - '/mydir:/mydir'
+
+    - name: Assert "tripleo_container_image_build_volumes"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --volume /etc:/etc --volume /mydir:/mydir"
+
+    - name: Check parameter "tripleo_container_image_build_work_dir"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_work_dir: /work
+
+    - name: Assert "tripleo_container_image_build_work_dir"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --work-dir /work"
