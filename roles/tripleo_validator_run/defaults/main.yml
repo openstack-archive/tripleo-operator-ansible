@@ -1,0 +1,8 @@
+---
+tripleo_validator_run_debug: false
+tripleo_validator_run_plan:
+tripleo_validator_run_workers:
+tripleo_validator_run_extra_vars:
+tripleo_validator_run_extra_vars_file:
+tripleo_validator_run_validation: []
+tripleo_validator_run_group: []

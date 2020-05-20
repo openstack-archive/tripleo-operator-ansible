@@ -61,6 +61,7 @@
       - tripleo-operator-molecule-tripleo_undercloud_minion_install
       - tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
       - tripleo-operator-molecule-tripleo_undercloud_upgrade
+      - tripleo-operator-molecule-tripleo_validator_run
 
     gate:
       jobs:
@@ -123,6 +124,7 @@
       - tripleo-operator-molecule-tripleo_undercloud_minion_install
       - tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
       - tripleo-operator-molecule-tripleo_undercloud_upgrade
+      - tripleo-operator-molecule-tripleo_validator_run
 
 - job:
     name: tripleo-operator-molecule-base
@@ -928,3 +930,17 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_undercloud_upgrade
+
+- job:
+    files:
+      - ^roles/tripleo_validator_run/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_validator_run
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_validator_run
