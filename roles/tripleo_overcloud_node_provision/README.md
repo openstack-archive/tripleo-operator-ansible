@@ -1,7 +1,7 @@
 tripleo_overcloud_node_provision
 =========
 
-A role to perform overcloud ndoe provisioning with Ironic.
+A role to perform overcloud node provisioning with Ironic.
 
 Requirements
 ------------

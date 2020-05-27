@@ -1,0 +1,92 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_node_extract_provisioned_log_output: false
+    tripleo_overcloud_node_extract_provisioned_debug: true
+  tasks:
+
+    - name: Call with defaults
+      include_role:
+        name: "tripleo_overcloud_node_extract_provisioned"
+
+    - name: Check command for defaults
+      assert:
+        that:
+          - tripleo_overcloud_node_extract_provisioned_output == "overcloud node extract provisioned --yes"
+
+    - name: Call with output file
+      include_role:
+        name: "tripleo_overcloud_node_extract_provisioned"
+      vars:
+        tripleo_overcloud_node_extract_provisioned_output_file: foo.yaml
+
+    - name: Check command with output file
+      assert:
+        that:
+          - tripleo_overcloud_node_extract_provisioned_output ==
+            "overcloud node extract provisioned -o foo.yaml --yes"
+
+    - name: Call with stack name
+      include_role:
+        name: "tripleo_overcloud_node_extract_provisioned"
+      vars:
+        tripleo_overcloud_node_extract_provisioned_stack: foo
+
+    - name: Check command with stack name
+      assert:
+        that:
+          - tripleo_overcloud_node_extract_provisioned_output ==
+            "overcloud node extract provisioned --stack foo --yes"
+
+    - name: Reset output fact
+      set_fact:
+        tripleo_overcloud_node_extract_provisioned_output: "reset"
+
+    - name: Create tempfile name for overwrite action tests
+      tempfile:
+        state: file
+        suffix: temp
+      register: tempfile
+
+    - name: Create tempfile for overwrite action tests
+      file:
+        state: touch
+        path: "{{ tempfile.path }}"
+
+    - name: Call with skip for existing output file
+      include_role:
+        name: "tripleo_overcloud_node_extract_provisioned"
+      vars:
+        tripleo_overcloud_node_extract_provisioned_output_file: "{{ tempfile.path }}"
+        tripleo_overcloud_node_extract_provisioned_overwrite_action: skip
+
+    - debug:
+        msg: "output {{ tripleo_overcloud_node_extract_provisioned_output }}"
+    - name: Check command call skipped
+      assert:
+        that:
+          - tripleo_overcloud_node_extract_provisioned_output == "reset"
+
+    - name: Call with error for existing output file
+      block:
+        - include_role:
+            name: "tripleo_overcloud_node_extract_provisioned"
+          vars:
+            tripleo_overcloud_node_extract_provisioned_output_file: "{{ tempfile.path }}"
+            tripleo_overcloud_node_extract_provisioned_overwrite_action: error
+      rescue:
+        - name: Flag expected error raised
+          set_fact:
+            overwrite_error_raised: true
+        - debug:
+            msg: Expected error raised due to existing output file
+
+    - name: Check command call skipped
+      assert:
+        that:
+          - tripleo_overcloud_node_extract_provisioned_output == "reset"

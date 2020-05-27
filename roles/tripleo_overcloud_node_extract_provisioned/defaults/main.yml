@@ -1,0 +1,14 @@
+# defaults file for tripleo_overcloud_node_extract_provisioned
+---
+openstack_bin: openstack
+tripleo_overcloud_node_extract_provisioned_debug: false
+tripleo_overcloud_node_extract_provisioned_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_node_extract_provisioned_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_node_extract_provisioned_log: "{{ tripleo_overcloud_node_extract_provisioned_home_dir }}/overcloud_node_extract_provisioned.log"
+tripleo_overcloud_node_extract_provisioned_log_combine: true
+tripleo_overcloud_node_extract_provisioned_log_output: true
+tripleo_overcloud_node_extract_provisioned_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_node_extract_provisioned_output_file:
+tripleo_overcloud_node_extract_provisioned_overwrite_action: error
+tripleo_overcloud_node_extract_provisioned_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
+tripleo_overcloud_node_extract_provisioned_stack:
