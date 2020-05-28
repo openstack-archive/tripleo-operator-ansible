@@ -40,11 +40,11 @@
   block:
     - name: Show the overcloud image upload command
       debug:
-        var: _deploy_cmd
+        var: _image_upload_cmd
 
     - name: Show the overcloud image upload environment
       debug:
-        var: _deploy_env
+        var: _image_upload_env
 
 - name: Write reproducer script
   tripleo_shell_script:
