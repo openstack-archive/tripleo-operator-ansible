@@ -9,6 +9,7 @@
   set_fact:
     _deploy_cmd: >-
       {{ openstack_bin }} tripleo deploy
+      {{ tripleo_deploy_debug_arg | ternary('--debug', '') }}
       {{ tripleo_deploy_templates | ternary('--templates $DEPLOY_TEMPLATES', '') }}
       {{ tripleo_deploy_standalone | ternary('--standalone', '') }}
       {{ tripleo_deploy_upgrade | ternary('--upgrade', '') }}
