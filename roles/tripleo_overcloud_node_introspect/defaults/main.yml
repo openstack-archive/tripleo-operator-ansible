@@ -9,3 +9,6 @@ tripleo_overcloud_node_introspect_os_cloud: "{{ tripleo_os_cloud | default('') }
 tripleo_overcloud_node_introspect_provide: false
 tripleo_overcloud_node_introspect_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
 tripleo_overcloud_node_introspect_run_validations: false
+tripleo_overcloud_node_introspect_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_node_introspect_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
+tripleo_overcloud_node_introspect_home_dir: "{{ ansible_env.HOME }}"
