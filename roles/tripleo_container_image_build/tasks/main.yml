@@ -1,0 +1,67 @@
+---
+# tasks file for tripleo_container_image_build
+- name: Set facts for tripleo container image build
+  set_fact:
+    _build_cmd: >-
+      {{ openstack_bin }} tripleo container image build
+      {{ tripleo_container_image_build_authfile | ternary('--authfile ' ~ tripleo_container_image_build_authfile, '') }}
+      {{ tripleo_container_image_build_base | ternary('--base ' ~ tripleo_container_image_build_base, '') }}
+      {{ tripleo_container_image_build_config_file | ternary('--config-file ' ~ tripleo_container_image_build_config_file, '') }}
+      {{ tripleo_container_image_build_config_path | ternary('--config-path ' ~ tripleo_container_image_build_config_path, '') }}
+      {{ tripleo_container_image_build_debug | ternary('--debug', '') }}
+      {{ tripleo_container_image_build_distro | ternary('--distro ' ~ tripleo_container_image_build_distro, '') }}
+      {{ tripleo_container_image_build_excludes | tripleo.operator.shell_arg_list('--exclude') }}
+      {{ tripleo_container_image_build_extra_config | ternary('--extra-config ' ~ tripleo_container_image_build_extra_config, '') }}
+      {{ tripleo_container_image_build_namespace | ternary('--namespace ' ~ tripleo_container_image_build_namespace, '') }}
+      {{ tripleo_container_image_build_prefix | ternary('--prefix ' ~ tripleo_container_image_build_prefix, '') }}
+      {{ tripleo_container_image_build_push | ternary('--push', '') }}
+      {{ tripleo_container_image_build_registry | ternary('--registry ' ~ tripleo_container_image_build_registry, '') }}
+      {{ tripleo_container_image_build_skip_build | ternary('--skip-build', '') }}
+      {{ tripleo_container_image_build_tag | ternary('--tag ' ~ tripleo_container_image_build_tag, '') }}
+      {{ tripleo_container_image_build_volumes | tripleo.operator.shell_arg_list('--volume') }}
+      {{ tripleo_container_image_build_work_dir | ternary('--work-dir ' ~ tripleo_container_image_build_work_dir, '') }}
+      {{ tripleo_container_image_build_log_output | ternary((">" ~ tripleo_container_image_build_log), '') }}
+      {{ tripleo_container_image_build_log_combine | ternary("2>&1", '') }}
+    _build_env: {}
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_container_image_build_log }}"
+  when: tripleo_container_image_build_log_output|bool
+
+- name: Show debug information
+  when: tripleo_container_image_build_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _build_cmd
+
+    - name: Show the environment
+      debug:
+        var: _build_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_container_image_build_home_dir }}/tripleo_container_image_build.sh"
+    shell_command: "{{ _build_cmd }}"
+    shell_environment: "{{ _build_env }}"
+  when: tripleo_container_image_build_generate_scripts|bool
+
+- name: Run tripleo container image build
+  shell: "{{ _build_cmd }}"  # noqa 305
+  environment: "{{ _build_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_container_image_build_home_dir }}"
+    warn: false
+  register: tripleo_container_image_build_result
+  async: "{{ tripleo_container_image_build_timeout }}"
+  poll: "{{ tripleo_container_image_build_poll }}"
+  changed_when: false
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_container_image_build_generate_scripts_only|bool
+
+- name: Set output fact
+  set_fact:
+    tripleo_container_image_build_output: "{{ tripleo_container_image_build_result.stdout }}"

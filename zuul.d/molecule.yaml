@@ -4,6 +4,7 @@
       jobs:
       - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_config_generate_ansible
+      - tripleo-operator-molecule-tripleo_container_image_build
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
       - tripleo-operator-molecule-tripleo_container_image_prepare
@@ -67,6 +68,7 @@
       jobs:
       - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_config_generate_ansible
+      - tripleo-operator-molecule-tripleo_container_image_build
       - tripleo-operator-molecule-tripleo_container_image_delete
       - tripleo-operator-molecule-tripleo_container_image_list
       - tripleo-operator-molecule-tripleo_container_image_prepare
@@ -162,6 +164,20 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_config_generate_ansible
+
+- job:
+    files:
+      - ^roles/tripleo_container_image_build/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_container_image_build
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_container_image_build
 
 - job:
     files:
