@@ -18,6 +18,7 @@ Role Variables
 * `tripleo_overcloud_update_run_limit`: (String) String that identifies a single node or a list of nodes to be upgraded.
 * `tripleo_overcloud_update_run_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_update_run_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_update_run_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_update_run_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_update_run_home_dir }}/overcloud_update_run.log"
 * `tripleo_overcloud_update_run_playbook`: (List) List of playbook(s) to use for the minor update. Defaults: []
 * `tripleo_overcloud_update_run_poll`: (Integer) Number of seconds to wait between each checks to see if the deployment command has completed. Default: 10

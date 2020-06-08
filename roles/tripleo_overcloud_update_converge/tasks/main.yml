@@ -41,7 +41,8 @@
       {{ tripleo_overcloud_update_converge_override_ansible_cfg | ternary('--override-ansible-cfg $UPDATE_OVERRIDE_ANSIBLE_CFG', '') }}
       {{ tripleo_overcloud_update_converge_config_download_timeout | ternary('--config-download-timeout $UPDATE_CONFIG_DOWNLOAD_TIMEOUT', '') }}
       {{ tripleo_overcloud_update_converge_baremetal_deployment | ternary('--baremetal-deployment $UPDATE_BAREMETAL_DEPLOYMENT', '') }}
-      {{ tripleo_overcloud_update_converge_log_output | ternary((">" ~ tripleo_overcloud_update_converge_log), '') }}
+      {{ tripleo_overcloud_update_converge_log_output | ternary((tripleo_overcloud_update_converge_log_redirect
+         ~ " " ~ tripleo_overcloud_update_converge_log), '') }}
       {{ tripleo_overcloud_update_converge_log_combine | ternary("2>&1", '') }}
     _update_converge_env:
       UPDATE_TEMPLATES: "{{ tripleo_overcloud_update_converge_templates }}"

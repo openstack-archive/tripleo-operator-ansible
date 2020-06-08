@@ -21,6 +21,7 @@ tripleo_overcloud_update_converge_libvirt_type:
 tripleo_overcloud_update_converge_log: "{{ tripleo_overcloud_update_converge_home_dir }}/overcloud_update_converge.log"
 tripleo_overcloud_update_converge_log_combine: true
 tripleo_overcloud_update_converge_log_output: true
+tripleo_overcloud_update_converge_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_update_converge_networks_file:
 tripleo_overcloud_update_converge_no_cleanup: false
 tripleo_overcloud_update_converge_no_config_download: false

@@ -20,6 +20,7 @@ Role Variables
 * `tripleo_overcloud_cell_export_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_cell_export_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_cell_export_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_cell_export_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_cell_export_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_cell_export_home_dir }}/overcloud_cell_export.log"
 * `tripleo_overcloud_cell_export_name`: (String) REQUIRED. Name of the stack used for additional cell.
 * `tripleo_overcloud_cell_export_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_cell_export_rc_file`.

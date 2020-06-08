@@ -21,7 +21,8 @@
       {{ openstack_bin }} overcloud node provide
       {{ tripleo_overcloud_node_provide_all_manageable | ternary('--all-manageable', '') }}
       {{ tripleo_overcloud_node_provide_node_uuids | tripleo.operator.shell_arg_list() }}
-      {{ tripleo_overcloud_node_provide_log_output | ternary((">" ~ tripleo_overcloud_node_provide_log), '') }}
+      {{ tripleo_overcloud_node_provide_log_output | ternary((tripleo_overcloud_node_provide_log_redirect
+         ~ " " ~ tripleo_overcloud_node_provide_log), '') }}
       {{ tripleo_overcloud_node_provide_log_combine | ternary("2>&1", '') }}
     _provide_env:
       OS_CLOUD: "{{ tripleo_overcloud_node_provide_os_cloud }}"

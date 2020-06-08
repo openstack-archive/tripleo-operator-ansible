@@ -12,6 +12,7 @@ tripleo_overcloud_container_image_prepare_includes: []
 tripleo_overcloud_container_image_prepare_log: "{{ tripleo_overcloud_container_image_prepare_home_dir }}/overcloud_container_image_prepare.log"
 tripleo_overcloud_container_image_prepare_log_combine: true
 tripleo_overcloud_container_image_prepare_log_output: true
+tripleo_overcloud_container_image_prepare_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_container_image_prepare_modify_role:
 tripleo_overcloud_container_image_prepare_modify_vars:
 tripleo_overcloud_container_image_prepare_namespace:

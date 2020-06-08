@@ -11,7 +11,8 @@
       {{ tripleo_overcloud_container_image_build_excludes | tripleo.operator.shell_arg_list('--exclude') }}
       {{ tripleo_overcloud_container_image_build_use_buildah | ternary('--use-buildah', '') }}
       {{ tripleo_overcloud_container_image_build_work_dir | tripleo.operator.shell_arg_list('--work-dir') }}
-      {{ tripleo_overcloud_container_image_build_log_output | ternary((">" ~ tripleo_overcloud_container_image_build_log), '') }}
+      {{ tripleo_overcloud_container_image_build_log_output |
+        ternary((tripleo_overcloud_container_image_build_log_redirect ~ " " ~ tripleo_overcloud_container_image_build_log), '') }}
       {{ tripleo_overcloud_container_image_build_log_combine | ternary("2>&1", '') }}
     _build_env: {}
 

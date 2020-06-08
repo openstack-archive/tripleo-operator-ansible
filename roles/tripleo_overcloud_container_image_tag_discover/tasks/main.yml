@@ -6,7 +6,8 @@
       {{ openstack_bin }} overcloud container image tag discover
       {{ tripleo_overcloud_container_image_tag_discover_image | ternary('--image $DISCOVER_IMAGE', '') }}
       {{ tripleo_overcloud_container_image_tag_discover_tag_from_label | ternary('--tag-from-label $DISCOVER_TAG_FROM_LABEL', '') }}
-      {{ tripleo_overcloud_container_image_tag_discover_log_output | ternary((">" ~ tripleo_overcloud_container_image_tag_discover_log), '') }}
+      {{ tripleo_overcloud_container_image_tag_discover_log_output | ternary((tripleo_overcloud_container_image_tag_discover_log_redirect
+         ~ " " ~ tripleo_overcloud_container_image_tag_discover_log), '') }}
       {{ tripleo_overcloud_container_image_tag_discover_log_combine | ternary("2>&1", '') }}
     _discover_env:
       DISCOVER_IMAGE: "{{ tripleo_overcloud_container_image_tag_discover_image | quote }}"

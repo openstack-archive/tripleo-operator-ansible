@@ -21,7 +21,8 @@
       {{ tripleo_overcloud_container_image_prepare_roles_file | ternary('--roles-file $PREPARE_ROLES_FILE', '') }}
       {{ tripleo_overcloud_container_image_prepare_modify_role | ternary('--modify-role $PREPARE_MODIFY_ROLE', '') }}
       {{ tripleo_overcloud_container_image_prepare_modify_vars | ternary('--modify-vars $PREPARE_MODIFY_VARS', '') }}
-      {{ tripleo_overcloud_container_image_prepare_log_output | ternary((">" ~ tripleo_overcloud_container_image_prepare_log), '') }}
+      {{ tripleo_overcloud_container_image_prepare_log_output | ternary((tripleo_overcloud_container_image_prepare_log_redirect
+         ~ " " ~ tripleo_overcloud_container_image_prepare_log), '') }}
       {{ tripleo_overcloud_container_image_prepare_log_combine | ternary("2>&1", '') }}
     _prepare_env:
       PREPARE_TEMPLATE_FILE: "{{ tripleo_overcloud_container_image_prepare_template_file | quote }}"

@@ -10,7 +10,7 @@
       {{ tripleo_overcloud_cell_export_output_file | ternary('--output-file $EXPORT_OUTPUT_FILE', '') }}
       {{ tripleo_overcloud_cell_export_force_overwrite | ternary('--force-overwrite', '') }}
       {{ tripleo_overcloud_cell_export_name }}
-      {{ tripleo_overcloud_cell_export_log_output | ternary((">" ~ tripleo_overcloud_cell_export_log), '') }}
+      {{ tripleo_overcloud_cell_export_log_output | ternary((tripleo_overcloud_cell_export_log_redirect ~ " " ~ tripleo_overcloud_cell_export_log), '') }}
       {{ tripleo_overcloud_cell_export_log_combine | ternary("2>&1", '') }}
     _export_env:
       EXPORT_CONTROL_STACK: "{{ tripleo_overcloud_cell_export_control_plane_stack | quote }}"

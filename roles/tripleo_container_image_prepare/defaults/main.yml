@@ -12,6 +12,7 @@ tripleo_container_image_prepare_log: "{{ tripleo_container_image_prepare_home_di
 tripleo_container_image_prepare_log_file:
 tripleo_container_image_prepare_log_output: false
 tripleo_container_image_prepare_log_combine: true
+tripleo_container_image_prepare_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_container_image_prepare_output_env_file:
 tripleo_container_image_prepare_roles_file:
 tripleo_container_image_prepare_timeout: 1800

@@ -21,6 +21,7 @@ tripleo_overcloud_upgrade_prepare_libvirt_type:
 tripleo_overcloud_upgrade_prepare_log: "{{ tripleo_overcloud_upgrade_prepare_home_dir }}/overcloud_upgrade_prepare.log"
 tripleo_overcloud_upgrade_prepare_log_combine: true
 tripleo_overcloud_upgrade_prepare_log_output: true
+tripleo_overcloud_upgrade_prepare_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_upgrade_prepare_networks_file:
 tripleo_overcloud_upgrade_prepare_no_cleanup: false
 tripleo_overcloud_upgrade_prepare_no_config_download: false

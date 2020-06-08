@@ -42,7 +42,7 @@
       {{ tripleo_overcloud_deploy_config_download_timeout | ternary('--config-download-timeout $DEPLOY_CONFIG_DOWNLOAD_TIMEOUT', '') }}
       {{ tripleo_overcloud_deploy_deployment_python_interpreter | ternary('--deployment-python-interpreter $DEPLOY_PYTHON_INTERPRETER', '') }}
       {{ tripleo_overcloud_deploy_baremetal_deployment | ternary('--baremetal-deployment $DEPLOY_BAREMETAL_DEPLOYMENT', '') }}
-      {{ tripleo_overcloud_deploy_log_output | ternary((">" ~ tripleo_overcloud_deploy_log), '') }}
+      {{ tripleo_overcloud_deploy_log_output | ternary((tripleo_overcloud_deploy_log_redirect ~ " " ~ tripleo_overcloud_deploy_log), '') }}
       {{ tripleo_overcloud_deploy_log_combine | ternary("2>&1", '') }}
     _deploy_env:
       DEPLOY_TEMPLATES: "{{ tripleo_overcloud_deploy_templates }}"

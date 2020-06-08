@@ -6,7 +6,8 @@
       {{ openstack_bin }} overcloud container image upload
       {{ tripleo_overcloud_container_image_upload_config_files | tripleo.operator.shell_arg_list('--config-file') }}
       {{ tripleo_overcloud_container_image_upload_cleanup | ternary('--cleanup $UPLOAD_CLEANUP', '') }}
-      {{ tripleo_overcloud_container_image_upload_log_output | ternary((">" ~ tripleo_overcloud_container_image_upload_log), '') }}
+      {{ tripleo_overcloud_container_image_upload_log_output | ternary((tripleo_overcloud_container_image_upload_log_redirect
+         ~ " " ~ tripleo_overcloud_container_image_upload_log), '') }}
       {{ tripleo_overcloud_container_image_upload_log_combine | ternary("2>&1", '') }}
     _upload_env:
       UPLOAD_CLEANUP: "{{ tripleo_overcloud_container_image_upload_cleanup | quote }}"

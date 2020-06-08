@@ -12,7 +12,8 @@
       {{ tripleo_overcloud_node_provision_concurrency | ternary('--concurrency $PROVISION_CONCURRENCY', '') }}
       {{ tripleo_overcloud_node_provision_timeout_arg | ternary('--timeout $PROVISION_TIMEOUT', '') }}
       {{ tripleo_overcloud_node_provision_deployment_file }}
-      {{ tripleo_overcloud_node_provision_log_output | ternary((">" ~ tripleo_overcloud_node_provision_log), '') }}
+      {{ tripleo_overcloud_node_provision_log_output | ternary((tripleo_overcloud_node_provision_log_redirect
+         ~ " " ~ tripleo_overcloud_node_provision_log), '') }}
       {{ tripleo_overcloud_node_provision_log_combine | ternary("2>&1", '') }}
     _provision_env:
       OS_CLOUD: "{{ tripleo_overcloud_node_provision_os_cloud }}"

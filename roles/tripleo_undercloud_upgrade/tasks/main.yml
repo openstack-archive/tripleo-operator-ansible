@@ -8,7 +8,7 @@
       {{ tripleo_undercloud_upgrade_inflight_validations | ternary("--inflight-validations", '') }}
       {{ tripleo_undercloud_upgrade_dry_run | ternary("--dry-run", '') }}
       {{ tripleo_undercloud_upgrade_yes | ternary("--yes", '') }}
-      {{ tripleo_undercloud_upgrade_log_output | ternary((">" ~ tripleo_undercloud_upgrade_log), '') }}
+      {{ tripleo_undercloud_upgrade_log_output | ternary((tripleo_undercloud_upgrade_log_redirect ~ " " ~ tripleo_undercloud_upgrade_log), '') }}
       {{ tripleo_undercloud_upgrade_log_combine | ternary("2>&1", '') }}
     _upgrade_env: {}
 

@@ -9,6 +9,7 @@ tripleo_overcloud_raid_create_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_raid_create_log: "{{ tripleo_overcloud_raid_create_home_dir }}/CHANGEME.log"
 tripleo_overcloud_raid_create_log_combine: true
 tripleo_overcloud_raid_create_log_output: true
+tripleo_overcloud_raid_create_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_raid_create_nodes: []
 tripleo_overcloud_raid_create_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_raid_create_poll: 10

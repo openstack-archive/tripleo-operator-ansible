@@ -25,6 +25,7 @@ Role Variables
 * `tripleo_container_image_build_log` (String): Path to the log file. Default to {{ tripleo_container_image_build_home_dir }}/container_image_build.log
 * `tripleo_container_image_build_log_combine`: (Boolean) Whether or not we combine the logs. Default: True
 * `tripleo_container_image_build_log_output`: (Boolean) Whether or not we output the logs. Default: True
+* `tripleo_container_image_build_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_container_image_build_namespace`: (String) Namespace for the container images. Default: ''
 * `tripleo_container_image_build_poll`: (Integer) Number of seconds to wait between each checks to see if the command has completed. Default: 10
 * `tripleo_container_image_build_prefix`: (String) Prefix for the container images names. Default: ''

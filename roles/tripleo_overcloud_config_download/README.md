@@ -19,6 +19,7 @@ Role Variables
 * `tripleo_overcloud_config_download_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_config_download_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_config_download_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_config_download_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_config_download_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_config_download_home_dir }}/overcloud_config_download.log"
 * `tripleo_overcloud_config_download_name`: (String) Name of the plan
 * `tripleo_overcloud_config_download_no_preserve_config`: (Boolean) If set to `true` the config dir will be removed prior to download. Default: false

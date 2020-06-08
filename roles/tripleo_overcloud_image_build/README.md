@@ -22,6 +22,7 @@ Role Variables
 * `tripleo_overcloud_image_build_image_names`: (List) List of image names to build.
 * `tripleo_overcloud_image_build_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true
 * `tripleo_overcloud_image_build_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
+* `tripleo_overcloud_image_build_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_image_build_log`: (String) Install log file path. Default: "{{ tripleo_overcloud_image_build_home_dir }}/overcloud_image_build.log"
 * `tripleo_overcloud_image_build_no_skip`: (Boolean) Flag to skipp build if cached image exists. Default: False
 * `tripleo_overcloud_image_build_output_directory`: (String) Path to the output directory for the images.

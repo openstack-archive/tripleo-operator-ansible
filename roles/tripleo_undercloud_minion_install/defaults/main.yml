@@ -10,6 +10,7 @@ tripleo_undercloud_minion_install_home_dir: "{{ ansible_env.HOME }}"
 tripleo_undercloud_minion_install_log: "{{ tripleo_undercloud_minion_install_home_dir }}/undercloud_minion_install.log"
 tripleo_undercloud_minion_install_log_combine: true
 tripleo_undercloud_minion_install_log_output: true
+tripleo_undercloud_minion_install_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_undercloud_minion_install_no_validations: false
 tripleo_undercloud_minion_install_poll: 10
 tripleo_undercloud_minion_install_timeout: 7200

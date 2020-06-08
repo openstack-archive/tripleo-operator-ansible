@@ -13,6 +13,7 @@ tripleo_overcloud_node_import_introspect: false
 tripleo_overcloud_node_import_log: "{{ tripleo_overcloud_node_import_home_dir }}/overcloud_node_import.log"
 tripleo_overcloud_node_import_log_combine: true
 tripleo_overcloud_node_import_log_output: true
+tripleo_overcloud_node_import_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_node_import_no_deploy_image: false
 tripleo_overcloud_node_import_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_node_import_poll: 10

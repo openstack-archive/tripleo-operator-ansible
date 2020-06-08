@@ -24,6 +24,7 @@ Role Variables
 * `tripleo_overcloud_container_image_prepare_includes`: (List) List of patterns to match the imagename against to include in the output. Default: []
 * `tripleo_overcloud_container_image_prepare_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_container_image_prepare_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_container_image_prepare_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_container_image_prepare_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_container_image_prepare_home_dir }}/overcloud_container_image_prepare.log"
 * `tripleo_overcloud_container_image_prepare_modify_role`: (String) Name of ansible role to run between every image pull and push.
 * `tripleo_overcloud_container_image_prepare_modify_vars`: (String) Ansible vairables file containing varisables to use when using modify role.

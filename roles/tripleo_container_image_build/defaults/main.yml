@@ -15,6 +15,7 @@ tripleo_container_image_build_home_dir: "{{ ansible_env.HOME }}"
 tripleo_container_image_build_log: "{{ tripleo_container_image_build_home_dir }}/container_image_build.log"
 tripleo_container_image_build_log_combine: true
 tripleo_container_image_build_log_output: true
+tripleo_container_image_build_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_container_image_build_namespace:
 tripleo_container_image_build_poll: 10
 tripleo_container_image_build_prefix:

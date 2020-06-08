@@ -42,7 +42,8 @@
       {{ tripleo_overcloud_ffwd_upgrade_prepare_config_download_timeout | ternary('--config-download-timeout $FFWD_CONFIG_DOWNLOAD_TIMEOUT', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_prepare_baremetal_deployment | ternary('--baremetal-deployment $FFWD_BAREMETAL_DEPLOYMENT', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_prepare_yes | ternary('--yes', '') }}
-      {{ tripleo_overcloud_ffwd_upgrade_prepare_log_output | ternary((">" ~ tripleo_overcloud_ffwd_upgrade_prepare_log), '') }}
+      {{ tripleo_overcloud_ffwd_upgrade_prepare_log_output |
+         ternary((tripleo_overcloud_ffwd_upgrade_prepare_log_redirect ~ " " ~ tripleo_overcloud_ffwd_upgrade_prepare_log), '') }}
       {{ tripleo_overcloud_ffwd_upgrade_prepare_log_combine | ternary("2>&1", '') }}
     _upgrade_prepare_env:
       FFWD_TEMPLATES: "{{ tripleo_overcloud_ffwd_upgrade_prepare_templates }}"

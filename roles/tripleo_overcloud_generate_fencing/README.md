@@ -24,6 +24,7 @@ Role Variables
 * `tripleo_overcloud_generate_fencing_ipmi_no_lanplus`: (Boolean) Do not use lanplus. Default: false
 * `tripleo_overcloud_generate_fencing_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_generate_fencing_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_generate_fencing_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_generate_fencing_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_generate_fencing_home_dir }}/overcloud_generate_fencing.log"
 * `tripleo_overcloud_generate_fencing_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_generate_fencing_rc_file`.
 * `tripleo_overcloud_generate_fencing_output_file`: (String) Destination for the output parameters.
