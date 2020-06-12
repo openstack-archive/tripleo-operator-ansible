@@ -19,7 +19,7 @@ Role Variables
 * `tripleo_overcloud_update_converge_deployed_server`: (Boolean) Flag to use pre-provisioned nodes. Default: false
 * `tripleo_overcloud_update_converge_disable_password_generation`: (Boolean) Flag to disable password generation. Default: false
 * `tripleo_overcloud_update_converge_disable_validations`: (Boolean) Flag to disable validations. Default: false
-* `tripleo_overcloud_update_converge_dry_run`: (Boolean) Flag to enabel dry run. Default: false
+* `tripleo_overcloud_update_converge_dry_run`: (Boolean) Flag to enable dry run. Default: false
 * `tripleo_overcloud_update_converge_environment_dirs`: (List) A list of directory paths containing environment files for the deployment. Should not be used with environment files.
 * `tripleo_overcloud_update_converge_environment_files`: (List) A list of environment file paths for the deployment.  Should not be used with environment dirs.
 * `tripleo_overcloud_update_converge_force_postconfig`: (Boolean) Force the overclodu post-deployment configuration. Default: false

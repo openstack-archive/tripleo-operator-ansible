@@ -20,7 +20,7 @@ Role Variables
 * `tripleo_overcloud_deploy_deployment_python_interpreter`: (String) Path to a python interpreter for the deployment actions.
 * `tripleo_overcloud_deploy_disable_password_generation`: (Boolean) Flag to disable password generation. Default: false
 * `tripleo_overcloud_deploy_disable_validations`: (Boolean) Flag to disable validations. Default: false
-* `tripleo_overcloud_deploy_dry_run`: (Boolean) Flag to enabel dry run. Default: false
+* `tripleo_overcloud_deploy_dry_run`: (Boolean) Flag to enable dry run. Default: false
 * `tripleo_overcloud_deploy_environment_dirs`: (List) A list of directory paths containing environment files for the deployment. Should not be used with environment files.
 * `tripleo_overcloud_deploy_environment_files`: (List) A list of environment file paths for the deployment.  Should not be used with environment dirs.
 * `tripleo_overcloud_deploy_force_postconfig`: (Boolean) Force the overclodu post-deployment configuration. Default: false
