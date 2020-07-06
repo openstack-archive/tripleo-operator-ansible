@@ -17,3 +17,6 @@ tripleo_overcloud_node_discover_provide: false
 tripleo_overcloud_node_discover_range:
 tripleo_overcloud_node_discover_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
 tripleo_overcloud_node_discover_run_validations: false
+tripleo_overcloud_node_introspect_node_timeout:
+tripleo_overcloud_node_introspect_max_retries:
+tripleo_overcloud_node_introspect_retry_timeout:

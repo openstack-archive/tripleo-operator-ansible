@@ -25,6 +25,9 @@ Role Variables
 * `tripleo_overcloud_node_discover_concurrency`: Maximum number of nodes to introspect at once.
 * `tripleo_overcloud_node_discover_os_cloud`: (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_node_discover_rc_file`.
 * `tripleo_overcloud_node_discover_rc_file`: (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
+* `tripleo_overcloud_node_introspect_node_timeout`: (Integer) Maximum timeout for node introspection.
+* `tripleo_overcloud_node_introspect_max_retries`: (Integer) Maximum introspection retries.
+* `tripleo_overcloud_node_introspect_retry_timeout`: (Integer) Maximum timeout between introspection retries.
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

@@ -9,6 +9,9 @@
       {{ tripleo_overcloud_node_introspect_all_manageable | ternary('--all-manageable', '') }}
       {{ tripleo_overcloud_node_introspect_provide | ternary('--provide', '') }}
       {{ tripleo_overcloud_node_introspect_run_validations | ternary('--run-validations', '') }}
+      {{ tripleo_overcloud_node_introspect_node_timeout | ternary('--node-timeout ' ~ tripleo_overcloud_node_introspect_node_timeout, '') }}
+      {{ tripleo_overcloud_node_introspect_max_retries | ternary('--max-retries ' ~ tripleo_overcloud_node_introspect_max_retries, '') }}
+      {{ tripleo_overcloud_node_introspect_retry_timeout | ternary('--retry-timeout ' ~ tripleo_overcloud_node_introspect_retry_timeout, '') }}
       {{ tripleo_overcloud_node_introspect_concurrency | ternary('--concurrency ' ~ tripleo_overcloud_node_introspect_concurrency, '') }}
     _introspect_env:
       OS_CLOUD: "{{ tripleo_overcloud_node_introspect_os_cloud }}"

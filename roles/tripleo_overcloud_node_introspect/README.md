@@ -22,6 +22,9 @@ Role Variables
 * `tripleo_overcloud_node_introspect_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_overcloud_node_introspect_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_node_introspect_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_node_introspect_home_dir`: (String) Path to the directory to execute the command in. Default: "{{ ansible_env.HOME }}"
+* `tripleo_overcloud_node_introspect_node_timeout`: (Integer) Maximum timeout for node introspection.
+* `tripleo_overcloud_node_introspect_max_retries`: (Integer) Maximum introspection retries.
+* `tripleo_overcloud_node_introspect_retry_timeout`: (Integer) Maximum timeout between introspection retries.
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

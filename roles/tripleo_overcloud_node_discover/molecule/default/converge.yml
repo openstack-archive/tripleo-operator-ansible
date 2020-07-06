@@ -102,6 +102,48 @@
         that:
           - tripleo_overcloud_node_discover_output == "overcloud node discover --run-validations"
 
+    - name: Check parameter "tripleo_overcloud_node_introspect_node_timeout"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_node_timeout: value
+
+    - name: Assert "tripleo_overcloud_node_introspect_node_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --node-timeout value"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_max_retries"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_max_retries: value
+
+    - name: Assert "tripleo_overcloud_node_introspect_max_retries"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --max-retries value"
+
+    - name: Check parameter "tripleo_overcloud_node_introspect_retry_timeout"
+      include_role:
+        name: "tripleo_overcloud_node_introspect"
+      vars:
+        openstack_bin: echo
+        tripleo_os_cloud: undercloud
+        tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_retry_timeout: value
+
+    - name: Assert "tripleo_overcloud_node_introspect_retry_timeout"
+      assert:
+        that:
+          - tripleo_overcloud_node_introspect_output == "overcloud node introspect --retry-timeout value"
+
     - name: Check parameter "tripleo_overcloud_node_discover_provide"
       include_role:
         name: "tripleo_overcloud_node_discover"
@@ -176,10 +218,14 @@
         tripleo_overcloud_node_discover_no_deploy_image: true
         tripleo_overcloud_node_discover_instance_boot_option: value
         tripleo_overcloud_node_discover_concurrency: value
+        tripleo_overcloud_node_introspect_node_timeout: 60
+        tripleo_overcloud_node_introspect_max_retries: 2
+        tripleo_overcloud_node_introspect_retry_timeout: 120
 
     - name: Assert all parameters for role tripleo_overcloud_node_discover
       assert:
         that:
           - tripleo_overcloud_node_discover_output ==
             "overcloud node discover --ip value --range value --credentials value --port value --introspect
-            --run-validations --provide --no-deploy-image --instance-boot-option value --concurrency value"
+            --run-validations --node-timeout 60 --max-retries 2 --retry-timeout 120 --provide --no-deploy-image
+            --instance-boot-option value --concurrency value"
