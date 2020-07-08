@@ -12,3 +12,6 @@ tripleo_overcloud_node_introspect_run_validations: false
 tripleo_overcloud_node_introspect_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_node_introspect_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_node_introspect_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_node_introspect_node_timeout:
+tripleo_overcloud_node_introspect_max_retries:
+tripleo_overcloud_node_introspect_retry_timeout:
