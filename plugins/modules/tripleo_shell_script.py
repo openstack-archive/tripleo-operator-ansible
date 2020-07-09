@@ -83,7 +83,7 @@ RETURN = """
 
 _SHELL_HEADER = """#!/bin/bash
 # This file is managed by ansible
-set -ex
+set -xeo pipefail
 
 """
 
