@@ -13,8 +13,7 @@
       {{ tripleo_overcloud_generate_fencing_ipmi_level | ternary('--ipmi-level $FENCING_LEVEL', '') }}
       {{ tripleo_overcloud_generate_fencing_output_file | ternary('--output $FENCING_OUTPUT', '') }}
       {{ tripleo_overcloud_generate_fencing_environment_file }}
-      {{ tripleo_overcloud_generate_fencing_log_output |
-         ternary((tripleo_overcloud_generate_fencing_log_redirect ~ " " ~ tripleo_overcloud_generate_fencing_log), '') }}
+      {{ tripleo_overcloud_generate_fencing_log_output | ternary((">" ~ tripleo_overcloud_generate_fencing_log), '') }}
       {{ tripleo_overcloud_generate_fencing_log_combine | ternary("2>&1", '') }}
     _fencing_env:
       OS_CLOUD: "{{ tripleo_overcloud_generate_fencing_os_cloud }}"

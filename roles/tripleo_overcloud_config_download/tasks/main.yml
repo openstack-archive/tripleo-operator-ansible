@@ -9,8 +9,7 @@
       {{ tripleo_overcloud_config_download_config_dir | ternary('--config-dir $DOWNLOAD_CONFIG_DIR', '') }}
       {{ tripleo_overcloud_config_download_config_type | ternary('--config-type $DOWNLOAD_CONFIG_TYPE', '') }}
       {{ tripleo_overcloud_config_download_no_preserve_config | ternary('--no-preserve-config', '') }}
-      {{ tripleo_overcloud_config_download_log_output | ternary((tripleo_overcloud_config_download_log_redirect
-         ~ " " ~ tripleo_overcloud_config_download_log), '') }}
+      {{ tripleo_overcloud_config_download_log_output | ternary((">" ~ tripleo_overcloud_config_download_log), '') }}
       {{ tripleo_overcloud_config_download_log_combine | ternary("2>&1", '') }}
     _download_env:
       DOWNLOAD_NAME: "{{ tripleo_overcloud_config_download_name | quote }}"

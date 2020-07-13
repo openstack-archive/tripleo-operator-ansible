@@ -9,7 +9,6 @@ tripleo_overcloud_upgrade_run_limit:
 tripleo_overcloud_upgrade_run_log: "{{ tripleo_overcloud_upgrade_run_home_dir }}/overcloud_upgrade_run.log"
 tripleo_overcloud_upgrade_run_log_combine: true
 tripleo_overcloud_upgrade_run_log_output: true
-tripleo_overcloud_upgrade_run_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_upgrade_run_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_upgrade_run_playbook: []
 tripleo_overcloud_upgrade_run_poll: 10

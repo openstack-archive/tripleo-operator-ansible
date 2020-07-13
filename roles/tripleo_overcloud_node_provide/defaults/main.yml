@@ -7,7 +7,6 @@ tripleo_overcloud_node_provide_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_node_provide_log: "{{ tripleo_overcloud_node_provide_home_dir }}/overcloud_node_provide.log"
 tripleo_overcloud_node_provide_log_combine: true
 tripleo_overcloud_node_provide_log_output: true
-tripleo_overcloud_node_provide_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_node_provide_node_uuids: []
 tripleo_overcloud_node_provide_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_node_provide_poll: 1

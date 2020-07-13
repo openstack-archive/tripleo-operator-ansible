@@ -7,7 +7,7 @@
       {{ openstack_bin }} overcloud delete
       {{ tripleo_overcloud_delete_yes | ternary('--yes', '') }}
       {{ tripleo_overcloud_delete_name }}
-      {{ tripleo_overcloud_delete_log_output | ternary((tripleo_overcloud_delete_log_redirect ~ " " ~ tripleo_overcloud_delete_log), '') }}
+      {{ tripleo_overcloud_delete_log_output | ternary((">" ~ tripleo_overcloud_delete_log), '') }}
       {{ tripleo_overcloud_delete_log_combine | ternary("2>&1", '') }}
     _delete_env:
       OS_CLOUD: "{{ tripleo_overcloud_delete_os_cloud }}"

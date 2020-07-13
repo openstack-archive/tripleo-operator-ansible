@@ -8,7 +8,6 @@ tripleo_overcloud_node_unprovision_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_node_unprovision_log: "{{ tripleo_overcloud_node_unprovision_home_dir }}/CHANGEME.log"
 tripleo_overcloud_node_unprovision_log_combine: true
 tripleo_overcloud_node_unprovision_log_output: true
-tripleo_overcloud_node_unprovision_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_node_unprovision_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_node_unprovision_poll: 10
 tripleo_overcloud_node_unprovision_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

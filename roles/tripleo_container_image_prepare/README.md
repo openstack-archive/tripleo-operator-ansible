@@ -21,7 +21,6 @@ Role Variables
 * `tripleo_container_image_prepare_output_env_file`: (String) File to write heat environment file which specifies all image parameters. Default is not set.
 * `tripleo_container_image_prepare_output_roles_file`: (String) Roles file path on the remote system. Default is not set.
 * `tripleo_container_image_prepare_timeout`: (Number) Amount of time to wait for the command to conplete. Default: 1800
-* `tripleo_container_image_prepare_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 
 Output Variables
 ----------------

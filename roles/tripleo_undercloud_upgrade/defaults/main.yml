@@ -11,7 +11,6 @@ tripleo_undercloud_upgrade_inflight_validations: false
 tripleo_undercloud_upgrade_log: "{{ tripleo_undercloud_upgrade_home_dir }}/undercloud_upgrade.log"
 tripleo_undercloud_upgrade_log_combine: true
 tripleo_undercloud_upgrade_log_output: true
-tripleo_undercloud_upgrade_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_undercloud_upgrade_no_validations: false
 tripleo_undercloud_upgrade_poll: 10
 tripleo_undercloud_upgrade_timeout: 7200

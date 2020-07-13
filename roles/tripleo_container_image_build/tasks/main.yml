@@ -20,7 +20,7 @@
       {{ tripleo_container_image_build_tag | ternary('--tag ' ~ tripleo_container_image_build_tag, '') }}
       {{ tripleo_container_image_build_volumes | tripleo.operator.shell_arg_list('--volume') }}
       {{ tripleo_container_image_build_work_dir | ternary('--work-dir ' ~ tripleo_container_image_build_work_dir, '') }}
-      {{ tripleo_container_image_build_log_output | ternary((tripleo_container_image_build_log_redirect ~ " " ~ tripleo_container_image_build_log), '') }}
+      {{ tripleo_container_image_build_log_output | ternary((">" ~ tripleo_container_image_build_log), '') }}
       {{ tripleo_container_image_build_log_combine | ternary("2>&1", '') }}
     _build_env: {}
 

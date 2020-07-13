@@ -14,7 +14,6 @@ Global Variables
 Accross the roles, there are a few variables that can be defined and would be
 consumed by default.
 
-* `tripleo_log_redirect`: (String) Sets the function to use for log redirect. By defaults, uses '>'.
 * `tripleo_os_cloud`: (String) OS_CLOUD name to use when a command requires authentication. By default this will be used to populate any role specific os_cloud variable that may be defined. If this is defined, it will take precedence over `tripleo_rc_file`.
 * `tripleo_rc_file`: (String) File path on the remote system that contains the authentication environment variables that will be used to perform actions that require authentication.
 

@@ -24,7 +24,6 @@ tripleo_deploy_local_ip:
 tripleo_deploy_log: "{{ tripleo_deploy_home_dir }}/standalone_deploy.log"
 tripleo_deploy_log_combine: true
 tripleo_deploy_log_output: true
-tripleo_deploy_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_deploy_networks_file:
 tripleo_deploy_output_dir:
 tripleo_deploy_output_only: false

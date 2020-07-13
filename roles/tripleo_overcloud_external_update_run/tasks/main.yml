@@ -11,8 +11,7 @@
       {{ tripleo_overcloud_external_update_run_skip_tags | ternary('--skip-tags $UPDATE_SKIP_TAGS', '') }}
       {{ tripleo_overcloud_external_update_run_static_inventory | ternary('--static-inventory $UPDATE_STATIC_INVENTORY', '') }}
       {{ tripleo_overcloud_external_update_run_stack | ternary('--stack $UPDATE_STACK', '') }}
-      {{ tripleo_overcloud_external_update_run_log_output |
-         ternary((tripleo_overcloud_external_update_run_log_redirect ~ " " ~ tripleo_overcloud_external_update_run_log), '') }}
+      {{ tripleo_overcloud_external_update_run_log_output | ternary((">" ~ tripleo_overcloud_external_update_run_log), '') }}
       {{ tripleo_overcloud_external_update_run_log_combine | ternary("2>&1", '') }}
     _update_run_env:
       OS_CLOUD: "{{ tripleo_overcloud_external_update_run_os_cloud }}"

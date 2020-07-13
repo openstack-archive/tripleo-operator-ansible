@@ -8,7 +8,7 @@
       {{ tripleo_undercloud_install_inflight_validations | ternary("--inflight-validations", '') }}
       {{ tripleo_undercloud_install_dry_run | ternary("--dry-run", '') }}
       {{ tripleo_undercloud_install_yes | ternary("--yes", '') }}
-      {{ tripleo_undercloud_install_log_output | ternary((tripleo_undercloud_install_log_redirect ~ " " ~ tripleo_undercloud_install_log), '') }}
+      {{ tripleo_undercloud_install_log_output | ternary((">" ~ tripleo_undercloud_install_log), '') }}
       {{ tripleo_undercloud_install_log_combine | ternary("2>&1", '') }}
     _install_env: {}
 

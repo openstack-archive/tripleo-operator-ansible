@@ -8,8 +8,7 @@
       {{ tripleo_overcloud_image_build_image_names | tripleo.operator.shell_arg_list('--image-name') }}
       {{ tripleo_overcloud_image_build_no_skip | ternary('--no-skip', '') }}
       {{ tripleo_overcloud_image_build_output_directory | ternary('--output-directory ' ~ tripleo_overcloud_image_build_output_directory, '') }}
-      {{ tripleo_overcloud_image_build_log_output | ternary((tripleo_overcloud_image_build_log_redirect
-         ~ " " ~ tripleo_overcloud_image_build_log), '') }}
+      {{ tripleo_overcloud_image_build_log_output | ternary((">" ~ tripleo_overcloud_image_build_log), '') }}
       {{ tripleo_overcloud_image_build_log_combine | ternary("2>&1", '') }}
     _build_env: |
       {% set env_vars = {} %}

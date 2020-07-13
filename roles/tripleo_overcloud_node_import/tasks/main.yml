@@ -14,8 +14,7 @@
       {{ tripleo_overcloud_node_import_http_boot | ternary('--http-boot $IMPORT_HTTP_BOOT', '') }}
       {{ tripleo_overcloud_node_import_concurrency | ternary('--concurrency ' ~ tripleo_overcloud_node_import_concurrency, '') }}
       {{ tripleo_overcloud_node_import_environment_file }}
-      {{ tripleo_overcloud_node_import_log_output | ternary((tripleo_overcloud_node_import_log_redirect
-         ~ " " ~ tripleo_overcloud_node_import_log), '') }}
+      {{ tripleo_overcloud_node_import_log_output | ternary((">" ~ tripleo_overcloud_node_import_log), '') }}
       {{ tripleo_overcloud_node_import_log_combine | ternary("2>&1", '') }}
     _import_env:
       IMPORT_INSTANCE_BOOT_OPTION: "{{ tripleo_overcloud_node_import_instance_boot_option }}"

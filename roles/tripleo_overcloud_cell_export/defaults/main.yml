@@ -11,7 +11,6 @@ tripleo_overcloud_cell_export_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_cell_export_log: "{{ tripleo_overcloud_cell_export_home_dir }}/overcloud_cell_export.log"
 tripleo_overcloud_cell_export_log_combine: true
 tripleo_overcloud_cell_export_log_output: true
-tripleo_overcloud_cell_export_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_cell_export_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_cell_export_output_file:
 tripleo_overcloud_cell_export_poll: 10

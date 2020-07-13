@@ -31,7 +31,6 @@ Role Variables
 * `tripleo_overcloud_ffwd_upgrade_prepare_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_ffwd_upgrade_prepare_home_dir }}/overcloud_ffwd_upgrade_prepare.log"
 * `tripleo_overcloud_ffwd_upgrade_prepare_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_ffwd_upgrade_prepare_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
-* `tripleo_overcloud_ffwd_upgrade_prepare_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_ffwd_upgrade_prepare_networks_file`: (String) File path to a networks file for the deployment.
 * `tripleo_overcloud_ffwd_upgrade_prepare_no_cleanup`: (Boolean) String to enable no cleanup. Default: false
 * `tripleo_overcloud_ffwd_upgrade_prepare_no_config_download`: (Boolean) String to disable the config download software configuration. Default: false
