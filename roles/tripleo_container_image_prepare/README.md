@@ -14,7 +14,7 @@ Role Variables
 * `tripleo_container_image_prepare_become`: (Boolean) Run the command as root. This needs to be true when uploading to the local undercloud registry. Default: true
 * `tripleo_container_image_prepare_cleanup`: (String) Cleanup behavior for local images left after upload. Can be one of full, partial, or none. Default is not set.
 * `tripleo_container_image_prepare_debug`: (Boolean) Flag to print out the prepare command. Default: False
-* `tripleo_container_image_prepare_dry_run`: (Boolean) Perform a dry run upload which will not perform any push, pull or modify operations. The environment file will still be populaged. Default: false
+* `tripleo_container_image_prepare_dry_run`: (Boolean) Perform a dry run upload which will not perform any push, pull or modify operations. The environment file will still be populated. Default: false
 * `tripleo_container_image_prepare_environment_files`: (List) List of environment files. Default: []
 * `tripleo_container_image_prepare_environment_directory`: (List) Directories containing environment files. Should not be used if `tripleo_container_image_prepare_environment_files` is defined. Default: []
 * `tripleo_container_image_prepare_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"

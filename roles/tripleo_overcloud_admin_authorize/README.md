@@ -13,7 +13,7 @@ Role Variables
 
 * `tripleo_overcloud_admin_authorize_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_overcloud_admin_authorize_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
-* `tripleo_overcloud_admin_authorize_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_admin_authorize_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
+* `tripleo_overcloud_admin_authorize_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_overcloud_admin_authorize_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_admin_authorize_home_dir`: (String) Location to execute the command in. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_admin_authorize_os_cloud`: (String) OS_CLOUD value to use when running the command. If tripleo_os_cloud is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_admin_authorize_rc_file`.
 * `tripleo_overcloud_admin_authorize_output_dir`: (String) Directory to output ansible.cfg and ansible.log files. If not specified, will output to the `tripleo_overcloud_admin_authorize_home_dir`.
@@ -22,7 +22,7 @@ Role Variables
 * `tripleo_overcloud_admin_authorize_ssh_enable_timeout`: (Integer) Timeout for the ssh enable process to finish (Train version only)
 * `tripleo_overcloud_admin_authorize_ssh_key`: (String) Path to ssh key for the overcloud nodes.
 * `tripleo_overcloud_admin_authorize_ssh_network`: (String) Network name to use for ssh access to the overcloud nodes.
-* `tripleo_overcloud_admin_authorize_ssh_port_timeout`: (Integer) Timeout for teh ssh port to become active.
+* `tripleo_overcloud_admin_authorize_ssh_port_timeout`: (Integer) Timeout for the ssh port to become active.
 * `tripleo_overcloud_admin_authorize_ssh_user`: (String) User for ssh access to overcloud nodes
 * `tripleo_overcloud_admin_authorize_stack`: (String) Name or ID of the heat stack
 * `tripleo_overcloud_admin_authorize_timeout`: (Integer) Number in seconds to wait for the ansible execution of the deployment command to finish. Default: 3600

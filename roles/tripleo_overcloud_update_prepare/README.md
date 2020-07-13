@@ -18,23 +18,23 @@ Role Variables
 * `tripleo_overcloud_update_prepare_debug`: (Boolean) Flag to print out the command that is run. Default: false
 * `tripleo_overcloud_update_prepare_disable_password_generation`: (Boolean) Flag to disable password generation. Default: false
 * `tripleo_overcloud_update_prepare_disable_validations`: (Boolean) Flag to disable validations. Default: false
-* `tripleo_overcloud_update_prepare_dry_run`: (Boolean) Flag to enabel dry run. Default: false
+* `tripleo_overcloud_update_prepare_dry_run`: (Boolean) Flag to enable dry run. Default: false
 * `tripleo_overcloud_update_prepare_environment_dirs`: (List) A list of directory paths containing environment files for the deployment. Should not be used with environment files.
 * `tripleo_overcloud_update_prepare_environment_files`: (List) A list of environment file paths for the deployment.  Should not be used with environment dirs.
-* `tripleo_overcloud_update_prepare_force_postconfig`: (Boolean) Force the overclodu post-deployment configuration. Default: false
+* `tripleo_overcloud_update_prepare_force_postconfig`: (Boolean) Force the overcloud post-deployment configuration. Default: false
 * `tripleo_overcloud_update_prepare_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
-* `tripleo_overcloud_update_prepare_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_update_prepare_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
+* `tripleo_overcloud_update_prepare_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_overcloud_update_prepare_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_update_prepare_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
-* `tripleo_overcloud_update_prepare_inflight_validations`: (Boolean) Flag to enable inflight validations. Default: false
-* `tripleo_overcloud_update_prepare_libvirt_type`: (String) Libvirt domain time. Setting `NovaComputeLibvirtType` in an environment file is prefered over this option.
-* `tripleo_overcloud_update_prepare_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
+* `tripleo_overcloud_update_prepare_inflight_validations`: (Boolean) Flag to enable in-flight validations. Default: false
+* `tripleo_overcloud_update_prepare_libvirt_type`: (String) Libvirt domain time. Setting `NovaComputeLibvirtType` in an environment file is preferred over this option.
+* `tripleo_overcloud_update_prepare_log_combine`: (Boolean) Flag to enable capturing stderr with stdout. Default: true
 * `tripleo_overcloud_update_prepare_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
 * `tripleo_overcloud_update_prepare_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_update_prepare_home_dir }}/overcloud_update_prepare.log"
 * `tripleo_overcloud_update_prepare_networks_file`: (String) File path to a networks file for the deployment.
 * `tripleo_overcloud_update_prepare_no_cleanup`: (Boolean) String to enable no cleanup. Default: false
 * `tripleo_overcloud_update_prepare_no_config_download`: (Boolean) String to disable the config download software configuration. Default: false
-* `tripleo_overcloud_update_prepare_no_proxy`: (String) String containing a comma seperated list of hosts to skip proxing when http_proxy and https_proxy are used.
-* `tripleo_overcloud_update_prepare_ntp_server`: (String) String containing a comma seperated list of ntp servers. Setting `NtpServer` in an environment file is prefered over this option.
+* `tripleo_overcloud_update_prepare_no_proxy`: (String) String containing a comma separated list of hosts to skip proxying when http_proxy and https_proxy are used.
+* `tripleo_overcloud_update_prepare_ntp_server`: (String) String containing a comma separated list of NTP servers. Setting `NtpServer` in an environment file is preferred over this option.
 * `tripleo_overcloud_update_prepare_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_update_prepare_rc_file`.
 * `tripleo_overcloud_update_prepare_output_dir`: (String) Path to a directory to output for the configuration download output.
 * `tripleo_overcloud_update_prepare_overcloud_ssh_enable_timeout`: (Integer) Timeout for the ssh enable process to finish.

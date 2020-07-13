@@ -14,9 +14,9 @@ Role Variables
 * `tripleo_overcloud_image_upload_architecture`: (String) Architecture type for the images being uploaded.
 * `tripleo_overcloud_image_upload_debug`: (Boolean) Flag to print out the command that is run. Default: False
 * `tripleo_overcloud_image_upload_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
-* `tripleo_overcloud_image_upload_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_overcloud_image_upload_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
+* `tripleo_overcloud_image_upload_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_overcloud_image_upload_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_image_upload_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
-* `tripleo_overcloud_image_upload_http_boot`: (String) Root directory for the ironic-pytho-agent-image
+* `tripleo_overcloud_image_upload_http_boot`: (String) Root directory for the ironic-python-agent-image
 * `tripleo_overcloud_image_upload_image_path`: (String) Path to directory overcloud images. By default the command will use the images in `tripleo_overcloud_image_upload_home_dir` if this is not specified.
 * `tripleo_overcloud_image_upload_image_type`: (String) If specified, restrict the image type to upload. Should be one of {os,ironic-python-agent}
 * `tripleo_overcloud_image_upload_ironic_python_agent_name`: (String) OpenStack ironic-python-agent image filename
@@ -28,7 +28,7 @@ Role Variables
 * `tripleo_overcloud_image_upload_platform`: (String) Platform type for the images being uploaded.
 * `tripleo_overcloud_image_upload_rc_file`: (String) (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
 * `tripleo_overcloud_image_upload_update_existing`: (Boolean) Update the images if they already exist. Default: false
-* `tripleo_overcloud_image_upload_whole_disk`: (Boolean) Overcloud iamge bneing uploaded is considered a whole disk image. Default: false
+* `tripleo_overcloud_image_upload_whole_disk`: (Boolean) Overcloud image being uploaded is considered a whole disk image. Default: false
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

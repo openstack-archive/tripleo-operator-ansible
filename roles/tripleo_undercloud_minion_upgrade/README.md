@@ -13,7 +13,7 @@ Role Variables
 
 * `tripleo_undercloud_minion_upgrade_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_undercloud_minion_upgrade_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
-* `tripleo_undercloud_minion_upgrade_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_undercloud_minion_upgrade_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
+* `tripleo_undercloud_minion_upgrade_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_undercloud_minion_upgrade_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_undercloud_minion_upgrade_dry_run`: (Boolean) Flag to add --dry-run to the upgrade command. Default: false
 * `tripleo_undercloud_minion_upgrade_force_stack_update`: (Boolean) Flag to add --force-stack-update to the upgrade command. Default: false
 * `tripleo_undercloud_minion_upgrade_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"

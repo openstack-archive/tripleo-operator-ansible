@@ -19,7 +19,7 @@ Role Variables
 * `tripleo_container_image_build_distro`: (String) Ability to override the distro name; e.g. rhel. Default: ''
 * `tripleo_container_image_build_excludes`: (List) Name of containers to exclude from the build. Default: []
 * `tripleo_container_image_build_extra_config`: (String) YAML Config file specifying the extra metadata to override; e.g. labels. Default: ''
-* `tripleo_container_image_build_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjonction with `tripleo_container_image_build_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
+* `tripleo_container_image_build_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_container_image_build_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_container_image_build_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_container_image_build_home_dir` (String): Path to the home directory. Default: {{ ansible_env.HOME }}
 * `tripleo_container_image_build_log` (String): Path to the log file. Default to {{ tripleo_container_image_build_home_dir }}/container_image_build.log

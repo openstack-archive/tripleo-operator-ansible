@@ -13,7 +13,7 @@ Role Variables
 
 * `tripleo_overcloud_failures_debug`: (Boolean) Flag to print out the command that is run. Default: False
 * `tripleo_overcloud_failures_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_failures_rc_file`.
-* `tripleo_overcloud_failures_plan`: (String) The name of the stakc/plan. Default: overcloud
+* `tripleo_overcloud_failures_plan`: (String) The name of the stack/plan. Default: overcloud
 * `tripleo_overcloud_failures_rc_file`: (String) (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
 
 NOTE: Please note that this command should be run against the undercloud so the

@@ -14,7 +14,7 @@ Role Variables
 * `tripleo_overcloud_node_provide_all_manageable`: (Boolean) Provide all nodes in manageable state. REQUIRED if UUIDs are not passed. Default: False
 * `tripleo_overcloud_node_provide_debug`: (Boolean) Flag to print out the delete command. Default: False
 * `tripleo_overcloud_node_provide_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
-* `tripleo_overcloud_node_provide_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
+* `tripleo_overcloud_node_provide_log_combine`: (Boolean) Flag to enable capturing stderr with stdout. Default: true
 * `tripleo_overcloud_node_provide_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
 * `tripleo_overcloud_node_provide_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_node_provide_home_dir }}/overcloud_node_provide.log"
 * `tripleo_overcloud_node_provide_node_uuids`: (List) List of  UUIDs to provide. REQUIRED if '--all-manageable' is not passed. Default []
