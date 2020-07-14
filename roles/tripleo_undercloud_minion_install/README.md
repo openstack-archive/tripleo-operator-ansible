@@ -23,7 +23,6 @@ Role Variables
 * `tripleo_undercloud_minion_install_yes`: (Boolean) Flag to add --yes to the install. Default: false
 * `tripleo_undercloud_minion_install_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true
 * `tripleo_undercloud_minion_install_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
-* `tripleo_undercloud_minion_install_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_undercloud_minion_install_log`: (String) Install log file path. Default: "{{ tripleo_undercloud_minion_install_home_dir }}/undercloud_minion_install.log"
 
 Output Variables

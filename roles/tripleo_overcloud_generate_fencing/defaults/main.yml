@@ -15,7 +15,6 @@ tripleo_overcloud_generate_fencing_ipmi_no_lanplus: false
 tripleo_overcloud_generate_fencing_log: "{{ tripleo_overcloud_generate_fencing_home_dir }}/overcloud_generate_fencing.log"
 tripleo_overcloud_generate_fencing_log_combine: true
 tripleo_overcloud_generate_fencing_log_output: true
-tripleo_overcloud_generate_fencing_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_generate_fencing_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_generate_fencing_output_file:
 tripleo_overcloud_generate_fencing_poll: 10

@@ -10,7 +10,7 @@
       {{ tripleo_overcloud_update_run_ssh_user | ternary('--ssh-user $UPDATE_SSH_USER', '') }}
       {{ tripleo_overcloud_update_run_static_inventory | ternary('--static-inventory $UPDATE_STATIC_INVENTORY', '') }}
       {{ tripleo_overcloud_update_run_stack | ternary('--stack $UPDATE_STACK', '') }}
-      {{ tripleo_overcloud_update_run_log_output | ternary((tripleo_overcloud_update_run_log_redirect ~ " " ~ tripleo_overcloud_update_run_log), '') }}
+      {{ tripleo_overcloud_update_run_log_output | ternary((">" ~ tripleo_overcloud_update_run_log), '') }}
       {{ tripleo_overcloud_update_run_log_combine | ternary("2>&1", '') }}
     _update_run_env:
       UPDATE_LIMIT: "{{ tripleo_overcloud_update_run_limit | quote }}"

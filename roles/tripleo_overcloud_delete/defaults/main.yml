@@ -8,7 +8,6 @@ tripleo_overcloud_delete_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_delete_log: "{{ tripleo_overcloud_delete_home_dir }}/overcloud_delete.log"
 tripleo_overcloud_delete_log_combine: true
 tripleo_overcloud_delete_log_output: true
-tripleo_overcloud_delete_log_redirect: "{{ tripleo_log_redirect | default('>') }}"
 tripleo_overcloud_delete_name:
 tripleo_overcloud_delete_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_delete_poll: 10

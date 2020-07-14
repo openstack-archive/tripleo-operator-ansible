@@ -9,8 +9,7 @@
       {{ tripleo_overcloud_ffwd_upgrade_run_static_inventory | ternary('--static-inventory $FFWD_STATIC_INVENTORY', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_run_stack | ternary('--stack $FFWD_STACK', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_run_yes | ternary('--yes', '') }}
-      {{ tripleo_overcloud_ffwd_upgrade_run_log_output | ternary((tripleo_overcloud_ffwd_upgrade_run_log_redirect
-         ~ " " ~ tripleo_overcloud_ffwd_upgrade_run_log), '') }}
+      {{ tripleo_overcloud_ffwd_upgrade_run_log_output | ternary((">" ~ tripleo_overcloud_ffwd_upgrade_run_log), '') }}
       {{ tripleo_overcloud_ffwd_upgrade_run_log_combine | ternary("2>&1", '') }}
     _run_env:
       FFWD_SSH_USER: "{{ tripleo_overcloud_ffwd_upgrade_run_ssh_user }}"

@@ -37,7 +37,7 @@
       {{ tripleo_deploy_inflight_validations | ternary('--inflight-validations', '') }}
       {{ tripleo_deploy_force_stack_create | ternary('--force-stack-create', '') }}
       {{ tripleo_deploy_force_stack_update | ternary('--force-stack-update', '') }}
-      {{ tripleo_deploy_log_output | ternary((tripleo_deploy_log_redirect ~ " " ~ tripleo_deploy_log), '') }}
+      {{ tripleo_deploy_log_output | ternary((">" ~ tripleo_deploy_log), '') }}
       {{ tripleo_deploy_log_combine | ternary("2>&1", '') }}
     _deploy_env:
       DEPLOY_CONTROL_VIP: "{{ tripleo_deploy_control_virtual_ip }}"

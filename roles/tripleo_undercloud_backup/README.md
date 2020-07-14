@@ -19,7 +19,6 @@ Role Variables
 * `tripleo_undercloud_backup_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_undercloud_backup_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true
 * `tripleo_undercloud_backup_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
-* `tripleo_undercloud_backup_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_undercloud_backup_poll`: (Integer) Number of seconds to wait between checks to see if the backup command has completed. This should be set to a value greater or equal to 1. Default: 10
 * `tripleo_undercloud_backup_timeout`: (Integer) Timeout for the backup command. Default: 7200
 * `tripleo_undercloud_backup_log`: (String) Backup log file path. Default: "{{ tripleo_undercloud_backup_home_dir }}/undercloud_backup.log"

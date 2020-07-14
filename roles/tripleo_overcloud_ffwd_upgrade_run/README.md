@@ -17,7 +17,6 @@ Role Variables
 * `tripleo_overcloud_ffwd_upgrade_run_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_ffwd_upgrade_run_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_ffwd_upgrade_run_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
-* `tripleo_overcloud_ffwd_upgrade_run_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_ffwd_upgrade_run_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_ffwd_upgrade_run_home_dir }}/overcloud_ffwd_upgrade_run.log"
 * `tripleo_overcloud_ffwd_upgrade_run_playbook`: (List) List of playbook(s) to use for the upgrade. Defaults: []
 * `tripleo_overcloud_ffwd_upgrade_run_poll`: (Integer) Number of seconds to wait between each checks to see if the deployment command has completed. Default: 10

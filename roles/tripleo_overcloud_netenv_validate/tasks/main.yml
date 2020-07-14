@@ -5,8 +5,7 @@
     _validate_cmd: >-
       {{ openstack_bin }} overcloud netenv validate
       {{ tripleo_overcloud_netenv_validate_file | ternary('--file $NETENV_FILE', '') }}
-      {{ tripleo_overcloud_netenv_validate_log_output | ternary((tripleo_overcloud_netenv_validate_log_redirect
-         ~ " " ~ tripleo_overcloud_netenv_validate_log), '') }}
+      {{ tripleo_overcloud_netenv_validate_log_output | ternary((">" ~ tripleo_overcloud_netenv_validate_log), '') }}
       {{ tripleo_overcloud_netenv_validate_log_combine | ternary("2>&1", '') }}
     _validate_env:
       NETENV_FILE: "{{ tripleo_overcloud_netenv_validate_file | quote }}"

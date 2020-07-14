@@ -21,7 +21,6 @@ Role Variables
 * `tripleo_overcloud_container_image_tag_discover_image`: (String) REQUIRED. Fully qualified name of the image to discover the tag.
 * `tripleo_overcloud_container_image_tag_discover_log_combine`: (Boolean) Flag to enable captching stderr with stdout. Default: true
 * `tripleo_overcloud_container_image_tag_discover_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
-* `tripleo_overcloud_container_image_tag_discover_log_redirect`: (String) How to redirect the log output. By default uses the value of `tripleo_log_redirect` or '>' if `tripleo_log_redirect` is not defined.
 * `tripleo_overcloud_container_image_tag_discover_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_container_image_tag_discover_home_dir }}/overcloud_container_image_tag_discover.log"
 * `tripleo_overcloud_container_image_tag_discover_poll`: (Integer) Number of seconds to wait between each checks to see if the command has completed. Default: 10
 * `tripleo_overcloud_container_image_tag_discover_tag_from_label`: (String) Label template format

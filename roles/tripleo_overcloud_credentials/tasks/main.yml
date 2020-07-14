@@ -7,7 +7,7 @@
       {{ openstack_bin }} overcloud credentials
       {{ tripleo_overcloud_credentials_directory | ternary('--directory $CREDENTIALS_DIR', '') }}
       {{ tripleo_overcloud_credentials_plan }}
-      {{ tripleo_overcloud_credentials_log_output | ternary((tripleo_overcloud_credentials_log_redirect ~ " " ~ tripleo_overcloud_credentials_log), '') }}
+      {{ tripleo_overcloud_credentials_log_output | ternary((">" ~ tripleo_overcloud_credentials_log), '') }}
       {{ tripleo_overcloud_credentials_log_combine | ternary("2>&1", '') }}
     _creds_env:
       CREDENTIALS_DIR: "{{ tripleo_overcloud_credentials_directory }}"
