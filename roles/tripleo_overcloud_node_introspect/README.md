@@ -11,6 +11,7 @@ None.
 Role Variables
 --------------
 
+* `tripleo_overcloud_node_introspect_debug`: : (Boolean) Flag to print out the introspection command. Default: False
 * `tripleo_overcloud_node_introspect_node_uuids`: Baremetal Node UUIDs for the node(s) to be introspected.
 * `tripleo_overcloud_node_introspect_all_manageable`: Introspect all nodes currently in 'manageable' state.
 * `tripleo_overcloud_node_introspect_provide`: Provide (make available) the nodes once introspected.
