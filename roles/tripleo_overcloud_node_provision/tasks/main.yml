@@ -40,6 +40,13 @@
       debug:
         var: _provision_env
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_node_provision_home_dir }}/tripleo_overcloud_node_provision.sh"
+    shell_command: "{{ _provision_cmd }}"
+    shell_environment: "{{ _provision_env }}"
+  when: tripleo_overcloud_node_provision_generate_scripts|bool
+
 - name: overcloud node provision
   shell: "{{ _provision_cmd }}"  # noqa 305
   environment: "{{ _provision_env }}"
@@ -51,7 +58,9 @@
   async: "{{ tripleo_overcloud_node_provision_timeout }}"
   poll: "{{ tripleo_overcloud_node_provision_poll }}"
   changed_when: false
-  when: not ansible_check_mode|bool
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_node_provision_generate_scripts_only|bool
 
 
 - name: Set output fact

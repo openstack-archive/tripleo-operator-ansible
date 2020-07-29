@@ -5,6 +5,7 @@ tripleo_overcloud_node_provision_concurrency:
 tripleo_overcloud_node_provision_debug: false
 tripleo_overcloud_node_provision_deployment_file:
 tripleo_overcloud_node_provision_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_node_provision_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
 tripleo_overcloud_node_provision_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_node_provision_log: "{{ tripleo_overcloud_node_provision_home_dir }}/overcloud_node_provision.log"
 tripleo_overcloud_node_provision_log_combine: true
