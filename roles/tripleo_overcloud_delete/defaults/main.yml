@@ -12,5 +12,6 @@ tripleo_overcloud_delete_name:
 tripleo_overcloud_delete_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_delete_poll: 10
 tripleo_overcloud_delete_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
+tripleo_overcloud_delete_skip_ipa_cleanup: false
 tripleo_overcloud_delete_timeout: 3600
 tripleo_overcloud_delete_yes: true

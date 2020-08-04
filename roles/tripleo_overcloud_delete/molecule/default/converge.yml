@@ -42,3 +42,14 @@
       assert:
         that:
           - tripleo_overcloud_delete_output == "overcloud delete --yes"
+
+    - name: Validate "tripleo_overcloud_delete_skip_ipa_cleanup"
+      include_role:
+        name: "tripleo_overcloud_delete"
+      vars:
+        tripleo_overcloud_delete_skip_ipa_cleanup: true
+
+    - name: Assert tripleo_overcloud_delete_skip_ipa_cleanup
+      assert:
+        that:
+          - tripleo_overcloud_delete_output == "overcloud delete --skip-ipa-cleanup"

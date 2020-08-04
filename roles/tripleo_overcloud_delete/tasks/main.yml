@@ -6,6 +6,7 @@
       {{ tripleo_overcloud_delete_os_cloud | ternary('', "source " ~ tripleo_overcloud_delete_rc_file ~ "; ") }}
       {{ openstack_bin }} overcloud delete
       {{ tripleo_overcloud_delete_yes | ternary('--yes', '') }}
+      {{ tripleo_overcloud_delete_skip_ipa_cleanup | ternary('--skip-ipa-cleanup', '') }}
       {{ tripleo_overcloud_delete_name }}
       {{ tripleo_overcloud_delete_log_output | ternary((">" ~ tripleo_overcloud_delete_log), '') }}
       {{ tripleo_overcloud_delete_log_combine | ternary("2>&1", '') }}

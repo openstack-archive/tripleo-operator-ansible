@@ -22,6 +22,7 @@ Role Variables
 * `tripleo_overcloud_delete_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_delete_rc_file`.
 * `tripleo_overcloud_delete_poll`: (Integer) Number of seconds to wait between each checks to see if the command has completed. Default: 10
 * `tripleo_overcloud_delete_rc_file`: (String) (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
+* `tripleo_overcloud_delete_skip_ipa_cleanup`: (Boolean) Skip IPA cleanup actions during overcloud removal. Default: false
 * `tripleo_overcloud_delete_timeout`: (Integer) Number in seconds to wait for the ansible execution of the command to finish. Default: 3600
 * `tripleo_overcloud_delete_yes`: (Boolean) Flag to indicate if we should prompt for yes/no. Default: false
 
