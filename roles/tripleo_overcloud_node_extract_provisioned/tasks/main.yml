@@ -1,0 +1,73 @@
+---
+# tasks file for tripleo_overcloud_node_extract_provisioned
+- name: Check if output file exists
+  stat:
+      path: "{{ tripleo_overcloud_node_extract_provisioned_output_file }}"
+  register: output_file_stat
+
+- name: Raise error for existing output file
+  fail:
+      msg: "output file already exists: {{ tripleo_overcloud_node_extract_provisioned_output_file }}"
+  when:
+      - tripleo_overcloud_node_extract_provisioned_overwrite_action == 'error'
+      - output_file_stat.stat.exists
+
+- name: Output file needs to be written
+  when: not (tripleo_overcloud_node_extract_provisioned_overwrite_action == 'skip' and
+             output_file_stat.stat.exists)
+  block:
+
+      - name: Set overcloud node provision facts
+        set_fact:
+            _provision_cmd: >-
+                {{ tripleo_overcloud_node_extract_provisioned_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_extract_provisioned_rc_file ~ "; ") }}
+                {{ openstack_bin }} overcloud node extract provisioned
+                {{ tripleo_overcloud_node_extract_provisioned_output_file | ternary('-o $EXTRACT_OUTPUT', '') }}
+                {{ tripleo_overcloud_node_extract_provisioned_stack | ternary('--stack $EXTRACT_STACK', '') }}
+                {{ tripleo_overcloud_node_extract_provisioned_log_output | ternary((">" ~ tripleo_overcloud_node_extract_provisioned_log), '') }}
+                {{ tripleo_overcloud_node_extract_provisioned_log_combine | ternary("2>&1", '') }}
+                --yes
+            _provision_env:
+                OS_CLOUD: "{{ tripleo_overcloud_node_extract_provisioned_os_cloud }}"
+                EXTRACT_OUTPUT: "{{ tripleo_overcloud_node_extract_provisioned_output_file | quote }}"
+                EXTRACT_STACK: "{{ tripleo_overcloud_node_extract_provisioned_stack | quote }}"
+
+      - name: Preserve existing log file if exists
+        timestamp_file:
+            path: "{{ tripleo_overcloud_node_extract_provisioned_log }}"
+        when: tripleo_overcloud_node_extract_provisioned_log_output|bool
+
+      - name: Show debug information
+        when: tripleo_overcloud_node_extract_provisioned_debug|bool
+        block:
+            - name: Show the command
+              debug:
+                  var: _provision_cmd
+
+            - name: Show the environment
+              debug:
+                  var: _provision_env
+
+      - name: Write reproducer script
+        tripleo_shell_script:
+            dest: "{{ tripleo_overcloud_node_extract_provisioned_home_dir }}/tripleo_overcloud_node_extract_provisioned.sh"
+            shell_command: "{{ _build_cmd }}"
+            shell_environment: "{{ _build_env }}"
+        when: tripleo_overcloud_node_extract_provisioned_generate_scripts|bool
+
+      - name: overcloud node extract provisioned
+        shell: "{{ _provision_cmd }}"  # noqa 305
+        environment: "{{ _provision_env }}"
+        args:
+            executable: /bin/bash
+            chdir: "{{ tripleo_overcloud_node_extract_provisioned_home_dir }}"
+            warn: false
+        register: tripleo_overcloud_node_extract_provisioned_result
+        changed_when: false
+        when: not ansible_check_mode|bool
+
+      - name: Set output fact
+        when:
+            - tripleo_overcloud_node_extract_provisioned_result.stdout is defined
+        set_fact:
+            tripleo_overcloud_node_extract_provisioned_output: "{{ tripleo_overcloud_node_extract_provisioned_result.stdout }}"
