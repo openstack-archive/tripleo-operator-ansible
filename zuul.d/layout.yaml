@@ -25,6 +25,10 @@
             files: &containers_minion_files
               - ^roles/tripleo_undercloud_install/.*$
               - ^roles/tripleo_undercloud_minion_install/.*$
+        - tripleo-ci-centos-8-standalone:
+            dependencies: *deps_unit_lint
+            files: &standalone_files
+              - ^roles/tripleo_deploy/.*$
     gate:
       jobs:
         - openstack-tox-linters
@@ -33,6 +37,8 @@
             files: *containers_multinode_files
         - tripleo-ci-centos-8-containers-undercloud-minion:
             files: *containers_minion_files
+        - tripleo-ci-centos-8-standalone:
+            files: *standalone_files
     promote:
       jobs:
       - promote-openstack-tox-docs: *tripleo-docs
