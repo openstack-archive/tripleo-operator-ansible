@@ -24,7 +24,7 @@ Role Variables
 * `tripleo_overcloud_deploy_environment_dirs`: (List) A list of directory paths containing environment files for the deployment. Should not be used with environment files.
 * `tripleo_overcloud_deploy_environment_files`: (List) A list of environment file paths for the deployment.  Should not be used with environment dirs.
 * `tripleo_overcloud_deploy_force_postconfig`: (Boolean) Force the overcloud post-deployment configuration. Default: false
-* `tripleo_overcloud_deploy_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By defaukt uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` isn't defined.
+* `tripleo_overcloud_deploy_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` isn't defined.
 * `tripleo_overcloud_deploy_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_overcloud_deploy_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
 * `tripleo_overcloud_deploy_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_deploy_inflight_validations`: (Boolean) Flag to enable in-flight validations. Default: false
