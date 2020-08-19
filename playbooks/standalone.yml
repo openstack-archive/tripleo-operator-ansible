@@ -81,10 +81,10 @@
             KernelIpNonLocalBind: 1
             NeutronPublicInterface: {{ standalone_local_interface }}
             NeutronBridgeMappings: datacenter:br-ctlplane
-            NeutronPyshicalBridge: br-ctlplane
+            NeutronPhysicalBridge: br-ctlplane
             StandaloneEnableRoutedNetworks: false
             StandaloneHomeDir: {{ ansible_env.HOME }}
-            InterfacesLocalMtu: {{ standalone_local_mtu }}
+            InterfaceLocalMtu: {{ standalone_local_mtu }}
             NovaComputeLibvirtType: {{ standalone_virt_type }}
         dest: "{{ ansible_env.HOME }}/parameters.yaml"
 
