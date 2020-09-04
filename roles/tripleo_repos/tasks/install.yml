@@ -29,4 +29,6 @@
   yum:
     name: "{{ _tripleo_repos_repo_url }}{{ _tripleo_repos_rpm }}"
     state: present
+    # We do not sign the rpm and we are fetching straight from a URL
+    disable_gpg_check: true
   become: true
