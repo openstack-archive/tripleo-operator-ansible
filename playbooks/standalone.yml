@@ -17,6 +17,7 @@
       - 8.8.8.8
     standalone_hostname: 'standalone.localdomain'
     standalone_ip: 192.168.24.2
+    standalone_control_virtual_ip: 192.168.24.3
     standalone_cidr: 24
     standalone_gateway:
     standalone_local_mtu: 1400
