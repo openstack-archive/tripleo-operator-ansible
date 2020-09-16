@@ -19,6 +19,12 @@
     var: _prepare_cmd
   when: tripleo_container_image_prepare_debug|bool
 
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_container_image_prepare_home_dir }}/tripleo_container_prepare.sh"
+    shell_command: "{{ _prepare_cmd }}"
+  when: tripleo_container_image_prepare_scripts|bool
+
 - name: Container image prepare
   shell: "{{ _prepare_cmd }}"  # noqa 305
   async: "{{ tripleo_container_image_prepare_timeout }}"

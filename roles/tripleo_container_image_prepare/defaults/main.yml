@@ -14,4 +14,5 @@ tripleo_container_image_prepare_log_output: false
 tripleo_container_image_prepare_log_combine: true
 tripleo_container_image_prepare_output_env_file:
 tripleo_container_image_prepare_roles_file:
+tripleo_container_image_prepare_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_container_image_prepare_timeout: 1800
