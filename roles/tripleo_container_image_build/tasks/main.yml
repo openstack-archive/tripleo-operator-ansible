@@ -16,6 +16,7 @@
       {{ tripleo_container_image_build_prefix | ternary('--prefix ' ~ tripleo_container_image_build_prefix, '') }}
       {{ tripleo_container_image_build_push | ternary('--push', '') }}
       {{ tripleo_container_image_build_registry | ternary('--registry ' ~ tripleo_container_image_build_registry, '') }}
+      {{ tripleo_container_image_build_rhel_modules | tripleo.operator.shell_arg_list('--rhel-modules') }}
       {{ tripleo_container_image_build_skip_build | ternary('--skip-build', '') }}
       {{ tripleo_container_image_build_tag | ternary('--tag ' ~ tripleo_container_image_build_tag, '') }}
       {{ tripleo_container_image_build_volumes | tripleo.operator.shell_arg_list('--volume') }}

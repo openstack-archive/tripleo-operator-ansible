@@ -165,6 +165,18 @@
           - tripleo_container_image_build_output ==
             "tripleo container image build --registry localhost:8787"
 
+    - name: Check parameter "tripleo_container_image_build_rhel_modules"
+      include_role:
+        name: "tripleo_container_image_build"
+      vars:
+        tripleo_container_image_build_rhel_modules: container-tools:2.0
+
+    - name: Assert "tripleo_container_image_build_rhel_modules"
+      assert:
+        that:
+          - tripleo_container_image_build_output ==
+            "tripleo container image build --rhel-modules container-tools:2.0"
+
     - name: Check parameter "tripleo_container_image_build_skip_build"
       include_role:
         name: "tripleo_container_image_build"
