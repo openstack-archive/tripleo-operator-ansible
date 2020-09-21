@@ -20,6 +20,7 @@ Role Variables
 * `tripleo_container_image_prepare_home_dir`: (String) Home directory for the undercloud user. Default: "{{ ansible_env.HOME }}"
 * `tripleo_container_image_prepare_output_env_file`: (String) File to write heat environment file which specifies all image parameters. Default is not set.
 * `tripleo_container_image_prepare_output_roles_file`: (String) Roles file path on the remote system. Default is not set.
+* `tripleo_container_image_prepare_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.
 * `tripleo_container_image_prepare_timeout`: (Number) Amount of time to wait for the command to conplete. Default: 1800
 
 Output Variables
