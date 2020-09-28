@@ -25,9 +25,11 @@ repos:
         types: [file, yaml]
         entry: yamllint --strict -f parsable
   - repo: https://github.com/ansible/ansible-lint
-    rev: v4.1.1a2
+    rev: v4.3.5
     hooks:
       - id: ansible-lint
+        additional_dependencies:
+          - 'ansible<2.10'
         files: \.(yaml|yml)$
         entry: >-
           ansible-lint --force-color -v -x "ANSIBLE0006,ANSIBLE0007,ANSIBLE0010,ANSIBLE0012,ANSIBLE0013,ANSIBLE0016"

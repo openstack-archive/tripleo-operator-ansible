@@ -87,6 +87,7 @@
             InterfaceLocalMtu: {{ standalone_local_mtu }}
             NovaComputeLibvirtType: {{ standalone_virt_type }}
         dest: "{{ ansible_env.HOME }}/parameters.yaml"
+        mode: '0644'
 
     - name: Generate ContainerImagePrepare
       include_role:

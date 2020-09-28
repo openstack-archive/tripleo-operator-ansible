@@ -57,6 +57,7 @@
       file:
         state: touch
         path: "{{ tempfile.path }}"
+        mode: '0644'
 
     - name: Call with skip for existing output file
       include_role:

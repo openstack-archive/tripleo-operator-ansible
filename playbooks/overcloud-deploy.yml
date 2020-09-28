@@ -49,6 +49,7 @@
             DnsServers: {{ deploy_dns }}
             NtpServer: {{ deploy_ntp }}
         dest: "{{ ansible_env.HOME }}/parameters.yaml"
+        mode: '0644'
 
     - name: Run overcloud deployment
       include_role:

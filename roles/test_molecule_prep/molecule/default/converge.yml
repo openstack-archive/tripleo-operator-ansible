@@ -3,10 +3,6 @@
   hosts: all
   tasks:
 
-    - name: "Include test_molecule_prep"
-      include_role:
-        name: "test_molecule_prep"
-
     - name: Test known collection filter
       set_fact:
         test_var: "{{ 'test' | tripleo.operator.shell_arg_list(parameter='--test') }}"

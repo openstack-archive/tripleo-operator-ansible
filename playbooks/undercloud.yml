@@ -60,6 +60,7 @@
         src: /usr/share/python-tripleoclient/undercloud.conf.sample
         dest: "{{ ansible_env.HOME }}/undercloud.conf"
         remote_src: true
+        mode: '0644'
 
     - name: Configure undercloud.conf
       ini_file:
@@ -67,6 +68,7 @@
         section: "{{ item.section }}"
         option: "{{ item.option }}"
         value: "{{ item.value }}"
+        mode: '0644'
       loop:
         - {'section': 'DEFAULT', 'option': 'undercloud_debug', 'value': "{{ install_debug }}"}
         - {'section': 'DEFAULT', 'option': 'local_mtu', 'value': "{{ undercloud_local_mtu }}"}
