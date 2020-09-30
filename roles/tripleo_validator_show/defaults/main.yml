@@ -1,0 +1,3 @@
+---
+tripleo_validator_show_debug: false
+tripleo_validator_show_validation: []

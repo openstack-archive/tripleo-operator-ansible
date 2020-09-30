@@ -1,0 +1,36 @@
+---
+- name: Fail if we do not pass validation
+  fail:
+    msg: "Please pass either tripleo_validator_show_validation"
+  when:
+    - tripleo_validator_show_validation | length == 0
+
+- name: Setup validator show facts
+  set_fact:
+    _validator_show_cmd: >-
+      {{ openstack_bin }} tripleo validator show --validation
+      {{ tripleo_validator_show_validation | ternary(' "${TRIPLEO_VALIDATOR_SHOW_VALIDATION}"', '') }}
+    _validator_show_env:
+      TRIPLEO_VALIDATOR_SHOW_VALIDATION: >-
+        {%- if tripleo_validator_show_validation is string -%}
+        {{ tripleo_validator_show_validation }}
+        {%- else -%}
+        {{ tripleo_validator_show_validation | join(',') }}
+        {%- endif -%}
+
+- name: Show debug information
+  when:
+    tripleo_validator_show_debug|bool
+  block:
+    - name: Show validator show environment
+      debug:
+        var: _validator_show_env
+    - name: Show validator show command
+      debug:
+        var: _validator_show_cmd
+
+- name: Show validation
+  shell: "{{ _validator_show_cmd }}"
+  environment: "{{ _validator_show_env }}"
+  register: tripleo_validator_show_result
+  changed_when: true

@@ -1,0 +1,23 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_validator_show_debug: true
+  tasks:
+
+    - name: Check parameter "tripleo_validator_show_validation" as a single element
+      include_role:
+        name: "tripleo_validator_show"
+      vars:
+        tripleo_validator_show_validation:
+          - 'check_ram'
+
+    - name: Assert "tripleo_validator_show_validation"
+      assert:
+        that:
+          - tripleo_validator_show_result.stdout ==
+            "tripleo validator show --validation check_ram"
