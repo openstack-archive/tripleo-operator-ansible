@@ -1,0 +1,20 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_validator_run_debug: true
+  tasks:
+
+    - name: Check parameter "tripleo_validator_list" as a list
+      include_role:
+        name: "tripleo_validator_list"
+
+    - name: Assert "tripleo_validator_list"
+      assert:
+        that:
+          - tripleo_validator_list_result.stdout ==
+            "tripleo validator list"
