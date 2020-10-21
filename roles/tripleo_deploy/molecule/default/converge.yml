@@ -189,6 +189,23 @@
         that:
           - tripleo_deploy_output == "tripleo deploy --heat-api-port 1111 --local-ip 192.168.24.2/24"
 
+    - name: Check parameter "tripleo_deploy_heat_container_image"
+      include_role:
+        name: "tripleo_deploy"
+      vars:
+        tripleo_deploy_templates:
+        tripleo_deploy_stack:
+        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone_role:
+        tripleo_deploy_timeout_arg:
+        tripleo_deploy_heat_container_image: quay.io/tripleomaster/openstack-heat-all:foo
+
+    - name: Assert "tripleo_deploy_heat_api_port"
+      assert:
+        that:
+          - tripleo_deploy_output == "tripleo deploy --heat-container-image quay.io/tripleomaster/openstack-heat-all:foo --local-ip 192.168.24.2/24"
+
+
     - name: Check parameter "tripleo_deploy_heat_user"
       include_role:
         name: "tripleo_deploy"

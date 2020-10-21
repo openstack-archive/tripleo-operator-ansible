@@ -24,6 +24,7 @@ Role Variables
 * `tripleo_deploy_force_stack_create`: (Boolean) Flag to force stack create. Default: false
 * `tripleo_deploy_force_stack_update`: (Boolean) Flag to force stack update. Default: false
 * `tripleo_deploy_heat_api_port`: (Number) Heat API port to use for the installer.
+* `tripleo_deploy_heat_container_image`: (String) Full container image location for the openstack-heat-all container.
 * `tripleo_deploy_heat_user`: (String) User to execute the non-privileged heat-all process.
 * `tripleo_deploy_hieradata_override`: (String) Path to hiera data override file.
 * `tripleo_deploy_home_dir`: (String) Path to the directory to execute the command in. Default: "{{ ansible_env.HOME }}"

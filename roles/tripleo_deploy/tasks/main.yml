@@ -24,6 +24,7 @@
       {{ tripleo_deploy_networks_file | ternary('-n $DEPLOY_NETWORKS_FILE', '') }}
       {{ tripleo_deploy_plan_environment_file | ternary('-p $DEPLOY_PLAN_ENV_FILE', '') }}
       {{ tripleo_deploy_heat_api_port | ternary('--heat-api-port $DEPLOY_HEAT_API_PORT', '') }}
+      {{ tripleo_deploy_heat_container_image | ternary('--heat-container-image $DEPLOY_HEAT_CONTAINER_IMAGE', '') }}
       {{ tripleo_deploy_heat_user | ternary('--heat-user $DEPLOY_HEAT_USER', '') }}
       {{ tripleo_deploy_deployment_user | ternary('--deployment-user $DEPLOY_DEPLOYMENT_USER', '') }}
       {{ tripleo_deploy_deployment_python_interpreter | ternary('--deployment-python-interpreter $DEPLOY_PYTHON_INTERPRETER', '') }}
@@ -43,6 +44,7 @@
       DEPLOY_CONTROL_VIP: "{{ tripleo_deploy_control_virtual_ip }}"
       DEPLOY_DEPLOYMENT_USER: "{{ tripleo_deploy_deployment_user }}"
       DEPLOY_HEAT_API_PORT: "{{ tripleo_deploy_heat_api_port }}"
+      DEPLOY_HEAT_CONTAINER_IMAGE: "{{ tripleo_deploy_heat_container_image }}"
       DEPLOY_HEAT_USER: "{{ tripleo_deploy_heat_user }}"
       DEPLOY_HIERADATA_OVERRIDE: "{{ tripleo_deploy_hieradata_override }}"
       DEPLOY_LOCAL_DOMAIN: "{{ tripleo_deploy_local_domain }}"
