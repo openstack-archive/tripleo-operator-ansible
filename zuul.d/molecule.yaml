@@ -137,11 +137,12 @@
 
 - job:
     files:
-      - ^roles/test_molecule_prep/.*
-      - ^plugins/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
+      - ^plugins/.*
       - ^requirements.txt
+      - ^roles/test_molecule_prep/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -152,11 +153,12 @@
 
 - job:
     files:
-      - ^roles/tripleo_config_generate_ansible/.*
-      - ^plugins/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
+      - ^plugins/.*
       - ^requirements.txt
+      - ^roles/tripleo_config_generate_ansible/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -167,10 +169,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_build/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_build/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -181,10 +184,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_delete/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_delete/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -195,10 +199,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_list/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_list/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -209,10 +214,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_push/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_push/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -223,10 +229,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_show/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_show/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -237,10 +244,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_image_upload/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_image_upload/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -251,10 +259,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_deploy/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_deploy/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -265,10 +274,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_admin_authorize/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_admin_authorize/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -279,10 +289,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_cell_export/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_cell_export/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -293,10 +304,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_config_download/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_config_download/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -307,10 +319,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_container_image_build/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_container_image_build/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -321,10 +334,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_container_image_prepare/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_container_image_prepare/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -335,10 +349,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_container_image_tag_discover/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_container_image_tag_discover/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -349,10 +364,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_container_image_upload/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_container_image_upload/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -363,10 +379,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_credentials/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_credentials/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -377,10 +394,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_deploy/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_deploy/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -391,10 +409,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_delete/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_delete/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -405,10 +424,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_export/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_export/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -419,10 +439,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_external_update_run/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_external_update_run/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -433,10 +454,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_external_upgrade_run/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_external_upgrade_run/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -447,10 +469,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_failures/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_failures/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -461,10 +484,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_ffwd_upgrade_converge/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_ffwd_upgrade_converge/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -475,10 +499,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_ffwd_upgrade_prepare/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_ffwd_upgrade_prepare/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -489,10 +514,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_ffwd_upgrade_run/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_ffwd_upgrade_run/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -503,10 +529,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_generate_fencing/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_generate_fencing/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -518,6 +545,7 @@
 - job:
     files:
       - ^roles/tripleo_overcloud_image_build/.*
+      - ^molecule-requirements.txt
     name: tripleo-operator-molecule-tripleo_overcloud_image_build
     parent: tripleo-operator-molecule-base
     vars:
@@ -525,10 +553,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_netenv_validate/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_netenv_validate/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -555,10 +584,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_introspect/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_introspect/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -569,10 +599,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_import/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_import/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -583,10 +614,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_provide/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_provide/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -597,10 +629,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_provision/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_provision/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -611,10 +644,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_unprovision/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_unprovision/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -625,10 +659,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_profiles_list/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_profiles_list/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -639,10 +674,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_profiles_match/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_profiles_match/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -653,10 +689,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_raid_create/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_raid_create/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -667,10 +704,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_support_report_collect/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_support_report_collect/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -681,10 +719,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_configure/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_configure/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -695,10 +734,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_node_clean/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_node_clean/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -725,10 +765,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_roles_list/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_roles_list/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -739,10 +780,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_roles_show/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_roles_show/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -753,10 +795,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_roles_generate/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_roles_generate/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -767,10 +810,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_prepare/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_prepare/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -781,10 +825,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_container_image_prepare_default/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_container_image_prepare_default/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -795,10 +840,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_update_converge/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_update_converge/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -809,10 +855,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_update_prepare/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_update_prepare/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -823,10 +870,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_update_run/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_update_run/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -837,10 +885,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_upgrade_converge/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_upgrade_converge/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -851,10 +900,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_upgrade_prepare/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_upgrade_prepare/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -865,10 +915,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_overcloud_upgrade_run/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_overcloud_upgrade_run/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -879,10 +930,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_undercloud_backup/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_undercloud_backup/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -893,10 +945,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_undercloud_install/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_undercloud_install/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -907,10 +960,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_undercloud_minion_install/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_undercloud_minion_install/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -921,10 +975,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_undercloud_minion_upgrade/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_undercloud_minion_upgrade/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -935,10 +990,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_undercloud_upgrade/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_undercloud_upgrade/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
@@ -949,10 +1005,11 @@
 
 - job:
     files:
-      - ^roles/tripleo_validator_run/.*
       - ^bindep.txt
       - ^galaxy.yml
+      - ^molecule-requirements.txt
       - ^requirements.txt
+      - ^roles/tripleo_validator_run/.*
       - ^setup.cfg
       - ^test-requirements.txt
       - ^tox.ini
