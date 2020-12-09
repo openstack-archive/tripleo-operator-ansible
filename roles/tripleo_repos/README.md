@@ -17,6 +17,7 @@ Role Variables
 * `tripleo_repos_repo_base`: (String) Url base to RDO (default: <https://trunk.rdoproject.org>)
 * `tripleo_repos_repos`: (List) List of repos to install
 * `tripleo_repos_mirror`: (String) Base OS mirror to use
+* `tripleo_repos_no_stream`: (Boolean) Flag for tripleo-repos to disable stream if CentOS8 Stream is not being used. Default: false
 * `tripleo_repos_rdo_mirror`: (String) RDO mirror to use
 * `tripleo_repos_output_path`: (String) Directory to save the repos in
 * `tripleo_repos_stream`: (Boolean) Flag for tripleo-repos if CentOS8 Stream is used. Default: false

@@ -26,6 +26,7 @@
       {{ tripleo_repos_mirror | ternary('--mirror ' ~ tripleo_repos_mirror, '') }}
       {{ tripleo_repos_rdo_mirror | ternary('--rdo-mirror ' ~ tripleo_repos_rdo_mirror, '') }}
       {{ tripleo_repos_stream | ternary('--stream', '') }}
+      {{ tripleo_repos_no_stream | ternary('--no-stream', '') }}
       {{ tripleo_repos_extra_args | join(' ') }}
       {{ tripleo_repos_repos | join( ' ') }}
 
