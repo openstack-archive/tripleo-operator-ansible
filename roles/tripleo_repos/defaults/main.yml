@@ -10,3 +10,4 @@ tripleo_repos_rdo_mirror:
 tripleo_repos_repo_base: https://trunk.rdoproject.org
 tripleo_repos_repos:
   - current-tripleo-dev
+tripleo_repos_stream: false
