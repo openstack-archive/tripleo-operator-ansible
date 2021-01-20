@@ -221,20 +221,6 @@
         that:
           - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --no-cleanup"
 
-    - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_update_plan_only"
-      include_role:
-        name: "tripleo_overcloud_ffwd_upgrade_prepare"
-      vars:
-        tripleo_overcloud_ffwd_upgrade_prepare_stack:
-        tripleo_overcloud_ffwd_upgrade_prepare_templates:
-        tripleo_overcloud_ffwd_upgrade_prepare_timeout_arg:
-        tripleo_overcloud_ffwd_upgrade_prepare_update_plan_only: true
-
-    - name: Assert "tripleo_overcloud_ffwd_upgrade_prepare_update_plan_only"
-      assert:
-        that:
-          - tripleo_overcloud_ffwd_upgrade_prepare_output == "overcloud ffwd-upgrade prepare --update-plan-only"
-
     - name: Check parameter "tripleo_overcloud_ffwd_upgrade_prepare_validation_errors_nonfatal"
       include_role:
         name: "tripleo_overcloud_ffwd_upgrade_prepare"

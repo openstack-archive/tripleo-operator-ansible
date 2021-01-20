@@ -48,7 +48,6 @@ Role Variables
 * `tripleo_deploy_templates`: (String) Path to the directory containing heat templates for the deployment. Default: /usr/share/openstack-tripleo-heat-templates
 * `tripleo_deploy_timeout`: (Integer) Number in seconds to wait for the ansible execution of the deployment command to finish. This should be larger than the `tripleo_deploy_timeout_arg` value. Default: 5700
 * `tripleo_deploy_timeout_arg`: (Integer) Number in minutes for the deployment to run. Default: 90
-* `tripleo_deploy_update_plan_only`: (Boolean) Flag to enable only updating the plan. Default: false
 * `tripleo_deploy_upgrade`: (Boolean) Flag to indicate upgrade an existing deployment. Default: true
 * `tripleo_deploy_yes`: (Boolean) Flag to skip yes/no prompts. Default: true
 

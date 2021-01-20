@@ -22,7 +22,6 @@
       {{ tripleo_overcloud_ffwd_upgrade_converge_networks_file | ternary('-n $FFWD_NETWORKS_FILE', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_converge_plan_environment_file | ternary('-p $FFWD_PLAN_ENV_FILE', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_converge_no_cleanup | ternary('--no-cleanup', '') }}
-      {{ tripleo_overcloud_ffwd_upgrade_converge_update_plan_only | ternary('--update-plan-only', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_converge_validation_errors_nonfatal | ternary('--validation-errors-nonfatal', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_converge_validation_warnings_fatal | ternary('--validation-warnings-fatal', '') }}
       {{ tripleo_overcloud_ffwd_upgrade_converge_disable_validations | ternary('--disable-validations', '') }}

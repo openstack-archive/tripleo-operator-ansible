@@ -22,7 +22,6 @@
       {{ tripleo_overcloud_upgrade_prepare_networks_file | ternary('-n $UPDATE_NETWORKS_FILE', '') }}
       {{ tripleo_overcloud_upgrade_prepare_plan_environment_file | ternary('-p $UPDATE_PLAN_ENV_FILE', '') }}
       {{ tripleo_overcloud_upgrade_prepare_no_cleanup | ternary('--no-cleanup', '') }}
-      {{ tripleo_overcloud_upgrade_prepare_update_plan_only | ternary('--update-plan-only', '') }}
       {{ tripleo_overcloud_upgrade_prepare_validation_errors_nonfatal | ternary('--validation-errors-nonfatal', '') }}
       {{ tripleo_overcloud_upgrade_prepare_validation_warnings_fatal | ternary('--validation-warnings-fatal', '') }}
       {{ tripleo_overcloud_upgrade_prepare_disable_validations | ternary('--disable-validations', '') }}

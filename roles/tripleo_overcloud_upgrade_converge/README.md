@@ -55,7 +55,6 @@ Role Variables
 * `tripleo_overcloud_upgrade_converge_templates`: (String) Path to a directory containing the tripleo-heat-templates for the deployment. Default: /usr/share/openstack-tripleo-heat-templates
 * `tripleo_overcloud_upgrade_converge_timeout`: (Integer) Number in seconds to wait for the ansible execution of the deployment command to finish. This should be larger than the `tripleo_overcloud_upgrade_converge_timeout_arg` value. Default: 5700
 * `tripleo_overcloud_upgrade_converge_timeout_arg`: (Integer) Number in minutes for the deployment to run. Default: 90
-* `tripleo_overcloud_upgrade_converge_update_plan_only`: (Boolean) Flag to enable only updating the plan. Default: false
 * `tripleo_overcloud_upgrade_converge_validation_errors_nonfatal`: (Boolean) Flag to make validation errors not fatal. Default: false
 * `tripleo_overcloud_upgrade_converge_validation_warnings_fatal`: (Boolean) Flag to make validation warnings fatal. Default: false
 
