@@ -47,3 +47,4 @@ tripleo_overcloud_update_converge_timeout: 5700
 tripleo_overcloud_update_converge_timeout_arg: 90
 tripleo_overcloud_update_converge_validation_errors_nonfatal: false
 tripleo_overcloud_update_converge_validation_warnings_fatal: false
+tripleo_overcloud_update_converge_yes: true

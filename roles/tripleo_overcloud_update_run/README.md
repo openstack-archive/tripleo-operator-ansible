@@ -26,6 +26,7 @@ Role Variables
 * `tripleo_overcloud_update_run_stack`: (String) Name of the stack to deploy.
 * `tripleo_overcloud_update_run_static_inventory`: (String) Path to an existing ansible inventory to use.
 * `tripleo_overcloud_update_run_timeout`: (Integer) Number in seconds to wait for the ansible execution of the deployment command to finish. Default: 5700
+* 'tripleo_overcloud_update_run_yes': (Boolean) Flag to skip the confirmation required before any update run operation. Default: true
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

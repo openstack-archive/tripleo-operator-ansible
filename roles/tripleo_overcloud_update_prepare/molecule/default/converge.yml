@@ -9,6 +9,7 @@
     tripleo_overcloud_update_prepare_debug: true
     tripleo_overcloud_update_prepare_log_output: false
     tripleo_overcloud_update_prepare_log_combine: false
+    tripleo_overcloud_update_prepare_yes: false
     tripleo_overcloud_update_prepare_poll: 1
   tasks:
 
@@ -34,6 +35,20 @@
       assert:
         that:
           - tripleo_overcloud_update_prepare_output == "overcloud update prepare --stack test"
+
+    - name: Check parameter "tripleo_overcloud_update_prepare_yes"
+      include_role:
+        name: "tripleo_overcloud_update_prepare"
+      vars:
+        tripleo_overcloud_update_prepare_stack:
+        tripleo_overcloud_update_prepare_templates:
+        tripleo_overcloud_update_prepare_timeout_arg:
+        tripleo_overcloud_update_prepare_yes: true
+
+    - name: Assert "tripleo_overcloud_update_prepare_yes"
+      assert:
+        that:
+          - tripleo_overcloud_update_prepare_output == "overcloud update prepare --yes"
 
     - name: Check parameter "tripleo_overcloud_update_prepare_libvirt_type"
       include_role:

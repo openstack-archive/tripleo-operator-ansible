@@ -10,6 +10,7 @@
     tripleo_overcloud_update_run_log_output: false
     tripleo_overcloud_update_run_log_combine: false
     tripleo_overcloud_update_run_poll: 1
+    tripleo_overcloud_update_run_yes: false
   tasks:
 
     - name: "Include tripleo_overcloud_update_run"
@@ -31,6 +32,18 @@
       assert:
         that:
           - tripleo_overcloud_update_run_output == "overcloud update run --stack test"
+
+    - name: Check parameter "tripleo_overcloud_update_run_yes"
+      include_role:
+        name: "tripleo_overcloud_update_run"
+      vars:
+        tripleo_overcloud_update_run_stack:
+        tripleo_overcloud_update_run_yes: true
+
+    - name: Assert "tripleo_overcloud_update_run_yes"
+      assert:
+        that:
+          - tripleo_overcloud_update_run_output == "overcloud update run --yes"
 
     - name: Check parameter "tripleo_overcloud_update_run_playbook"
       include_role:

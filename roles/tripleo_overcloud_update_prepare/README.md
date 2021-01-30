@@ -58,6 +58,7 @@ Role Variables
 * `tripleo_overcloud_update_prepare_update_preparement_python_interpreter`: (String) Path to a python interpreter for the deployment actions.
 * `tripleo_overcloud_update_prepare_validation_errors_nonfatal`: (Boolean) Flag to make validation errors not fatal. Default: false
 * `tripleo_overcloud_update_prepare_validation_warnings_fatal`: (Boolean) Flag to make validation warnings fatal. Default: false
+* 'tripleo_overcloud_update_prepare_yes': (Boolean) Flag to skip the confirmation required before any update prepare operation. Default: true
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

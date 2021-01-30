@@ -41,6 +41,7 @@
       {{ tripleo_overcloud_update_prepare_config_download_timeout | ternary('--config-download-timeout $UPDATE_CONFIG_DOWNLOAD_TIMEOUT', '') }}
       {{ tripleo_overcloud_update_prepare_update_preparement_python_interpreter | ternary('--deployment-python-interpreter $UPDATE_PYTHON_INTERPRETER', '') }}
       {{ tripleo_overcloud_update_prepare_baremetal_deployment | ternary('--baremetal-deployment $UPDATE_BAREMETAL_DEPLOYMENT', '') }}
+      {{ tripleo_overcloud_update_prepare_yes | ternary('--yes', '') }}
       {{ tripleo_overcloud_update_prepare_log_output | ternary((">" ~ tripleo_overcloud_update_prepare_log), '') }}
       {{ tripleo_overcloud_update_prepare_log_combine | ternary("2>&1", '') }}
     _update_prepare_env:

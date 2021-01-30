@@ -19,3 +19,4 @@ tripleo_overcloud_external_update_run_stack:
 tripleo_overcloud_external_update_run_static_inventory:
 tripleo_overcloud_external_update_run_tags:
 tripleo_overcloud_external_update_run_timeout: 5700
+tripleo_overcloud_external_update_run_yes: true

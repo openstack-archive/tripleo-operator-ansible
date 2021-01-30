@@ -57,6 +57,7 @@ Role Variables
 * `tripleo_overcloud_update_converge_timeout`: (Integer) Number in seconds to wait for the ansible execution of the deployment command to finish. This should be larger than the `tripleo_overcloud_update_converge_timeout_arg` value. Default: 5700
 * `tripleo_overcloud_update_converge_validation_errors_nonfatal`: (Boolean) Flag to make validation errors not fatal. Default: false
 * `tripleo_overcloud_update_converge_validation_warnings_fatal`: (Boolean) Flag to make validation warnings fatal. Default: false
+* 'tripleo_overcloud_update_converge_yes': (Boolean) Flag to skip the confirmation required before any update converge operation. Default: true
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

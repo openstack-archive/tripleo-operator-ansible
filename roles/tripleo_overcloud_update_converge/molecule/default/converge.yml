@@ -10,6 +10,7 @@
     tripleo_overcloud_update_converge_log_output: false
     tripleo_overcloud_update_converge_log_combine: false
     tripleo_overcloud_update_converge_poll: 1
+    tripleo_overcloud_update_converge_yes: false
   tasks:
 
     - name: "Include tripleo_overcloud_update_converge"
@@ -34,6 +35,20 @@
       assert:
         that:
           - tripleo_overcloud_update_converge_output == "overcloud update converge --stack test"
+
+    - name: Check parameter "tripleo_overcloud_update_converge_yes"
+      include_role:
+        name: "tripleo_overcloud_update_converge"
+      vars:
+        tripleo_overcloud_update_converge_stack:
+        tripleo_overcloud_update_converge_templates:
+        tripleo_overcloud_update_converge_timeout_arg:
+        tripleo_overcloud_update_converge_yes: true
+
+    - name: Assert "tripleo_overcloud_update_converge_yes"
+      assert:
+        that:
+          - tripleo_overcloud_update_converge_output == "overcloud update converge --yes"
 
     - name: Check parameter "tripleo_overcloud_update_converge_libvirt_type"
       include_role:

@@ -17,3 +17,4 @@ tripleo_overcloud_update_run_ssh_user:
 tripleo_overcloud_update_run_stack:
 tripleo_overcloud_update_run_static_inventory:
 tripleo_overcloud_update_run_timeout: 5700
+tripleo_overcloud_update_run_yes: true
