@@ -40,6 +40,7 @@
     warn: false
   async: "{{ tripleo_undercloud_backup_timeout }}"
   poll: "{{ tripleo_undercloud_backup_poll }}"
+  become: "{{ tripleo_undercloud_backup_become }}"
   register: tripleo_undercloud_backup_result
   changed_when: true
   when:

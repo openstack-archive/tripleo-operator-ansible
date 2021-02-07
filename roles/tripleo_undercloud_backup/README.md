@@ -11,6 +11,7 @@ None.
 Role Variables
 --------------
 
+* `tripleo_undercloud_backup_become`: (Boolean) Run the command as root. This needs to be true as the commands require root privileges to run. Default: true
 * `tripleo_undercloud_backup_add_path`: (List) List of additional filesystem paths to backup. Default: []
 * `tripleo_undercloud_backup_debug`: (Boolean) Flag used to enable the debug version of commands. Default: false
 * `tripleo_undercloud_backup_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` is not defined.

@@ -6,6 +6,7 @@
   vars:
     openstack_bin: echo
     tripleo_os_cloud: undercloud
+    tripleo_undercloud_backup_become: false
     tripleo_undercloud_backup_debug: true
     tripleo_undercloud_backup_log_output: false
     tripleo_undercloud_backup_log_combine: false
