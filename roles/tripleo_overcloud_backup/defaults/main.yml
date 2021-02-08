@@ -1,0 +1,19 @@
+# defaults file for tripleo_overcloud_backup
+---
+openstack_bin: openstack
+tripleo_overcloud_backup_add_path: []
+tripleo_overcloud_backup_debug: false
+tripleo_overcloud_backup_exclude_path: []
+tripleo_overcloud_backup_init:
+tripleo_overcloud_backup_setup_nfs: false
+tripleo_overcloud_backup_setup_rear: false
+tripleo_overcloud_backup_storage_ip:
+tripleo_overcloud_backup_extra_vars:
+tripleo_overcloud_backup_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_backup_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
+tripleo_overcloud_backup_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_backup_log: "{{ tripleo_overcloud_backup_home_dir }}/overcloud_backup.log"
+tripleo_overcloud_backup_log_combine: true
+tripleo_overcloud_backup_log_output: true
+tripleo_overcloud_backup_poll: 10
+tripleo_overcloud_backup_timeout: 7200

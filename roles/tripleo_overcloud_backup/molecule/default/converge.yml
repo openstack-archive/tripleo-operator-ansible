@@ -1,0 +1,104 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: overcloud
+    tripleo_overcloud_backup_debug: true
+    tripleo_overcloud_backup_log_output: false
+    tripleo_overcloud_backup_log_combine: false
+    tripleo_overcloud_backup_poll: 1
+  tasks:
+
+    - name: "Include tripleo_overcloud_backup"
+      include_role:
+        name: "tripleo_overcloud_backup"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup"
+
+    - name: Check parameter "tripleo_overcloud_backup_init_rear"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_init: rear
+
+    - name: Assert "tripleo_overcloud_backup_init_rear"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup --init rear"
+
+    - name: Check parameter "tripleo_overcloud_backup_init_nfs"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_init: nfs
+
+    - name: Assert "tripleo_overcloud_backup_init_nfs"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup --init nfs"
+
+    - name: Check parameter "tripleo_overcloud_backup_setup_nfs"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_setup_nfs: true
+
+    - name: Assert "tripleo_overcloud_backup_setup_nfs"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup --setup-nfs"
+
+    - name: Check parameter "tripleo_overcloud_backup_setup_rear"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_setup_rear: true
+
+    - name: Assert "tripleo_overcloud_backup_setup_rear"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup --setup-rear"
+
+    - name: Check parameter "tripleo_overcloud_backup_setup_rear_extra_vars_file"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_setup_rear: true
+        tripleo_overcloud_backup_extra_vars: /path/to/vars.yaml
+
+    - name: Assert "tripleo_overcloud_backup_setup_rear_extra_vars_file"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup --setup-rear --extra-vars /path/to/vars.yaml"
+
+    - name: Check parameter "tripleo_overcloud_backup_storage_ip"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_setup_rear: true
+        tripleo_overcloud_backup_storage_ip: "192.168.24.1"
+
+    - name: Assert "tripleo_overcloud_backup_storage_ip"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == "overcloud backup --setup-rear --storage-ip 192.168.24.1"
+
+    - name: Check parameter "tripleo_overcloud_backup_setup_rear_extra_vars_string"
+      include_role:
+        name: "tripleo_overcloud_backup"
+      vars:
+        tripleo_overcloud_backup_setup_rear: true
+        tripleo_overcloud_backup_extra_vars: "{{ {'tripleo_backup_and_restore_nfs_server': '192.168.24.1'} | to_json }}"
+
+    - name: Assert "tripleo_overcloud_backup_setup_rear_extra_vars_string"
+      vars:
+        tripleo_overcloud_backup_extra_vars: "{{ {'tripleo_backup_and_restore_nfs_server': '192.168.24.1'} | to_json }}"
+      assert:
+        that:
+          - tripleo_overcloud_backup_result.stdout == 'overcloud backup --setup-rear --extra-vars {{ tripleo_overcloud_backup_extra_vars  }}'

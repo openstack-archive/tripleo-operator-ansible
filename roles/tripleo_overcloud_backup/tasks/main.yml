@@ -1,0 +1,50 @@
+---
+- name: Setup overcloud backup facts
+  set_fact:
+    _backup_cmd: >-
+      {{ openstack_bin }} overcloud backup
+      {{ tripleo_overcloud_backup_init | tripleo.operator.shell_arg_list(parameter='--init') }}
+      {{ tripleo_overcloud_backup_setup_nfs | ternary('--setup-nfs', '') }}
+      {{ tripleo_overcloud_backup_setup_rear  | ternary('--setup-rear', '') }}
+      {{ tripleo_overcloud_backup_storage_ip | tripleo.operator.shell_arg_list(parameter='--storage-ip') }}
+      {{ tripleo_overcloud_backup_extra_vars | tripleo.operator.shell_arg_list(parameter='--extra-vars') }}
+      {{ tripleo_overcloud_backup_log_output | ternary((">" ~ tripleo_overcloud_backup_log), '') }}
+      {{ tripleo_overcloud_backup_log_combine | ternary("2>&1", '') }}
+    _backup_env: {}
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_backup_log }}"
+  when: tripleo_overcloud_backup_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_backup_debug|bool
+  block:
+    - name: Show the overcloud backup command
+      debug:
+        var: _backup_cmd
+
+    - name: Show the overcloud backup environment
+      debug:
+        var: _backup_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_backup_home_dir }}/tripleo_overcloud_backup.sh"
+    shell_command: "{{ _backup_cmd }}"
+    shell_environment: "{{ _backup_env }}"
+  when: tripleo_overcloud_backup_generate_scripts|bool
+
+- name: overcloud backup
+  shell: "{{ _backup_cmd }}"  # noqa 305
+  environment: "{{ _backup_env }}"
+  args:
+    chdir: "{{ tripleo_overcloud_backup_home_dir }}"
+    warn: false
+  async: "{{ tripleo_overcloud_backup_timeout }}"
+  poll: "{{ tripleo_overcloud_backup_poll }}"
+  register: tripleo_overcloud_backup_result
+  changed_when: true
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_backup_generate_scripts_only|bool
