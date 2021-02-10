@@ -14,3 +14,4 @@ tripleo_overcloud_node_unprovision_rc_file: "{{ tripleo_rc_file | default(ansibl
 tripleo_overcloud_node_unprovision_stack:
 tripleo_overcloud_node_unprovision_timeout: 3600
 tripleo_overcloud_node_unprovision_yes: true
+tripleo_overcloud_node_unprovision_network_ports:

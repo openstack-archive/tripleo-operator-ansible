@@ -19,3 +19,4 @@ tripleo_overcloud_node_provision_rc_file: "{{ tripleo_rc_file | default(ansible_
 tripleo_overcloud_node_provision_stack:
 tripleo_overcloud_node_provision_timeout: 3700
 tripleo_overcloud_node_provision_timeout_arg:
+tripleo_overcloud_node_provision_network_ports:

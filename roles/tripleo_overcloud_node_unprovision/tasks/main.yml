@@ -6,6 +6,7 @@
       {{ tripleo_overcloud_node_unprovision_os_cloud | ternary('', "source " ~ tripleo_overcloud_node_unprovision_rc_file ~ "; ") }}
       {{ openstack_bin }} overcloud node unprovision
       {{ tripleo_overcloud_node_unprovision_stack | ternary('--stack $UNPROVISION_STACK', '') }}
+      {{ tripleo_overcloud_node_unprovision_network_ports | ternary('--network-ports', '') }}
       {{ tripleo_overcloud_node_unprovision_all | ternary('--all', '') }}
       {{ tripleo_overcloud_node_unprovision_yes | ternary('--yes', '') }}
       {{ tripleo_overcloud_node_unprovision_deployment_file }}
