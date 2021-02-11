@@ -1,0 +1,23 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_validator_show_parameter_debug: true
+  tasks:
+
+    - name: Check parameter "tripleo_validator_show_parameter" as a single element
+      include_role:
+        name: "tripleo_validator_show_parameter"
+      vars:
+        tripleo_validator_show_parameter:
+          - 'foo'
+
+    - name: Assert "tripleo_validator_show_parameter"
+      assert:
+        that:
+          - tripleo_validator_show_parameter_result.stdout ==
+            "tripleo validator show parameter foo"
