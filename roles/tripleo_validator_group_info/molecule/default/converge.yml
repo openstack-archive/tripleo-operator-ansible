@@ -1,0 +1,23 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_validator_show_debug: true
+  tasks:
+
+    - name: Check parameter "tripleo_validator_group_info" as a single element
+      include_role:
+        name: "tripleo_validator_group_info"
+      vars:
+        tripleo_validator_group_info:
+          - 'group'
+
+    - name: Assert "tripleo_validator_group_info"
+      assert:
+        that:
+          - tripleo_validator_group_info_result.stdout ==
+            "tripleo validator group info group"

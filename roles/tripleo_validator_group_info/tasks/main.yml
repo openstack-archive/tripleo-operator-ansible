@@ -1,0 +1,36 @@
+---
+- name: Fail if we do not pass group
+  fail:
+    msg: "Please pass tripleo_validator_group_info"
+  when:
+    - tripleo_validator_group_info | length == 0
+
+- name: Setup validator group info facts
+  set_fact:
+    _validator_group_info_cmd: >-
+      {{ openstack_bin }} tripleo validator group info
+      {{ tripleo_validator_group_info | ternary(' "${TRIPLEO_VALIDATOR_GROUP_INFO}"', '') }}
+    _validator_group_info_env:
+      TRIPLEO_VALIDATOR_GROUP_INFO: >-
+        {%- if tripleo_validator_group_info is string -%}
+        {{ tripleo_validator_group_info }}
+        {%- else -%}
+        {{ tripleo_validator_group_info | join(',') }}
+        {%- endif -%}
+
+- name: Show debug information
+  when:
+    tripleo_validator_group_info_debug|bool
+  block:
+    - name: Show validator group info environment
+      debug:
+        var: _validator_group_info_env
+    - name: Show validator group info command
+      debug:
+        var: _validator_group_info_cmd
+
+- name: Show validation group info
+  shell: "{{ _validator_group_info_cmd }}"
+  environment: "{{ _validator_group_info_env }}"
+  register: tripleo_validator_group_info_result
+  changed_when: true
