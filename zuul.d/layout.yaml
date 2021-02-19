@@ -6,7 +6,12 @@
     check:
       jobs:
         - openstack-tox-linters
-        - tripleo-ci-centos-8-content-provider
+        - tripleo-ci-centos-8-content-provider:
+            dependencies:
+              - openstack-tox-linters
+              - openstack-tox-pep8
+              - openstack-tox-py36
+              - openstack-tox-py37
         - openstack-tox-docs: &tripleo-docs
             files:
             - ^doc/.*
@@ -29,11 +34,7 @@
                 - overcloud-deploy
                 - overcloud-post-deploy
                 - overcloud-validate
-            dependencies: &deps_unit_lint
-              - openstack-tox-pep8
-              - openstack-tox-py36
-              - openstack-tox-py37
-              - openstack-tox-linters
+            dependencies: &deps_content_provider_c8
               - tripleo-ci-centos-8-content-provider
             files: &containers_multinode_files
               - ^roles/tripleo_undercloud_install/.*$
@@ -46,7 +47,7 @@
                 - undercloud-install
                 - undercloud-validate
                 - images
-            dependencies: *deps_unit_lint
+            dependencies: *deps_content_provider_c8
             files: &containers_minion_files
               - ^roles/tripleo_undercloud_install/.*$
               - ^roles/tripleo_undercloud_minion_install/.*$
@@ -56,7 +57,7 @@
               build_container_images: false
               tags:
                 - standalone
-            dependencies: *deps_unit_lint
+            dependencies: *deps_content_provider_c8
             files: &standalone_files
               - ^roles/tripleo_deploy/.*$
     gate:
