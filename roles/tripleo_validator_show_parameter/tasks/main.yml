@@ -1,0 +1,36 @@
+---
+- name: Fail if we do not pass parameter
+  fail:
+    msg: "Please pass tripleo_validator_show_parameter"
+  when:
+    - tripleo_validator_show_parameter | length == 0
+
+- name: Setup validator show parameter facts
+  set_fact:
+    _validator_show_parameter_cmd: >-
+      {{ openstack_bin }} tripleo validator show parameter
+      {{ tripleo_validator_show_parameter | ternary(' "${TRIPLEO_VALIDATOR_SHOW_PARAMETER}"', '') }}
+    _validator_show_parameter_env:
+      TRIPLEO_VALIDATOR_SHOW_PARAMETER: >-
+        {%- if tripleo_validator_show_parameter is string -%}
+        {{ tripleo_validator_show_parameter }}
+        {%- else -%}
+        {{ tripleo_validator_show_parameter | join(',') }}
+        {%- endif -%}
+
+- name: Show debug information
+  when:
+    tripleo_validator_show_parameter_debug|bool
+  block:
+    - name: Show validator show parameter environment
+      debug:
+        var: _validator_show_parameter_env
+    - name: Show validator show parameter command
+      debug:
+        var: _validator_show_parameter_cmd
+
+- name: Show validation parameter
+  shell: "{{ _validator_show_parameter_cmd }}"
+  environment: "{{ _validator_show_parameter_env }}"
+  register: tripleo_validator_show_parameter_result
+  changed_when: true
