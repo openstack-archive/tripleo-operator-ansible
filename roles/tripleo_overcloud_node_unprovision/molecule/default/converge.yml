@@ -55,3 +55,15 @@
         that:
           - tripleo_overcloud_node_unprovision_output ==
             "overcloud node unprovision --yes foo.yaml"
+
+    - name: Assert "tripleo_overcloud_node_unprovision_network_ports"
+      include_role:
+        name: "tripleo_overcloud_node_unprovision"
+      vars:
+        tripleo_overcloud_node_unprovision_network_ports: true
+
+    - name: Validate tripleo_overcloud_node_unprovision_network_ports
+      assert:
+        that:
+          - tripleo_overcloud_node_unprovision_output ==
+            "overcloud node unprovision --network-ports --yes"

@@ -103,3 +103,15 @@
         that:
           - tripleo_overcloud_node_provision_output ==
             "overcloud node provision deploy.yaml"
+
+    - name: Assert "tripleo_overcloud_node_provision_network_ports"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_network_ports: true
+
+    - name: Validate tripleo_overcloud_node_provision_network_ports
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --network-ports"
