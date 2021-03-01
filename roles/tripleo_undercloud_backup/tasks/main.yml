@@ -5,6 +5,10 @@
       {{ openstack_bin }} undercloud backup
       {{ tripleo_undercloud_backup_add_path | tripleo.operator.shell_arg_list(parameter='--add-path') }}
       {{ tripleo_undercloud_backup_exclude_path | tripleo.operator.shell_arg_list(parameter='--exclude-path') }}
+      {{ tripleo_undercloud_backup_init | tripleo.operator.shell_arg_list(parameter='--init') }}
+      {{ tripleo_undercloud_backup_setup_nfs | ternary('--setup-nfs', '') }}
+      {{ tripleo_undercloud_backup_setup_rear  | ternary('--setup-rear', '') }}
+      {{ tripleo_undercloud_backup_extra_vars | tripleo.operator.shell_arg_list(parameter='--extra-vars') }}
       {{ tripleo_undercloud_backup_log_output | ternary((">" ~ tripleo_undercloud_backup_log), '') }}
       {{ tripleo_undercloud_backup_log_combine | ternary("2>&1", '') }}
     _backup_env: {}
