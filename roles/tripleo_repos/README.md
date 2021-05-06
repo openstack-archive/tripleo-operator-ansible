@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 * `tripleo_repos_branch`: (String) Repo branch to configure (master|train|stein|etc)
+* `tripleo_repos_repo_branch`: (String) Repo branch to install tripleo-repos tool (master|train|stein|etc)
 * `tripleo_repos_debug`: (Boolean) Flag to print out the tripleo-repos command being executed
 * `tripleo_repos_extra_args`: (List) List of extra arguments to pass to tripleo_repos
 * `tripleo_repos_repo_base`: (String) Url base to RDO (default: <https://trunk.rdoproject.org>)
