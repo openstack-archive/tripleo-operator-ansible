@@ -6,7 +6,7 @@
 
 - name: Build RDO repo url
   set_fact:
-    _tripleo_repos_repo_url: >
+    _tripleo_repos_repo_url: >-
       {{ tripleo_repos_repo_base }}/{{ _tripleo_repos_distro }}-{{ tripleo_repos_repo_branch |
       ternary(tripleo_repos_repo_branch, tripleo_repos_branch) }}/{{ _tripleo_repos_component }}/current/
 
