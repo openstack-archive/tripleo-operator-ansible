@@ -1,0 +1,14 @@
+# defaults file for tripleo_overcloud_network_provision
+---
+openstack_bin: openstack
+tripleo_overcloud_network_provision_debug: false
+tripleo_overcloud_network_provision_deployment_file:
+tripleo_overcloud_network_provision_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_overcloud_network_provision_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
+tripleo_overcloud_network_provision_home_dir: "{{ ansible_env.HOME }}"
+tripleo_overcloud_network_provision_log: "{{ tripleo_overcloud_network_provision_home_dir }}/overcloud_network_provision.log"
+tripleo_overcloud_network_provision_log_combine: true
+tripleo_overcloud_network_provision_log_output: true
+tripleo_overcloud_network_provision_os_cloud: "{{ tripleo_os_cloud | default('') }}"
+tripleo_overcloud_network_provision_output_file:
+tripleo_overcloud_network_provision_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
