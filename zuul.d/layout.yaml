@@ -12,6 +12,11 @@
               - openstack-tox-pep8
               - openstack-tox-py36
               - openstack-tox-py37
+            files: &content_provider
+              - ^roles/tripleo_undercloud_install/.*$
+              - ^roles/tripleo_undercloud_minion_install/.*$
+              - ^roles/tripleo_deploy/.*$
+              - ^roles/tripleo_container_image_prepare_default/.*$
         - openstack-tox-docs: &tripleo-docs
             files:
             - ^doc/.*
@@ -60,11 +65,12 @@
             dependencies: *deps_content_provider_c8
             files: &standalone_files
               - ^roles/tripleo_deploy/.*$
-              - ^roles/tripleo_container_image_prepare/.*$
+              - ^roles/tripleo_container_image_prepare_default/.*$
     gate:
       jobs:
         - openstack-tox-linters
-        - tripleo-ci-centos-8-content-provider
+        - tripleo-ci-centos-8-content-provider:
+            files: *content_provider
         - openstack-tox-docs: *tripleo-docs
         - tripleo-ci-centos-8-containers-multinode: *job_containers_multinode
         - tripleo-ci-centos-8-containers-undercloud-minion: *job_containers_undercloud_minion
