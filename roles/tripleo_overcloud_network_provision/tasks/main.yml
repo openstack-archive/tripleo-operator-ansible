@@ -1,0 +1,58 @@
+---
+# tasks file for tripleo_overcloud_network_provision
+- name: Set overcloud network provision facts
+  set_fact:
+    _provision_cmd: >-
+      {{ tripleo_overcloud_network_provision_os_cloud | ternary('', "source " ~ tripleo_overcloud_network_provision_rc_file ~ "; ") }}
+      {{ openstack_bin }} overcloud network provision -y
+      {{ tripleo_overcloud_network_provision_output_file | ternary('-o $PROVISION_OUTPUT', '') }}
+      {{ tripleo_overcloud_network_provision_deployment_file }}
+      {{ tripleo_overcloud_network_provision_log_output | ternary((">" ~ tripleo_overcloud_network_provision_log), '') }}
+      {{ tripleo_overcloud_network_provision_log_combine | ternary("2>&1", '') }}
+    _provision_env:
+      OS_CLOUD: "{{ tripleo_overcloud_network_provision_os_cloud }}"
+      PROVISION_OUTPUT: "{{ tripleo_overcloud_network_provision_output_file | quote }}"
+
+
+- name: Preserve existing log file if exists
+  timestamp_file:
+    path: "{{ tripleo_overcloud_network_provision_log }}"
+  when: tripleo_overcloud_network_provision_log_output|bool
+
+- name: Show debug information
+  when: tripleo_overcloud_network_provision_debug|bool
+  block:
+    - name: Show the command
+      debug:
+        var: _provision_cmd
+
+    - name: Show the environment
+      debug:
+        var: _provision_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_overcloud_network_provision_home_dir }}/tripleo_overcloud_network_provision.sh"
+    shell_command: "{{ _provision_cmd }}"
+    shell_environment: "{{ _provision_env }}"
+  when: tripleo_overcloud_network_provision_generate_scripts|bool
+
+- name: overcloud network provision
+  shell: "{{ _provision_cmd }}"  # noqa 305
+  environment: "{{ _provision_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ tripleo_overcloud_network_provision_home_dir }}"
+    warn: false
+  register: tripleo_overcloud_network_provision_result
+  changed_when: false
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_network_provision_generate_scripts_only|bool
+
+
+- name: Set output fact
+  when:
+    - tripleo_overcloud_network_provision_result.stdout is defined
+  set_fact:
+    tripleo_overcloud_network_provision_output: "{{ tripleo_overcloud_network_provision_result.stdout }}"

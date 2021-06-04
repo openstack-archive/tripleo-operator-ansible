@@ -1,0 +1,44 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_overcloud_network_provision_log_output: false
+    tripleo_overcloud_network_provision_debug: true
+  tasks:
+
+    - name: "Include tripleo_overcloud_network_provision"
+      include_role:
+        name: "tripleo_overcloud_network_provision"
+
+    - name: Check role
+      assert:
+        that:
+          - tripleo_overcloud_network_provision_output == "overcloud network provision -y"
+
+    - name: Assert "tripleo_overcloud_network_provision_output_file"
+      include_role:
+        name: "tripleo_overcloud_network_provision"
+      vars:
+        tripleo_overcloud_network_provision_output_file: foo.yaml
+
+    - name: Validate tripleo_overcloud_network_provision_output_file
+      assert:
+        that:
+          - tripleo_overcloud_network_provision_output ==
+            "overcloud network provision -o foo.yaml"
+
+    - name: Assert "tripleo_overcloud_network_provision_deployment_file"
+      include_role:
+        name: "tripleo_overcloud_network_provision"
+      vars:
+        tripleo_overcloud_network_provision_deployment_file: deploy.yaml
+
+    - name: Validate tripleo_overcloud_network_provision_deployment_file
+      assert:
+        that:
+          - tripleo_overcloud_network_provision_output ==
+            "overcloud network provision deploy.yaml"
