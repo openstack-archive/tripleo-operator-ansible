@@ -8,6 +8,7 @@
       {{ tripleo_overcloud_node_provision_output_file | ternary('-o $PROVISION_OUTPUT', '') }}
       {{ tripleo_overcloud_node_provision_stack | ternary('--stack $PROVISION_STACK', '') }}
       {{ tripleo_overcloud_node_provision_network_ports | ternary('--network-ports', '') }}
+      {{ tripleo_overcloud_node_provision_network_config | ternary('--network-config', '') }}
       {{ tripleo_overcloud_node_provision_overcloud_ssh_user | ternary('--overcloud-ssh-user $PROVISION_USER', '') }}
       {{ tripleo_overcloud_node_provision_overcloud_ssh_key | ternary('--overcloud-ssh-key $PROVISION_KEY', '') }}
       {{ tripleo_overcloud_node_provision_concurrency | ternary('--concurrency $PROVISION_CONCURRENCY', '') }}

@@ -20,3 +20,4 @@ tripleo_overcloud_node_provision_stack:
 tripleo_overcloud_node_provision_timeout: 3700
 tripleo_overcloud_node_provision_timeout_arg:
 tripleo_overcloud_node_provision_network_ports:
+tripleo_overcloud_node_provision_network_config:

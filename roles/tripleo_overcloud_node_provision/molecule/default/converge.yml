@@ -115,3 +115,15 @@
         that:
           - tripleo_overcloud_node_provision_output ==
             "overcloud node provision --network-ports"
+
+    - name: Assert "tripleo_overcloud_node_provision_network_config"
+      include_role:
+        name: "tripleo_overcloud_node_provision"
+      vars:
+        tripleo_overcloud_node_provision_network_config: true
+
+    - name: Validate tripleo_overcloud_node_provision_network_config
+      assert:
+        that:
+          - tripleo_overcloud_node_provision_output ==
+            "overcloud node provision --network-config"
