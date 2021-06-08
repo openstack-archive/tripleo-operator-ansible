@@ -1,10 +1,10 @@
 ---
 # tasks file for tripleo_overcloud_network_vip_provision
-- name: Set overcloud network provision facts
+- name: Set overcloud network vip provision facts
   set_fact:
     _provision_cmd: >-
       {{ tripleo_overcloud_network_vip_provision_os_cloud | ternary('', "source " ~ tripleo_overcloud_network_vip_provision_rc_file ~ "; ") }}
-      {{ openstack_bin }} overcloud network provision -y
+      {{ openstack_bin }} overcloud network vip provision -y
       {{ tripleo_overcloud_network_vip_provision_output_file | ternary('-o $PROVISION_OUTPUT', '') }}
       {{ tripleo_overcloud_network_vip_provision_stack | ternary ('--stack $STACK', '') }}
       {{ tripleo_overcloud_network_vip_provision_deployment_file }}
@@ -50,7 +50,6 @@
   when:
     - not ansible_check_mode|bool
     - not tripleo_overcloud_network_vip_provision_generate_scripts_only|bool
-
 
 - name: Set output fact
   when:
