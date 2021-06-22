@@ -79,7 +79,3 @@
     promote:
       jobs:
       - promote-openstack-tox-docs: *tripleo-docs
-
-    release:
-      jobs:
-        - publish-openstack-python-tarball
