@@ -43,7 +43,7 @@ Role Variables
 * `tripleo_deploy_public_virtual_ip`: (String) Public network VIP.
 * `tripleo_deploy_roles_file`: (String) File path to a deployment roles file.
 * `tripleo_deploy_stack`: (String) Name for ephemeral stack. Default: standalone
-* `tripleo_deploy_standalone`: (Boolean) Flag to indicate that a standalone cloud is being deployed. Default: true
+* `tripleo_deploy_standalone`: (Boolean) Flag to indicate that a standalone cloud is being deployed. Should be false after the Victoria. Default: false
 * `tripleo_deploy_standalone_role`: (String) Role name to deploy. Default: Standalone
 * `tripleo_deploy_templates`: (String) Path to the directory containing heat templates for the deployment. Default: /usr/share/openstack-tripleo-heat-templates
 * `tripleo_deploy_timeout`: (Integer) Number in seconds to wait for the ansible execution of the deployment command to finish. This should be larger than the `tripleo_deploy_timeout_arg` value. Default: 5700

@@ -25,7 +25,7 @@
         that:
           - tripleo_deploy_output ==
             "tripleo deploy --templates /usr/share/openstack-tripleo-heat-templates "
-            "--standalone --stack standalone --standalone-role Standalone --timeout 90 "
+            "--stack standalone --standalone-role Standalone --timeout 90 "
             "--local-ip 192.168.24.2/24"
 
     - name: Check parameter "tripleo_deploy_stack"
@@ -34,14 +34,14 @@
       vars:
         tripleo_deploy_templates:
         tripleo_deploy_stack: test
-        tripleo_deploy_standalone: false
+        tripleo_deploy_standalone: true
         tripleo_deploy_standalone_role:
         tripleo_deploy_timeout_arg:
 
     - name: Assert "tripleo_deploy_stack"
       assert:
         that:
-          - tripleo_deploy_output == "tripleo deploy --stack test --local-ip 192.168.24.2/24"
+          - tripleo_deploy_output == "tripleo deploy --standalone --stack test --local-ip 192.168.24.2/24"
 
     - name: Check parameter "tripleo_deploy_upgrade"
       include_role:
