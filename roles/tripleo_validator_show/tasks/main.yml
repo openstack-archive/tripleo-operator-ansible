@@ -8,7 +8,7 @@
 - name: Setup validator show facts
   set_fact:
     _validator_show_cmd: >-
-      {{ openstack_bin }} tripleo validator show --validation
+      {{ openstack_bin }} tripleo validator show
       {{ tripleo_validator_show_validation | ternary(' "${TRIPLEO_VALIDATOR_SHOW_VALIDATION}"', '') }}
     _validator_show_env:
       TRIPLEO_VALIDATOR_SHOW_VALIDATION: >-

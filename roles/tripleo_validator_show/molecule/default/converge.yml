@@ -20,4 +20,4 @@
       assert:
         that:
           - tripleo_validator_show_result.stdout ==
-            "tripleo validator show --validation check_ram"
+            "tripleo validator show check_ram"
