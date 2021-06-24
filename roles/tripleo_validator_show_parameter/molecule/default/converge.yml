@@ -9,15 +9,28 @@
     tripleo_validator_show_parameter_debug: true
   tasks:
 
-    - name: Check parameter "tripleo_validator_show_parameter" as a single element
+    - name: Check parameter "tripleo_validator_show_validation_parameter" as a single element
       include_role:
         name: "tripleo_validator_show_parameter"
       vars:
-        tripleo_validator_show_parameter:
+        tripleo_validator_show_validation_parameter:
           - 'foo'
 
-    - name: Assert "tripleo_validator_show_parameter"
+    - name: Assert "tripleo_validator_show_validation_parameter"
       assert:
         that:
           - tripleo_validator_show_parameter_result.stdout ==
-            "tripleo validator show parameter foo"
+            "tripleo validator show parameter --validation foo"
+
+    - name: Check parameter "tripleo_validator_show_group_parameter" as a single element
+      include_role:
+        name: "tripleo_validator_show_parameter"
+      vars:
+        tripleo_validator_show_group_parameter:
+          - 'no-op'
+
+    - name: Assert "tripleo_validator_show_group_parameter"
+      assert:
+        that:
+          - tripleo_validator_show_parameter_result.stdout ==
+            "tripleo validator show parameter --group no-op"
