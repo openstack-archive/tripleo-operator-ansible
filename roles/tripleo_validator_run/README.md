@@ -17,6 +17,7 @@ Role Variables
 * `tripleo_validator_run_extra_vars_file`: (String) Path to an ansible vars file to use when running the validations
 * `tripleo_validator_run_validation`: (String) Specific validation to run
 * `tripleo_validator_run_group`: (String) Group of validations to run
+* `tripleo_validator_run_static_inventory`: (String) Path to a static inventory file
 
 Output Variables
 ----------------

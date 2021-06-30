@@ -6,3 +6,4 @@ tripleo_validator_run_extra_vars:
 tripleo_validator_run_extra_vars_file:
 tripleo_validator_run_validation: []
 tripleo_validator_run_group: []
+tripleo_validator_run_static_inventory:
