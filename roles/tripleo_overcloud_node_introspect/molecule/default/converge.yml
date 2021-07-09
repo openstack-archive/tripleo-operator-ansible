@@ -12,6 +12,8 @@
         openstack_bin: echo
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Check role
       assert:
@@ -26,6 +28,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_node_uuids: ['test1', 'test2']
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_node_uuids"
       assert:
@@ -40,6 +44,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_all_manageable: true
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_all_manageable"
       assert:
@@ -54,6 +60,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_provide: true
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_provide"
       assert:
@@ -68,6 +76,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_run_validations: true
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_run_validations"
       assert:
@@ -82,6 +92,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_concurrency: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_concurrency"
       assert:
@@ -96,6 +108,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_node_timeout: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_node_timeout"
       assert:
@@ -110,6 +124,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_max_retries: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_max_retries"
       assert:
@@ -124,6 +140,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_retry_timeout: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_retry_timeout"
       assert:
@@ -145,6 +163,8 @@
         tripleo_overcloud_node_introspect_node_timeout: 60
         tripleo_overcloud_node_introspect_max_retries: 2
         tripleo_overcloud_node_introspect_retry_timeout: 120
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert all parameters for role tripleo_overcloud_node_introspect
       assert:

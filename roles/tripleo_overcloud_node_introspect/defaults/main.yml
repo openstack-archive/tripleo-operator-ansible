@@ -15,3 +15,6 @@ tripleo_overcloud_node_introspect_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_node_introspect_node_timeout:
 tripleo_overcloud_node_introspect_max_retries:
 tripleo_overcloud_node_introspect_retry_timeout:
+tripleo_overcloud_node_introspect_log: "{{ tripleo_overcloud_node_introspect_home_dir }}/overcloud_node_introspect.log"
+tripleo_overcloud_node_introspect_log_combine: true
+tripleo_overcloud_node_introspect_log_output: true

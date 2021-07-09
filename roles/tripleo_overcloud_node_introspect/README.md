@@ -26,6 +26,9 @@ Role Variables
 * `tripleo_overcloud_node_introspect_node_timeout`: (Integer) Maximum timeout for node introspection.
 * `tripleo_overcloud_node_introspect_max_retries`: (Integer) Maximum introspection retries.
 * `tripleo_overcloud_node_introspect_retry_timeout`: (Integer) Maximum timeout between introspection retries.
+* `tripleo_overcloud_node_introspect_log_combine`: (Boolean) Flag to enable capturing stderr with stdout. Default: true
+* `tripleo_overcloud_node_introspect_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
+* `tripleo_overcloud_node_introspect_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_node_introspect_home_dir }}/overcloud_node_introspect.log"
 
 NOTE: Please note that this command should be run against the undercloud so the
 OS_CLOUD or rc file variables should be set to use the 'undercloud' when

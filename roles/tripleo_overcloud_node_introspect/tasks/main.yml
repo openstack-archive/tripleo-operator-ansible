@@ -13,6 +13,8 @@
       {{ tripleo_overcloud_node_introspect_max_retries | ternary('--max-retries ' ~ tripleo_overcloud_node_introspect_max_retries, '') }}
       {{ tripleo_overcloud_node_introspect_retry_timeout | ternary('--retry-timeout ' ~ tripleo_overcloud_node_introspect_retry_timeout, '') }}
       {{ tripleo_overcloud_node_introspect_concurrency | ternary('--concurrency ' ~ tripleo_overcloud_node_introspect_concurrency, '') }}
+      {{ tripleo_overcloud_node_introspect_log_output | ternary((">" ~ tripleo_overcloud_node_introspect_log), '') }}
+      {{ tripleo_overcloud_node_introspect_log_combine | ternary("2>&1", '') }}
     _introspect_env:
       OS_CLOUD: "{{ tripleo_overcloud_node_introspect_os_cloud }}"
 
