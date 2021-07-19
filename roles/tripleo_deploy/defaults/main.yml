@@ -41,3 +41,4 @@ tripleo_deploy_timeout: 5700
 tripleo_deploy_timeout_arg: 90
 tripleo_deploy_upgrade: false
 tripleo_deploy_yes: true
+tripleo_deploy_reproducer_command: false
