@@ -36,6 +36,8 @@
         name: tripleo_repos
       vars:
         tripleo_repos_debug: "{{ standalone_debug }}"
+      when:
+        - ansible_facts.distribution == 'CentOS'
 
     - name: Ensure system is up to date
       yum:
@@ -56,14 +58,14 @@
             name: python-tripleoclient
             state: installed
           become: true
-          when: ansible_distribution_major_version|int <= 7
+          when: ansible_facts.distribution_major_version|int <= 7
 
         - name: install python3 tripleoclient
           package:
             name: python3-tripleoclient
             state: present
           become: true
-          when: ansible_distribution_major_version|int >= 8
+          when: ansible_facts.distribution_major_version|int >= 8
 
     - name: Generate parameters.yaml
       copy:
