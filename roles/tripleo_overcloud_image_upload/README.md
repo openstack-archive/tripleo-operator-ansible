@@ -20,6 +20,8 @@ Role Variables
 * `tripleo_overcloud_image_upload_image_path`: (String) Path to directory overcloud images. By default the command will use the images in `tripleo_overcloud_image_upload_home_dir` if this is not specified.
 * `tripleo_overcloud_image_upload_image_type`: (String) If specified, restrict the image type to upload. Should be one of {os,ironic-python-agent}
 * `tripleo_overcloud_image_upload_ironic_python_agent_name`: (String) OpenStack ironic-python-agent image filename
+* `tripleo_overcloud_image_upload_local`: (Boolean) Flag to combine to enable the --local flag. Default: false
+* `tripleo_overcloud_image_upload_local_path`: (String) Path to local upload location. Default: ''
 * `tripleo_overcloud_image_upload_log_combine`: (Boolean) Flag to combine stdout and stderr in the logfile. Default: true
 * `tripleo_overcloud_image_upload_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
 * `tripleo_overcloud_image_upload_log`: (String) Install log file path. Default: "{{ tripleo_overcloud_image_upload_home_dir }}/overcloud_image_upload.log"
