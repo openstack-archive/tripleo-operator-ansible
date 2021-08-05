@@ -1,3 +1,27 @@
+- job:
+    name: tripleo-operator-ansible-release
+    parent: base
+    run: ci/playbooks/publish_collection.yml
+    secrets:
+      - name: ansible_galaxy_info
+        secret: ansible_galaxy_info_toa
+
+- secret:
+    name: ansible_galaxy_info_toa
+    data:
+      url: https://galaxy.ansible.com
+      token: !encrypted/pkcs1-oaep
+        - SXQjXSgmtNQeh5e3vElfPvpGfNJcD5Dt9O8ntMUnXspuUWWxPWOtjyhm/o2IEdHvRTEmH
+          EcNpj5MoMv+ufk6PbneC93jJQ6NrA5g5AwP7aZsVyrii1JwtxT37XIZPGPkJ3bvz51UFA
+          CL0U2KdcPz5vf2gzvf/ZvDB0IRZqEVnmlJHG/b84bS+k28aWHdQ4xB2nlsB5mOhuX4gVN
+          2xCgn9rNZwafw9jleuqtMmWYqEICGXWWniLpb8cQAfwXCCpuWnO+2UUremIrocTnbIiQA
+          Smz7UuyMWlOFS8KCgM60/yE+QRorpjT3U63eF+V2cpf2gXY5U7P7RWp2OnzTh2eSoH11x
+          FJ0b2zqDXnmxougo3+1qD/LO11CSBYdH6PxId5VCRbVS3dHLiHJPR7ABqjT8kpiw7Gmh3
+          jAE7Lkk+niAhYr4X+ZcBni1jS3TfAJx5SYMrjLOn5rDbKKk0jTUxfZ6w7aRZxheXTiBOw
+          pgE4j/cwi/VpV45WBCN83I2l63Jz4WGJVPDjhNbYOApxmNDFA8RQeShD5cOyxsnOxh7xU
+          uyb+385Biuc5O1jLSGDBqWbo1O9tdUBAc3ZhpSSUgSP2MY12RIgpj55Qy5TCvy5+4VKH3
+          APbMJDE3uJzdlmRyo6iaFZBziYxYCnvpnH+zYX0VwzdG0WGFUW//OVNE8eN7jM=
+
 - project:
     templates:
       - openstack-python3-ussuri-jobs
@@ -79,3 +103,7 @@
     promote:
       jobs:
       - promote-openstack-tox-docs: *tripleo-docs
+
+    tag:
+      jobs:
+        - tripleo-operator-ansible-release

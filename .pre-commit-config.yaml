@@ -32,7 +32,7 @@ repos:
           - 'ansible<2.10'
         files: \.(yaml|yml)$
         entry: >-
-          ansible-lint --force-color -v -x "ANSIBLE0006,ANSIBLE0007,ANSIBLE0010,ANSIBLE0012,ANSIBLE0013,ANSIBLE0016"
+          ansible-lint --force-color -v -x "ANSIBLE0006,ANSIBLE0007,ANSIBLE0010,ANSIBLE0012,ANSIBLE0013,ANSIBLE0016" --exclude zuul.d/
         # TODO(cloudnull): These codes were added to pass the lint check.
         #                  Things found within roles.galaxy are external
         #                  and not something maintained here.
