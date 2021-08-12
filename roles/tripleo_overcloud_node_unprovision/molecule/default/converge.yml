@@ -18,7 +18,7 @@
     - name: Check role
       assert:
         that:
-          - tripleo_overcloud_node_unprovision_output == "overcloud node unprovision --yes"
+          - tripleo_overcloud_node_unprovision_output == "overcloud node unprovision --stack overcloud --yes"
 
     - name: Assert "tripleo_overcloud_node_unprovision_stack"
       include_role:
@@ -37,6 +37,7 @@
         name: "tripleo_overcloud_node_unprovision"
       vars:
         tripleo_overcloud_node_unprovision_all: true
+        tripleo_overcloud_node_unprovision_stack:
 
     - name: Validate tripleo_overcloud_node_unprovision_all
       assert:
@@ -49,6 +50,7 @@
         name: "tripleo_overcloud_node_unprovision"
       vars:
         tripleo_overcloud_node_unprovision_deployment_file: foo.yaml
+        tripleo_overcloud_node_unprovision_stack:
 
     - name: Validate tripleo_overcloud_node_unprovision_deployment_file
       assert:
@@ -61,6 +63,7 @@
         name: "tripleo_overcloud_node_unprovision"
       vars:
         tripleo_overcloud_node_unprovision_network_ports: true
+        tripleo_overcloud_node_unprovision_stack:
 
     - name: Validate tripleo_overcloud_node_unprovision_network_ports
       assert:

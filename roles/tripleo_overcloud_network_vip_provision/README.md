@@ -21,7 +21,7 @@ Role Variables
 * `tripleo_overcloud_network_vip_provision_log`: (String) Path to a log file for the command output. Default: "{{ tripleo_overcloud_network_vip_provision_home_dir }}/overcloud_network_vip_provision.log"
 * `tripleo_overcloud_network_vip_provision_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_network_vip_provision_rc_file`.
 * `tripleo_overcloud_network_vip_provision_output_file`: (String) Path to an output file.
-* `tripleo_overcloud_network_vip_provision_stack`: (String) Stack name.
+* `tripleo_overcloud_network_vip_provision_stack`: (String) Stack name. Defaut: overcloud
 * `tripleo_overcloud_network_vip_provision_rc_file`: (String) (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
 
 Output Variables

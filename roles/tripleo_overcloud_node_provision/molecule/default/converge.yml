@@ -18,13 +18,14 @@
     - name: Check role
       assert:
         that:
-          - tripleo_overcloud_node_provision_output == "overcloud node provision"
+          - tripleo_overcloud_node_provision_output == "overcloud node provision --stack overcloud"
 
     - name: Assert "tripleo_overcloud_node_provision_output_file"
       include_role:
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_output_file: foo.yaml
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_output_file
       assert:
@@ -49,6 +50,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_overcloud_ssh_user: foo
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_overcloud_ssh_user
       assert:
@@ -61,6 +63,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_overcloud_ssh_key: foo.pub
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_overcloud_ssh_key
       assert:
@@ -73,6 +76,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_concurrency: 5
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_concurrency
       assert:
@@ -85,6 +89,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_timeout_arg: 12
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_timeout_arg
       assert:
@@ -97,6 +102,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_deployment_file: deploy.yaml
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_deployment_file
       assert:
@@ -109,6 +115,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_network_ports: true
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_network_ports
       assert:
@@ -121,6 +128,7 @@
         name: "tripleo_overcloud_node_provision"
       vars:
         tripleo_overcloud_node_provision_network_config: true
+        tripleo_overcloud_node_provision_stack:
 
     - name: Validate tripleo_overcloud_node_provision_network_config
       assert:
