@@ -23,6 +23,7 @@ tripleo_overcloud_deploy_log: "{{ tripleo_overcloud_deploy_home_dir }}/overcloud
 tripleo_overcloud_deploy_log_combine: true
 tripleo_overcloud_deploy_log_output: true
 tripleo_overcloud_deploy_networks_file:
+tripleo_overcloud_deploy_vip_file:
 tripleo_overcloud_deploy_no_cleanup: false
 tripleo_overcloud_deploy_no_config_download: false
 tripleo_overcloud_deploy_no_proxy:
