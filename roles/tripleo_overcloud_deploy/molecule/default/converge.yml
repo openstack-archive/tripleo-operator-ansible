@@ -337,6 +337,20 @@
         that:
           - tripleo_overcloud_deploy_output == "overcloud deploy --skip-postconfig"
 
+    - name: Check parameter "tripleo_overcloud_deploy_skip_nodes_and_networks"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_skip_nodes_and_networks: true
+
+    - name: Assert "tripleo_overcloud_deploy_skip_nodes_and_networks"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --skip-nodes-and-networks"
+
     - name: Check parameter "tripleo_overcloud_deploy_force_postconfig"
       include_role:
         name: "tripleo_overcloud_deploy"

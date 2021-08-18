@@ -51,6 +51,7 @@ Role Variables
 * `tripleo_overcloud_deploy_roles_file`: (String) File path to a deployment roles file.
 * `tripleo_overcloud_deploy_run_validations`: (Boolean) Flag to enable running validations. Default: false
 * `tripleo_overcloud_deploy_skip_deploy_identifier`: (Boolean) Flag to enable skip deploy identifier. Default: false
+* `tripleo_overcloud_deploy_skip_nodes_and_networks`: (Boolean) Flag to enable skip nodes and networks provisionning. Default: false
 * `tripleo_overcloud_deploy_skip_postconfig`: (Boolean) Flag to enable skip postconfig. Default: false
 * `tripleo_overcloud_deploy_stack`: (String) Name of the stack to deploy. Default: overcloud
 * `tripleo_overcloud_deploy_templates`: (String) Path to a directory containing the tripleo-heat-templates for the deployment. Default: /usr/share/openstack-tripleo-heat-templates/

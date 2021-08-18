@@ -41,6 +41,7 @@ tripleo_overcloud_deploy_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME
 tripleo_overcloud_deploy_roles_file:
 tripleo_overcloud_deploy_run_validations: false
 tripleo_overcloud_deploy_skip_deploy_identifier: false
+tripleo_overcloud_deploy_skip_nodes_and_networks: false
 tripleo_overcloud_deploy_skip_postconfig: false
 tripleo_overcloud_deploy_stack: overcloud
 tripleo_overcloud_deploy_templates: /usr/share/openstack-tripleo-heat-templates
