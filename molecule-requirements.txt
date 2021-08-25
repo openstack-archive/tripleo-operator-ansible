@@ -1,4 +1,4 @@
-ansible>=2.9,<2.10
+ansible-core<2.12
 # molecule also has optional extras: docker, podman
 molecule[test]>=3.5.0,<3.6  # MIT
 oslotest
