@@ -16,6 +16,11 @@ tripleo_overcloud_deploy_environment_files: []
 tripleo_overcloud_deploy_force_postconfig: false
 tripleo_overcloud_deploy_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
 tripleo_overcloud_deploy_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
+tripleo_overcloud_deploy_heat_type: ""
+tripleo_overcloud_deploy_heat_container_api_image: ""
+tripleo_overcloud_deploy_heat_container_engine_image: ""
+tripleo_overcloud_deploy_remove_heat: false
+tripleo_overcloud_deploy_skip_heat_pull: false
 tripleo_overcloud_deploy_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_deploy_inflight_validations: false
 tripleo_overcloud_deploy_libvirt_type:

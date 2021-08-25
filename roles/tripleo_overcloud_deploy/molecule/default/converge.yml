@@ -518,3 +518,73 @@
       assert:
         that:
           - tripleo_overcloud_deploy_output == "overcloud deploy --vip-file vips.yaml"
+
+    - name: Check parameter "tripleo_overcloud_deploy_heat_type"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_heat_type: "pod"
+
+    - name: Assert "tripleo_overcloud_deploy_heat_type"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --heat-type pod"
+
+    - name: Check parameter "tripleo_overcloud_deploy_heat_container_api_image"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_heat_container_api_image: "foo.iso"
+
+    - name: Assert "tripleo_vercloud_deploy_heat_container_api_image"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --heat-container-api-image foo.iso"
+
+    - name: Check parameter "tripleo_overcloud_deploy_heat_container_engine_image"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_heat_container_engine_image: "foo.iso"
+
+    - name: Assert "tripleo_overcloud_deploy_heat_container_engine_image"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --heat-container-engine-image foo.iso"
+
+    - name: Check parameter "tripleo_overcloud_deploy_skip_heat_pull"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_skip_heat_pull: true
+
+    - name: Assert "tripleo_vercloud_deploy_skip_heat_pull"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --skip-heat-pull"
+
+    - name: Check parameter "tripleo_overcloud_deploy_remove_heat"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_remove_heat: true
+
+    - name: Assert "tripleo_overcloud_deploy_remove_heat"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --rm-heat"

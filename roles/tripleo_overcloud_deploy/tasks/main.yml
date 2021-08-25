@@ -43,6 +43,11 @@
       {{ tripleo_overcloud_deploy_config_download_timeout | ternary('--config-download-timeout $DEPLOY_CONFIG_DOWNLOAD_TIMEOUT', '') }}
       {{ tripleo_overcloud_deploy_deployment_python_interpreter | ternary('--deployment-python-interpreter $DEPLOY_PYTHON_INTERPRETER', '') }}
       {{ tripleo_overcloud_deploy_baremetal_deployment | ternary('--baremetal-deployment $DEPLOY_BAREMETAL_DEPLOYMENT', '') }}
+      {{ tripleo_overcloud_deploy_heat_type | ternary('--heat-type $DEPLOY_HEAT_TYPE', '') }}
+      {{ tripleo_overcloud_deploy_heat_container_api_image | ternary('--heat-container-api-image $DEPLOY_HEAT_CONTAINER_API_IMAGE', '') }}
+      {{ tripleo_overcloud_deploy_heat_container_engine_image | ternary('--heat-container-engine-image $DEPLOY_HEAT_CONTAINER_ENGINE_IMAGE', '') }}
+      {{ tripleo_overcloud_deploy_skip_heat_pull | ternary('--skip-heat-pull', '') }}
+      {{ tripleo_overcloud_deploy_remove_heat | ternary('--rm-heat', '') }}
       {{ tripleo_overcloud_deploy_log_output | ternary((">" ~ tripleo_overcloud_deploy_log), '') }}
       {{ tripleo_overcloud_deploy_log_combine | ternary("2>&1", '') }}
     _deploy_env:
@@ -67,6 +72,9 @@
       DEPLOY_CONFIG_DOWNLOAD_TIMEOUT: "{{ tripleo_overcloud_deploy_config_download_timeout }}"
       DEPLOY_PYTHON_INTERPRETER: "{{ tripleo_overcloud_deploy_deployment_python_interpreter }}"
       DEPLOY_BAREMETAL_DEPLOYMENT: "{{ tripleo_overcloud_deploy_baremetal_deployment }}"
+      DEPLOY_HEAT_TYPE: "{{ tripleo_overcloud_deploy_heat_type }}"
+      DEPLOY_HEAT_CONTAINER_API_IMAGE: "{{ tripleo_overcloud_deploy_heat_container_api_image }}"
+      DEPLOY_HEAT_CONTAINER_ENGINE_IMAGE: "{{ tripleo_overcloud_deploy_heat_container_engine_image }}"
       OS_CLOUD: "{{ tripleo_overcloud_deploy_os_cloud }}"
 
 - name: Preserve existing log file if exists

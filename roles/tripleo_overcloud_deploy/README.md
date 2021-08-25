@@ -26,6 +26,11 @@ Role Variables
 * `tripleo_overcloud_deploy_force_postconfig`: (Boolean) Force the overcloud post-deployment configuration. Default: false
 * `tripleo_overcloud_deploy_generate_scripts`: (Boolean) Write out a shell script that can be used to reproduce the command being executed. By default uses the value of `tripleo_generate_scripts` or False if `tripleo_generate_scripts` isn't defined.
 * `tripleo_overcloud_deploy_generate_scripts_only`: (Boolean) Do not run the actual command - to be used in conjunction with `tripleo_overcloud_deploy_generate_scripts`. By default uses the value of `tripleo_generate_scripts_only` or False if `tripleo_generate_scripts_only` is not defined.
+* `tripleo_overcloud_deploy_heat_type`: (String) Ephemeral heat type.
+* `tripleo_overcloud_deploy_heat_container_api_image`: (String) Heat container api image.
+* `tripleo_overcloud_deploy_heat_container_engine_image`: (String) Heat container engine image.
+* `tripleo_overcloud_deploy_remove_heat`:(Boolean) Remove ephemeral heat. Deafult: false
+* `tripleo_overcloud_deploy_skip_heat_pull`: (Boolean) When --heat-type is pod or container assume the container image has already been pulled. Default: false
 * `tripleo_overcloud_deploy_home_dir`: (String) Home directory to where the command is run from. Default: "{{ ansible_env.HOME }}"
 * `tripleo_overcloud_deploy_inflight_validations`: (Boolean) Flag to enable in-flight validations. Default: false
 * `tripleo_overcloud_deploy_libvirt_type`: (String) Libvirt domain time. Setting `NovaComputeLibvirtType` in an environment file is preferred over this option.
