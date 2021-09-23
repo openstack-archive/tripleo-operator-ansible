@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_config_generate_ansible
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_config_generate_ansible
   company: Red Hat

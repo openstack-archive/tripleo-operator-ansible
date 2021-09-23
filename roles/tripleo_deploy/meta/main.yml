@@ -16,8 +16,10 @@
 
 
 galaxy_info:
+  role_name: tripleo_deploy
+  namespace: openstack
   author: OpenStack
-  description: TripleO Operator Role -- tripleo_failures
+  description: TripleO Operator Role -- tripleo_deploy
   company: Red Hat
   license: Apache-2.0
   min_ansible_version: 2.8

@@ -110,6 +110,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_node_timeout: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_node_timeout"
       assert:
@@ -124,6 +126,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_max_retries: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_max_retries"
       assert:
@@ -138,6 +142,8 @@
         tripleo_os_cloud: undercloud
         tripleo_overcloud_node_introspect_debug: true
         tripleo_overcloud_node_introspect_retry_timeout: value
+        tripleo_overcloud_node_introspect_log_combine: false
+        tripleo_overcloud_node_introspect_log_output: false
 
     - name: Assert "tripleo_overcloud_node_introspect_retry_timeout"
       assert:

@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_overcloud_netenv_validate
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_overcloud_netenv_validate
   company: Red Hat

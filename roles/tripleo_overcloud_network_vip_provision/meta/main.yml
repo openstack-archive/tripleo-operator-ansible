@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_overcloud_network_vip_provision
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_overcloud_network_vip_provision
   company: Red Hat

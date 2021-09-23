@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: test_molecule_prep
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- test_molecule_prep
   company: Red Hat
