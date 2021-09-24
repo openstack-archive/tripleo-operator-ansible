@@ -33,6 +33,7 @@ Role Variables
 * `tripleo_overcloud_deploy_log_combine`: (Boolean) Flag to enable capturing stderr with stdout. Default: true
 * `tripleo_overcloud_deploy_log_output`: (Boolean) Flag to enable logging to a file. Since the output of this command can be large, it is not recommended to disable this. Default: true
 * `tripleo_overcloud_deploy_networks_file`: (String) File path to a networks file for the deployment.
+* `tripleo_overcloud_deploy_vip_file`: (String) File path to a virtual IPs file for the deployment.
 * `tripleo_overcloud_deploy_no_cleanup`: (Boolean) String to enable no cleanup. Default: false
 * `tripleo_overcloud_deploy_no_config_download`: (Boolean) String to disable the config download software configuration. Default: false
 * `tripleo_overcloud_deploy_no_proxy`: (String) String containing a comma separated list of hosts to skip proxying when http_proxy and https_proxy are used.
