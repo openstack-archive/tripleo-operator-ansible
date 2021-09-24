@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_overcloud_node_extract_provisioned
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_overcloud_node_extract_provisioned
   company: Red Hat

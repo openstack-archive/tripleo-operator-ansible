@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_repos
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_repos
   company: Red Hat

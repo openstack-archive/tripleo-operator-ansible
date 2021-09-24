@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_container_image_prepare
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_container_image_prepare
   company: Red Hat

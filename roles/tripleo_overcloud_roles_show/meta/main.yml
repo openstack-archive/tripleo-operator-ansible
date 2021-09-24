@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_overcloud_roles_show
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_overcloud_roles_show
   company: Red Hat

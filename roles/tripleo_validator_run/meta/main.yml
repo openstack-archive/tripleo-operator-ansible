@@ -16,6 +16,8 @@
 
 
 galaxy_info:
+  role_name: tripleo_validator_run
+  namespace: openstack
   author: OpenStack
   description: TripleO Operator Role -- tripleo_validator_run
   company: Red Hat

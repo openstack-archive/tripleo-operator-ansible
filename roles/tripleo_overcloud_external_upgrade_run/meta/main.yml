@@ -16,8 +16,10 @@
 
 
 galaxy_info:
+  role_name: tripleo_overcloud_external_upgrade_run
+  namespace: openstack
   author: OpenStack
-  description: TripleO Operator Role -- tripleo_overcloud_external_upgrade_prepare
+  description: TripleO Operator Role -- tripleo_overcloud_external_upgrade_run
   company: Red Hat
   license: Apache-2.0
   min_ansible_version: 2.8
