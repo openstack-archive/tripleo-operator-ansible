@@ -23,6 +23,7 @@
       {{ tripleo_container_image_build_work_dir | ternary('--work-dir ' ~ tripleo_container_image_build_work_dir, '') }}
       {{ tripleo_container_image_build_log_output | ternary((">" ~ tripleo_container_image_build_log), '') }}
       {{ tripleo_container_image_build_log_combine | ternary("2>&1", '') }}
+      {{ tripleo_container_image_build_tcib_extras | tripleo.operator.shell_arg_list('--tcib-extras') }}
     _build_env: {}
 
 - name: Preserve existing log file if exists

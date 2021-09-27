@@ -27,3 +27,4 @@ tripleo_container_image_build_timeout: 5700
 tripleo_container_image_build_volumes: []
 tripleo_container_image_build_work_dir:
 tripleo_container_image_build_retries: 0
+tripleo_container_image_build_tcib_extras: []

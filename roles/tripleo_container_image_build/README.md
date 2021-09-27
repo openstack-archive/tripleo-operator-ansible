@@ -35,6 +35,7 @@ Role Variables
 * `tripleo_container_image_build_timeout`: (Integer) Number in seconds to wait for the ansible execution of the build command to finish. Default: 5700
 * `tripleo_container_image_build_volumes`: (List) Volume to bind mount during the container image builds. Default: []
 * `tripleo_container_image_build_work_dir`: (String) Tripleo container builds directory.
+* `tripleo_container_image_build_tcib_extras`: (List) TCIB extra variables (Like tcib_release, tcib_python_version). Default: None
 
 Output Variables
 ----------------
