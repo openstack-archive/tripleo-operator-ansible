@@ -29,7 +29,7 @@
       assert:
         that:
           - tripleo_overcloud_network_vip_provision_output ==
-            "overcloud network vip provision -o foo.yaml"
+            "overcloud network vip provision -y -o foo.yaml"
 
     - name: Assert "tripleo_overcloud_network_vip_provision_deployment_file"
       include_role:
@@ -41,4 +41,4 @@
       assert:
         that:
           - tripleo_overcloud_network_vip_provision_output ==
-            "overcloud network vip provision deploy.yaml"
+            "overcloud network vip provision -y deploy.yaml"
