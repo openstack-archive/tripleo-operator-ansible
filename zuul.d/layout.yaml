@@ -38,7 +38,6 @@
               - openstack-tox-py37
             files: &content_provider
               - ^roles/tripleo_undercloud_install/.*$
-              - ^roles/tripleo_undercloud_minion_install/.*$
               - ^roles/tripleo_deploy/.*$
               - ^roles/tripleo_container_image_prepare_default/.*$
         - openstack-tox-docs: &tripleo-docs
@@ -67,19 +66,6 @@
               - tripleo-ci-centos-8-content-provider
             files: &containers_multinode_files
               - ^roles/tripleo_undercloud_install/.*$
-        - tripleo-ci-centos-8-containers-undercloud-minion: &job_containers_undercloud_minion
-            vars: &undercloud_consumer_vars
-              consumer_job: true
-              tags:
-                - undercloud-setup
-                - undercloud-scripts
-                - undercloud-install
-                - undercloud-validate
-                - images
-            dependencies: *deps_content_provider_c8
-            files: &containers_minion_files
-              - ^roles/tripleo_undercloud_install/.*$
-              - ^roles/tripleo_undercloud_minion_install/.*$
         - tripleo-ci-centos-8-standalone: &job_centos8_standalone
             vars: &sa_consumer_vars
               consumer_job: true
@@ -97,7 +83,6 @@
             files: *content_provider
         - openstack-tox-docs: *tripleo-docs
         - tripleo-ci-centos-8-containers-multinode: *job_containers_multinode
-        - tripleo-ci-centos-8-containers-undercloud-minion: *job_containers_undercloud_minion
         - tripleo-ci-centos-8-standalone: *job_centos8_standalone
 
     promote:
