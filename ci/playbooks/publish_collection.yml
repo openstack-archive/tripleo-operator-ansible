@@ -28,7 +28,7 @@
       file:
         state: "{{ item }}"
         path: "{{ build_collection_path }}"
-        mode: 0644
+        mode: 0755
       loop:
         - absent
         - directory
