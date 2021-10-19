@@ -32,6 +32,14 @@
       debug:
         var: _unprovision_env
 
+- name: write reproducer script
+  tripleo_shell_script:
+    dest: "{{ tripleo_config_generate_home_dir }}/tripleo_overcloud_node_unprovision.sh"
+    shell_command: "{{ _unprovision_cmd }}"
+    shell_environment: "{{ _unprovision_env }}"
+  when:
+    - tripleo_overcloud_node_unprovision_generate_scripts|bool
+
 - name: overcloud node unprovision
   shell: "{{ _unprovision_cmd }}"  # noqa 305
   environment: "{{ _unprovision_env }}"
@@ -43,7 +51,9 @@
   async: "{{ tripleo_overcloud_node_unprovision_timeout }}"
   poll: "{{ tripleo_overcloud_node_unprovision_poll }}"
   changed_when: false
-  when: not ansible_check_mode|bool
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_overcloud_node_unprovision_generate_scripts_only|bool
 
 - name: Set output fact
   when:

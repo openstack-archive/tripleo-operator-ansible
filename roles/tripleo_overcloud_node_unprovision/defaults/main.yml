@@ -4,6 +4,8 @@ openstack_bin: openstack
 tripleo_overcloud_node_unprovision_all: false
 tripleo_overcloud_node_unprovision_debug: false
 tripleo_overcloud_node_unprovision_deployment_file:
+tripleo_overcloud_node_unprovision_generate_scripts: "{{ tripleo_generate_scripts|default(False) }}"
+tripleo_overcloud_node_unprovision_generate_scripts_only: "{{ tripleo_generate_scripts_only|default(False) }}"
 tripleo_overcloud_node_unprovision_home_dir: "{{ ansible_env.HOME }}"
 tripleo_overcloud_node_unprovision_log: "{{ tripleo_overcloud_node_unprovision_home_dir }}/CHANGEME.log"
 tripleo_overcloud_node_unprovision_log_combine: true
