@@ -32,7 +32,6 @@
       {{ tripleo_overcloud_deploy_skip_postconfig | ternary('--skip-postconfig', '') }}
       {{ tripleo_overcloud_deploy_force_postconfig | ternary('--force-postconfig', '') }}
       {{ tripleo_overcloud_deploy_skip_deploy_identifier | ternary('--skip-deploy-identifier', '') }}
-      {{ tripleo_overcloud_deploy_skip_nodes_and_networks | ternary('--skip-nodes-and-networks', '') }}
       {{ tripleo_overcloud_deploy_answers_file | ternary('--answers-file $DEPLOY_ANSWERS_FILE', '') }}
       {{ tripleo_overcloud_deploy_disable_password_generation | ternary('--disable-password-generation', '') }}
       {{ tripleo_overcloud_deploy_deployed_server | ternary('--deployed-server', '') }}
