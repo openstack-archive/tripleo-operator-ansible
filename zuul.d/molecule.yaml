@@ -34,6 +34,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_generate_fencing
       - tripleo-operator-molecule-tripleo_overcloud_image_build
       - tripleo-operator-molecule-tripleo_overcloud_netenv_validate
+      - tripleo-operator-molecule-tripleo_overcloud_network_vip_provision
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_reset
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
@@ -103,6 +104,7 @@
       - tripleo-operator-molecule-tripleo_overcloud_generate_fencing
       - tripleo-operator-molecule-tripleo_overcloud_image_build
       - tripleo-operator-molecule-tripleo_overcloud_netenv_validate
+      - tripleo-operator-molecule-tripleo_overcloud_network_vip_provision
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
       - tripleo-operator-molecule-tripleo_overcloud_node_bios_reset
       - tripleo-operator-molecule-tripleo_overcloud_node_clean
@@ -590,6 +592,21 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_overcloud_netenv_validate
+
+- job:
+    files:
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^molecule-requirements.txt
+      - ^requirements.txt
+      - ^roles/tripleo_overcloud_network_vip_provision/.*
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_overcloud_network_vip_provision
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_overcloud_network_vip_provision
 
 - job:
     files:
