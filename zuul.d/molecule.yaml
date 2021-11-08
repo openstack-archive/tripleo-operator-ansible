@@ -13,6 +13,7 @@
       - tripleo-operator-molecule-tripleo_container_image_show
       - tripleo-operator-molecule-tripleo_overcloud_image_upload
       - tripleo-operator-molecule-tripleo_deploy
+      - tripleo-operator-molecule-tripleo_upgrade
       - tripleo-operator-molecule-tripleo_overcloud_admin_authorize
       - tripleo-operator-molecule-tripleo_overcloud_backup
       - tripleo-operator-molecule-tripleo_overcloud_cell_export
@@ -83,6 +84,7 @@
       - tripleo-operator-molecule-tripleo_container_image_show
       - tripleo-operator-molecule-tripleo_overcloud_image_upload
       - tripleo-operator-molecule-tripleo_deploy
+      - tripleo-operator-molecule-tripleo_upgrade
       - tripleo-operator-molecule-tripleo_overcloud_admin_authorize
       - tripleo-operator-molecule-tripleo_overcloud_backup
       - tripleo-operator-molecule-tripleo_overcloud_cell_export
@@ -283,6 +285,21 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_deploy
+
+- job:
+    files:
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^molecule-requirements.txt
+      - ^requirements.txt
+      - ^roles/tripleo_upgrade/.*
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_upgrade
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_upgrade
 
 - job:
     files:

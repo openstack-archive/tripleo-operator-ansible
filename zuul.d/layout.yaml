@@ -76,6 +76,7 @@
             files: &standalone_files
               - ^roles/tripleo_deploy/.*$
               - ^roles/tripleo_container_image_prepare_default/.*$
+         #TODO(jfrancoa): Add standalone-upgrade job when job is stable
     gate:
       jobs:
         - openstack-tox-linters
