@@ -11,5 +11,5 @@ tripleo_overcloud_network_vip_provision_log_combine: true
 tripleo_overcloud_network_vip_provision_log_output: true
 tripleo_overcloud_network_vip_provision_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_network_vip_provision_output_file:
-tripleo_overcloud_network_vip_provision_stack:
+tripleo_overcloud_network_vip_provision_stack: overcloud
 tripleo_overcloud_network_vip_provision_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

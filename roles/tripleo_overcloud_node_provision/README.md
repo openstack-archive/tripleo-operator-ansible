@@ -26,7 +26,7 @@ Role Variables
 * `tripleo_overcloud_node_provision_overcloud_ssh_user`: (String) User for ssh access to the newly deployed nodes.
 * `tripleo_overcloud_node_provision_poll`: (Integer) Number of seconds to wait between each checks to see if the command has completed. Default: 10
 * `tripleo_overcloud_node_provision_rc_file`: (String) (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
-* `tripleo_overcloud_node_provision_stack`: (String) Name or ID of the heat stack.
+* `tripleo_overcloud_node_provision_stack`: (String) Name or ID of the heat stack. Default: stack
 * `tripleo_overcloud_node_provision_timeout_arg`: (Integer) Number of seconds to wait for node to complete. Should be smaller than the `overcloud_node_provision_timeout` variable.
 * `tripleo_overcloud_node_provision_timeout`: (Integer) Number in seconds to wait for the ansible execution of the command to finish. Default: 3700
 

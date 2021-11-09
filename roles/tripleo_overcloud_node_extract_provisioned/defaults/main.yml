@@ -11,4 +11,4 @@ tripleo_overcloud_node_extract_provisioned_os_cloud: "{{ tripleo_os_cloud | defa
 tripleo_overcloud_node_extract_provisioned_output_file:
 tripleo_overcloud_node_extract_provisioned_overwrite_action: error
 tripleo_overcloud_node_extract_provisioned_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
-tripleo_overcloud_node_extract_provisioned_stack:
+tripleo_overcloud_node_extract_provisioned_stack: overcloud

@@ -23,7 +23,7 @@ Role Variables
 * `tripleo_overcloud_node_unprovision_os_cloud`: (String) (String) OS_CLOUD value to use when running the command. If `tripleo_os_cloud` is defined, it will be the default. Otherwise the default is ''. This variable takes precedence over `tripleo_overcloud_node_unprovision_rc_file`.
 * `tripleo_overcloud_node_unprovision_poll`: (Integer) Number of seconds to wait between each checks to see if the command has completed. Default: 10
 * `tripleo_overcloud_node_unprovision_rc_file`: (String) (String) Path to the credential file to use. If `tripleo_rc_file` is defined, it will be the default. Default: "{{ ansible_env.HOME }}/stackrc"
-* `tripleo_overcloud_node_unprovision_stack`: (String) Name or ID of the heat stack
+* `tripleo_overcloud_node_unprovision_stack`: (String) Name or ID of the heat stack Default: overcloud
 * `tripleo_overcloud_node_unprovision_timeout`: (Integer) Number in seconds to wait for the ansible execution of the command to finish. Default: 3600
 * `tripleo_overcloud_node_unprovision_yes`: (Boolean) Skip yes/no prompt. Default: true
 

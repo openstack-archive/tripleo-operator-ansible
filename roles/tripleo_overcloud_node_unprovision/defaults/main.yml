@@ -13,7 +13,7 @@ tripleo_overcloud_node_unprovision_log_output: true
 tripleo_overcloud_node_unprovision_os_cloud: "{{ tripleo_os_cloud | default('') }}"
 tripleo_overcloud_node_unprovision_poll: 10
 tripleo_overcloud_node_unprovision_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"
-tripleo_overcloud_node_unprovision_stack:
+tripleo_overcloud_node_unprovision_stack: overcloud
 tripleo_overcloud_node_unprovision_timeout: 3600
 tripleo_overcloud_node_unprovision_yes: true
 tripleo_overcloud_node_unprovision_network_ports:

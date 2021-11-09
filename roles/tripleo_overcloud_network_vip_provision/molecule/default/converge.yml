@@ -17,13 +17,14 @@
     - name: Check role
       assert:
         that:
-          - tripleo_overcloud_network_vip_provision_output == "overcloud network vip provision -y"
+          - tripleo_overcloud_network_vip_provision_output == "overcloud network vip provision -y --stack overcloud"
 
     - name: Assert "tripleo_overcloud_network_vip_provision_output_file"
       include_role:
         name: "tripleo_overcloud_network_vip_provision"
       vars:
         tripleo_overcloud_network_vip_provision_output_file: foo.yaml
+        tripleo_overcloud_network_vip_provision_stack:
 
     - name: Validate tripleo_overcloud_network_vip_provision_output_file
       assert:
@@ -36,6 +37,7 @@
         name: "tripleo_overcloud_network_vip_provision"
       vars:
         tripleo_overcloud_network_vip_provision_deployment_file: deploy.yaml
+        tripleo_overcloud_network_vip_provision_stack:
 
     - name: Validate tripleo_overcloud_network_vip_provision_deployment_file
       assert:
