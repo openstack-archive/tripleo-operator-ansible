@@ -26,6 +26,13 @@ class FilterModule(object):
             'shell_arg_list': self.shell_arg_list
         }
 
+    def _add_to_list(self, list_item, arg, parameter):
+        val = quote(arg)
+        if parameter:
+            list_item.append("{} {}".format(parameter, val))
+        else:
+            list_item.append(val)
+
     def shell_arg_list(self, arg, parameter=None):
         # Nothing was passed into this, just return an empty string
         if not arg:
@@ -34,10 +41,11 @@ class FilterModule(object):
             arg = [arg]
         return_value = []
         for a in arg:
-            if a:
-                val = quote(a)
-                if parameter:
-                    return_value.append("{} {}".format(parameter, val))
-                else:
-                    return_value.append(val)
+            if isinstance(a, str) and a.strip():
+                self._add_to_list(return_value, a, parameter)
+            elif isinstance(a, (list, tuple)):
+                # Deal with nested list items.
+                for item in a:
+                    if item.strip():
+                        self._add_to_list(return_value, item, parameter)
         return ' '.join(return_value)

@@ -59,3 +59,15 @@ class TestShellArgsFilters(tests_base.TestCase):
         expected = '-p a'
         self.assertEqual(expected,
                          self.filter.shell_arg_list(arg, parameter='-p'))
+
+    def test_shell_arg_nested_list(self):
+        arg = ['a', ['b', 'c'], 'd']
+        expected = '-p a -p b -p c -p d'
+        self.assertEqual(expected,
+                         self.filter.shell_arg_list(arg, parameter='-p'))
+
+    def test_shell_args_empty_item(self):
+        arg = ['a', ['b', 'c', ''], 'd', '']
+        expected = '-p a -p b -p c -p d'
+        self.assertEqual(expected,
+                         self.filter.shell_arg_list(arg, parameter='-p'))
