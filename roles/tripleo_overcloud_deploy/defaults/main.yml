@@ -9,6 +9,7 @@ tripleo_overcloud_deploy_debug: false
 tripleo_overcloud_deploy_deployed_server: false
 tripleo_overcloud_deploy_deployment_python_interpreter:
 tripleo_overcloud_deploy_disable_password_generation: false
+tripleo_overcloud_deploy_disable_protected_resource_types: false
 tripleo_overcloud_deploy_disable_validations: false
 tripleo_overcloud_deploy_dry_run: false
 tripleo_overcloud_deploy_environment_dirs: []

@@ -574,3 +574,17 @@
       assert:
         that:
           - tripleo_overcloud_deploy_output == "overcloud deploy --rm-heat"
+
+    - name: Check parameter "tripleo_overcloud_deploy_disable_protected_resource_types"
+      include_role:
+        name: "tripleo_overcloud_deploy"
+      vars:
+        tripleo_overcloud_deploy_stack:
+        tripleo_overcloud_deploy_templates:
+        tripleo_overcloud_deploy_timeout_arg:
+        tripleo_overcloud_deploy_disable_protected_resource_types: true
+
+    - name: Assert "tripleo_overcloud_deploy_disable_protected_resource_types"
+      assert:
+        that:
+          - tripleo_overcloud_deploy_output == "overcloud deploy --disable-protected-resource-types"
