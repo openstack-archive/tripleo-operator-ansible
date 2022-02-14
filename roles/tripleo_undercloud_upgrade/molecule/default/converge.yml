@@ -75,3 +75,14 @@
       assert:
         that:
           - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --yes"
+
+    - name: Check parameter "tripleo_undercloud_upgrade_reproducer_command"
+      include_role:
+        name: "tripleo_undercloud_upgrade"
+      vars:
+        tripleo_undercloud_upgrade_reproducer_command: true
+
+    - name: Assert "tripleo_undercloud_upgrade_reproducer_command"
+      assert:
+        that:
+          - tripleo_undercloud_upgrade_result.stdout == "undercloud upgrade --reproduce-command"

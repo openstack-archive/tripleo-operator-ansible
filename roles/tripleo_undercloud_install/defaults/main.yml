@@ -12,6 +12,7 @@ tripleo_undercloud_install_log_combine: true
 tripleo_undercloud_install_log_output: true
 tripleo_undercloud_install_no_validations: false
 tripleo_undercloud_install_poll: 10
+tripleo_undercloud_install_reproducer_command: false
 tripleo_undercloud_install_timeout: 7200
 tripleo_undercloud_install_yes: false
 tripleo_undercloud_install_log: "{{ tripleo_undercloud_install_home_dir }}/undercloud_install.log"
