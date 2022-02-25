@@ -22,6 +22,7 @@ Role Variables
 * `tripleo_undercloud_install_log_output`: (Boolean) Flag to log the output to a file rather than show it in the ansible output. Default: true
 * `tripleo_undercloud_install_no_validations`: (Boolean) Flag to add --no-validations to the install. Default: false
 * `tripleo_undercloud_install_poll`: (Integer) Number of seconds to wait between checks to see if the install command has completed. This should be set to a value greater or equal to 1. Default: 10
+* `tripleo_undercloud_install_reproducer_command`: (Boolean) Flag to create a reproducer script including the Ansible command to re-run deployment playbooks.
 * `tripleo_undercloud_install_timeout`: (Integer) Timeout for the install command. Default: 7200
 * `tripleo_undercloud_install_yes`: (Boolean) Flag to add --yes to the install. Default: false
 * `tripleo_undercloud_install_log`: (String) Install log file path. Default: "{{ tripleo_undercloud_install_home_dir }}/undercloud_install.log"

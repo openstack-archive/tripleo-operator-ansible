@@ -75,3 +75,14 @@
       assert:
         that:
           - tripleo_undercloud_install_result.stdout == "undercloud install --yes"
+
+    - name: Check parameter "tripleo_undercloud_install_reproducer_command"
+      include_role:
+        name: "tripleo_undercloud_install"
+      vars:
+        tripleo_undercloud_install_reproducer_command: true
+
+    - name: Assert "tripleo_undercloud_install_reproducer_command"
+      assert:
+        that:
+          - tripleo_undercloud_install_result.stdout == "undercloud install --reproduce-command"
