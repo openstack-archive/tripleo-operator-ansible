@@ -1,0 +1,25 @@
+---
+- name: Converge
+  hosts: all
+  collections:
+    - tripleo.operator
+  vars:
+    openstack_bin: echo
+    tripleo_os_cloud: undercloud
+    tripleo_ceph_user_run_debug: true
+  tasks:
+    - name: Enable ceph-admin user with tripleo_ceph_user role
+      include_role:
+        name: "tripleo_ceph_user"
+      vars:
+        tripleo_ceph_user_spec: /home/zuul/ceph_spec.yaml
+
+    - name: Show result tripleo_ceph_user_result
+      debug:
+        msg: "{{ tripleo_ceph_user_result }}"
+
+    - name: Assert tripleo_ceph_user command
+      assert:
+        that:
+          - tripleo_ceph_user_result.stdout ==
+            "overcloud ceph user enable /home/zuul/ceph_spec.yaml --cephadm-ssh-user ceph-admin"

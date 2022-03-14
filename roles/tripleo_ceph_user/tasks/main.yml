@@ -1,0 +1,58 @@
+---
+- name: Setup ceph user enable facts
+  set_fact:
+    _deploy_cmd: >-
+      {{ openstack_bin }} overcloud ceph user
+      {{ tripleo_ceph_user_enable | ternary('enable', 'disable') }}
+      {{ tripleo_ceph_user_spec }}
+      {{ tripleo_ceph_user_fsid | ternary('--fsid $FSID', '') }}
+      {{ tripleo_ceph_user_standalone | ternary('--standalone', '') }}
+      {{ tripleo_ceph_user_ssh_user | ternary('--cephadm-ssh-user $CEPHADM_SSH_USER', '') }}
+      {{ tripleo_ceph_user_stack | ternary('--stack $DEPLOY_STACK', '') }}
+      {{ tripleo_ceph_user_working_dir | ternary('--working-dir $DEPLOY_WORKING_DIR', '') }}
+    _deploy_env:
+      FSID: "{{ tripleo_ceph_user_fsid }}"
+      CEPHADM_SSH_USER: "{{ tripleo_ceph_user_ssh_user }}"
+      DEPLOY_STACK: "{{ tripleo_ceph_user_stack }}"
+      DEPLOY_WORKING_DIR: "{{ tripleo_ceph_user_working_dir }}"
+
+- name: Show debug information
+  when:
+    tripleo_ceph_user_debug|bool
+  block:
+    - name: Show openstack overcloud ceph user enable command
+      debug:
+        var: _deploy_cmd
+
+    - name: Show the openstack overcloud ceph user enable environment
+      debug:
+        var: _deploy_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ ansible_env.HOME }}/openstack_overcloud_ceph_user.sh"
+    shell_command: "{{ _deploy_cmd }}"
+    shell_environment: "{{ _deploy_env }}"
+  when: tripleo_ceph_user_generate_scripts|bool
+
+- name: Enable Ceph User
+  shell: "{{ _deploy_cmd }}"  # noqa 305
+  environment: "{{ _deploy_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}"
+    warn: false
+  become: "{{ tripleo_ceph_user_become }}"
+  register: tripleo_ceph_user_result
+  async: "{{ tripleo_ceph_user_timeout }}"
+  poll: "{{ tripleo_ceph_user_poll }}"
+  changed_when: false
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_ceph_user_generate_scripts_only|bool
+
+- name: Set output fact
+  when:
+    - tripleo_ceph_user_result.stdout is defined
+  set_fact:
+    tripleo_ceph_user_output: "{{ tripleo_ceph_user_result.stdout }}"

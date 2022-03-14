@@ -4,6 +4,7 @@
       jobs:
       - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_ceph_spec
+      - tripleo-operator-molecule-tripleo_ceph_user
       - tripleo-operator-molecule-tripleo_config_generate_ansible
       - tripleo-operator-molecule-tripleo_container_image_build
       - tripleo-operator-molecule-tripleo_container_image_delete
@@ -76,6 +77,7 @@
       jobs:
       - tripleo-operator-molecule-test_molecule_prep
       - tripleo-operator-molecule-tripleo_ceph_spec
+      - tripleo-operator-molecule-tripleo_ceph_user
       - tripleo-operator-molecule-tripleo_config_generate_ansible
       - tripleo-operator-molecule-tripleo_container_image_build
       - tripleo-operator-molecule-tripleo_container_image_delete
@@ -1149,3 +1151,17 @@
     parent: tripleo-operator-molecule-base
     vars:
       tox_extra_args: tripleo_ceph_spec
+
+- job:
+    files:
+      - ^roles/tripleo_ceph_user/.*
+      - ^bindep.txt
+      - ^galaxy.yml
+      - ^requirements.txt
+      - ^setup.cfg
+      - ^test-requirements.txt
+      - ^tox.ini
+    name: tripleo-operator-molecule-tripleo_ceph_user
+    parent: tripleo-operator-molecule-base
+    vars:
+      tox_extra_args: tripleo_ceph_user
