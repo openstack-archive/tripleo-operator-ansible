@@ -1,0 +1,93 @@
+---
+###############################################################################
+# Overcloud post-installation playbook
+#
+# Description:
+# This is a basic playbook to execute post-installation tasks.
+
+###############################################################################
+
+- hosts: undercloud
+  collections:
+    - tripleo.operator
+  vars:
+    flavors:
+      - name: m1.tiny
+        ram: 512
+        disk: 0
+        vcpus: 1
+      - name: m1.smaller
+        ram: 1024
+        disk: 0
+        vcpus: 1
+      - name: m1.small
+        ram: 2048
+        disk: 10
+        vcpus: 1
+      - name: m1.medium
+        ram: 3072
+        disk: 10
+        vcpus: 2
+      - name: m1.large
+        ram: 8192
+        disk: 10
+        vcpus: 4
+      - name: m1.xlarge
+        ram: 8192
+        disk: 10
+        vcpus: 8
+    networks:
+      - name: public
+        state: present
+        gateway_ip: 10.1.1.1
+        subnet_range: 10.1.1.0/24
+        external: true
+      - name: provider
+        state: present
+        gateway_ip: 10.9.101.254
+        subnet_range: 10.9.101.0/24
+        external: true
+      - name: private
+        state: present
+        gateway_ip: 10.1.2.1
+        subnet_range: 10.1.2.0/24
+        external: false
+
+    stack_name: overcloud
+
+  gather_facts: true
+  tasks:
+    - name: Get overcloud status
+      import_role:
+        name: tripleo_overcloud_status
+
+    - name: Run all overcloud post installation tasks if conditions are met.
+      block:
+        - name: Create flavor
+          os_nova_flavor:
+            state: present
+            name: "{{ item.name }}"
+            ram: "{{ item.ram }}"
+            vcpus: "{{ item.vcpus }}"
+            disk: "{{ item.disk  }}"
+            cloud: "{{ stack_name }}"
+          with_items: "{{ flavors }}"
+
+        - name: Create networks
+          os_network:
+            state: present
+            name: "{{ item.name }}-network"
+            external: "{{ item.external }}"
+            cloud: "{{ stack_name }}"
+          with_items: "{{ networks }}"
+
+        - name: Create subnet
+          os_subnet:
+            state: present
+            network_name: "{{ item.name }}-network"
+            name: "{{ item.name }}-subnet"
+            cidr: "{{ item.subnet_range }}"
+            gateway_ip: "{{ item.gateway_ip }}"
+            cloud: "{{ stack_name }}"
+          with_items: "{{ networks }}"
+      when: tripleo_overcloud_status_output | regex_search('DEPLOY_SUCCESS')
