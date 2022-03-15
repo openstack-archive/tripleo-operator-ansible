@@ -1,0 +1,19 @@
+---
+driver:
+  name: delegated
+  options:
+    managed: false
+    ansible_connection_options:
+      ansible_connection: local
+log: true
+platforms:
+  - name: instance
+provisioner:
+  name: ansible
+scenario:
+  name: default
+  test_sequence:
+    - prepare
+    - syntax
+    - converge
+    - verify

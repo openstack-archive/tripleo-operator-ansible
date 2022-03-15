@@ -1,0 +1,41 @@
+---
+openstack_bin: openstack
+tripleo_ceph_deploy_become: false
+tripleo_ceph_deploy_crush_hierarchy:
+tripleo_ceph_deploy_debug: false
+tripleo_ceph_deploy_deployed_baremetal:
+tripleo_ceph_deploy_spec:
+tripleo_ceph_deploy_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
+tripleo_ceph_deploy_generate_scripts_only: "{{ tripleo_generate_scripts_only | default(False) }}"
+tripleo_ceph_deploy_mon_ip:
+tripleo_ceph_deploy_osd_spec:
+tripleo_ceph_deploy_overwrite: false
+tripleo_ceph_deploy_poll: 10
+tripleo_ceph_deploy_roles_file:
+tripleo_ceph_user_ssh_user: ceph-admin
+tripleo_ceph_deploy_stack:
+tripleo_ceph_deploy_standalone: false
+tripleo_ceph_deploy_timeout: 5700
+tripleo_ceph_deploy_timeout_arg: 90
+tripleo_ceph_deploy_working_dir:
+tripleo_ceph_deploy_output:
+tripleo_ceph_deploy_skip_user_create: false
+tripleo_ceph_deploy_skip_hosts_config: false
+tripleo_ceph_deploy_skip_container_registry_config: false
+tripleo_ceph_deploy_network_data:
+tripleo_ceph_deploy_public_network_name:
+tripleo_ceph_deploy_cluster_network_name:
+tripleo_ceph_deploy_config:
+tripleo_ceph_deploy_cephadm_extra_args:
+tripleo_ceph_deploy_force: false
+tripleo_ceph_deploy_ceph_vip:
+tripleo_ceph_deploy_daemons:
+tripleo_ceph_deploy_single_host_defaults: false
+tripleo_ceph_deploy_container_cephadm_default: false
+tripleo_ceph_deploy_container_image_prepare:
+tripleo_ceph_deploy_container_namespace:
+tripleo_ceph_deploy_container_image:
+tripleo_ceph_deploy_container_tag:
+tripleo_ceph_deploy_container_registry_url:
+tripleo_ceph_deploy_container_registry_username:
+tripleo_ceph_deploy_container_registry_password:

@@ -1,0 +1,102 @@
+---
+- name: Setup ceph deploy facts
+  set_fact:
+    _deploy_cmd: >-
+      {{ openstack_bin }} overcloud ceph deploy
+      {{ tripleo_ceph_deploy_deployed_baremetal }}
+      {{ tripleo_ceph_deploy_output | ternary('--output $DEPLOYED_CEPH', '') }}
+      {{ tripleo_ceph_deploy_overwrite | ternary('--yes', '') }}
+      {{ tripleo_ceph_deploy_standalone | ternary('--standalone', '') }}
+      {{ tripleo_ceph_deploy_mon_ip | ternary('--mon-ip $CEPH_MON_IP', '') }}
+      {{ tripleo_ceph_deploy_spec | ternary('--ceph-spec $CEPH_SPEC', '') }}
+      {{ tripleo_ceph_deploy_stack | ternary('--stack $DEPLOY_STACK', '') }}
+      {{ tripleo_ceph_deploy_working_dir | ternary('--working-dir $DEPLOY_WORKING_DIR', '') }}
+      {{ tripleo_ceph_deploy_roles_file | ternary('--roles $DEPLOY_ROLES_FILE', '') }}
+      {{ tripleo_ceph_deploy_osd_spec | ternary('--osd-spec $CEPH_OSD_SPEC', '') }}
+      {{ tripleo_ceph_deploy_crush_hierarchy | ternary('--crush-hierarchy $CEPH_CRUSH_HIERARCHY', '') }}
+      {{ tripleo_ceph_user_ssh_user | ternary('--cephadm-ssh-user $CEPHADM_SSH_USER', '') }}
+      {{ tripleo_ceph_deploy_skip_user_create | ternary('--skip-user-create', '') }}
+      {{ tripleo_ceph_deploy_skip_hosts_config | ternary('--skip-hosts-config', '') }}
+      {{ tripleo_ceph_deploy_skip_container_registry_config | ternary('--skip-container-registry-config', '') }}
+      {{ tripleo_ceph_deploy_force | ternary('--force', '') }}
+      {{ tripleo_ceph_deploy_single_host_defaults | ternary('--single-host-defaults', '') }}
+      {{ tripleo_ceph_deploy_network_data | ternary('--network-data $NETWORK_DATA', '') }}
+      {{ tripleo_ceph_deploy_public_network_name | ternary('--public-network-name $PUBLIC_NETWORK_NAME', '') }}
+      {{ tripleo_ceph_deploy_cluster_network_name | ternary('--cluster-network-name $CLUSTER_NETWORK_NAME', '') }}
+      {{ tripleo_ceph_deploy_config | ternary('--config $CONFIG', '') }}
+      {{ tripleo_ceph_deploy_cephadm_extra_args | ternary('--cephadm-extra-args "$CEPHADM_EXTRA_ARGS"', '') }}
+      {{ tripleo_ceph_deploy_ceph_vip | ternary('--ceph-vip $CEPH_VIP', '') }}
+      {{ tripleo_ceph_deploy_daemons | ternary('--daemons $DAEMONS', '') }}
+      {{ tripleo_ceph_deploy_container_cephadm_default | ternary('--cephadm-default-container', '') }}
+      {{ tripleo_ceph_deploy_container_image_prepare | ternary('--container-image-prepare $CONTAINER_IMAGE_PREPARE', '') }}
+      {{ tripleo_ceph_deploy_container_namespace | ternary('--container-namespace $CONTAINER_NAMESPACE', '') }}
+      {{ tripleo_ceph_deploy_container_image | ternary('--container-image $CONTAINER_IMAGE', '') }}
+      {{ tripleo_ceph_deploy_container_tag | ternary('--container-tag $CONTAINER_TAG', '') }}
+      {{ tripleo_ceph_deploy_container_registry_url | ternary('--registry-url $REGISTRY_URL', '') }}
+      {{ tripleo_ceph_deploy_container_registry_username | ternary('--registry-username $REGISTRY_USERNAME', '') }}
+      {{ tripleo_ceph_deploy_container_registry_password | ternary('--registry-password $REGISTRY_PASSWORD', '') }}
+    _deploy_env:
+      DEPLOYED_CEPH: "{{ tripleo_ceph_deploy_output }}"
+      DEPLOY_STACK: "{{ tripleo_ceph_deploy_stack }}"
+      DEPLOY_WORKING_DIR: "{{ tripleo_ceph_deploy_working_dir }}"
+      DEPLOY_ROLES_FILE: "{{ tripleo_ceph_deploy_roles_file }}"
+      CEPH_SPEC: "{{ tripleo_ceph_deploy_spec }}"
+      CEPH_MON_IP: "{{ tripleo_ceph_deploy_mon_ip }}"
+      CEPH_OSD_SPEC: "{{ tripleo_ceph_deploy_osd_spec }}"
+      CEPH_CRUSH_HIERARCHY: "{{ tripleo_ceph_deploy_crush_hierarchy }}"
+      CEPHADM_SSH_USER: "{{ tripleo_ceph_user_ssh_user }}"
+      NETWORK_DATA: "{{ tripleo_ceph_deploy_network_data }}"
+      PUBLIC_NETWORK_NAME: "{{ tripleo_ceph_deploy_public_network_name }}"
+      CLUSTER_NETWORK_NAME: "{{ tripleo_ceph_deploy_cluster_network_name }}"
+      CONFIG: "{{ tripleo_ceph_deploy_config }}"
+      CEPHADM_EXTRA_ARGS: "{{ tripleo_ceph_deploy_cephadm_extra_args }}"
+      CEPH_VIP: "{{ tripleo_ceph_deploy_ceph_vip }}"
+      DAEMONS: "{{ tripleo_ceph_deploy_daemons }}"
+      CONTAINER_IMAGE_PREPARE: "{{ tripleo_ceph_deploy_container_image_prepare }}"
+      CONTAINER_NAMESPACE: "{{ tripleo_ceph_deploy_container_namespace }}"
+      CONTAINER_IMAGE: "{{ tripleo_ceph_deploy_container_image }}"
+      CONTAINER_TAG: "{{ tripleo_ceph_deploy_container_tag }}"
+      REGISTRY_URL: "{{ tripleo_ceph_deploy_container_registry_url }}"
+      REGISTRY_USERNAME: "{{ tripleo_ceph_deploy_container_registry_username }}"
+      REGISTRY_PASSWORD: "{{ tripleo_ceph_deploy_container_registry_password }}"
+
+- name: Show debug information
+  when:
+    tripleo_ceph_deploy_debug|bool
+  block:
+    - name: Show openstack overcloud ceph deploy command
+      debug:
+        var: _deploy_cmd
+
+    - name: Show the openstack overcloud ceph deploy environment
+      debug:
+        var: _deploy_env
+
+- name: Write reproducer script
+  tripleo_shell_script:
+    dest: "{{ ansible_env.HOME }}/openstack_overcloud_ceph_deploy.sh"
+    shell_command: "{{ _deploy_cmd }}"
+    shell_environment: "{{ _deploy_env }}"
+  when: tripleo_ceph_deploy_generate_scripts|bool
+
+- name: Run Ceph Deploy
+  shell: "{{ _deploy_cmd }}"  # noqa 305
+  environment: "{{ _deploy_env }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}"
+    warn: false
+  become: "{{ tripleo_ceph_deploy_become }}"
+  register: tripleo_ceph_deploy_result
+  async: "{{ tripleo_ceph_deploy_timeout }}"
+  poll: "{{ tripleo_ceph_deploy_poll }}"
+  changed_when: false
+  when:
+    - not ansible_check_mode|bool
+    - not tripleo_ceph_deploy_generate_scripts_only|bool
+
+- name: Set output fact
+  when:
+    - tripleo_ceph_deploy_result.stdout is defined
+  set_fact:
+    tripleo_ceph_deploy_output: "{{ tripleo_ceph_deploy_result.stdout }}"
