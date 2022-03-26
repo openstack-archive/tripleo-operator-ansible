@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 * `tripleo_ceph_deploy_become`: (Boolean) Execute command with escalated privileges. Default: false
+* `tripleo_ceph_deploy_cluster`: (String) Name of the Ceph cluster. If set to 'foo', then the files /etc/ceph/<FSID>/foo.conf and /etc/ceph/<FSID>/foo.client.admin.keyring will be created. Otherwise these files will use the name 'ceph'. Changing this means changing command line calls too, e.g. 'ceph health' will become 'ceph --cluster foo health' unless export CEPH_ARGS='--cluster foo' is used. If unset `openenstack overcloud ceph deploy` will default this value to 'ceph'.
 * `tripleo_ceph_deploy_crush_hierarchy`: (String) Path to an existing crush hierarchy spec file.
 * `tripleo_ceph_deploy_debug`: (Boolean) Flag to print out the command that is run. Default: false
 * `tripleo_ceph_deploy_deployed_baremetal`: (String) Path to the environment file output from "openstack overcloud node provision". This argument may be excluded only if tripleo_ceph_deploy_standalone is True.

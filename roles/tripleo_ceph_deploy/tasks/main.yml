@@ -8,6 +8,7 @@
       {{ tripleo_ceph_deploy_overwrite | ternary('--yes', '') }}
       {{ tripleo_ceph_deploy_standalone | ternary('--standalone', '') }}
       {{ tripleo_ceph_deploy_mon_ip | ternary('--mon-ip $CEPH_MON_IP', '') }}
+      {{ tripleo_ceph_deploy_cluster | ternary('--cluster $CLUSTER', '') }}
       {{ tripleo_ceph_deploy_spec | ternary('--ceph-spec $CEPH_SPEC', '') }}
       {{ tripleo_ceph_deploy_stack | ternary('--stack $DEPLOY_STACK', '') }}
       {{ tripleo_ceph_deploy_working_dir | ternary('--working-dir $DEPLOY_WORKING_DIR', '') }}
@@ -42,6 +43,7 @@
       DEPLOY_ROLES_FILE: "{{ tripleo_ceph_deploy_roles_file }}"
       CEPH_SPEC: "{{ tripleo_ceph_deploy_spec }}"
       CEPH_MON_IP: "{{ tripleo_ceph_deploy_mon_ip }}"
+      CLUSTER: "{{ tripleo_ceph_deploy_cluster }}"
       CEPH_OSD_SPEC: "{{ tripleo_ceph_deploy_osd_spec }}"
       CEPH_CRUSH_HIERARCHY: "{{ tripleo_ceph_deploy_crush_hierarchy }}"
       CEPHADM_SSH_USER: "{{ tripleo_ceph_user_ssh_user }}"

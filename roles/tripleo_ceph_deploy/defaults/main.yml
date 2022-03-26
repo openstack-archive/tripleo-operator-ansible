@@ -1,6 +1,7 @@
 ---
 openstack_bin: openstack
 tripleo_ceph_deploy_become: false
+tripleo_ceph_deploy_cluster:
 tripleo_ceph_deploy_crush_hierarchy:
 tripleo_ceph_deploy_debug: false
 tripleo_ceph_deploy_deployed_baremetal:
