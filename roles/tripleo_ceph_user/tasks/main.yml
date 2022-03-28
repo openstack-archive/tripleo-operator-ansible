@@ -3,7 +3,7 @@
   set_fact:
     _deploy_cmd: >-
       {{ openstack_bin }} overcloud ceph user
-      {{ tripleo_ceph_user_enable | ternary('enable', 'disable') }}
+      {{ tripleo_ceph_user_enable | ternary('enable', 'disable --yes') }}
       {{ tripleo_ceph_user_spec }}
       {{ tripleo_ceph_user_fsid | ternary('--fsid $FSID', '') }}
       {{ tripleo_ceph_user_standalone | ternary('--standalone', '') }}
