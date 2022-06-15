@@ -74,19 +74,6 @@
           - tripleo_validator_run_result.stdout ==
             "tripleo validator run --extra-vars-file /tmp/foo.json --group no-op"
 
-    - name: Check parameter "tripleo_validator_run_plan"
-      include_role:
-        name: "tripleo_validator_run"
-      vars:
-        tripleo_validator_run_plan: 'my-thing'
-        tripleo_validator_run_group: 'no-op'
-
-    - name: Assert "tripleo_validator_run_plan"
-      assert:
-        that:
-          - tripleo_validator_run_result.stdout ==
-            'tripleo validator run --plan my-thing --group no-op'
-
     - name: Check parameter "tripleo_validator_run_workers"
       include_role:
         name: "tripleo_validator_run"

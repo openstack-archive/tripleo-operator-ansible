@@ -17,12 +17,11 @@
   set_fact:
     _validator_run_cmd: >-
       {{ openstack_bin }} tripleo validator run
-      {{ tripleo_validator_run_plan | ternary('--plan ' ~ tripleo_validator_run_plan, '') }}
       {{ tripleo_validator_run_workers | ternary('--workers ' ~ tripleo_validator_run_workers, '') }}
       {{ tripleo_validator_run_extra_vars_file | ternary('--extra-vars-file ' ~ tripleo_validator_run_extra_vars_file, '') }}
       {{ tripleo_validator_run_validation | ternary('--validation "${TRIPLEO_VALIDATOR_RUN_VALIDATION}"', '') }}
       {{ tripleo_validator_run_group | ternary('--group "${TRIPLEO_VALIDATOR_RUN_GROUP}"', '') }}
-      {{ tripleo_validator_run_static_inventory | ternary('--static-inventory ' ~ tripleo_validator_run_static_inventory, '') }}
+      {{ tripleo_validator_run_inventory | ternary('--inventory ' ~ tripleo_validator_run_inventory, '') }}
     _validator_run_env:
       TRIPLEO_VALIDATOR_RUN_VALIDATION: >-
         {%- if tripleo_validator_run_validation is string -%}
