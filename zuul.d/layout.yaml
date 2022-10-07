@@ -24,7 +24,7 @@
 
 - project:
     templates:
-      - openstack-python3-ussuri-jobs
+      - openstack-python3-zed-jobs
       - tripleo-operator-molecule-jobs
       - release-notes-jobs-python3
     check:
@@ -34,8 +34,7 @@
             dependencies:
               - openstack-tox-linters
               - openstack-tox-pep8
-              - openstack-tox-py36
-              - openstack-tox-py37
+              - openstack-tox-py39
             files: &content_provider
               - ^roles/tripleo_undercloud_install/.*$
               - ^roles/tripleo_deploy/.*$
