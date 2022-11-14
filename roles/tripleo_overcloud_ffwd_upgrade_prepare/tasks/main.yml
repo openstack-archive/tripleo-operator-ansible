@@ -93,7 +93,6 @@
   environment: "{{ _upgrade_prepare_env }}"
   args:
     chdir: "{{ tripleo_overcloud_ffwd_upgrade_prepare_home_dir }}"
-    warn: false
   register: tripleo_overcloud_ffwd_upgrade_prepare_result
   async: "{{ tripleo_overcloud_ffwd_upgrade_prepare_timeout }}"
   poll: "{{ tripleo_overcloud_ffwd_upgrade_prepare_poll }}"

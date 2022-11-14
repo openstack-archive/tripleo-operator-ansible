@@ -47,7 +47,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_node_discover_home_dir }}"
-    warn: false
   register: tripleo_overcloud_node_discover_result
   changed_when: true
   when:

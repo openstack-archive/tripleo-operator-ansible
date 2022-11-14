@@ -40,7 +40,6 @@
   environment: "{{ _backup_env }}"
   args:
     chdir: "{{ tripleo_overcloud_backup_home_dir }}"
-    warn: false
   async: "{{ tripleo_overcloud_backup_timeout }}"
   poll: "{{ tripleo_overcloud_backup_poll }}"
   register: tripleo_overcloud_backup_result

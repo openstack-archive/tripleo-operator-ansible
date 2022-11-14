@@ -87,7 +87,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ ansible_env.HOME }}"
-    warn: false
   become: "{{ tripleo_ceph_deploy_become }}"
   register: tripleo_ceph_deploy_result
   async: "{{ tripleo_ceph_deploy_timeout }}"

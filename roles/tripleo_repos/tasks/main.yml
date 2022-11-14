@@ -40,6 +40,5 @@
 - name: Run tripleo-repos
   shell: "{{ _repos_cmd }}"
   args:
-    warn: false
   become: true
   changed_when: true

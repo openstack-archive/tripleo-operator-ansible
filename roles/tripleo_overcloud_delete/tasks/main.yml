@@ -43,7 +43,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_delete_home_dir }}"
-    warn: false
   register: tripleo_overcloud_delete_result
   async: "{{ tripleo_overcloud_delete_timeout }}"
   poll: "{{ tripleo_overcloud_delete_poll }}"

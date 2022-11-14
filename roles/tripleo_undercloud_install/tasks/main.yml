@@ -41,7 +41,6 @@
   environment: "{{ _install_env }}"
   args:
     chdir: "{{ tripleo_undercloud_install_home_dir }}"
-    warn: false
   async: "{{ tripleo_undercloud_install_timeout }}"
   poll: "{{ tripleo_undercloud_install_poll }}"
   register: tripleo_undercloud_install_result

@@ -36,7 +36,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_node_bios_configure_home_dir }}"
-    warn: false
   register: tripleo_overcloud_node_bios_configure_result
   changed_when: true
   when:

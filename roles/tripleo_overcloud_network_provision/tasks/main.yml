@@ -43,7 +43,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_network_provision_home_dir }}"
-    warn: false
   register: tripleo_overcloud_network_provision_result
   changed_when: false
   when:

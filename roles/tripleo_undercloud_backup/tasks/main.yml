@@ -41,7 +41,6 @@
   environment: "{{ _backup_env }}"
   args:
     chdir: "{{ tripleo_undercloud_backup_home_dir }}"
-    warn: false
   async: "{{ tripleo_undercloud_backup_timeout }}"
   poll: "{{ tripleo_undercloud_backup_poll }}"
   become: "{{ tripleo_undercloud_backup_become }}"

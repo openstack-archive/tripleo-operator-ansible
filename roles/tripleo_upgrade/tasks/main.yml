@@ -90,7 +90,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_upgrade_home_dir }}"
-    warn: false
   become: "{{ tripleo_upgrade_become }}"
   register: tripleo_upgrade_result
   async: "{{ tripleo_upgrade_timeout }}"
