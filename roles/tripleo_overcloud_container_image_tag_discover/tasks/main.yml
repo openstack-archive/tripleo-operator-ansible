@@ -41,7 +41,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_container_image_tag_discover_home_dir }}"
-    warn: false
   register: tripleo_overcloud_container_image_tag_discover_result
   async: "{{ tripleo_overcloud_container_image_tag_discover_timeout }}"
   poll: "{{ tripleo_overcloud_container_image_tag_discover_poll }}"

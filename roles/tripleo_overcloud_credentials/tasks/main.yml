@@ -42,7 +42,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_credentials_home_dir }}"
-    warn: false
   register: tripleo_overcloud_credentials_result
   async: "{{ tripleo_overcloud_credentials_timeout }}"
   poll: "{{ tripleo_overcloud_credentials_poll }}"

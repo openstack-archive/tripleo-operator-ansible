@@ -47,7 +47,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_config_download_home_dir }}"
-    warn: false
   register: tripleo_overcloud_config_download_result
   async: "{{ tripleo_overcloud_config_download_timeout }}"
   poll: "{{ tripleo_overcloud_config_download_poll }}"

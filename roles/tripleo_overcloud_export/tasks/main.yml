@@ -37,7 +37,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_export_home_dir }}"
-    warn: false
   register: tripleo_overcloud_export_result
   changed_when: false
   when:

@@ -25,7 +25,6 @@
   environment: "{{ _failures_env }}"
   args:
     executable: /bin/bash
-    warn: false
   register: tripleo_overcloud_failures_result
   changed_when: false
 

@@ -49,7 +49,6 @@
   environment: "{{ _upgrade_run_env }}"
   args:
     chdir: "{{ tripleo_overcloud_external_upgrade_run_home_dir }}"
-    warn: false
   register: tripleo_overcloud_external_upgrade_run_result
   async: "{{ tripleo_overcloud_external_upgrade_run_timeout }}"
   poll: "{{ tripleo_overcloud_external_upgrade_run_poll }}"

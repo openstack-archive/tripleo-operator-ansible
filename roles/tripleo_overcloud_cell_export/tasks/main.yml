@@ -48,7 +48,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_cell_export_home_dir }}"
-    warn: false
   register: tripleo_overcloud_cell_export_result
   async: "{{ tripleo_overcloud_cell_export_timeout }}"
   poll: "{{ tripleo_overcloud_cell_export_poll }}"

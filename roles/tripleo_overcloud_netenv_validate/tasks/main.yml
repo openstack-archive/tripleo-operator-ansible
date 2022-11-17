@@ -39,7 +39,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_netenv_validate_home_dir }}"
-    warn: false
   register: tripleo_overcloud_netenv_validate_result
   async: "{{ tripleo_overcloud_netenv_validate_timeout }}"
   poll: "{{ tripleo_overcloud_netenv_validate_poll }}"

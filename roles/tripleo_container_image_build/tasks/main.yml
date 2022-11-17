@@ -55,7 +55,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_container_image_build_home_dir }}"
-    warn: false
   register: tripleo_container_image_build_result
   async: "{{ tripleo_container_image_build_timeout }}"
   poll: "{{ tripleo_container_image_build_poll }}"

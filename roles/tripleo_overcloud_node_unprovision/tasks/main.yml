@@ -46,7 +46,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_node_unprovision_home_dir }}"
-    warn: false
   register: tripleo_overcloud_node_unprovision_result
   async: "{{ tripleo_overcloud_node_unprovision_timeout }}"
   poll: "{{ tripleo_overcloud_node_unprovision_poll }}"

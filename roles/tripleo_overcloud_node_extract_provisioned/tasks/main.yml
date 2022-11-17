@@ -61,7 +61,6 @@
         args:
             executable: /bin/bash
             chdir: "{{ tripleo_overcloud_node_extract_provisioned_home_dir }}"
-            warn: false
         register: tripleo_overcloud_node_extract_provisioned_result
         changed_when: false
         when: not ansible_check_mode|bool

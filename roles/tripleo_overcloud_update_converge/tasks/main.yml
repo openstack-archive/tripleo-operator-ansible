@@ -93,7 +93,6 @@
   environment: "{{ _update_converge_env }}"
   args:
     chdir: "{{ tripleo_overcloud_update_converge_home_dir }}"
-    warn: false
   register: tripleo_overcloud_update_converge_result
   async: "{{ tripleo_overcloud_update_converge_timeout }}"
   poll: "{{ tripleo_overcloud_update_converge_poll }}"

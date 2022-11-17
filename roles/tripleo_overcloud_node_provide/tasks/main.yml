@@ -43,7 +43,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_node_provide_home_dir }}"
-    warn: false
   register: tripleo_overcloud_node_provide_result
   async: "{{ tripleo_overcloud_node_provide_timeout }}"
   poll: "{{ tripleo_overcloud_node_provide_poll }}"

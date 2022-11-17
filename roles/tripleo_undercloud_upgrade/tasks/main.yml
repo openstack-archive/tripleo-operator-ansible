@@ -41,7 +41,6 @@
   environment: "{{ _upgrade_env }}"
   args:
     chdir: "{{ tripleo_undercloud_upgrade_home_dir }}"
-    warn: false
   async: "{{ tripleo_undercloud_upgrade_timeout }}"
   poll: "{{ tripleo_undercloud_upgrade_poll }}"
   register: tripleo_undercloud_upgrade_result

@@ -58,7 +58,6 @@
   environment: "{{ _image_upload_env }}"
   args:
     chdir: "{{ tripleo_overcloud_image_upload_home_dir }}"
-    warn: false
   async: "{{ tripleo_overcloud_image_upload_timeout }}"
   register: tripleo_overcloud_image_upload_result
   poll: "{{ tripleo_overcloud_image_upload_poll }}"

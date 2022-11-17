@@ -47,7 +47,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ ansible_env.HOME }}"
-    warn: false
   become: "{{ tripleo_ceph_spec_become }}"
   register: tripleo_ceph_spec_result
   async: "{{ tripleo_ceph_spec_timeout }}"

@@ -105,7 +105,6 @@
   environment: "{{ _deploy_env }}"
   args:
     chdir: "{{ tripleo_overcloud_deploy_home_dir }}"
-    warn: false
   register: tripleo_overcloud_deploy_result
   async: "{{ tripleo_overcloud_deploy_timeout }}"
   poll: "{{ tripleo_overcloud_deploy_poll }}"

@@ -44,7 +44,6 @@
   args:
     executable: /bin/bash
     chdir: "{{ tripleo_overcloud_container_image_build_home_dir }}"
-    warn: false
   register: tripleo_overcloud_container_image_build_result
   async: "{{ tripleo_overcloud_container_image_build_timeout }}"
   poll: "{{ tripleo_overcloud_container_image_build_poll }}"
