@@ -18,9 +18,12 @@
       {{ tripleo_ceph_user_ssh_user | ternary('--cephadm-ssh-user $CEPHADM_SSH_USER', '') }}
       {{ tripleo_ceph_deploy_skip_user_create | ternary('--skip-user-create', '') }}
       {{ tripleo_ceph_deploy_skip_hosts_config | ternary('--skip-hosts-config', '') }}
+      {{ tripleo_ceph_deploy_skip_ntp | ternary('--skip-ntp', '') }}
       {{ tripleo_ceph_deploy_skip_container_registry_config | ternary('--skip-container-registry-config', '') }}
       {{ tripleo_ceph_deploy_force | ternary('--force', '') }}
       {{ tripleo_ceph_deploy_single_host_defaults | ternary('--single-host-defaults', '') }}
+      {{ tripleo_ceph_deploy_ntp_server | ternary('--ntp-server $CEPH_NTP_SERVER', '') }}
+      {{ tripleo_ceph_deploy_ntp_heat_env_file | ternary('--ntp-heat-env-file $CEPH_NTP_HEAT_ENV_FILE', '') }}
       {{ tripleo_ceph_deploy_network_data | ternary('--network-data $NETWORK_DATA', '') }}
       {{ tripleo_ceph_deploy_public_network_name | ternary('--public-network-name $PUBLIC_NETWORK_NAME', '') }}
       {{ tripleo_ceph_deploy_cluster_network_name | ternary('--cluster-network-name $CLUSTER_NETWORK_NAME', '') }}
@@ -45,6 +48,8 @@
       CEPH_MON_IP: "{{ tripleo_ceph_deploy_mon_ip }}"
       CLUSTER: "{{ tripleo_ceph_deploy_cluster }}"
       CEPH_OSD_SPEC: "{{ tripleo_ceph_deploy_osd_spec }}"
+      CEPH_NTP_SERVER: "{{ tripleo_ceph_deploy_ntp_server }}"
+      CEPH_NTP_HEAT_ENV_FILE: "{{ tripleo_ceph_deploy_ntp_heat_env_file }}"
       CEPH_CRUSH_HIERARCHY: "{{ tripleo_ceph_deploy_crush_hierarchy }}"
       CEPHADM_SSH_USER: "{{ tripleo_ceph_user_ssh_user }}"
       NETWORK_DATA: "{{ tripleo_ceph_deploy_network_data }}"

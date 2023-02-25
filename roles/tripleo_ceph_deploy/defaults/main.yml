@@ -23,6 +23,7 @@ tripleo_ceph_deploy_output:
 tripleo_ceph_deploy_skip_user_create: false
 tripleo_ceph_deploy_skip_hosts_config: false
 tripleo_ceph_deploy_skip_container_registry_config: false
+tripleo_ceph_deploy_skip_ntp: false
 tripleo_ceph_deploy_network_data:
 tripleo_ceph_deploy_public_network_name:
 tripleo_ceph_deploy_cluster_network_name:
@@ -32,6 +33,8 @@ tripleo_ceph_deploy_force: false
 tripleo_ceph_deploy_ceph_vip:
 tripleo_ceph_deploy_daemons:
 tripleo_ceph_deploy_single_host_defaults: false
+tripleo_ceph_deploy_ntp_server:
+tripleo_ceph_deploy_ntp_heat_env_file:
 tripleo_ceph_deploy_container_cephadm_default: false
 tripleo_ceph_deploy_container_image_prepare:
 tripleo_ceph_deploy_container_namespace:
