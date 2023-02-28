@@ -154,6 +154,8 @@
     parent: openstack-tox-molecule
     success-url: "reports.html"
     failure-url: "reports.html"
+    vars:
+      tox_extra_args: "-- -s {{ mol_scenario }}"
 
 - job:
     files:
@@ -169,7 +171,7 @@
     name: tripleo-operator-molecule-test_molecule_prep
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: test_molecule_prep
+      mol_scenario: test_molecule_prep
 
 - job:
     files:
@@ -185,7 +187,7 @@
     name: tripleo-operator-molecule-tripleo_config_generate_ansible
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_config_generate_ansible
+      mol_scenario: tripleo_config_generate_ansible
 
 - job:
     files:
@@ -200,7 +202,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_build
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_build
+      mol_scenario: tripleo_container_image_build
 
 - job:
     files:
@@ -215,7 +217,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_delete
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_delete
+      mol_scenario: tripleo_container_image_delete
 
 - job:
     files:
@@ -230,7 +232,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_list
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_list
+      mol_scenario: tripleo_container_image_list
 
 - job:
     files:
@@ -245,7 +247,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_push
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_push
+      mol_scenario: tripleo_container_image_push
 
 - job:
     files:
@@ -260,7 +262,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_show
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_show
+      mol_scenario: tripleo_container_image_show
 
 - job:
     files:
@@ -275,7 +277,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_image_upload
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_image_upload
+      mol_scenario: tripleo_overcloud_image_upload
 
 - job:
     files:
@@ -290,7 +292,7 @@
     name: tripleo-operator-molecule-tripleo_deploy
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_deploy
+      mol_scenario: tripleo_deploy
 
 - job:
     files:
@@ -305,7 +307,7 @@
     name: tripleo-operator-molecule-tripleo_upgrade
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_upgrade
+      mol_scenario: tripleo_upgrade
 
 - job:
     files:
@@ -320,7 +322,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_admin_authorize
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_admin_authorize
+      mol_scenario: tripleo_overcloud_admin_authorize
 
 - job:
     files:
@@ -335,7 +337,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_backup
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_backup
+      mol_scenario: tripleo_overcloud_backup
 
 - job:
     files:
@@ -350,7 +352,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_cell_export
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_cell_export
+      mol_scenario: tripleo_overcloud_cell_export
 
 - job:
     files:
@@ -365,7 +367,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_config_download
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_config_download
+      mol_scenario: tripleo_overcloud_config_download
 
 - job:
     files:
@@ -380,7 +382,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_container_image_build
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_container_image_build
+      mol_scenario: tripleo_overcloud_container_image_build
 
 - job:
     files:
@@ -395,7 +397,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_container_image_prepare
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_container_image_prepare
+      mol_scenario: tripleo_overcloud_container_image_prepare
 
 - job:
     files:
@@ -410,7 +412,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_container_image_tag_discover
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_container_image_tag_discover
+      mol_scenario: tripleo_overcloud_container_image_tag_discover
 
 - job:
     files:
@@ -425,7 +427,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_container_image_upload
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_container_image_upload
+      mol_scenario: tripleo_overcloud_container_image_upload
 
 - job:
     files:
@@ -440,7 +442,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_credentials
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_credentials
+      mol_scenario: tripleo_overcloud_credentials
 
 - job:
     files:
@@ -455,7 +457,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_deploy
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_deploy
+      mol_scenario: tripleo_overcloud_deploy
 
 - job:
     files:
@@ -470,7 +472,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_delete
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_delete
+      mol_scenario: tripleo_overcloud_delete
 
 - job:
     files:
@@ -485,7 +487,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_export
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_export
+      mol_scenario: tripleo_overcloud_export
 
 - job:
     files:
@@ -500,7 +502,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_external_update_run
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_external_update_run
+      mol_scenario: tripleo_overcloud_external_update_run
 
 - job:
     files:
@@ -515,7 +517,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_external_upgrade_run
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_external_upgrade_run
+      mol_scenario: tripleo_overcloud_external_upgrade_run
 
 - job:
     files:
@@ -530,7 +532,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_failures
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_failures
+      mol_scenario: tripleo_overcloud_failures
 
 - job:
     files:
@@ -545,7 +547,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_ffwd_upgrade_converge
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_ffwd_upgrade_converge
+      mol_scenario: tripleo_overcloud_ffwd_upgrade_converge
 
 - job:
     files:
@@ -560,7 +562,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_ffwd_upgrade_prepare
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_ffwd_upgrade_prepare
+      mol_scenario: tripleo_overcloud_ffwd_upgrade_prepare
 
 - job:
     files:
@@ -575,7 +577,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_ffwd_upgrade_run
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_ffwd_upgrade_run
+      mol_scenario: tripleo_overcloud_ffwd_upgrade_run
 
 - job:
     files:
@@ -590,7 +592,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_generate_fencing
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_generate_fencing
+      mol_scenario: tripleo_overcloud_generate_fencing
 
 - job:
     files:
@@ -599,7 +601,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_image_build
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_image_build
+      mol_scenario: tripleo_overcloud_image_build
 
 - job:
     files:
@@ -614,7 +616,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_netenv_validate
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_netenv_validate
+      mol_scenario: tripleo_overcloud_netenv_validate
 
 - job:
     files:
@@ -629,7 +631,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_network_vip_provision
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_network_vip_provision
+      mol_scenario: tripleo_overcloud_network_vip_provision
 
 - job:
     files:
@@ -637,7 +639,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_bios_configure
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_bios_configure
+      mol_scenario: tripleo_overcloud_node_bios_configure
 
 - job:
     files:
@@ -645,7 +647,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_bios_reset
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_bios_reset
+      mol_scenario: tripleo_overcloud_node_bios_reset
 
 - job:
     files:
@@ -660,7 +662,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_introspect
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_introspect
+      mol_scenario: tripleo_overcloud_node_introspect
 
 - job:
     files:
@@ -675,7 +677,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_import
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_import
+      mol_scenario: tripleo_overcloud_node_import
 
 - job:
     files:
@@ -690,7 +692,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_provide
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_provide
+      mol_scenario: tripleo_overcloud_node_provide
 
 - job:
     files:
@@ -705,7 +707,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_provision
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_provision
+      mol_scenario: tripleo_overcloud_node_provision
 
 - job:
     files:
@@ -720,7 +722,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_unprovision
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_unprovision
+      mol_scenario: tripleo_overcloud_node_unprovision
 
 - job:
     files:
@@ -735,7 +737,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_profiles_list
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_profiles_list
+      mol_scenario: tripleo_overcloud_profiles_list
 
 - job:
     files:
@@ -750,7 +752,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_profiles_match
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_profiles_match
+      mol_scenario: tripleo_overcloud_profiles_match
 
 - job:
     files:
@@ -765,7 +767,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_raid_create
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_raid_create
+      mol_scenario: tripleo_overcloud_raid_create
 
 - job:
     files:
@@ -780,7 +782,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_support_report_collect
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_support_report_collect
+      mol_scenario: tripleo_overcloud_support_report_collect
 
 - job:
     files:
@@ -795,7 +797,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_configure
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_configure
+      mol_scenario: tripleo_overcloud_node_configure
 
 - job:
     files:
@@ -810,7 +812,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_clean
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_clean
+      mol_scenario: tripleo_overcloud_node_clean
 
 - job:
     files:
@@ -818,7 +820,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_delete
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_delete
+      mol_scenario: tripleo_overcloud_node_delete
 
 - job:
     files:
@@ -826,7 +828,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_node_discover
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_node_discover
+      mol_scenario: tripleo_overcloud_node_discover
 
 - job:
     files:
@@ -841,7 +843,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_roles_list
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_roles_list
+      mol_scenario: tripleo_overcloud_roles_list
 
 - job:
     files:
@@ -856,7 +858,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_roles_show
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_roles_show
+      mol_scenario: tripleo_overcloud_roles_show
 
 - job:
     files:
@@ -871,7 +873,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_roles_generate
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_roles_generate
+      mol_scenario: tripleo_overcloud_roles_generate
 
 - job:
     files:
@@ -886,7 +888,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_prepare
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_prepare
+      mol_scenario: tripleo_container_image_prepare
 
 - job:
     files:
@@ -901,7 +903,7 @@
     name: tripleo-operator-molecule-tripleo_container_image_prepare_default
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_container_image_prepare_default
+      mol_scenario: tripleo_container_image_prepare_default
 
 - job:
     files:
@@ -916,7 +918,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_update_converge
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_update_converge
+      mol_scenario: tripleo_overcloud_update_converge
 
 - job:
     files:
@@ -931,7 +933,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_update_prepare
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_update_prepare
+      mol_scenario: tripleo_overcloud_update_prepare
 
 - job:
     files:
@@ -946,7 +948,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_update_run
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_update_run
+      mol_scenario: tripleo_overcloud_update_run
 
 - job:
     files:
@@ -961,7 +963,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_upgrade_converge
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_upgrade_converge
+      mol_scenario: tripleo_overcloud_upgrade_converge
 
 - job:
     files:
@@ -976,7 +978,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_upgrade_prepare
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_upgrade_prepare
+      mol_scenario: tripleo_overcloud_upgrade_prepare
 
 - job:
     files:
@@ -991,7 +993,7 @@
     name: tripleo-operator-molecule-tripleo_overcloud_upgrade_run
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_overcloud_upgrade_run
+      mol_scenario: tripleo_overcloud_upgrade_run
 
 - job:
     files:
@@ -1006,7 +1008,7 @@
     name: tripleo-operator-molecule-tripleo_undercloud_backup
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_undercloud_backup
+      mol_scenario: tripleo_undercloud_backup
 
 - job:
     files:
@@ -1021,7 +1023,7 @@
     name: tripleo-operator-molecule-tripleo_undercloud_install
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_undercloud_install
+      mol_scenario: tripleo_undercloud_install
 
 - job:
     files:
@@ -1036,7 +1038,7 @@
     name: tripleo-operator-molecule-tripleo_undercloud_minion_install
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_undercloud_minion_install
+      mol_scenario: tripleo_undercloud_minion_install
 
 - job:
     files:
@@ -1051,7 +1053,7 @@
     name: tripleo-operator-molecule-tripleo_undercloud_minion_upgrade
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_undercloud_minion_upgrade
+      mol_scenario: tripleo_undercloud_minion_upgrade
 
 - job:
     files:
@@ -1066,7 +1068,7 @@
     name: tripleo-operator-molecule-tripleo_undercloud_upgrade
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_undercloud_upgrade
+      mol_scenario: tripleo_undercloud_upgrade
 
 - job:
     files:
@@ -1080,7 +1082,7 @@
     name: tripleo-operator-molecule-tripleo_validator_group_info
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_validator_group_info
+      mol_scenario: tripleo_validator_group_info
 
 - job:
     files:
@@ -1094,7 +1096,7 @@
     name: tripleo-operator-molecule-tripleo_validator_list
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_validator_list
+      mol_scenario: tripleo_validator_list
 
 - job:
     files:
@@ -1110,7 +1112,7 @@
     name: tripleo-operator-molecule-tripleo_validator_run
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_validator_run
+      mol_scenario: tripleo_validator_run
 
 - job:
     files:
@@ -1124,7 +1126,7 @@
     name: tripleo-operator-molecule-tripleo_validator_show
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_validator_show
+      mol_scenario: tripleo_validator_show
 
 - job:
     files:
@@ -1138,7 +1140,7 @@
     name: tripleo-operator-molecule-tripleo_validator_show_parameter
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_validator_show_parameter
+      mol_scenario: tripleo_validator_show_parameter
 
 - job:
     files:
@@ -1152,7 +1154,7 @@
     name: tripleo-operator-molecule-tripleo_ceph_spec
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_ceph_spec
+      mol_scenario: tripleo_ceph_spec
 
 - job:
     files:
@@ -1166,7 +1168,7 @@
     name: tripleo-operator-molecule-tripleo_ceph_user
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_ceph_user
+      mol_scenario: tripleo_ceph_user
 
 - job:
     files:
@@ -1180,5 +1182,5 @@
     name: tripleo-operator-molecule-tripleo_ceph_deploy
     parent: tripleo-operator-molecule-base
     vars:
-      tox_extra_args: tripleo_ceph_deploy
+      mol_scenario: tripleo_ceph_deploy
 
