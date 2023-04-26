@@ -22,8 +22,10 @@
       {{ tripleo_ceph_deploy_skip_container_registry_config | ternary('--skip-container-registry-config', '') }}
       {{ tripleo_ceph_deploy_force | ternary('--force', '') }}
       {{ tripleo_ceph_deploy_single_host_defaults | ternary('--single-host-defaults', '') }}
+      {% if tripleo_ceph_deploy_with_ntp %}
       {{ tripleo_ceph_deploy_ntp_server | ternary('--ntp-server $CEPH_NTP_SERVER', '') }}
       {{ tripleo_ceph_deploy_ntp_heat_env_file | ternary('--ntp-heat-env-file $CEPH_NTP_HEAT_ENV_FILE', '') }}
+      {% endif %}
       {{ tripleo_ceph_deploy_network_data | ternary('--network-data $NETWORK_DATA', '') }}
       {{ tripleo_ceph_deploy_public_network_name | ternary('--public-network-name $PUBLIC_NETWORK_NAME', '') }}
       {{ tripleo_ceph_deploy_cluster_network_name | ternary('--cluster-network-name $CLUSTER_NETWORK_NAME', '') }}

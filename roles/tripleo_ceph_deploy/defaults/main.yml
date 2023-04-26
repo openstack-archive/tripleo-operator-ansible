@@ -35,6 +35,7 @@ tripleo_ceph_deploy_daemons:
 tripleo_ceph_deploy_single_host_defaults: false
 tripleo_ceph_deploy_ntp_server:
 tripleo_ceph_deploy_ntp_heat_env_file:
+tripleo_ceph_deploy_with_ntp: false
 tripleo_ceph_deploy_container_cephadm_default: false
 tripleo_ceph_deploy_container_image_prepare:
 tripleo_ceph_deploy_container_namespace:
