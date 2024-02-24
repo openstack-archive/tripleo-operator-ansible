@@ -1,7 +1,0 @@
-skip_list:
-  - role-name
-  - unnamed-task
-  - command-instead-of-shell
-  - no-changed-when
-  - no-handler
-  - yaml

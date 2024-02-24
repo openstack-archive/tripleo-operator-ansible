@@ -1,5 +1,0 @@
----
-tripleo_validator_show_parameter_debug: false
-tripleo_validator_show_parameter: []
-tripleo_validator_show_validation_parameter: []
-tripleo_validator_show_group_parameter: []

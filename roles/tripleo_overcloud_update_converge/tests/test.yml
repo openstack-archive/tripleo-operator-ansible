@@ -1,4 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - tripleo_overcloud_update_converge

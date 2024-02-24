@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  remote_user: root
-  roles:
-    - tripleo_overcloud_node_provide
-  vars:
-    - tripleo_overcloud_node_provide_all_manageable: --all-manageable

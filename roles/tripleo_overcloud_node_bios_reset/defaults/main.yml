@@ -1,8 +1,0 @@
-# defaults file for tripleo_overcloud_node_bios_reset
----
-openstack_bin: openstack
-tripleo_overcloud_node_bios_reset_all_manageable: false
-tripleo_overcloud_node_bios_reset_debug: false
-tripleo_overcloud_node_bios_reset_node_uuids: []
-tripleo_overcloud_node_bios_reset_os_cloud: "{{ tripleo_os_cloud | default('') }}"
-tripleo_overcloud_node_bios_reset_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

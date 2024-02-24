@@ -1,9 +1,0 @@
----
-# defaults file for tripleo_container_image_prepare_default
-openstack_bin: openstack
-tripleo_container_image_prepare_default_debug: false
-tripleo_container_image_prepare_default_enable_registry_login: false
-tripleo_container_image_prepare_default_generate_scripts: "{{ tripleo_generate_scripts | default(False) }}"
-tripleo_container_image_prepare_default_home_dir: "{{ ansible_env.HOME }}"
-tripleo_container_image_prepare_default_local_push_destination: false
-tripleo_container_image_prepare_default_output_env_file:

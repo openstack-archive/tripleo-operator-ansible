@@ -1,9 +1,0 @@
-# defaults file for tripleo_overcloud_node_clean
----
-openstack_bin: openstack
-tripleo_overcloud_node_clean_all_manageable: false
-tripleo_overcloud_node_clean_debug: false
-tripleo_overcloud_node_clean_node_uuids: []
-tripleo_overcloud_node_clean_os_cloud: "{{ tripleo_os_cloud | default('') }}"
-tripleo_overcloud_node_clean_provide: false
-tripleo_overcloud_node_clean_rc_file: "{{ tripleo_rc_file | default(ansible_env.HOME ~ '/stackrc') }}"

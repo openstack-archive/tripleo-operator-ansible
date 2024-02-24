@@ -1,8 +1,0 @@
----
-- name: Prepare
-  hosts: all
-  tasks:
-
-    - name: Include molecule prep
-      include_role:
-        name: test_molecule_prep

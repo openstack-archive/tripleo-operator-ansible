@@ -1,7 +1,0 @@
-ansible-core<2.12
-# molecule also has optional extras: docker, podman
-molecule[test]>=3.5.0,<3.6  # MIT
-oslotest
-pytest-molecule>=1.3.3
-# Latest release of py is 1.11.0, library which is in maintenance mode
-py==1.11.0 # MIT

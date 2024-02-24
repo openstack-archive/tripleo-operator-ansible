@@ -1,8 +1,0 @@
----
-- name: Prepare
-  hosts: all
-  tasks:
-
-    - name: Build collection
-      include_role:
-        name: test_molecule_prep
